@@ -31,6 +31,7 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "TerminalEvents.h"
+#include "ESP01Events.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,11 +77,13 @@ void Terminal_OnError(void)
 */
 void Terminal_OnRxChar(void)
 {
-  /* Write your code here ... */
 	volatile Terminal_TComData received = '\0';
 
-	Terminal_RecvChar(&received);	// Receiving the char from RX buffer
+	Terminal_RecvChar(&received);	// Receiving the char from the RX buffer
+
 	Terminal_SendChar(received);	// Echoing the received char to the Terminal
+	// Retransmitting the received char to the ESP-01 module
+	ESP01_SendChar((ESP01_TComData)received);
 }
 
 /*

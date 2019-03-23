@@ -29,6 +29,7 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "TerminalEvents.h"
+#include "ESP01Events.h"
 
 #ifdef __cplusplus
 extern "C" {

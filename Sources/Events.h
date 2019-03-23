@@ -35,6 +35,8 @@
 #include "IO_Map.h"
 #include "Terminal.h"
 #include "ASerialLdd1.h"
+#include "ESP01.h"
+#include "ASerialLdd2.h"
 
 #ifdef __cplusplus
 extern "C" {

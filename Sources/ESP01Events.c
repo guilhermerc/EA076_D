@@ -1,54 +1,50 @@
 /* ###################################################################
-**     Filename    : TerminalEvents.h
+**     Filename    : ESP01Events.c
 **     Project     : EA076_PE
 **     Processor   : MKL25Z128VLK4
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-03-23, 11:19, # CodeGen: 10
+**     Date/Time   : 2019-03-23, 13:28, # CodeGen: 12
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
 **     Contents    :
-**         Terminal_OnError  - void Terminal_OnError(void);
-**         Terminal_OnRxChar - void Terminal_OnRxChar(void);
-**         Terminal_OnTxChar - void Terminal_OnTxChar(void);
+**         ESP01_OnError  - void ESP01_OnError(void);
+**         ESP01_OnRxChar - void ESP01_OnRxChar(void);
+**         ESP01_OnTxChar - void ESP01_OnTxChar(void);
 **
 ** ###################################################################*/
 /*!
-** @file TerminalEvents.h
+** @file ESP01Events.c
 ** @version 01.00
 ** @brief
 **         This is user's event module.
 **         Put your event handler code here.
 */         
 /*!
-**  @addtogroup TerminalEvents_module TerminalEvents module documentation
+**  @addtogroup ESP01Events_module ESP01Events module documentation
 **  @{
 */         
+/* MODULE ESP01Events */
 
-#ifndef __TerminalEvents_H
-#define __TerminalEvents_H
-/* MODULE TerminalEvents */
-
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
-#include "Terminal.h"
-#include "ASerialLdd1.h"
-#include "ESP01.h"
-#include "ASerialLdd2.h"
+#include "Cpu.h"
+#include "Events.h"
+#include "TerminalEvents.h"
+#include "ESP01Events.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
+
+/* User includes (#include below this line is not maintained by Processor Expert) */
+
 /*
 ** ===================================================================
-**     Event       :  Terminal_OnError (module TerminalEvents)
+**     Event       :  ESP01_OnError (module ESP01Events)
 **
-**     Component   :  Terminal [AsynchroSerial]
+**     Component   :  ESP01 [AsynchroSerial]
 **     Description :
 **         This event is called when a channel error (not the error
 **         returned by a given method) occurs. The errors can be read
@@ -59,13 +55,16 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Terminal_OnError(void);
+void ESP01_OnError(void)
+{
+  /* Write your code here ... */
+}
 
 /*
 ** ===================================================================
-**     Event       :  Terminal_OnRxChar (module TerminalEvents)
+**     Event       :  ESP01_OnRxChar (module ESP01Events)
 **
-**     Component   :  Terminal [AsynchroSerial]
+**     Component   :  ESP01 [AsynchroSerial]
 **     Description :
 **         This event is called after a correct character is received.
 **         The event is available only when the <Interrupt
@@ -76,59 +75,38 @@ void Terminal_OnError(void);
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Terminal_OnRxChar(void);
+void ESP01_OnRxChar(void)
+{
+	volatile ESP01_TComData received = '\0';
+
+	ESP01_RecvChar(&received);	// Receiving the char from RX buffer
+
+	// Retransmitting the received char to the Terminal
+	Terminal_SendChar(received);
+}
 
 /*
 ** ===================================================================
-**     Event       :  Terminal_OnTxChar (module TerminalEvents)
+**     Event       :  ESP01_OnTxChar (module ESP01Events)
 **
-**     Component   :  Terminal [AsynchroSerial]
+**     Component   :  ESP01 [AsynchroSerial]
 **     Description :
 **         This event is called after a character is transmitted.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Terminal_OnTxChar(void);
+void ESP01_OnTxChar(void)
+{
+  /* Write your code here ... */
+}
 
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFullRxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called when the input buffer is full;
-**         i.e. after reception of the last character 
-**         that was successfully placed into input buffer.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFullRxBuf(void);
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFreeTxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called after the last character in output
-**         buffer is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFreeTxBuf(void);
-
-/* END TerminalEvents */
+/* END ESP01Events */
 
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif 
 
-#endif 
-/* ifndef __TerminalEvents_H*/
 /*!
 ** @}
 */
