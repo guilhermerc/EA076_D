@@ -82,7 +82,7 @@ void ESP01_OnRxChar(void)
 	ESP01_RecvChar(&received);	// Receiving the char from RX buffer
 
 	// Retransmitting the received char to the Terminal
-	Terminal_SendChar(received);
+	Terminal_SendChar((Terminal_TComData)received);
 }
 
 /*
