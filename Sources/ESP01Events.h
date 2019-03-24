@@ -78,20 +78,6 @@ void ESP01_OnError(void);
 */
 void ESP01_OnRxChar(void);
 
-/*
-** ===================================================================
-**     Event       :  ESP01_OnTxChar (module ESP01Events)
-**
-**     Component   :  ESP01 [AsynchroSerial]
-**     Description :
-**         This event is called after a character is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void ESP01_OnTxChar(void);
-
-
 /* END ESP01Events */
 
 #ifdef __cplusplus

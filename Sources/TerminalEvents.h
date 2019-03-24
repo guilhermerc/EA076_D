@@ -78,49 +78,6 @@ void Terminal_OnError(void);
 */
 void Terminal_OnRxChar(void);
 
-/*
-** ===================================================================
-**     Event       :  Terminal_OnTxChar (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called after a character is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnTxChar(void);
-
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFullRxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called when the input buffer is full;
-**         i.e. after reception of the last character 
-**         that was successfully placed into input buffer.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFullRxBuf(void);
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFreeTxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called after the last character in output
-**         buffer is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFreeTxBuf(void);
-
 /* END TerminalEvents */
 
 #ifdef __cplusplus

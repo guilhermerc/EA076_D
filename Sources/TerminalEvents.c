@@ -28,6 +28,8 @@
 */         
 /* MODULE TerminalEvents */
 
+#include <ESP01.h>
+#include <Terminal.h>
 #include "Cpu.h"
 #include "Events.h"
 #include "TerminalEvents.h"
@@ -84,57 +86,6 @@ void Terminal_OnRxChar(void)
 	Terminal_SendChar(received);	// Echoing the received char to the Terminal
 	// Retransmitting the received char to the ESP-01 module
 	ESP01_SendChar((ESP01_TComData)received);
-}
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnTxChar (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called after a character is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnTxChar(void)
-{
-  /* Write your code here ... */
-}
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFullRxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called when the input buffer is full;
-**         i.e. after reception of the last character 
-**         that was successfully placed into input buffer.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFullRxBuf(void)
-{
-  /* Write your code here ... */
-}
-
-/*
-** ===================================================================
-**     Event       :  Terminal_OnFreeTxBuf (module TerminalEvents)
-**
-**     Component   :  Terminal [AsynchroSerial]
-**     Description :
-**         This event is called after the last character in output
-**         buffer is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void Terminal_OnFreeTxBuf(void)
-{
-  /* Write your code here ... */
 }
 
 /* END TerminalEvents */

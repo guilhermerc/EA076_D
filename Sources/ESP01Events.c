@@ -28,6 +28,8 @@
 */         
 /* MODULE ESP01Events */
 
+#include <ESP01.h>
+#include <Terminal.h>
 #include "Cpu.h"
 #include "Events.h"
 #include "TerminalEvents.h"
@@ -83,22 +85,6 @@ void ESP01_OnRxChar(void)
 
 	// Retransmitting the received char to the Terminal
 	Terminal_SendChar((Terminal_TComData)received);
-}
-
-/*
-** ===================================================================
-**     Event       :  ESP01_OnTxChar (module ESP01Events)
-**
-**     Component   :  ESP01 [AsynchroSerial]
-**     Description :
-**         This event is called after a character is transmitted.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void ESP01_OnTxChar(void)
-{
-  /* Write your code here ... */
 }
 
 /* END ESP01Events */
