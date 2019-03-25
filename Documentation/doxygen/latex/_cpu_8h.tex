@@ -1,0 +1,97 @@
+\hypertarget{_cpu_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Cpu.h File Reference}
+\label{_cpu_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Cpu.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Cpu.\+h}}
+{\ttfamily \#include \char`\"{}P\+E\+\_\+\+Types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}P\+E\+\_\+\+Error.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}P\+E\+\_\+\+Const.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}I\+O\+\_\+\+Map.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_t_cpu_clock_configuration}{T\+Cpu\+Clock\+Configuration}
+\item 
+struct \hyperlink{structt_vector_table}{t\+Vector\+Table}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries P\+Ecfg\+\_\+\+F\+L\+A\+SH}~1U
+\item 
+\#define {\bfseries Cpu\+\_\+\+On\+N\+M\+I\+I\+N\+T\+\_\+\+E\+V\+E\+N\+T\+\_\+\+E\+N\+A\+B\+L\+ED}
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+B\+U\+S\+\_\+\+C\+L\+K\+\_\+\+HZ}~20971520\+U /$\ast$ Initial value of the bus clock frequency in Hz $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+C\+O\+R\+E\+\_\+\+C\+L\+K\+\_\+\+HZ}~20971520\+U /$\ast$ Initial value of the core/system clock frequency in Hz.  $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+C\+L\+O\+C\+K\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+N\+U\+M\+B\+ER}~0x01\+U /$\ast$ Specifies number of defined clock configurations. $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+B\+U\+S\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+L\+O\+C\+K\+\_\+\+C\+O\+N\+F\+I\+G0}~20971520\+U /$\ast$ Value of the bus clock frequency in the clock configuration 0 in Hz. $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+C\+O\+R\+E\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+L\+O\+C\+K\+\_\+\+C\+O\+N\+F\+I\+G0}~20971520\+U /$\ast$ Value of the core/system clock frequency in the clock configuration 0 in Hz. $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+I\+N\+T\+\_\+\+S\+L\+O\+W\+\_\+\+C\+L\+K\+\_\+\+HZ}~32768\+U /$\ast$ Value of the slow internal oscillator clock frequency in Hz  $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+I\+N\+T\+\_\+\+F\+A\+S\+T\+\_\+\+C\+L\+K\+\_\+\+HZ}~4000000\+U /$\ast$ Value of the fast internal oscillator clock frequency in Hz  $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+F\+A\+M\+I\+L\+Y\+\_\+\+Kinetis}~/$\ast$ Specification of the core type of the selected cpu $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+M\+K\+L25\+Z128\+L\+K4}~/$\ast$ Name of the selected cpu derivative $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+P\+A\+R\+T\+N\+U\+M\+\_\+\+M\+K\+L25\+Z128\+V\+L\+K4}~/$\ast$ Part number of the selected cpu $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+L\+I\+T\+T\+L\+E\+\_\+\+E\+N\+D\+I\+AN}~/$\ast$ The selected cpu uses little endian $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+C\+L\+O\+C\+K\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~0x00\+U /$\ast$ Clock configuration 0 identifier $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+C\+O\+R\+E\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~20971520\+U\+L /$\ast$ Core clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+B\+U\+S\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~20971520\+U\+L /$\ast$ Bus clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+F\+L\+E\+X\+B\+U\+S\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~0\+U\+L /$\ast$ Flexbus clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~0\+U\+L /$\ast$ F\+L\+A\+S\+H clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+U\+S\+B\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~0\+U\+L /$\ast$ U\+S\+B clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+P\+L\+L\+\_\+\+F\+L\+L\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~20971520\+U\+L /$\ast$ P\+L\+L/\+F\+L\+L clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+M\+C\+G\+I\+R\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~32768\+U\+L /$\ast$ M\+C\+G internal reference clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+O\+S\+C\+E\+R\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~0\+U\+L /$\ast$ System O\+S\+C external reference clock frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+E\+R\+C\+L\+K32\+K\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~1000\+U\+L /$\ast$ External reference clock 32k frequency in clock configuration 0 $\ast$/
+\item 
+\#define {\bfseries C\+P\+U\+\_\+\+M\+C\+G\+F\+F\+\_\+\+C\+L\+K\+\_\+\+H\+Z\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+0}~32768\+U\+L /$\ast$ M\+C\+G fixed frequency clock $\ast$/
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$const {\bfseries t\+Isr\+Func}) (void)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries P\+E\+\_\+low\+\_\+level\+\_\+init} (void)
+\item 
+{\bfseries P\+E\+\_\+\+I\+SR} (Cpu\+\_\+\+I\+N\+T\+\_\+\+N\+M\+I\+Interrupt)
+\item 
+{\bfseries P\+E\+\_\+\+I\+SR} (Cpu\+\_\+\+Interrupt)
+\item 
+void {\bfseries \+\_\+\+\_\+init\+\_\+hardware} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{struct_t_cpu_clock_configuration}{T\+Cpu\+Clock\+Configuration} \hyperlink{group___cpu__module_gab69281f0e90d16198a5595ed7f471441}{P\+E\+\_\+\+Cpu\+Clock\+Configurations} \mbox{[}C\+P\+U\+\_\+\+C\+L\+O\+C\+K\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+N\+U\+M\+B\+ER\mbox{]}
+\item 
+const \hyperlink{structt_vector_table}{t\+Vector\+Table} {\bfseries \+\_\+\+\_\+vect\+\_\+table}
+\item 
+volatile uint8\+\_\+t {\bfseries S\+R\+\_\+reg}
+\item 
+volatile uint8\+\_\+t {\bfseries S\+R\+\_\+lock}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVersion}{Version}
+01.\+04 
+\end{DoxyVersion}

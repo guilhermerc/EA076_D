@@ -1,0 +1,71 @@
+\hypertarget{struct_d_m_a___mem_map}{}\section{D\+M\+A\+\_\+\+Mem\+Map Struct Reference}
+\label{struct_d_m_a___mem_map}\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+
+
+{\ttfamily \#include $<$M\+K\+L25\+Z4.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_d_m_a___mem_map_ac2655fa4a2c9e21906cf4e769379e83a}\label{struct_d_m_a___mem_map_ac2655fa4a2c9e21906cf4e769379e83a}} 
+uint8\+\_\+t {\bfseries R\+E\+S\+E\+R\+V\+E\+D\+\_\+0} \mbox{[}256\mbox{]}
+\item 
+\mbox{\Hypertarget{struct_d_m_a___mem_map_aea460f848151807a209653e8a86aa2cf}\label{struct_d_m_a___mem_map_aea460f848151807a209653e8a86aa2cf}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \hyperlink{struct_d_m_a___mem_map_a800d089db050cc5c5376f4fd1b8607f4}{SAR}\\
+\>uint32\_t \hyperlink{struct_d_m_a___mem_map_a22aca0a7ea6ca1da1a58f0fe6f32166f}{DAR}\\
+\mbox{\Hypertarget{struct_d_m_a___mem_map_1_1_0D5_ad969e92ff79fb46cf9ff6ef0da01d609}\label{struct_d_m_a___mem_map_1_1_0D5_ad969e92ff79fb46cf9ff6ef0da01d609}} 
+\>union \{\\
+\>\>uint32\_t \hyperlink{struct_d_m_a___mem_map_ad1e76cea4d92082ca9ed0d760ce5cefe}{DSR\_BCR}\\
+\>\>struct \{\\
+\>\>\>uint8\_t {\bfseries RESERVED\_0} \mbox{[}3\mbox{]}\\
+\>\>\>uint8\_t \hyperlink{struct_d_m_a___mem_map_a386ac5fd0aa8748b87f2de231c917b07}{DSR}\\
+\>\>\} {\bfseries DMA\_DSR\_ACCESS8BIT}\\
+\>\} \\
+\>uint32\_t \hyperlink{struct_d_m_a___mem_map_a844c0fef8183d262baec56c84a07c070}{DCR}\\
+\} {\bfseries DMA} \mbox{[}4\mbox{]}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+MA -\/ Peripheral register structure 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{struct_d_m_a___mem_map_a22aca0a7ea6ca1da1a58f0fe6f32166f}\label{struct_d_m_a___mem_map_a22aca0a7ea6ca1da1a58f0fe6f32166f}} 
+\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}!D\+AR@{D\+AR}}
+\index{D\+AR@{D\+AR}!D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+\subsubsection{\texorpdfstring{D\+AR}{DAR}}
+{\footnotesize\ttfamily uint32\+\_\+t D\+M\+A\+\_\+\+Mem\+Map\+::\+D\+AR}
+
+Destination Address Register, array offset\+: 0x104, array step\+: 0x10 \mbox{\Hypertarget{struct_d_m_a___mem_map_a844c0fef8183d262baec56c84a07c070}\label{struct_d_m_a___mem_map_a844c0fef8183d262baec56c84a07c070}} 
+\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}!D\+CR@{D\+CR}}
+\index{D\+CR@{D\+CR}!D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+\subsubsection{\texorpdfstring{D\+CR}{DCR}}
+{\footnotesize\ttfamily uint32\+\_\+t D\+M\+A\+\_\+\+Mem\+Map\+::\+D\+CR}
+
+D\+MA Control Register, array offset\+: 0x10C, array step\+: 0x10 \mbox{\Hypertarget{struct_d_m_a___mem_map_a386ac5fd0aa8748b87f2de231c917b07}\label{struct_d_m_a___mem_map_a386ac5fd0aa8748b87f2de231c917b07}} 
+\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}!D\+SR@{D\+SR}}
+\index{D\+SR@{D\+SR}!D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+\subsubsection{\texorpdfstring{D\+SR}{DSR}}
+{\footnotesize\ttfamily uint8\+\_\+t D\+M\+A\+\_\+\+Mem\+Map\+::\+D\+SR}
+
+D\+M\+A\+\_\+\+D\+S\+R0 register...D\+M\+A\+\_\+\+D\+S\+R3 register., array offset\+: 0x10B, array step\+: 0x10 \mbox{\Hypertarget{struct_d_m_a___mem_map_ad1e76cea4d92082ca9ed0d760ce5cefe}\label{struct_d_m_a___mem_map_ad1e76cea4d92082ca9ed0d760ce5cefe}} 
+\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}!D\+S\+R\+\_\+\+B\+CR@{D\+S\+R\+\_\+\+B\+CR}}
+\index{D\+S\+R\+\_\+\+B\+CR@{D\+S\+R\+\_\+\+B\+CR}!D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+\subsubsection{\texorpdfstring{D\+S\+R\+\_\+\+B\+CR}{DSR\_BCR}}
+{\footnotesize\ttfamily uint32\+\_\+t D\+M\+A\+\_\+\+Mem\+Map\+::\+D\+S\+R\+\_\+\+B\+CR}
+
+D\+MA Status Register / Byte Count Register, array offset\+: 0x108, array step\+: 0x10 \mbox{\Hypertarget{struct_d_m_a___mem_map_a800d089db050cc5c5376f4fd1b8607f4}\label{struct_d_m_a___mem_map_a800d089db050cc5c5376f4fd1b8607f4}} 
+\index{D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}!S\+AR@{S\+AR}}
+\index{S\+AR@{S\+AR}!D\+M\+A\+\_\+\+Mem\+Map@{D\+M\+A\+\_\+\+Mem\+Map}}
+\subsubsection{\texorpdfstring{S\+AR}{SAR}}
+{\footnotesize\ttfamily uint32\+\_\+t D\+M\+A\+\_\+\+Mem\+Map\+::\+S\+AR}
+
+Source Address Register, array offset\+: 0x100, array step\+: 0x10 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Static\+\_\+\+Code/\+I\+O\+\_\+\+Map/\hyperlink{_m_k_l25_z4_8h}{M\+K\+L25\+Z4.\+h}\end{DoxyCompactItemize}
