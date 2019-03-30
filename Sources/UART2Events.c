@@ -26,11 +26,14 @@
 **  @{
 */         
 /* MODULE UART2Events */
-
 #include "Cpu.h"
 #include "Events.h"
 #include "UART0Events.h"
 #include "UART2Events.h"
+
+#include <ESP01_comm.h>
+#include <stdint.h>
+#include <UART2Events.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -82,12 +85,24 @@ void UART2_OnError(void)
 */
 void UART2_OnRxChar(void)
 {
-	volatile UART2_TComData received = '\0';
+	static volatile UART2_TComData linear_buffer[MESSAGE_BUFFER_SIZE];
+	static volatile uint8_t curr_idx = 0;
 
-	UART2_RecvChar(&received);	// Receiving the char from RX buffer
+	UART2_RecvChar(&(linear_buffer[curr_idx]));	// Receiving the char from RX buffer
 
-	// Retransmitting the received char to the UART0
-	UART0_SendChar((UART0_TComData)received);
+	UART0_SendChar((UART0_TComData)linear_buffer[curr_idx]);	// TEMPORARY
+
+	// Test if the buffer has a complete message
+	if(linear_buffer[curr_idx] == '\n' && linear_buffer[curr_idx - 1] == '\r')
+	{
+		communication_fsm_parse(linear_buffer);
+		/*
+		 * LOG the message into UART0: "UART2_OnRxChar: <message>"
+		 */
+		curr_idx = 0;
+	}
+	else
+		curr_idx++;
 }
 
 /* END UART2Events */

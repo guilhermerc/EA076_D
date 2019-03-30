@@ -3,7 +3,7 @@
   <Header>
     <Name>EA076_PE</Name>
     <SavedBy>guilherme</SavedBy>
-    <ModificationStamp>20</ModificationStamp>
+    <ModificationStamp>21</ModificationStamp>
     <Date>2019-03-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>17</ProjectCompNumb>
+    <ProjectCompNumb>21</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -40,6 +40,13 @@
     <DontWriteGeneratedModules lines_count="0" />
     <ProjectStaticFilesGenerationMode>STANDALONE</ProjectStaticFilesGenerationMode>
   </Options>
+  <UserFolder>
+    <UserFolderName />
+    <NodeName>Referenced_Components</NodeName>
+    <CompNumb>19</CompNumb>
+    <FolderType>Beans</FolderType>
+    <ExpandedAll>true</ExpandedAll>
+  </UserFolder>
   <CPU>
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.processor.mkl25z128lk4</ComponentUUID>
