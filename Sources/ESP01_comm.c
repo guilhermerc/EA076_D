@@ -35,31 +35,47 @@ void comm_fsm_start()
 	comm_fsm_send();
 }
 
-void comm_fsm_receive(UART2_TComData* message)
+void comm_fsm_recv(UART2_TComData* message_in)
 {
 	switch(comm_state)
 	{
 	case CONNECT_WIFI:
 	{
-		if(strcmp(message, "CONNECT WIFI\r\n") == 0)
+		LOG("comm_fsm_recv (CONNECT_WIFI)", (UART0_TComData*)message_in);
+
+		if(strcmp(message_in, "CONNECT WIFI\r\n") == 0)
 		{
 			comm_state = GET_IP_NUMB;
 		}
-		else if(strcmp(message, "ERROR WIFI\r\n") == 0)
+		else if(strcmp(message_in, "ERROR WIFI\r\n") == 0)
 		{
 			comm_state = CONNECT_WIFI;
 		}
 		else
 		{
-			LOG("comm_fsm_parse", message);
+			//LOG("[UNEXPECTED] comm_fsm_recv (CONNECT_WIFI)", message_in);
 		}
+
 		break;
 	}
 	case GET_IP_NUMB:
+	{
+		LOG("comm_fsm_recv (GET_IP_NUMB)", message_in);
+		break;
+	}
 	case GET_MAC_ADD:
+	{
+		LOG("comm_fsm_recv (GET_MAC_ADD)", message_in);
+		break;
+	}
 	case CONNECT_MQTT:
+	{
+		LOG("comm_fsm_recv (CONNECT_MQTT)", message_in);
+		break;
+	}
 	case INDEED_COMM:
 	{
+		LOG("comm_fsm_recv (INDEED_COMM)", message_in);
 		break;
 	}
 	}
@@ -68,29 +84,39 @@ void comm_fsm_receive(UART2_TComData* message)
 
 void comm_fsm_send()
 {
-	UART2_TComData message[MESSAGE_BUFFER_SIZE];
-
 	switch(comm_state)
 	{
 	case CONNECT_WIFI:
 	{
-		strcpy(message, "CONNWIFI ");
-		strcat(message, WIFI_SSID);
-		strcat(message, ",");
-		strcat(message, WIFI_PASSWORD);
-		strcat(message, TERMINATING_CHARS);
-		// LOG the message into UART0: "comm_fsm_send: <message>"
-		LOG("comm_fsm_send", message);
-		/*
-		 * Call function that sends a string via UART2
-		 */
+		strcpy(message_out, "CONNWIFI ");
+		strcat(message_out, WIFI_SSID);
+		strcat(message_out, ",");
+		strcat(message_out, WIFI_PASSWORD);
+		strcat(message_out, TERMINATING_CHARS);
+
+		LOG("comm_fsm_send (CONNECT_WIFI)", message_out);
+		UART2_OnTxChar();
+
 		break;
 	}
 	case GET_IP_NUMB:
+	{
+		LOG("comm_fsm_send (GET_IP_NUMB)", message_out);
+		break;
+	}
 	case GET_MAC_ADD:
+	{
+		LOG("comm_fsm_send (GET_MAC_ADD)", message_out);
+		break;
+	}
 	case CONNECT_MQTT:
+	{
+		LOG("comm_fsm_send (CONNECT_MQTT)", message_out);
+		break;
+	}
 	case INDEED_COMM:
 	{
+		LOG("comm_fsm_send (INDEED_COMM)", message_out);
 		break;
 	}
 	}

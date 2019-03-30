@@ -10,10 +10,13 @@
 #include <PE_Types.h>
 #include <UART2.h>
 
-bool state_changed;
+#define MESSAGE_BUFFER_SIZE	512
+
+volatile UART2_TComData message_out[MESSAGE_BUFFER_SIZE];
+volatile bool state_changed;
 
 void comm_fsm_start();
-void comm_fsm_receive(UART2_TComData* message);
+void comm_fsm_recv(UART2_TComData* message_in);
 void comm_fsm_send();
 
 #endif /* SOURCES_ESP01_COMM_H_ */
