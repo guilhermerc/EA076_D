@@ -25,9 +25,6 @@
 **  @{
 */         
 /* MODULE main */
-
-
-/* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
 #include "UART0Events.h"
@@ -36,11 +33,17 @@
 #include "ASerialLdd1.h"
 #include "UART2.h"
 #include "ASerialLdd2.h"
-/* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+
+
+/* Including needed modules to compile this module/procedure */
+
+#include <Cpu.h>
+#include <ESP01_comm.h>
+
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 enum boolean { false, true }; // boolean type
