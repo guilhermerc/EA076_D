@@ -49,8 +49,12 @@ int main(void)
 
   for(;;)
   {
-	  if(state_changed == TRUE)
+	  if(message_received == TRUE)
+	  {
+		  message_received = FALSE;
+		  comm_fsm_recv();
 		  comm_fsm_send();
+	  }
   }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

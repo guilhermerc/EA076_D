@@ -28,6 +28,7 @@
 /* MODULE UART2Events */
 
 #include <ESP01_comm.h>
+#include <PE_Types.h>
 #include <stdint.h>
 #include <UART2.h>
 #include "UART2Events.h"
@@ -91,7 +92,7 @@ void UART2_OnRxChar(void)
 	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
 	{
 		message_in[curr_idx + 1] = '\0';
-		comm_fsm_recv(message_in);
+		message_received = TRUE;
 		curr_idx = 0;
 	}
 	else

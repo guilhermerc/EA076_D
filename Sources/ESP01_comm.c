@@ -38,7 +38,7 @@ static COMM_STATE_ENUM comm_state = CONNECT_WIFI;
 void comm_fsm_start()
 {
 	comm_state = CONNECT_WIFI;
-	state_changed = FALSE;
+	message_received = FALSE;
 	comm_fsm_send();
 }
 
@@ -47,7 +47,7 @@ void comm_send_msg()
 	UART2_OnTxChar();
 }
 
-void comm_fsm_recv(UART2_TComData* message_in)
+void comm_fsm_recv()
 {
 	static bool has_ip_number = FALSE;
 	static bool has_mac_addr = FALSE;
@@ -148,7 +148,6 @@ void comm_fsm_recv(UART2_TComData* message_in)
 		break;
 	}
 	}
-	state_changed = TRUE;
 }
 
 void comm_fsm_send()
@@ -213,5 +212,4 @@ void comm_fsm_send()
 		break;
 	}
 	}
-	state_changed = FALSE;
 }
