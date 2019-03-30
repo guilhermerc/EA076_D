@@ -31,8 +31,9 @@
 #include "UART0Events.h"
 #include "UART2Events.h"
 
-#include <ESP01_comm.h>
 #include <stdint.h>
+#include <string.h>
+#include <UART0Events.h>
 #include <UART2Events.h>
 
 #ifdef __cplusplus
@@ -95,14 +96,31 @@ void UART2_OnRxChar(void)
 	// Test if the buffer has a complete message
 	if(linear_buffer[curr_idx] == '\n' && linear_buffer[curr_idx - 1] == '\r')
 	{
-		communication_fsm_parse(linear_buffer);
 		/*
 		 * LOG the message into UART0: "UART2_OnRxChar: <message>"
 		 */
+		LOG("UART2_OnRxChar: ", linear_buffer);
+		comm_fsm_parse(linear_buffer);
 		curr_idx = 0;
 	}
 	else
 		curr_idx++;
+}
+
+/*
+** ===================================================================
+**     Event       :  UART2_OnTxChar (module UART2Events)
+**
+**     Component   :  UART2 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART2_OnTxChar(void)
+{
+  /* Write your code here ... */
 }
 
 /* END UART2Events */

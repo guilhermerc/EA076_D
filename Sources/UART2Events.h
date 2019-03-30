@@ -80,6 +80,19 @@ void UART2_OnError(void);
 void UART2_OnRxChar(void);
 
 
+/*
+** ===================================================================
+**     Event       :  UART2_OnTxChar (module UART2Events)
+**
+**     Component   :  UART2 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART2_OnTxChar(void);
+
 /* END UART2Events */
 
 #ifdef __cplusplus
