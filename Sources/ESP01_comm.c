@@ -50,7 +50,7 @@ void comm_fsm_parse(UART2_TComData* message)
 		}
 		else
 		{
-			// LOG the message into UART0: "comm_fsm_parse: <message>"
+			LOG("comm_fsm_parse: ", message);
 		}
 		break;
 	}
@@ -77,10 +77,11 @@ void comm_fsm_send()
 		strcat(message, ",");
 		strcat(message, WIFI_PASSWORD);
 		strcat(message, TERMINATING_CHARS);
+		// LOG the message into UART0: "comm_fsm_send: <message>"
+		LOG("comm_fsm_send: ", message);
 		/*
 		 * Call function that sends a string via UART2
 		 */
-		// LOG the message into UART0: "comm_fsm_send: <message>"
 		break;
 	}
 	case GET_IP_NUMB:
