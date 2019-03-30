@@ -25,28 +25,12 @@
 **  @{
 */         
 /* MODULE main */
-#include "Cpu.h"
-#include "Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
-
-
-/* Including needed modules to compile this module/procedure */
 
 #include <Cpu.h>
 #include <ESP01_comm.h>
+#include <PE_Types.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-
-enum boolean { false, true }; // boolean type
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -64,6 +48,10 @@ int main(void)
   comm_fsm_start();
 
   for(;;)
+  {
+	  if(state_changed == TRUE)
+		  comm_fsm_send();
+  }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
