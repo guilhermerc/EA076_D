@@ -43,8 +43,6 @@
 extern "C" {
 #endif 
 
-#define MESSAGE_BUFFER_SIZE	512
-
 /*
 ** ===================================================================
 **     Event       :  UART2_OnError (module UART2Events)

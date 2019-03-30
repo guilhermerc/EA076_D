@@ -26,15 +26,11 @@
 **  @{
 */         
 /* MODULE UART2Events */
-#include "Cpu.h"
-#include "Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
 
+#include <ESP01_comm.h>
 #include <stdint.h>
-#include <string.h>
-#include <UART0Events.h>
-#include <UART2Events.h>
+#include <UART2.h>
+#include "UART2Events.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -86,19 +82,16 @@ void UART2_OnError(void)
 */
 void UART2_OnRxChar(void)
 {
-	static volatile UART2_TComData linear_buffer[MESSAGE_BUFFER_SIZE];
+	static volatile UART2_TComData message_in[MESSAGE_BUFFER_SIZE];
 	static volatile uint8_t curr_idx = 0;
 
-	UART2_RecvChar(&(linear_buffer[curr_idx]));	// Receiving the char from RX buffer
+	UART2_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
 
 	// Test if the buffer has a complete message
-	if(linear_buffer[curr_idx] == '\n' && linear_buffer[curr_idx - 1] == '\r')
+	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
 	{
-		/*
-		 * LOG the message into UART0: "UART2_OnRxChar: <message>"
-		 */
-		LOG("UART2_OnRxChar: ", linear_buffer);
-		comm_fsm_receive(linear_buffer);
+		message_in[curr_idx + 1] = '\0';
+		comm_fsm_recv(message_in);
 		curr_idx = 0;
 	}
 	else
@@ -118,7 +111,17 @@ void UART2_OnRxChar(void)
 */
 void UART2_OnTxChar(void)
 {
-  /* Write your code here ... */
+	static uint8_t curr_idx = 0;
+
+	UART2_TComData curr_char = message_out[curr_idx++];
+	if(curr_char != '\0')
+	{
+		UART2_SendChar(curr_char);
+	}
+	else
+	{
+		curr_idx = 0;
+	}
 }
 
 /* END UART2Events */
