@@ -5,9 +5,9 @@
  *      Author: guilherme
  */
 
+#include <LOG.h>
 #include <string.h>
-#include <UART0.h>
-#include "LOG.h"
+#include <UART0Events.h>
 
 void LOG(char * function_name, UART0_TComData * message)
 {
@@ -15,4 +15,5 @@ void LOG(char * function_name, UART0_TComData * message)
 	strcat(log_buffer, ": ");
 	strcat(log_buffer, message);
 	UART0_EnableEvent();
+	UART0_OnTxChar();
 }

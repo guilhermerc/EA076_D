@@ -5,10 +5,10 @@
 **         with the MQTT Broker (using the ESP-01 module).
 */
 
+#include <ESP01_comm.h>
+#include <LOG.h>
 #include <string.h>
-#include <UART2.h>
-#include "ESP01_comm.h"
-#include "UART2Events.h"
+#include <UART2Events.h>
 
 #define WIFI_SSID "\"EA076\""
 #define WIFI_PASSWORD "\"FRDMKL25Z\""
@@ -31,10 +31,11 @@ static COMM_STATE_ENUM comm_state = CONNECT_WIFI;
 void comm_fsm_start()
 {
 	comm_state = CONNECT_WIFI;
+	state_changed = FALSE;
 	comm_fsm_send();
 }
 
-void comm_fsm_parse(UART2_TComData* message)
+void comm_fsm_receive(UART2_TComData* message)
 {
 	switch(comm_state)
 	{
@@ -50,7 +51,7 @@ void comm_fsm_parse(UART2_TComData* message)
 		}
 		else
 		{
-			LOG("comm_fsm_parse: ", message);
+			LOG("comm_fsm_parse", message);
 		}
 		break;
 	}
@@ -62,6 +63,7 @@ void comm_fsm_parse(UART2_TComData* message)
 		break;
 	}
 	}
+	state_changed = TRUE;
 }
 
 void comm_fsm_send()
@@ -78,7 +80,7 @@ void comm_fsm_send()
 		strcat(message, WIFI_PASSWORD);
 		strcat(message, TERMINATING_CHARS);
 		// LOG the message into UART0: "comm_fsm_send: <message>"
-		LOG("comm_fsm_send: ", message);
+		LOG("comm_fsm_send", message);
 		/*
 		 * Call function that sends a string via UART2
 		 */
@@ -92,4 +94,5 @@ void comm_fsm_send()
 		break;
 	}
 	}
+	state_changed = FALSE;
 }

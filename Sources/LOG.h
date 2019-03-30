@@ -8,6 +8,8 @@
 #ifndef SOURCES_LOG_H_
 #define SOURCES_LOG_H_
 
+#include <UART0.h>
+
 #define LOG_BUFFER_SIZE	512
 volatile UART0_TComData log_buffer[LOG_BUFFER_SIZE];
 
