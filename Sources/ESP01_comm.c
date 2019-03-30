@@ -30,7 +30,7 @@ typedef enum COMM_STATE
 	GET_IP_NUMB,
 	GET_MAC_ADDR,
 	CONNECT_MQTT,
-	INDEED_COMM
+	COMM_INDEED
 } COMM_STATE_ENUM;
 
 static COMM_STATE_ENUM comm_state = CONNECT_WIFI;
@@ -121,11 +121,30 @@ void comm_fsm_recv(UART2_TComData* message_in)
 	case CONNECT_MQTT:
 	{
 		LOG("comm_fsm_recv (CONNECT_MQTT)", message_in);
+
+		if(strcmp(message_in, "CONNECT MQTT\r\n") == 0)
+		{
+			comm_state = COMM_INDEED;
+		}
+		else if(strcmp(message_in, "NOWIFI\r\n") == 0 |
+				strcmp(message_in, "WIFI_DISCONNECTED\r\n") == 0)
+		{
+			comm_state = CONNECT_WIFI;
+		}
+		else if(strcmp(message_in, "ERROR: 1\r\n") == 0 |
+				strcmp(message_in, "ERROR: 2\r\n") == 0 |
+				strcmp(message_in, "ERROR: 3\r\n") == 0 |
+				strcmp(message_in, "ERROR: 4\r\n") == 0 |
+				strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
+		{
+					comm_state = CONNECT_MQTT;
+		}
+
 		break;
 	}
-	case INDEED_COMM:
+	case COMM_INDEED:
 	{
-		LOG("comm_fsm_recv (INDEED_COMM)", message_in);
+		LOG("comm_fsm_recv (COMM_INDEED)", message_in);
 		break;
 	}
 	}
@@ -188,9 +207,9 @@ void comm_fsm_send()
 
 		break;
 	}
-	case INDEED_COMM:
+	case COMM_INDEED:
 	{
-		LOG("comm_fsm_send (INDEED_COMM)", message_out);
+		//LOG("comm_fsm_send (COMM_INDEED)", message_out);
 		break;
 	}
 	}
