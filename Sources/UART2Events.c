@@ -83,7 +83,6 @@ void UART2_OnError(void)
 */
 void UART2_OnRxChar(void)
 {
-	static volatile UART2_TComData message_in[MESSAGE_BUFFER_SIZE];
 	static volatile uint8_t curr_idx = 0;
 
 	UART2_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
