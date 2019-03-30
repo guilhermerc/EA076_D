@@ -1,43 +1,42 @@
 /* ###################################################################
-**     Filename    : TerminalEvents.h
+**     Filename    : UART0Events.h
 **     Project     : EA076_PE
 **     Processor   : MKL25Z128VLK4
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-03-23, 11:19, # CodeGen: 10
+**     Date/Time   : 2019-03-29, 22:11, # CodeGen: 42
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
 **     Contents    :
-**         Terminal_OnError  - void Terminal_OnError(void);
-**         Terminal_OnRxChar - void Terminal_OnRxChar(void);
-**         Terminal_OnTxChar - void Terminal_OnTxChar(void);
+**         UART0_OnError  - void UART0_OnError(void);
+**         UART0_OnRxChar - void UART0_OnRxChar(void);
 **
 ** ###################################################################*/
 /*!
-** @file TerminalEvents.h
+** @file UART0Events.h
 ** @version 01.00
 ** @brief
 **         This is user's event module.
 **         Put your event handler code here.
 */         
 /*!
-**  @addtogroup TerminalEvents_module TerminalEvents module documentation
+**  @addtogroup UART0Events_module UART0Events module documentation
 **  @{
 */         
 
-#ifndef __TerminalEvents_H
-#define __TerminalEvents_H
-/* MODULE TerminalEvents */
+#ifndef __UART0Events_H
+#define __UART0Events_H
+/* MODULE UART0Events */
 
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
-#include "Terminal.h"
+#include "UART0.h"
 #include "ASerialLdd1.h"
-#include "ESP01.h"
+#include "UART2.h"
 #include "ASerialLdd2.h"
 
 #ifdef __cplusplus
@@ -46,9 +45,9 @@ extern "C" {
 
 /*
 ** ===================================================================
-**     Event       :  Terminal_OnError (module TerminalEvents)
+**     Event       :  UART0_OnError (module UART0Events)
 **
-**     Component   :  Terminal [AsynchroSerial]
+**     Component   :  UART0 [AsynchroSerial]
 **     Description :
 **         This event is called when a channel error (not the error
 **         returned by a given method) occurs. The errors can be read
@@ -59,13 +58,13 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Terminal_OnError(void);
+void UART0_OnError(void);
 
 /*
 ** ===================================================================
-**     Event       :  Terminal_OnRxChar (module TerminalEvents)
+**     Event       :  UART0_OnRxChar (module UART0Events)
 **
-**     Component   :  Terminal [AsynchroSerial]
+**     Component   :  UART0 [AsynchroSerial]
 **     Description :
 **         This event is called after a correct character is received.
 **         The event is available only when the <Interrupt
@@ -76,16 +75,17 @@ void Terminal_OnError(void);
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Terminal_OnRxChar(void);
+void UART0_OnRxChar(void);
 
-/* END TerminalEvents */
+
+/* END UART0Events */
 
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif 
 
 #endif 
-/* ifndef __TerminalEvents_H*/
+/* ifndef __UART0Events_H*/
 /*!
 ** @}
 */
