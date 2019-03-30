@@ -3,7 +3,7 @@
   <Header>
     <Name>EA076_PE</Name>
     <SavedBy>guilherme</SavedBy>
-    <ModificationStamp>16</ModificationStamp>
+    <ModificationStamp>20</ModificationStamp>
     <Date>2019-03-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -4524,7 +4524,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.asynchroserial</ComponentUUID>
     <BeanType>AsynchroSerial</BeanType>
-    <Name>Terminal</Name>
+    <Name>UART0</Name>
     <CompNumb>13</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -4539,7 +4539,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal</Value>
+        <Value>UART0</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>Ser</ItemSymbol>
@@ -7133,7 +7133,7 @@
         <ItemSymbol>EventModule</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>TerminalEvents</Value>
+        <Value>UART0Events</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>BeforeNewSpeed</ItemSymbol>
@@ -7149,7 +7149,7 @@
         <ItemSymbol>BeforeNewSpeedName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_BeforeNewSpeed</Value>
+        <Value>UART0_BeforeNewSpeed</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>AfterNewSpeed</ItemSymbol>
@@ -7165,7 +7165,7 @@
         <ItemSymbol>AfterNewSpeedName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_AfterNewSpeed</Value>
+        <Value>UART0_AfterNewSpeed</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnError</ItemSymbol>
@@ -7181,7 +7181,7 @@
         <ItemSymbol>OnErrorName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnError</Value>
+        <Value>UART0_OnError</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnErrorPriority</ItemSymbol>
@@ -7203,7 +7203,7 @@
         <ItemSymbol>OnRxCharName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnRxChar</Value>
+        <Value>UART0_OnRxChar</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxCharPriority</ItemSymbol>
@@ -7225,7 +7225,7 @@
         <ItemSymbol>OnRxCharExtName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnRxCharExt</Value>
+        <Value>UART0_OnRxCharExt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxCharExtPriority</ItemSymbol>
@@ -7247,7 +7247,7 @@
         <ItemSymbol>OnTxCharName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnTxChar</Value>
+        <Value>UART0_OnTxChar</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTxCharPriority</ItemSymbol>
@@ -7269,7 +7269,7 @@
         <ItemSymbol>OnFullRxBufName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnFullRxBuf</Value>
+        <Value>UART0_OnFullRxBuf</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnFullRxBufPriority</ItemSymbol>
@@ -7291,7 +7291,7 @@
         <ItemSymbol>OnFreeTxBufName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnFreeTxBuf</Value>
+        <Value>UART0_OnFreeTxBuf</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnFreeTxBufPriority</ItemSymbol>
@@ -7313,7 +7313,7 @@
         <ItemSymbol>OnBreakName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnBreak</Value>
+        <Value>UART0_OnBreak</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnBreakPriority</ItemSymbol>
@@ -7340,7 +7340,7 @@
         <ItemSymbol>OnIdleName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnIdle</Value>
+        <Value>UART0_OnIdle</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnIdlePriority</ItemSymbol>
@@ -7372,7 +7372,7 @@
         <ItemSymbol>OnTxCompleteName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnTxComplete</Value>
+        <Value>UART0_OnTxComplete</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTxCompletePriority</ItemSymbol>
@@ -7399,7 +7399,7 @@
         <ItemSymbol>OnRxActiveEdgeName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>Terminal_OnRxActiveEdge</Value>
+        <Value>UART0_OnRxActiveEdge</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxActiveEdgePriority</ItemSymbol>
@@ -7413,7 +7413,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.asynchroserial</ComponentUUID>
     <BeanType>AsynchroSerial</BeanType>
-    <Name>ESP01</Name>
+    <Name>UART2</Name>
     <CompNumb>15</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -7428,7 +7428,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01</Value>
+        <Value>UART2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>Ser</ItemSymbol>
@@ -10022,7 +10022,7 @@
         <ItemSymbol>EventModule</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01Events</Value>
+        <Value>UART2Events</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>BeforeNewSpeed</ItemSymbol>
@@ -10038,7 +10038,7 @@
         <ItemSymbol>BeforeNewSpeedName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_BeforeNewSpeed</Value>
+        <Value>UART2_BeforeNewSpeed</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>AfterNewSpeed</ItemSymbol>
@@ -10054,7 +10054,7 @@
         <ItemSymbol>AfterNewSpeedName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_AfterNewSpeed</Value>
+        <Value>UART2_AfterNewSpeed</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnError</ItemSymbol>
@@ -10070,7 +10070,7 @@
         <ItemSymbol>OnErrorName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnError</Value>
+        <Value>UART2_OnError</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnErrorPriority</ItemSymbol>
@@ -10092,7 +10092,7 @@
         <ItemSymbol>OnRxCharName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnRxChar</Value>
+        <Value>UART2_OnRxChar</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxCharPriority</ItemSymbol>
@@ -10114,7 +10114,7 @@
         <ItemSymbol>OnRxCharExtName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnRxCharExt</Value>
+        <Value>UART2_OnRxCharExt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxCharExtPriority</ItemSymbol>
@@ -10136,7 +10136,7 @@
         <ItemSymbol>OnTxCharName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnTxChar</Value>
+        <Value>UART2_OnTxChar</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTxCharPriority</ItemSymbol>
@@ -10158,7 +10158,7 @@
         <ItemSymbol>OnFullRxBufName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnFullRxBuf</Value>
+        <Value>UART2_OnFullRxBuf</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnFullRxBufPriority</ItemSymbol>
@@ -10180,7 +10180,7 @@
         <ItemSymbol>OnFreeTxBufName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnFreeTxBuf</Value>
+        <Value>UART2_OnFreeTxBuf</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnFreeTxBufPriority</ItemSymbol>
@@ -10202,7 +10202,7 @@
         <ItemSymbol>OnBreakName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnBreak</Value>
+        <Value>UART2_OnBreak</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnBreakPriority</ItemSymbol>
@@ -10229,7 +10229,7 @@
         <ItemSymbol>OnIdleName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnIdle</Value>
+        <Value>UART2_OnIdle</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnIdlePriority</ItemSymbol>
@@ -10261,7 +10261,7 @@
         <ItemSymbol>OnTxCompleteName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnTxComplete</Value>
+        <Value>UART2_OnTxComplete</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTxCompletePriority</ItemSymbol>
@@ -10288,7 +10288,7 @@
         <ItemSymbol>OnRxActiveEdgeName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>ESP01_OnRxActiveEdge</Value>
+        <Value>UART2_OnRxActiveEdge</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnRxActiveEdgePriority</ItemSymbol>
