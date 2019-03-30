@@ -111,10 +111,10 @@ PE_DEBUGHALT();
       </boolgroup>
     </CompilerProperties>
   </CPU_Bean>
-  <Bean name="Terminal" type="AsynchroSerial">
+  <Bean name="UART0" type="AsynchroSerial">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Terminal" />
+      <Component_name v="UART0" />
       <Channel v="UART0" />
       <boolgroup name="Interrupt service/event" v="Enabled">
         <Interrupt_RxD v="INT_UART0" />
@@ -289,15 +289,15 @@ PE_DEBUGHALT();
       <ConnectPin v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
-      <Event_module_name v="TerminalEvents" />
+      <Event_module_name v="UART0Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
       <event name="OnError" v="generate code">
-        <Event_procedure_name v="Terminal_OnError" />
+        <Event_procedure_name v="UART0_OnError" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxChar" v="generate code">
-        <Event_procedure_name v="Terminal_OnRxChar" />
+        <Event_procedure_name v="UART0_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
@@ -308,10 +308,10 @@ PE_DEBUGHALT();
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="ESP01" type="AsynchroSerial">
+  <Bean name="UART2" type="AsynchroSerial">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="ESP01" />
+      <Component_name v="UART2" />
       <Channel v="UART2" />
       <boolgroup name="Interrupt service/event" v="Enabled">
         <Interrupt_RxD v="INT_UART2" />
@@ -405,8 +405,8 @@ PE_DEBUGHALT();
           <Methods>
             <Init v="generate code" />
             <Deinit v="don&amp;apos;t generate code" />
-            <Enable v="generate code" />
-            <Disable v="generate code" />
+            <Enable v="don&amp;apos;t generate code" />
+            <Disable v="don&amp;apos;t generate code" />
             <SendBlock v="generate code" />
             <ReceiveBlock v="generate code" />
             <CancelBlockTransmission v="don&amp;apos;t generate code" />
@@ -461,15 +461,15 @@ PE_DEBUGHALT();
     </Properties>
     <Methods>
       <Enable v="don&amp;apos;t generate code" />
-      <Disable v="generate code" />
-      <EnableEvent v="generate code" />
-      <DisableEvent v="generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <EnableEvent v="don&amp;apos;t generate code" />
+      <DisableEvent v="don&amp;apos;t generate code" />
       <RecvChar v="generate code" />
       <SendChar v="generate code" />
-      <RecvBlock v="generate code" />
-      <SendBlock v="generate code" />
-      <ClearRxBuf v="generate code" />
-      <ClearTxBuf v="generate code" />
+      <RecvBlock v="don&amp;apos;t generate code" />
+      <SendBlock v="don&amp;apos;t generate code" />
+      <ClearRxBuf v="don&amp;apos;t generate code" />
+      <ClearTxBuf v="don&amp;apos;t generate code" />
       <CharsInRxBuf v="don&amp;apos;t generate code" />
       <GetCharsInRxBuf v="don&amp;apos;t generate code" />
       <CharsInTxBuf v="don&amp;apos;t generate code" />
@@ -486,29 +486,119 @@ PE_DEBUGHALT();
       <ConnectPin v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
-      <Event_module_name v="ESP01Events" />
+      <Event_module_name v="UART2Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
       <event name="OnError" v="generate code">
-        <Event_procedure_name v="ESP01_OnError" />
+        <Event_procedure_name v="UART2_OnError" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxChar" v="generate code">
-        <Event_procedure_name v="ESP01_OnRxChar" />
+        <Event_procedure_name v="UART2_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="don&amp;apos;t generate code" />
-      <event name="OnFullRxBuf" v="generate code">
-        <Event_procedure_name v="ESP01_OnFullRxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
-      <event name="OnFreeTxBuf" v="generate code">
-        <Event_procedure_name v="ESP01_OnFreeTxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
+      <event name="OnFullRxBuf" v="don&amp;apos;t generate code" />
+      <event name="OnFreeTxBuf" v="don&amp;apos;t generate code" />
       <event name="OnBreak" v="don&amp;apos;t generate code" />
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="UTILS" type="Utility">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="UTILS" />
+      <SDK v="MCUC1" />
+    </Properties>
+    <Methods>
+      <strcpy v="don&amp;apos;t generate code" />
+      <strcat v="generate code" />
+      <strcatPad v="generate code" />
+      <chcat v="generate code" />
+      <Num8sToStr v="generate code" />
+      <Num8uToStr v="generate code" />
+      <Num16sToStr v="generate code" />
+      <Num16uToStr v="generate code" />
+      <Num32uToStr v="generate code" />
+      <Num32sToStr v="generate code" />
+      <NumFloatToStr v="generate code" />
+      <Num16sToStrFormatted v="generate code" />
+      <Num16uToStrFormatted v="generate code" />
+      <Num32uToStrFormatted v="generate code" />
+      <Num32sToStrFormatted v="generate code" />
+      <strcatNum8u v="generate code" />
+      <strcatNum8s v="generate code" />
+      <strcatNum16u v="generate code" />
+      <strcatNum16s v="generate code" />
+      <strcatNum32u v="generate code" />
+      <strcatNum32s v="generate code" />
+      <strcatNum16uFormatted v="generate code" />
+      <strcatNum16sFormatted v="generate code" />
+      <strcatNum32uFormatted v="generate code" />
+      <strcatNum32sFormatted v="generate code" />
+      <strcatNum8Hex v="generate code" />
+      <strcatNum16Hex v="generate code" />
+      <strcatNum24Hex v="generate code" />
+      <strcatNum32Hex v="generate code" />
+      <strcatNum32sDotValue100 v="generate code" />
+      <strcatNumFloat v="generate code" />
+      <IsLeapYear v="generate code" />
+      <WeekDay v="generate code" />
+      <ReadEscapedName v="generate code" />
+      <xatoi v="generate code" />
+      <ScanDate v="generate code" />
+      <ScanTime v="generate code" />
+      <ScanDecimal8uNumber v="generate code" />
+      <ScanDecimal8sNumber v="generate code" />
+      <ScanDecimal16uNumber v="generate code" />
+      <ScanDecimal16sNumber v="generate code" />
+      <ScanDecimal32uNumber v="generate code" />
+      <ScanDecimal32sNumber v="generate code" />
+      <ScanDecimal32sDotNumber v="generate code" />
+      <ScanHex8uNumber v="generate code" />
+      <ScanHex8uNumberNoPrefix v="generate code" />
+      <ScanHex16uNumber v="generate code" />
+      <ScanHex32uNumber v="generate code" />
+      <ScanSeparatedNumbers v="generate code" />
+      <ScanDoubleQuotedString v="generate code" />
+      <strcmp v="generate code" />
+      <strncmp v="generate code" />
+      <strFind v="generate code" />
+      <strtailcmp v="generate code" />
+      <strlen v="generate code" />
+      <strCutTail v="generate code" />
+      <GetValue16LE v="generate code" />
+      <GetValue24LE v="generate code" />
+      <GetValue32LE v="generate code" />
+      <SetValue16LE v="generate code" />
+      <SetValue24LE v="generate code" />
+      <SetValue32LE v="generate code" />
+      <map v="generate code" />
+      <map64 v="generate code" />
+      <constrain v="generate code" />
+      <random v="generate code" />
+      <randomSetSeed v="generate code" />
+      <Deinit v="generate code" />
+      <Init v="generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="MCUC1" type="McuLibConfig">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="MCUC1" />
+      <SDK v="Processor Expert" />
+      <Config_Files_Folder v="" />
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
     </Events>
   </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>
