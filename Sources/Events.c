@@ -28,8 +28,8 @@
 
 #include "Cpu.h"
 #include "Events.h"
-#include "TerminalEvents.h"
-#include "ESP01Events.h"
+#include "UART0Events.h"
+#include "UART2Events.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -33,9 +33,9 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
-#include "Terminal.h"
+#include "UART0.h"
 #include "ASerialLdd1.h"
-#include "ESP01.h"
+#include "UART2.h"
 #include "ASerialLdd2.h"
 
 #ifdef __cplusplus
