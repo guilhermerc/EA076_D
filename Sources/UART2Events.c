@@ -91,8 +91,6 @@ void UART2_OnRxChar(void)
 
 	UART2_RecvChar(&(linear_buffer[curr_idx]));	// Receiving the char from RX buffer
 
-	UART0_SendChar((UART0_TComData)linear_buffer[curr_idx]);	// TEMPORARY
-
 	// Test if the buffer has a complete message
 	if(linear_buffer[curr_idx] == '\n' && linear_buffer[curr_idx - 1] == '\r')
 	{
@@ -100,7 +98,7 @@ void UART2_OnRxChar(void)
 		 * LOG the message into UART0: "UART2_OnRxChar: <message>"
 		 */
 		LOG("UART2_OnRxChar: ", linear_buffer);
-		comm_fsm_parse(linear_buffer);
+		comm_fsm_receive(linear_buffer);
 		curr_idx = 0;
 	}
 	else
