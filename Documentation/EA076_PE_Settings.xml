@@ -111,10 +111,10 @@ PE_DEBUGHALT();
       </boolgroup>
     </CompilerProperties>
   </CPU_Bean>
-  <Bean name="Terminal" type="AsynchroSerial">
+  <Bean name="UART0" type="AsynchroSerial">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Terminal" />
+      <Component_name v="UART0" />
       <Channel v="UART0" />
       <boolgroup name="Interrupt service/event" v="Enabled">
         <Interrupt_RxD v="INT_UART0" />
@@ -289,15 +289,15 @@ PE_DEBUGHALT();
       <ConnectPin v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
-      <Event_module_name v="TerminalEvents" />
+      <Event_module_name v="UART0Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
       <event name="OnError" v="generate code">
-        <Event_procedure_name v="Terminal_OnError" />
+        <Event_procedure_name v="UART0_OnError" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxChar" v="generate code">
-        <Event_procedure_name v="Terminal_OnRxChar" />
+        <Event_procedure_name v="UART0_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
@@ -308,10 +308,10 @@ PE_DEBUGHALT();
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="ESP01" type="AsynchroSerial">
+  <Bean name="UART2" type="AsynchroSerial">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="ESP01" />
+      <Component_name v="UART2" />
       <Channel v="UART2" />
       <boolgroup name="Interrupt service/event" v="Enabled">
         <Interrupt_RxD v="INT_UART2" />
@@ -405,8 +405,8 @@ PE_DEBUGHALT();
           <Methods>
             <Init v="generate code" />
             <Deinit v="don&amp;apos;t generate code" />
-            <Enable v="generate code" />
-            <Disable v="generate code" />
+            <Enable v="don&amp;apos;t generate code" />
+            <Disable v="don&amp;apos;t generate code" />
             <SendBlock v="generate code" />
             <ReceiveBlock v="generate code" />
             <CancelBlockTransmission v="don&amp;apos;t generate code" />
@@ -461,15 +461,15 @@ PE_DEBUGHALT();
     </Properties>
     <Methods>
       <Enable v="don&amp;apos;t generate code" />
-      <Disable v="generate code" />
-      <EnableEvent v="generate code" />
-      <DisableEvent v="generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <EnableEvent v="don&amp;apos;t generate code" />
+      <DisableEvent v="don&amp;apos;t generate code" />
       <RecvChar v="generate code" />
       <SendChar v="generate code" />
-      <RecvBlock v="generate code" />
-      <SendBlock v="generate code" />
-      <ClearRxBuf v="generate code" />
-      <ClearTxBuf v="generate code" />
+      <RecvBlock v="don&amp;apos;t generate code" />
+      <SendBlock v="don&amp;apos;t generate code" />
+      <ClearRxBuf v="don&amp;apos;t generate code" />
+      <ClearTxBuf v="don&amp;apos;t generate code" />
       <CharsInRxBuf v="don&amp;apos;t generate code" />
       <GetCharsInRxBuf v="don&amp;apos;t generate code" />
       <CharsInTxBuf v="don&amp;apos;t generate code" />
@@ -486,27 +486,21 @@ PE_DEBUGHALT();
       <ConnectPin v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
-      <Event_module_name v="ESP01Events" />
+      <Event_module_name v="UART2Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
       <event name="OnError" v="generate code">
-        <Event_procedure_name v="ESP01_OnError" />
+        <Event_procedure_name v="UART2_OnError" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxChar" v="generate code">
-        <Event_procedure_name v="ESP01_OnRxChar" />
+        <Event_procedure_name v="UART2_OnRxChar" />
         <Priority v="same as interrupt" />
       </event>
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="don&amp;apos;t generate code" />
-      <event name="OnFullRxBuf" v="generate code">
-        <Event_procedure_name v="ESP01_OnFullRxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
-      <event name="OnFreeTxBuf" v="generate code">
-        <Event_procedure_name v="ESP01_OnFreeTxBuf" />
-        <Priority v="same as interrupt" />
-      </event>
+      <event name="OnFullRxBuf" v="don&amp;apos;t generate code" />
+      <event name="OnFreeTxBuf" v="don&amp;apos;t generate code" />
       <event name="OnBreak" v="don&amp;apos;t generate code" />
       <event name="OnTxComplete" v="don&amp;apos;t generate code" />
     </Events>
