@@ -31,6 +31,7 @@
 #include "Events.h"
 #include "UART0Events.h"
 #include "UART2Events.h"
+#include "LOG.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,6 +39,7 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+
 
 /*
 ** ===================================================================
@@ -89,6 +91,33 @@ void UART0_OnRxChar(void)
 	UART0_SendChar(received);	// Echoing the received char to the Terminal
 	// Retransmitting the received char to the ESP-01 module
 	UART2_SendChar((UART2_TComData)received);
+}
+
+/*
+** ===================================================================
+**     Event       :  UART0_OnTxChar (module UART0Events)
+**
+**     Component   :  UART0 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART0_OnTxChar(void)
+{
+	static uint8_t curr_idx = 0;
+
+	UART0_TComData curr_char = log_buffer[curr_idx++];
+	if(curr_char != '\0')
+	{
+		UART0_SendChar(curr_char);
+	}
+	else
+	{
+		curr_idx = 0;
+		UART0_DisableEvent();
+	}
 }
 
 /* END UART0Events */

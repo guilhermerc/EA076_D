@@ -78,6 +78,19 @@ void UART0_OnError(void);
 void UART0_OnRxChar(void);
 
 
+/*
+** ===================================================================
+**     Event       :  UART0_OnTxChar (module UART0Events)
+**
+**     Component   :  UART0 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART0_OnTxChar(void);
+
 /* END UART0Events */
 
 #ifdef __cplusplus
