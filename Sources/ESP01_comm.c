@@ -11,10 +11,11 @@
 #include <UART0.h>
 #include <UART2Events.h>
 
-#define WIFI_SSID "\"EA076\""
-#define WIFI_PASSWORD "\"FRDMKL25Z\""
+#define WIFI_SSID "\"EA076R\""
+#define WIFI_PASSWORD "\"FRDMKL25\""
+#define MQTT_IP "\"192.168.1.111\""
 #define MQTT_PORT "1883"
-#define MQTT_USERNAME "\"GUILHERME\""
+#define MQTT_USERNAME "\"aluno\""
 #define MQTT_PASSWORD "\"UNICAMP\""
 #define TERMINATING_CHARS "\r\n"
 
@@ -131,10 +132,10 @@ void comm_fsm_recv()
 		{
 			comm_state = CONNECT_WIFI;
 		}
-		else if(strcmp(message_in, "ERROR: 1\r\n") == 0 |
-				strcmp(message_in, "ERROR: 2\r\n") == 0 |
-				strcmp(message_in, "ERROR: 3\r\n") == 0 |
-				strcmp(message_in, "ERROR: 4\r\n") == 0 |
+		else if(strcmp(message_in, "ERROR: -1\r\n") == 0 |
+				strcmp(message_in, "ERROR: -2\r\n") == 0 |
+				strcmp(message_in, "ERROR: -3\r\n") == 0 |
+				strcmp(message_in, "ERROR: -4\r\n") == 0 |
 				strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
 		{
 					comm_state = CONNECT_MQTT;
@@ -190,7 +191,7 @@ void comm_fsm_send()
 	case CONNECT_MQTT:
 	{
 		strcpy(message_out, "CONNMQTT ");
-		strcat(message_out, ip_number);
+		strcat(message_out, MQTT_IP);
 		strcat(message_out, ",");
 		strcat(message_out, MQTT_PORT);
 		strcat(message_out, ",");
