@@ -17,6 +17,7 @@
 #define MQTT_PORT "1883"
 #define MQTT_USERNAME "\"aluno\""
 #define MQTT_PASSWORD "\"UNICAMP\""
+#define SMARTPHONE_TOPIC "\"EA076/grupoD3/celular\""
 #define TERMINATING_CHARS "\r\n"
 
 #define IP_NUMBER_SIZE	32
@@ -31,7 +32,8 @@ typedef enum COMM_STATE
 	GET_IP_NUMB,
 	GET_MAC_ADDR,
 	CONNECT_MQTT,
-	COMM_INDEED
+	COMM_INDEED,
+	TOPIC_SUBSD
 } COMM_STATE_ENUM;
 
 static COMM_STATE_ENUM comm_state = CONNECT_WIFI;
@@ -146,7 +148,30 @@ void comm_fsm_recv()
 	case COMM_INDEED:
 	{
 		LOG("comm_fsm_recv (COMM_INDEED)", message_in);
+
+		if(strcmp(message_in, "OK SUBSCRIBE\r\n") == 0)
+		{
+			comm_state = TOPIC_SUBSD;
+		}
+		else if(strcmp(message_in, "NOT CONNECTED\r\n") == 0 |
+				strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
+		{
+			comm_state = CONNECT_MQTT;
+		}
+		else if(strcmp(message_in, "ERROR SUBSCRIBE\r\n") == 0)
+		{
+			comm_state = COMM_INDEED;
+		}
+		else if(strcmp(message_in, "WIFI_DISCONNECTED\r\n") == 0)
+		{
+			comm_state = CONNECT_WIFI;
+		}
+
 		break;
+	}
+	case TOPIC_SUBSD:
+	{
+		LOG("comm_fsm_recv (TOPIC_SUBSD)", message_in);
 	}
 	}
 }
@@ -209,7 +234,16 @@ void comm_fsm_send()
 	}
 	case COMM_INDEED:
 	{
+		strcpy(message_out, "SUBSCRIBE ");
+		strcat(message_out, SMARTPHONE_TOPIC);
+		strcat(message_out, TERMINATING_CHARS);
 		//LOG("comm_fsm_send (COMM_INDEED)", message_out);
+		comm_send_msg();
+
+		break;
+	}
+	case TOPIC_SUBSD:
+	{
 		break;
 	}
 	}
