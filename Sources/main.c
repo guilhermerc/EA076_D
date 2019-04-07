@@ -45,15 +45,15 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
 
-  comm_fsm_start();
+  comm_start();
 
   for(;;)
   {
 	  if(message_received == TRUE)
 	  {
 		  message_received = FALSE;
-		  comm_fsm_recv();
-		  comm_fsm_send();
+		  comm_recv();
+		  comm_send();
 	  }
   }
 
