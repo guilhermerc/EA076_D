@@ -63,7 +63,7 @@ int main(void)
   for(;;)
   {
 	  if(message_recv == TRUE &&
-			  (message_sent == TRUE && log_sent == TRUE))
+			  (message_sent == TRUE && log_entry_sent == TRUE))
 	  {
 		  message_recv = FALSE;
 		  comm_parse();

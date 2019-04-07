@@ -129,7 +129,7 @@ void UART0_OnTxChar(void)
 		curr_idx = 0;
 		//UART0_DisableEvent();
 
-		log_sent = TRUE;
+		log_entry_sent = TRUE;
 	}
 }
 

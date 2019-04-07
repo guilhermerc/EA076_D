@@ -14,6 +14,6 @@
 volatile UART0_TComData log_buffer[LOG_BUFFER_SIZE];
 
 void LOG(char * function_name, UART0_TComData * message);
-volatile bool log_sent;
+volatile bool log_entry_sent;
 
 #endif /* SOURCES_LOG_H_ */

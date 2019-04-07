@@ -58,8 +58,8 @@ void comm_start()
 	comm_info.state = CONNECT_WIFI;
 	message_recv = FALSE;
 	message_sent = TRUE;
-	log_sent = TRUE;
-	comm_send();
+	log_entry_sent = TRUE;
+	comm_response();
 }
 
 void comm_send_msg()
@@ -139,7 +139,9 @@ void comm_response()
 	{
 		strcpy(message_out, "PUBLISH ");
 		strcat(message_out, SMARTPHONE_TOPIC);
-		strcat(message_out, "\"");
+		strcat(message_out, ",\"");
+		// The index which corresponds to the '\r' char is overwritten with '\0'
+		message_in[strlen(message_in) - 2] = '\0';
 		strcat(message_out, message_in);
 		strcat(message_out, "\"");
 		strcat(message_out, TERMINATING_CHARS);

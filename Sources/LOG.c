@@ -11,7 +11,7 @@
 
 void LOG(char * function_name, UART0_TComData * message)
 {
-	log_sent = FALSE;
+	log_entry_sent = FALSE;
 
 	strcpy(log_buffer, function_name);
 	strcat(log_buffer, ": ");
