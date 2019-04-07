@@ -18,8 +18,8 @@
 ** @file UART2Events.h
 ** @version 01.00
 ** @brief
-**         This is user's event module.
-**         Put your event handler code here.
+**         This module contains the handlers related to
+**         UART2 interruptions (events).
 */         
 /*!
 **  @addtogroup UART2Events_module UART2Events module documentation
