@@ -14,10 +14,11 @@
 
 UART2_TComData message_out[MESSAGE_BUFFER_SIZE];
 UART2_TComData message_in[MESSAGE_BUFFER_SIZE];
-volatile bool message_received;
+volatile bool message_recv;
+volatile bool message_sent;
 
 void comm_start();
-void comm_recv();
-void comm_send();
+void comm_parse();
+void comm_response();
 
 #endif /* SOURCES_ESP01_COMM_H_ */

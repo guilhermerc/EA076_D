@@ -151,7 +151,7 @@ PE_DEBUGHALT();
       </group>
       <group name="Initialization">
         <Enabled_in_init__code v="yes" />
-        <Events_enabled_in_init_ v="no" />
+        <Events_enabled_in_init_ v="yes" />
       </group>
       <group name="CPU clock/speed selection">
         <High_speed_mode v="This component enabled" />
@@ -265,8 +265,8 @@ PE_DEBUGHALT();
     <Methods>
       <Enable v="don&amp;apos;t generate code" />
       <Disable v="don&amp;apos;t generate code" />
-      <EnableEvent v="generate code" />
-      <DisableEvent v="generate code" />
+      <EnableEvent v="don&amp;apos;t generate code" />
+      <DisableEvent v="don&amp;apos;t generate code" />
       <RecvChar v="generate code" />
       <SendChar v="generate code" />
       <RecvBlock v="don&amp;apos;t generate code" />
@@ -296,7 +296,10 @@ PE_DEBUGHALT();
         <Event_procedure_name v="UART0_OnError" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnRxChar" v="don&amp;apos;t generate code" />
+      <event name="OnRxChar" v="generate code">
+        <Event_procedure_name v="UART0_OnRxChar" />
+        <Priority v="same as interrupt" />
+      </event>
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="generate code">
         <Event_procedure_name v="UART0_OnTxChar" />

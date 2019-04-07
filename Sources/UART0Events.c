@@ -27,11 +27,15 @@
 */         
 /* MODULE UART0Events */
 
+#include <ESP01_comm.h>
+#include <LOG.h>
+#include <PE_Types.h>
+#include <stdint.h>
+#include <UART0.h>
 #include "Cpu.h"
 #include "Events.h"
 #include "UART0Events.h"
 #include "UART2Events.h"
-#include "LOG.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -84,13 +88,20 @@ void UART0_OnError(void)
 
 void UART0_OnRxChar(void)
 {
-	volatile UART0_TComData received = '\0';
+	static volatile uint8_t curr_idx = 0;
 
-	UART0_RecvChar(&received);	// Receiving the char from the RX buffer
+	UART0_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
 
-	UART0_SendChar(received);	// Echoing the received char to the Terminal
-	// Retransmitting the received char to the ESP-01 module
-	UART2_SendChar((UART2_TComData)received);
+	// Test if the buffer has a complete message
+	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
+	{
+		message_in[curr_idx + 1] = '\0';
+		curr_idx = 0;
+
+		message_recv = TRUE;
+	}
+	else
+		curr_idx++;
 }
 
 /*
@@ -116,7 +127,9 @@ void UART0_OnTxChar(void)
 	else
 	{
 		curr_idx = 0;
-		UART0_DisableEvent();
+		//UART0_DisableEvent();
+
+		log_sent = TRUE;
 	}
 }
 

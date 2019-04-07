@@ -296,10 +296,7 @@ PE_DEBUGHALT();
         <Event_procedure_name v="UART0_OnError" />
         <Priority v="same as interrupt" />
       </event>
-      <event name="OnRxChar" v="generate code">
-        <Event_procedure_name v="UART0_OnRxChar" />
-        <Priority v="same as interrupt" />
-      </event>
+      <event name="OnRxChar" v="don&amp;apos;t generate code" />
       <event name="OnRxCharExt" v="don&amp;apos;t generate code" />
       <event name="OnTxChar" v="generate code">
         <Event_procedure_name v="UART0_OnTxChar" />

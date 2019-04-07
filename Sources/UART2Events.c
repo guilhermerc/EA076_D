@@ -31,6 +31,9 @@
 #include <PE_Types.h>
 #include <stdint.h>
 #include <UART2.h>
+#include "Cpu.h"
+#include "Events.h"
+#include "UART0Events.h"
 #include "UART2Events.h"
 
 #ifdef __cplusplus
@@ -91,8 +94,9 @@ void UART2_OnRxChar(void)
 	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
 	{
 		message_in[curr_idx + 1] = '\0';
-		message_received = TRUE;
 		curr_idx = 0;
+
+		message_recv = TRUE;
 	}
 	else
 		curr_idx++;
@@ -121,6 +125,8 @@ void UART2_OnTxChar(void)
 	else
 	{
 		curr_idx = 0;
+
+		message_sent = TRUE;
 	}
 }
 

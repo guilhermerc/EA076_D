@@ -25,9 +25,22 @@
 **  @{
 */         
 /* MODULE main */
+#include "Cpu.h"
+#include "Events.h"
+#include "UART0Events.h"
+#include "UART2Events.h"
+#include "UART0.h"
+#include "ASerialLdd1.h"
+#include "UART2.h"
+#include "ASerialLdd2.h"
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
 
 #include <Cpu.h>
 #include <ESP01_comm.h>
+#include <LOG.h>
 #include <PE_Types.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
@@ -49,11 +62,12 @@ int main(void)
 
   for(;;)
   {
-	  if(message_received == TRUE)
+	  if(message_recv == TRUE &&
+			  (message_sent == TRUE && log_sent == TRUE))
 	  {
-		  message_received = FALSE;
-		  comm_recv();
-		  comm_send();
+		  message_recv = FALSE;
+		  comm_parse();
+		  comm_response();
 	  }
   }
 

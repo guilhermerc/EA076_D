@@ -11,9 +11,11 @@
 
 void LOG(char * function_name, UART0_TComData * message)
 {
+	log_sent = FALSE;
+
 	strcpy(log_buffer, function_name);
 	strcat(log_buffer, ": ");
 	strcat(log_buffer, message);
-	UART0_EnableEvent();
+	//UART0_EnableEvent();
 	UART0_OnTxChar();
 }
