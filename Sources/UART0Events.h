@@ -18,8 +18,8 @@
 ** @file UART0Events.h
 ** @version 01.00
 ** @brief
-**         This is user's event module.
-**         Put your event handler code here.
+**         This module contains the handlers related to
+**         UART0 interruptions (events).
 */         
 /*!
 **  @addtogroup UART0Events_module UART0Events module documentation
