@@ -9,13 +9,20 @@
 #include <string.h>
 #include <UART0Events.h>
 
-void LOG(char * function_name, UART0_TComData * message)
+/*! \brief A function that logs something into UART0 TX
+**
+** 	This function assembles the log entry message and
+**  triggers the sending process.
+** 	This handler also notifies the main loop when a
+** 	log entry is being sent (using the log_entry_sent
+** 	flags).
+*/
+void LOG(char * tag, UART0_TComData * message)
 {
 	log_entry_sent = FALSE;
 
-	strcpy(log_buffer, function_name);
+	strcpy(log_buffer, tag);
 	strcat(log_buffer, ": ");
 	strcat(log_buffer, message);
-	//UART0_EnableEvent();
 	UART0_OnTxChar();
 }
