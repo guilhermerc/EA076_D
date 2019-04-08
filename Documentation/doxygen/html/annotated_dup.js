@@ -10,7 +10,6 @@ var annotated_dup =
     [ "DMA_MemMap", "struct_d_m_a___mem_map.html", "struct_d_m_a___mem_map" ],
     [ "DMAMUX_MemMap", "struct_d_m_a_m_u_x___mem_map.html", "struct_d_m_a_m_u_x___mem_map" ],
     [ "DWT_MemMap", "struct_d_w_t___mem_map.html", "struct_d_w_t___mem_map" ],
-    [ "ESP01_TError", "union_e_s_p01___t_error.html", "union_e_s_p01___t_error" ],
     [ "FGPIO_MemMap", "struct_f_g_p_i_o___mem_map.html", "struct_f_g_p_i_o___mem_map" ],
     [ "FTFA_MemMap", "struct_f_t_f_a___mem_map.html", "struct_f_t_f_a___mem_map" ],
     [ "GPIO_MemMap", "struct_g_p_i_o___mem_map.html", "struct_g_p_i_o___mem_map" ],
@@ -80,11 +79,12 @@ var annotated_dup =
     [ "SPI_MemMap", "struct_s_p_i___mem_map.html", "struct_s_p_i___mem_map" ],
     [ "SysTick_MemMap", "struct_sys_tick___mem_map.html", "struct_sys_tick___mem_map" ],
     [ "TCpuClockConfiguration", "struct_t_cpu_clock_configuration.html", "struct_t_cpu_clock_configuration" ],
-    [ "Terminal_TError", "union_terminal___t_error.html", "union_terminal___t_error" ],
     [ "TPM_MemMap", "struct_t_p_m___mem_map.html", "struct_t_p_m___mem_map" ],
     [ "TSI_MemMap", "struct_t_s_i___mem_map.html", "struct_t_s_i___mem_map" ],
     [ "tVectorTable", "structt_vector_table.html", "structt_vector_table" ],
     [ "UART0_MemMap", "struct_u_a_r_t0___mem_map.html", "struct_u_a_r_t0___mem_map" ],
+    [ "UART0_TError", "union_u_a_r_t0___t_error.html", "union_u_a_r_t0___t_error" ],
+    [ "UART2_TError", "union_u_a_r_t2___t_error.html", "union_u_a_r_t2___t_error" ],
     [ "UART_MemMap", "struct_u_a_r_t___mem_map.html", "struct_u_a_r_t___mem_map" ],
     [ "USB_MemMap", "struct_u_s_b___mem_map.html", "struct_u_s_b___mem_map" ]
 ];
