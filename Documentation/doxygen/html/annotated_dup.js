@@ -5,6 +5,7 @@ var annotated_dup =
     [ "ASerialLdd2_TDeviceData", "struct_a_serial_ldd2___t_device_data.html", "struct_a_serial_ldd2___t_device_data" ],
     [ "BP_MemMap", "struct_b_p___mem_map.html", "struct_b_p___mem_map" ],
     [ "CMP_MemMap", "struct_c_m_p___mem_map.html", "struct_c_m_p___mem_map" ],
+    [ "COMM_INFO", "struct_c_o_m_m___i_n_f_o.html", "struct_c_o_m_m___i_n_f_o" ],
     [ "CoreDebug_MemMap", "struct_core_debug___mem_map.html", "struct_core_debug___mem_map" ],
     [ "DAC_MemMap", "struct_d_a_c___mem_map.html", "struct_d_a_c___mem_map" ],
     [ "DMA_MemMap", "struct_d_m_a___mem_map.html", "struct_d_m_a___mem_map" ],

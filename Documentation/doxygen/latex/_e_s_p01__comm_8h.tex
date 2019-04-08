@@ -1,0 +1,78 @@
+\hypertarget{_e_s_p01__comm_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.h File Reference}
+\label{_e_s_p01__comm_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+h}}
+
+
+This file exports the needed stuff from \hyperlink{_e_s_p01__comm_8c}{E\+S\+P01\+\_\+comm.\+c}.  
+
+
+{\ttfamily \#include $<$P\+E\+\_\+\+Types.\+h$>$}\newline
+{\ttfamily \#include $<$U\+A\+R\+T2.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a69e73620bd8f14313137ac04cf571477}\label{_e_s_p01__comm_8h_a69e73620bd8f14313137ac04cf571477}} 
+\#define {\bfseries M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~512
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}{comm\+\_\+start} ()
+\begin{DoxyCompactList}\small\item\em A function starts the communication with E\+S\+P01. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}{comm\+\_\+parse} ()
+\begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to parse a received msg. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_p01__comm_8h_a144515221297b75e9db38676fceae827}{comm\+\_\+response} ()
+\begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to respond to a received msg. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a02c559b27c951376e4917997ffb17030}\label{_e_s_p01__comm_8h_a02c559b27c951376e4917997ffb17030}} 
+U\+A\+R\+T2\+\_\+\+T\+Com\+Data {\bfseries message\+\_\+out} \mbox{[}M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE\mbox{]}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a7e16a5c9eae6cc971f5522c73a7a0299}\label{_e_s_p01__comm_8h_a7e16a5c9eae6cc971f5522c73a7a0299}} 
+U\+A\+R\+T2\+\_\+\+T\+Com\+Data {\bfseries message\+\_\+in} \mbox{[}M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE\mbox{]}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a1c7dabbefb86cb708480f9c6f0caf51c}\label{_e_s_p01__comm_8h_a1c7dabbefb86cb708480f9c6f0caf51c}} 
+volatile bool {\bfseries message\+\_\+recv}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a466a14cf4cc66762c2db192d9e015004}\label{_e_s_p01__comm_8h_a466a14cf4cc66762c2db192d9e015004}} 
+volatile bool {\bfseries message\+\_\+sent}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file exports the needed stuff from \hyperlink{_e_s_p01__comm_8c}{E\+S\+P01\+\_\+comm.\+c}. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}\label{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}} 
+\index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+parse@{comm\+\_\+parse}}
+\index{comm\+\_\+parse@{comm\+\_\+parse}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
+\subsubsection{\texorpdfstring{comm\+\_\+parse()}{comm\_parse()}}
+{\footnotesize\ttfamily void comm\+\_\+parse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A function implementing a F\+SM to parse a received msg. 
+
+This function is responsible for parsing a received message and change the state of the F\+SM (if needed). the last received message from the M\+Q\+TT broker. It also logs some information when the connection is already established. \mbox{\Hypertarget{_e_s_p01__comm_8h_a144515221297b75e9db38676fceae827}\label{_e_s_p01__comm_8h_a144515221297b75e9db38676fceae827}} 
+\index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+response@{comm\+\_\+response}}
+\index{comm\+\_\+response@{comm\+\_\+response}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
+\subsubsection{\texorpdfstring{comm\+\_\+response()}{comm\_response()}}
+{\footnotesize\ttfamily void comm\+\_\+response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A function implementing a F\+SM to respond to a received msg. 
+
+This function is responsible for assembling a response to the last received message from the M\+Q\+TT broker. It also implements connection retries and logs the process. \mbox{\Hypertarget{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}\label{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}} 
+\index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+start@{comm\+\_\+start}}
+\index{comm\+\_\+start@{comm\+\_\+start}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
+\subsubsection{\texorpdfstring{comm\+\_\+start()}{comm\_start()}}
+{\footnotesize\ttfamily void comm\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A function starts the communication with E\+S\+P01. 
+
+This function is responsible for starting the communication with E\+S\+P01 (consequently with the M\+Q\+TT broker). 
