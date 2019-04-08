@@ -53,6 +53,11 @@ COMM_INFO_STRUCT comm_info;
 
 bool comm_are_there_conn_errors();
 
+/*! \brief A function starts the communication with ESP01
+**
+** 	This function is responsible for starting the communication
+** 	with ESP01 (consequently with the MQTT broker).
+*/
 void comm_start()
 {
 	comm_info.state = CONNECT_WIFI;
@@ -62,12 +67,25 @@ void comm_start()
 	comm_response();
 }
 
+/*! \brief A function triggers the message sending process (to ESP01)
+**
+** 	This function is responsible for triggering the
+** 	sending message process (to ESP01).
+** 	It also notifies the main loop that a message is
+** 	being sent with UART2.
+*/
 void comm_send_msg()
 {
 	message_sent = FALSE;
 	UART2_OnTxChar();
 }
 
+/*! \brief A function implementing a FSM to respond to a received msg
+**
+** 	This function is responsible for assembling a response to
+** 	the last received message from the MQTT broker.
+**	It also implements connection retries and logs the process.
+*/
 void comm_response()
 {
 	if(comm_info.state == WAITING_FOR_CMD)	return;
@@ -151,6 +169,14 @@ void comm_response()
 	comm_send_msg();
 }
 
+/*! \brief A function implementing a FSM to parse a received msg
+**
+** 	This function is responsible for parsing a received
+** 	message and change the state of the FSM (if needed).
+** 	the last received message from the MQTT broker.
+**	It also logs some information when the connection is
+**	already established.
+*/
 void comm_parse()
 {
 	static bool has_ip_number = FALSE;
@@ -309,6 +335,11 @@ void comm_parse()
 	}
 }
 
+/*! \brief A function that checks if there is a connection error
+**
+** 	This function is responsible for checking if the message
+** 	received is one of global connection errors.
+*/
 bool comm_are_there_conn_errors()
 {
 	bool status = FALSE;
