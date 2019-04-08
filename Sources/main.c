@@ -17,8 +17,9 @@
 ** @file main.c
 ** @version 01.01
 ** @brief
-**         Main module.
 **         This module contains user's application code.
+**         This module contains the main loop, in which
+**         communication-related flags are monitored.
 */         
 /*!
 **  @addtogroup main_module main module documentation
@@ -58,8 +59,22 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
 
+  /*!
+   * Starts the communication
+   */
   comm_start();
 
+  /*!
+   * Infinite loop that checks
+   * 	if a message was received and;
+   * 	if the last message was completely sent and;
+   * 	if the last log entry was completely sent.
+   *
+   * If all of the above tests are TRUE, then it calls the
+   * function that parses the received message. Thereafter,
+   * it calls the function that responds to the received
+   * message.
+   */
   for(;;)
   {
 	  if(message_recv == TRUE &&
