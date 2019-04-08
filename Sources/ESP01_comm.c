@@ -324,6 +324,8 @@ void comm_parse()
 		}
 		else if(strcmp(message_in, "NOT CONNECTED\r\n") == 0)
 		{
+			LOG("COMMUNICATION", "Connection with MQTT broker lost. Retrying...\n");
+
 			comm_info.state = CONNECT_MQTT;
 		}
 		else if(strcmp(message_in, "ERROR SUBSCRIBE\r\n") == 0)
@@ -346,11 +348,15 @@ bool comm_are_there_conn_errors()
 	bool status = FALSE;
 	if(strcmp(message_in, "WIFI_DISCONNECTED\r\n") == 0)
 	{
+		LOG("CONNECTION_ERROR", "Connection with Wi-Fi lost. Retrying...\n");
+
 		comm_info.state = CONNECT_WIFI;
 		status = TRUE;
 	}
 	else if(strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
 	{
+		LOG("CONNECTION_ERROR", "Connection with MQTT broker lost. Retrying...\n");
+
 		comm_info.state = CONNECT_MQTT;
 		status = TRUE;
 	}
