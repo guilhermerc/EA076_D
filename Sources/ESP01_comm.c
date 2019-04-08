@@ -19,6 +19,7 @@
 #define MQTT_PASSWORD "\"UNICAMP\""
 #define SMARTPHONE_TOPIC "\"EA076/grupoD3/celular\""
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
+#define ESP_TOPIC "\"EA076/grupoD3/ESP\""
 #define TERMINATING_CHARS "\r\n"
 #define MAX_TOKENS	32
 
@@ -156,7 +157,7 @@ void comm_response()
 	case PUBLISHING:
 	{
 		strcpy(message_out, "PUBLISH ");
-		strcat(message_out, SMARTPHONE_TOPIC);
+		strcat(message_out, ESP_TOPIC);
 		strcat(message_out, ",\"");
 		// The index which corresponds to the '\r' char is overwritten with '\0'
 		message_in[strlen(message_in) - 2] = '\0';
