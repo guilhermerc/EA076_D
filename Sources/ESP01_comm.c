@@ -5,10 +5,12 @@
  **         with the MQTT Broker (using the ESP-01 module).
  */
 
+#include <ADC0.h>
 #include <ESP01_comm.h>
 #include <LOG.h>
 #include <stdint.h>
 #include <string.h>
+#include <TI0.h>
 #include <UART2Events.h>
 
 #define WIFI_SSID "\"EA076R\""
@@ -20,7 +22,6 @@
 #define SMARTPHONE_TOPIC "\"EA076/grupoD3/celular\""
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
 #define ESP_TOPIC "\"EA076/grupoD3/ESP\""
-#define TERMINATING_CHARS "\r\n"
 #define MAX_TOKENS	32
 
 #define IP_NUMBER_SIZE	32
@@ -32,26 +33,6 @@ static char mac_addr[MAC_ADDR_SIZE];	// it should be const
 static bool is_subsc_to_smartp = FALSE;
 static UART2_TComData * tokens[MAX_TOKENS];
 
-typedef enum COMM_STATE
-{
-	CONNECT_WIFI,
-	GET_IP_NUMB,
-	GET_MAC_ADDR,
-	CONNECT_MQTT,
-	WAITING_FOR_CMD,
-	TOPIC_SUBSC,
-	TOPIC_UNSUBSC,
-	PUBLISHING,
-	PINGING
-} COMM_STATE_ENUM;
-
-typedef struct COMM_INFO
-{
-	COMM_STATE_ENUM state;
-} COMM_INFO_STRUCT;
-
-COMM_INFO_STRUCT comm_info;
-
 bool comm_are_there_conn_errors();
 
 /*! \brief A function starts the communication with ESP01
@@ -59,13 +40,24 @@ bool comm_are_there_conn_errors();
 ** 	This function is responsible for starting the communication
 ** 	with ESP01 (consequently with the MQTT broker).
 */
-void comm_start()
+void comm_init()
 {
 	comm_info.state = CONNECT_WIFI;
-	message_recv = FALSE;
-	message_sent = TRUE;
-	log_entry_sent = TRUE;
+
+	comm_info.message_received = FALSE;
+	comm_info.loging_status = DONE;
+	comm_info.sending_status = DONE;
+
 	comm_response();
+}
+
+COMM_STATUS comm_status()
+{
+	COMM_STATUS comm_status = BUSY;
+	if((comm_info.sending_status == DONE) && (comm_info.loging_status == DONE))
+			comm_status = AVAILABLE;
+
+	return comm_status;
 }
 
 /*! \brief A function triggers the message sending process (to ESP01)
@@ -77,7 +69,7 @@ void comm_start()
 */
 void comm_send_msg()
 {
-	message_sent = FALSE;
+	comm_info.sending_status = SENDING;
 	UART2_OnTxChar();
 }
 
@@ -246,7 +238,9 @@ void comm_parse()
 			if(is_subsc_to_smartp == FALSE)
 				comm_info.state = TOPIC_SUBSC;
 			else
+			{
 				comm_info.state = WAITING_FOR_CMD;
+			}
 		}
 		else if(strcmp(message_in, "NOWIFI\r\n") == 0)
 		{
