@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "ADC_MemMap", "struct_a_d_c___mem_map.html", "struct_a_d_c___mem_map" ],
+    [ "AdcLdd1_TDeviceData", "struct_adc_ldd1___t_device_data.html", "struct_adc_ldd1___t_device_data" ],
     [ "ASerialLdd1_TDeviceData", "struct_a_serial_ldd1___t_device_data.html", "struct_a_serial_ldd1___t_device_data" ],
     [ "ASerialLdd2_TDeviceData", "struct_a_serial_ldd2___t_device_data.html", "struct_a_serial_ldd2___t_device_data" ],
     [ "BP_MemMap", "struct_b_p___mem_map.html", "struct_b_p___mem_map" ],
@@ -80,8 +81,11 @@ var annotated_dup =
     [ "SPI_MemMap", "struct_s_p_i___mem_map.html", "struct_s_p_i___mem_map" ],
     [ "SysTick_MemMap", "struct_sys_tick___mem_map.html", "struct_sys_tick___mem_map" ],
     [ "TCpuClockConfiguration", "struct_t_cpu_clock_configuration.html", "struct_t_cpu_clock_configuration" ],
+    [ "TEMPERATURE_INFO", "struct_t_e_m_p_e_r_a_t_u_r_e___i_n_f_o.html", "struct_t_e_m_p_e_r_a_t_u_r_e___i_n_f_o" ],
+    [ "TimerIntLdd1_TDeviceData", "struct_timer_int_ldd1___t_device_data.html", "struct_timer_int_ldd1___t_device_data" ],
     [ "TPM_MemMap", "struct_t_p_m___mem_map.html", "struct_t_p_m___mem_map" ],
     [ "TSI_MemMap", "struct_t_s_i___mem_map.html", "struct_t_s_i___mem_map" ],
+    [ "TU1_TDeviceData", "struct_t_u1___t_device_data.html", "struct_t_u1___t_device_data" ],
     [ "tVectorTable", "structt_vector_table.html", "structt_vector_table" ],
     [ "UART0_MemMap", "struct_u_a_r_t0___mem_map.html", "struct_u_a_r_t0___mem_map" ],
     [ "UART0_TError", "union_u_a_r_t0___t_error.html", "union_u_a_r_t0___t_error" ],

@@ -1,7 +1,10 @@
 
 \begin{DoxyItemize}
 \item \hyperlink{ASerialLdd1}{A\+Serial\+Ldd1 (Serial\+\_\+\+L\+DD)}
-\item \hyperlink{ASerialLdd2}{A\+Serial\+Ldd2 (Serial\+\_\+\+L\+DD)} 
+\item \hyperlink{ASerialLdd2}{A\+Serial\+Ldd2 (Serial\+\_\+\+L\+DD)}
+\item \hyperlink{AdcLdd1}{Adc\+Ldd1 (A\+D\+C\+\_\+\+L\+DD)}
+\item \hyperlink{TU1}{T\+U1 (Timer\+Unit\+\_\+\+L\+DD)}
+\item \hyperlink{TimerIntLdd1}{Timer\+Int\+Ldd1 (Timer\+Int\+\_\+\+L\+DD)} 
 \end{DoxyItemize}\hypertarget{ASerialLdd1}{}\section{A\+Serial\+Ldd1 (Serial\+\_\+\+L\+DD)}\label{ASerialLdd1}
 This component \char`\"{}\+Serial\+\_\+\+L\+D\+D\char`\"{} implements an asynchronous serial communication. The component supports different settings of parity, word width, stop-\/bit and communication speed, user can select interrupt or polling handler. Communication speed can be changed also in runtime. The component requires one on-\/chip asynchronous serial communication channel.
 
@@ -657,4 +660,851 @@ Bit&Field&Value&Description \\\cline{1-4}
 2&B\+R\+K13&0x00&Break Character Generation Length \\\cline{1-4}
 1&L\+B\+K\+DE&0x00&L\+IN Break Detection Enable \\\cline{1-4}
 0&R\+AF&0x00&Receiver Active Flag \\\cline{1-4}
+\end{longtabu}
+\hypertarget{AdcLdd1}{}\section{Adc\+Ldd1 (A\+D\+C\+\_\+\+L\+DD)}\label{AdcLdd1}
+This device \char`\"{}\+A\+D\+C\+\_\+\+L\+D\+D\char`\"{} implements an A/D converter, its control methods and interrupt/event handling procedure.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{AdcLdd1_settings}{Component Settings}
+\item \hyperlink{AdcLdd1_regs_overview}{Registers Initialization Overview}
+\item \hyperlink{AdcLdd1_regs_details}{Register Initialization Details}
+\item \hyperlink{group___adc_ldd1__module}{Component documentation} 
+\end{DoxyItemize}\hypertarget{AdcLdd1_settings}{}\subsection{Component Settings}\label{AdcLdd1_settings}
+
+\begin{DoxyCode}
+            Component name                                 : AdcLdd1
+            A/D converter                                  : ADC0
+            Discontinuous mode                             : no
+            Interrupt service/event                        : Enabled
+              A/D interrupt                                : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8dadc0bb741cef921ebacfbc9105c85097b}{INT\_ADC0}
+              A/D interrupt priority                       : medium priority
+            DMA                                            : Disabled
+            A/D channel list                               : 1
+              Channel 0                                    : 
+                Channel mode                               : Single Ended
+                  Input                                    : 
+                    A/D channel (pin)                      : ADC0\_SE8/TSI0\_CH0/PTB0/LLWU\_P5/I2C0\_SCL/
+      TPM1\_CH0
+                    A/D channel (pin) signal               : 
+            Static sample groups                           : Disabled
+            Max. samples                                   : 8
+            A/D resolution                                 : Autoselect
+            Low-power mode                                 : Disabled
+            High-speed conversion mode                     : Disabled
+            Asynchro clock output                          : Disabled
+            Sample time                                    : 4 clock periods
+            Number of conversions                          : 1
+            Conversion time                                : 4.768372 µs
+            ADC clock                                      : 5.242 MHz (190.735 ns)
+            Single conversion time - Single-ended          : 5.96 us
+            Single conversion time - Differential          : 7.677 us
+            Additional conversion time - Single-ended      : 4.768 us
+            Additional conversion time - Differential      : 6.484 us
+            Result type                                    : unsigned 16 bits, right justified
+            Trigger                                        : Disabled
+            Voltage reference                              : 
+              High voltage reference                       : 
+                Volt. ref. pin                             : VREFH
+                Volt. ref pin signal                       : 
+              Low voltage reference                        : 
+                Volt. ref. pin                             : VREFL
+                Volt. ref pin signal                       : 
+            Initialization                                 : 
+              Enabled in init. code                        : yes
+              Auto initialization                          : no
+              Event mask                                   : 
+                OnMeasurementComplete                      : Enabled
+                OnError                                    : Disabled
+            CPU clock/configuration selection              : 
+              Clock configuration 0                        : This component enabled
+              Clock configuration 1                        : This component disabled
+              Clock configuration 2                        : This component disabled
+              Clock configuration 3                        : This component disabled
+              Clock configuration 4                        : This component disabled
+              Clock configuration 5                        : This component disabled
+              Clock configuration 6                        : This component disabled
+              Clock configuration 7                        : This component disabled
+<h1>
+\end{DoxyCode}
+ \hypertarget{AdcLdd1_regs_overview}{}\subsection{Registers Initialization Overview}\label{AdcLdd1_regs_overview}
+This page contains the initialization values for the registers of the peripheral(s) configured by the component. \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{4}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*1)*4/4}|}{Adc\+Ldd1 Initialization }\\\cline{1-4}
+Address&Register&Register Value&Register Description \\\cline{1-4}
+0x4003\+B000&A\+D\+C0\+\_\+\+S\+C1A &0x00000048 &A\+D\+C0\+\_\+\+S\+C1A register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4004803C&S\+I\+M\+\_\+\+S\+C\+G\+C6 &0x08000001 &S\+I\+M\+\_\+\+S\+C\+G\+C6 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x\+E000\+E40C&N\+V\+I\+C\+\_\+\+I\+P\+R3 &0x80800080 &N\+V\+I\+C\+\_\+\+I\+P\+R3 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x0000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4004\+A000&P\+O\+R\+T\+B\+\_\+\+P\+C\+R0 &0x00000000 &P\+O\+R\+T\+B\+\_\+\+P\+C\+R0 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4003\+B008&A\+D\+C0\+\_\+\+C\+F\+G1 &0x0000004C &A\+D\+C0\+\_\+\+C\+F\+G1 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4003\+B00C&A\+D\+C0\+\_\+\+C\+F\+G2 &0x00000000 &A\+D\+C0\+\_\+\+C\+F\+G2 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4003\+B020&A\+D\+C0\+\_\+\+S\+C2 &0x00000000 &A\+D\+C0\+\_\+\+S\+C2 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4003\+B024&A\+D\+C0\+\_\+\+S\+C3 &0x00000040 &A\+D\+C0\+\_\+\+S\+C3 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+\end{longtabu}
+Color Denotes Reset Value ~\newline
+ \hypertarget{AdcLdd1_regs_details}{}\subsection{Register Initialization Details}\label{AdcLdd1_regs_details}
+This page contains detailed description of initialization values for the registers of the peripheral(s) configured by the component.
+
+A\+D\+C0\+\_\+\+S\+C1A  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{1}{\linewidth}{C\+O\+CO }&\multirow{2}{\linewidth}{A\+I\+EN}&\multirow{2}{\linewidth}{D\+I\+FF}&\multicolumn{5}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*13)*5/17}|}{\multirow{2}{\linewidth}{A\+D\+CH  }}\\\cline{1-1}\cline{10-10}
+W &&&&&&&&&&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{5}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*10)*5/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&1&1&1&1&1  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000048 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x0000001F }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&C\+O\+CO&0x00&Conversion Complete Flag \\\cline{1-4}
+6&A\+I\+EN&0x01&Interrupt Enable \\\cline{1-4}
+5&D\+I\+FF&0x00&Differential Mode Enable \\\cline{1-4}
+0 -\/ 4&A\+D\+CH&0x00&Input channel select \\\cline{1-4}
+\end{longtabu}
+S\+I\+M\+\_\+\+S\+C\+G\+C6  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{D\+A\+C0}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{R\+TC}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{A\+D\+C0 }&\multirow{2}{\linewidth}{T\+P\+M2}&\multirow{2}{\linewidth}{T\+P\+M1}&\multirow{2}{\linewidth}{T\+P\+M0 }&\multirow{2}{\linewidth}{P\+IT}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{D\+M\+A\+M\+UX }&\multirow{2}{\linewidth}{F\+TF  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&1  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4004803C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x08000001 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000001 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+31&D\+A\+C0&0x00&D\+A\+C0 Clock Gate Control \\\cline{1-4}
+29&R\+TC&0x00&R\+TC Access Control \\\cline{1-4}
+27&A\+D\+C0&0x01&A\+D\+C0 Clock Gate Control \\\cline{1-4}
+26&T\+P\+M2&0x00&T\+P\+M2 Clock Gate Control \\\cline{1-4}
+25&T\+P\+M1&0x00&T\+P\+M1 Clock Gate Control \\\cline{1-4}
+24&T\+P\+M0&0x00&T\+P\+M0 Clock Gate Control \\\cline{1-4}
+23&P\+IT&0x00&P\+IT Clock Gate Control \\\cline{1-4}
+1&D\+M\+A\+M\+UX&0x00&D\+MA Mux Clock Gate Control \\\cline{1-4}
+0&F\+TF&0x01&Flash Memory Clock Gate Control \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+P\+R3  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+15}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+14  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+13}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+12  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E40C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x80800080 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+24 -\/ 31&P\+R\+I\+\_\+15&0x80&Priority of interrupt 15 \\\cline{1-4}
+16 -\/ 23&P\+R\+I\+\_\+14&0x80&Priority of interrupt 14 \\\cline{1-4}
+8 -\/ 15&P\+R\+I\+\_\+13&0x00&Priority of interrupt 12 \\\cline{1-4}
+0 -\/ 7&P\+R\+I\+\_\+12&0x80&Priority of interrupt 11 \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+S\+ER  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{33}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-33}
+R&\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*2)*32/33}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*1)*32/33}|}{}\\\cline{1-33}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-33}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E100 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x0000\+D000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 31&S\+E\+T\+E\+NA&0x00&Interrupt set enable bits \\\cline{1-4}
+\end{longtabu}
+P\+O\+R\+T\+B\+\_\+\+P\+C\+R0  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{I\+SF}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*14)*4/17}|}{\multirow{2}{\linewidth}{I\+R\+QC  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*4/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multicolumn{3}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*15)*3/17}|}{\multirow{2}{\linewidth}{M\+UX }}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{D\+SE}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{P\+FE}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{S\+RE }&\multirow{2}{\linewidth}{PE}&\multirow{2}{\linewidth}{PS  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{3}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*3/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&?&?&?&0&? &0&?&0&?&?&?  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4004\+A000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+24&I\+SF&0x00&Interrupt Status Flag \\\cline{1-4}
+16 -\/ 19&I\+R\+QC&0x00&Interrupt Configuration \\\cline{1-4}
+8 -\/ 10&M\+UX&0x00&Pin Mux Control \\\cline{1-4}
+6&D\+SE&0x00&Drive Strength Enable \\\cline{1-4}
+4&P\+FE&0x00&Passive Filter Enable \\\cline{1-4}
+2&S\+RE&0x00&Slew Rate Enable \\\cline{1-4}
+1&PE&0x00&Pull Enable \\\cline{1-4}
+0&PS&0x00&Pull Select \\\cline{1-4}
+\end{longtabu}
+A\+D\+C0\+\_\+\+C\+F\+G1  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{A\+D\+L\+PC }&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*14)*2/17}|}{\multirow{2}{\linewidth}{A\+D\+IV}}&\multirow{2}{\linewidth}{A\+D\+L\+S\+MP}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*14)*2/17}|}{\multirow{2}{\linewidth}{M\+O\+DE }}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*14)*2/17}|}{\multirow{2}{\linewidth}{A\+D\+I\+C\+LK  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B008 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x0000004C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&A\+D\+L\+PC&0x00&Low-\/\+Power Configuration \\\cline{1-4}
+5 -\/ 6&A\+D\+IV&0x02&Clock Divide Select \\\cline{1-4}
+4&A\+D\+L\+S\+MP&0x00&Sample time configuration \\\cline{1-4}
+2 -\/ 3&M\+O\+DE&0x02&Conversion mode selection \\\cline{1-4}
+0 -\/ 1&A\+D\+I\+C\+LK&0x00&Input Clock Select \\\cline{1-4}
+\end{longtabu}
+A\+D\+C0\+\_\+\+C\+F\+G2  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{M\+U\+X\+S\+EL }&\multirow{2}{\linewidth}{A\+D\+A\+C\+K\+EN}&\multirow{2}{\linewidth}{A\+D\+H\+SC}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*16)*2/17}|}{\multirow{2}{\linewidth}{A\+D\+L\+S\+TS  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B00C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+4&M\+U\+X\+S\+EL&0x00&A\+DC Mux Select \\\cline{1-4}
+3&A\+D\+A\+C\+K\+EN&0x00&Asynchronous Clock Output Enable \\\cline{1-4}
+2&A\+D\+H\+SC&0x00&High-\/\+Speed Configuration \\\cline{1-4}
+0 -\/ 1&A\+D\+L\+S\+TS&0x00&Long Sample Time Select \\\cline{1-4}
+\end{longtabu}
+A\+D\+C0\+\_\+\+S\+C2  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{1}{\linewidth}{A\+D\+A\+CT }&\multirow{2}{\linewidth}{A\+D\+T\+RG}&\multirow{2}{\linewidth}{A\+C\+FE}&\multirow{2}{\linewidth}{A\+C\+F\+GT }&\multirow{2}{\linewidth}{A\+C\+R\+EN}&\multirow{2}{\linewidth}{D\+M\+A\+EN}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*16)*2/17}|}{\multirow{2}{\linewidth}{R\+E\+F\+S\+EL  }}\\\cline{1-1}\cline{10-10}
+W &&&&&&&&&&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*10)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B020 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&A\+D\+A\+CT&0x00&Conversion Active \\\cline{1-4}
+6&A\+D\+T\+RG&0x00&Conversion Trigger Select \\\cline{1-4}
+5&A\+C\+FE&0x00&Compare Function Enable \\\cline{1-4}
+4&A\+C\+F\+GT&0x00&Compare Function Greater Than Enable \\\cline{1-4}
+3&A\+C\+R\+EN&0x00&Compare Function Range Enable \\\cline{1-4}
+2&D\+M\+A\+EN&0x00&D\+MA Enable \\\cline{1-4}
+0 -\/ 1&R\+E\+F\+S\+EL&0x00&Voltage Reference Selection \\\cline{1-4}
+\end{longtabu}
+A\+D\+C0\+\_\+\+S\+C3  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{C\+AL }&\multirow{2}{\linewidth}{C\+A\+LF}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{A\+D\+CO}&\multirow{2}{\linewidth}{A\+V\+GE}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*16)*2/17}|}{\multirow{2}{\linewidth}{A\+V\+GS  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B024 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000040 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&C\+AL&0x00&Calibration \\\cline{1-4}
+6&C\+A\+LF&0x01&Calibration Failed Flag \\\cline{1-4}
+3&A\+D\+CO&0x00&Continuous Conversion Enable \\\cline{1-4}
+2&A\+V\+GE&0x00&Hardware Average Enable \\\cline{1-4}
+0 -\/ 1&A\+V\+GS&0x00&Hardware Average Select \\\cline{1-4}
+\end{longtabu}
+\hypertarget{TU1}{}\section{T\+U1 (Timer\+Unit\+\_\+\+L\+DD)}\label{TU1}
+This Timer\+Unit component provides a low level A\+PI for unified hardware access across various timer devices using the Prescaler-\/\+Counter-\/\+Compare-\/\+Capture timer structure.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{TU1_settings}{Component Settings}
+\item \hyperlink{TU1_regs_overview}{Registers Initialization Overview}
+\item \hyperlink{TU1_regs_details}{Register Initialization Details}
+\item \hyperlink{group___t_u1__module}{Component documentation} 
+\end{DoxyItemize}\hypertarget{TU1_settings}{}\subsection{Component Settings}\label{TU1_settings}
+
+\begin{DoxyCode}
+            Component name                                 : TU1
+            Module name                                    : LPTMR0
+            Counter                                        : LPTMR0\_CNR
+            Counter direction                              : Up
+            Counter width                                  : 16 bits
+            Value type                                     : uint16\_t
+            Input clock source                             : Internal
+              Counter frequency                            : Auto select
+            Counter restart                                : On-match
+              Period device                                : LPTMR0\_CMR
+              Period                                       : 1 sec
+              Interrupt                                    : Enabled
+                Interrupt                                  : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8dadb33151c23fc4df6fa87f60d1df02dae}{INT\_LPTMR0}
+                Interrupt priority                         : medium priority
+            Channel list                                   : 0
+            Initialization                                 : 
+              Enabled in init. code                        : yes
+              Auto initialization                          : no
+              Event mask                                   : 
+                OnCounterRestart                           : Disabled
+                OnChannel0                                 : Disabled
+                OnChannel1                                 : Disabled
+                OnChannel2                                 : Disabled
+                OnChannel3                                 : Disabled
+                OnChannel4                                 : Disabled
+                OnChannel5                                 : Disabled
+                OnChannel6                                 : Disabled
+                OnChannel7                                 : Disabled
+            CPU clock/configuration selection              : 
+              Clock configuration 0                        : This component enabled
+              Clock configuration 1                        : This component disabled
+              Clock configuration 2                        : This component disabled
+              Clock configuration 3                        : This component disabled
+              Clock configuration 4                        : This component disabled
+              Clock configuration 5                        : This component disabled
+              Clock configuration 6                        : This component disabled
+              Clock configuration 7                        : This component disabled
+<h1>
+\end{DoxyCode}
+ \hypertarget{TU1_regs_overview}{}\subsection{Registers Initialization Overview}\label{TU1_regs_overview}
+This page contains the initialization values for the registers of the peripheral(s) configured by the component. \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{4}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*1)*4/4}|}{T\+U1 Initialization }\\\cline{1-4}
+Address&Register&Register Value&Register Description \\\cline{1-4}
+0x40048038&S\+I\+M\+\_\+\+S\+C\+G\+C5 &0x00000181 &S\+I\+M\+\_\+\+S\+C\+G\+C5 register, peripheral T\+U1. \\\cline{1-4}
+0x40040000&L\+P\+T\+M\+R0\+\_\+\+C\+SR &0x00000081 &L\+P\+T\+M\+R0\+\_\+\+C\+SR register, peripheral T\+U1. \\\cline{1-4}
+0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00007\+F\+FF &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral T\+U1. \\\cline{1-4}
+0x40040004&L\+P\+T\+M\+R0\+\_\+\+P\+SR &0x00000004 &L\+P\+T\+M\+R0\+\_\+\+P\+SR register, peripheral T\+U1. \\\cline{1-4}
+0x\+E000\+E41C&N\+V\+I\+C\+\_\+\+I\+P\+R7 &0x00000080 &N\+V\+I\+C\+\_\+\+I\+P\+R7 register, peripheral T\+U1. \\\cline{1-4}
+0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x1000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral T\+U1. \\\cline{1-4}
+\end{longtabu}
+Color Denotes Reset Value ~\newline
+ \hypertarget{TU1_regs_details}{}\subsection{Register Initialization Details}\label{TU1_regs_details}
+This page contains detailed description of initialization values for the registers of the peripheral(s) configured by the component.
+
+S\+I\+M\+\_\+\+S\+C\+G\+C5  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{P\+O\+R\+TE}&\multirow{2}{\linewidth}{P\+O\+R\+TD}&\multirow{2}{\linewidth}{P\+O\+R\+TC }&\multirow{2}{\linewidth}{P\+O\+R\+TB}&\multirow{2}{\linewidth}{P\+O\+R\+TA}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+SI }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{L\+P\+T\+MR  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&1&1&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40048038 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000181 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000180 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+13&P\+O\+R\+TE&0x00&Port E Clock Gate Control \\\cline{1-4}
+12&P\+O\+R\+TD&0x00&Port D Clock Gate Control \\\cline{1-4}
+11&P\+O\+R\+TC&0x00&Port C Clock Gate Control \\\cline{1-4}
+10&P\+O\+R\+TB&0x00&Port B Clock Gate Control \\\cline{1-4}
+9&P\+O\+R\+TA&0x00&Port A Clock Gate Control \\\cline{1-4}
+5&T\+SI&0x00&T\+SI Access Control \\\cline{1-4}
+0&L\+P\+T\+MR&0x01&Low Power Timer Access Control \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+C\+SR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+CF }&\multirow{2}{\linewidth}{T\+IE}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*16)*2/17}|}{\multirow{2}{\linewidth}{T\+PS}}&\multirow{2}{\linewidth}{T\+PP }&\multirow{2}{\linewidth}{T\+FC}&\multirow{2}{\linewidth}{T\+MS}&\multirow{2}{\linewidth}{T\+EN  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000081 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&T\+CF&0x01&Timer Compare Flag \\\cline{1-4}
+6&T\+IE&0x00&Timer Interrupt Enable \\\cline{1-4}
+4 -\/ 5&T\+PS&0x00&Timer Pin Select \\\cline{1-4}
+3&T\+PP&0x00&Timer Pin Polarity \\\cline{1-4}
+2&T\+FC&0x00&Timer Free-\/\+Running Counter \\\cline{1-4}
+1&T\+MS&0x00&Timer Mode Select \\\cline{1-4}
+0&T\+EN&0x01&Timer Enable \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+C\+MR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{C\+O\+M\+P\+A\+RE  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040008 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00007\+F\+FF }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 15&C\+O\+M\+P\+A\+RE&0x00&Compare Value \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+P\+SR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*13)*4/17}|}{\multirow{2}{\linewidth}{P\+R\+E\+S\+C\+A\+LE}}&\multirow{2}{\linewidth}{P\+B\+YP}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*13)*2/17}|}{\multirow{2}{\linewidth}{P\+CS  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*4/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040004 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000004 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+3 -\/ 6&P\+R\+E\+S\+C\+A\+LE&0x00&Prescale Value \\\cline{1-4}
+2&P\+B\+YP&0x01&Prescaler Bypass \\\cline{1-4}
+0 -\/ 1&P\+CS&0x00&Prescaler Clock Select \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+P\+R7  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+31}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+30  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+29}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+28  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E41C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000080 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+24 -\/ 31&P\+R\+I\+\_\+31&0x00&Priority of interrupt 31 \\\cline{1-4}
+16 -\/ 23&P\+R\+I\+\_\+30&0x00&Priority of interrupt 30 \\\cline{1-4}
+8 -\/ 15&P\+R\+I\+\_\+29&0x00&Priority of interrupt 29 \\\cline{1-4}
+0 -\/ 7&P\+R\+I\+\_\+28&0x80&Priority of interrupt 28 \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+S\+ER  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{33}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-33}
+R&\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*2)*32/33}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*1)*32/33}|}{}\\\cline{1-33}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-33}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E100 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x1000\+D000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 31&S\+E\+T\+E\+NA&0x00&Interrupt set enable bits \\\cline{1-4}
+\end{longtabu}
+\hypertarget{TimerIntLdd1}{}\section{Timer\+Int\+Ldd1 (Timer\+Int\+\_\+\+L\+DD)}\label{TimerIntLdd1}
+This Timer\+Int component implements a periodic interrupt. When the component and its events are enabled, the \char`\"{}\+On\+Interrupt\char`\"{} event is called periodically with the period that you specify. Timer\+Int supports also changing the period in runtime. This Timer\+Int component provides a high level A\+PI for unified hardware access to various timer devices using the Timer\+Unit component.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{TimerIntLdd1_settings}{Component Settings}
+\item \hyperlink{TimerIntLdd1_regs_overview}{Registers Initialization Overview}
+\item \hyperlink{TimerIntLdd1_regs_details}{Register Initialization Details}
+\item \hyperlink{group___timer_int_ldd1__module}{Component documentation} 
+\end{DoxyItemize}\hypertarget{TimerIntLdd1_settings}{}\subsection{Component Settings}\label{TimerIntLdd1_settings}
+
+\begin{DoxyCode}
+            Component name                                 : TimerIntLdd1
+            Periodic interrupt source                      : LPTMR0\_CMR
+            Counter                                        : LPTMR0\_CNR
+            Interrupt service/event                        : Enabled
+              Interrupt                                    : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8dadb33151c23fc4df6fa87f60d1df02dae}{INT\_LPTMR0}
+              Interrupt priority                           : medium priority
+            Interrupt period                               : 1 sec
+            Initialization                                 : 
+              Enabled in init. code                        : yes
+              Auto initialization                          : yes
+              Event mask                                   : 
+                OnInterrupt                                : Disabled
+            CPU clock/configuration selection              : 
+              Clock configuration 0                        : This component enabled
+              Clock configuration 1                        : This component disabled
+              Clock configuration 2                        : This component disabled
+              Clock configuration 3                        : This component disabled
+              Clock configuration 4                        : This component disabled
+              Clock configuration 5                        : This component disabled
+              Clock configuration 6                        : This component disabled
+              Clock configuration 7                        : This component disabled
+            Referenced components                          : 
+              Linked TimerUnit                             : TU1
+<h1>
+\end{DoxyCode}
+ \hypertarget{TimerIntLdd1_regs_overview}{}\subsection{Registers Initialization Overview}\label{TimerIntLdd1_regs_overview}
+This page contains the initialization values for the registers of the peripheral(s) configured by the component. \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{4}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*1)*4/4}|}{Timer\+Int\+Ldd1 Initialization }\\\cline{1-4}
+Address&Register&Register Value&Register Description \\\cline{1-4}
+0x40048038&S\+I\+M\+\_\+\+S\+C\+G\+C5 &0x00000181 &S\+I\+M\+\_\+\+S\+C\+G\+C5 register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x40040000&L\+P\+T\+M\+R0\+\_\+\+C\+SR &0x00000081 &L\+P\+T\+M\+R0\+\_\+\+C\+SR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00007\+F\+FF &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x40040004&L\+P\+T\+M\+R0\+\_\+\+P\+SR &0x00000004 &L\+P\+T\+M\+R0\+\_\+\+P\+SR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x\+E000\+E41C&N\+V\+I\+C\+\_\+\+I\+P\+R7 &0x00000080 &N\+V\+I\+C\+\_\+\+I\+P\+R7 register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x1000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+\end{longtabu}
+Color Denotes Reset Value ~\newline
+ \hypertarget{TimerIntLdd1_regs_details}{}\subsection{Register Initialization Details}\label{TimerIntLdd1_regs_details}
+This page contains detailed description of initialization values for the registers of the peripheral(s) configured by the component.
+
+S\+I\+M\+\_\+\+S\+C\+G\+C5  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{P\+O\+R\+TE}&\multirow{2}{\linewidth}{P\+O\+R\+TD}&\multirow{2}{\linewidth}{P\+O\+R\+TC }&\multirow{2}{\linewidth}{P\+O\+R\+TB}&\multirow{2}{\linewidth}{P\+O\+R\+TA}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+SI }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{L\+P\+T\+MR  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&1&1&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40048038 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000181 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000180 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+13&P\+O\+R\+TE&0x00&Port E Clock Gate Control \\\cline{1-4}
+12&P\+O\+R\+TD&0x00&Port D Clock Gate Control \\\cline{1-4}
+11&P\+O\+R\+TC&0x00&Port C Clock Gate Control \\\cline{1-4}
+10&P\+O\+R\+TB&0x00&Port B Clock Gate Control \\\cline{1-4}
+9&P\+O\+R\+TA&0x00&Port A Clock Gate Control \\\cline{1-4}
+5&T\+SI&0x00&T\+SI Access Control \\\cline{1-4}
+0&L\+P\+T\+MR&0x01&Low Power Timer Access Control \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+C\+SR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+CF }&\multirow{2}{\linewidth}{T\+IE}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*16)*2/17}|}{\multirow{2}{\linewidth}{T\+PS}}&\multirow{2}{\linewidth}{T\+PP }&\multirow{2}{\linewidth}{T\+FC}&\multirow{2}{\linewidth}{T\+MS}&\multirow{2}{\linewidth}{T\+EN  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000081 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&T\+CF&0x01&Timer Compare Flag \\\cline{1-4}
+6&T\+IE&0x00&Timer Interrupt Enable \\\cline{1-4}
+4 -\/ 5&T\+PS&0x00&Timer Pin Select \\\cline{1-4}
+3&T\+PP&0x00&Timer Pin Polarity \\\cline{1-4}
+2&T\+FC&0x00&Timer Free-\/\+Running Counter \\\cline{1-4}
+1&T\+MS&0x00&Timer Mode Select \\\cline{1-4}
+0&T\+EN&0x01&Timer Enable \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+C\+MR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{C\+O\+M\+P\+A\+RE  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040008 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00007\+F\+FF }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 15&C\+O\+M\+P\+A\+RE&0x00&Compare Value \\\cline{1-4}
+\end{longtabu}
+L\+P\+T\+M\+R0\+\_\+\+P\+SR  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*13)*4/17}|}{\multirow{2}{\linewidth}{P\+R\+E\+S\+C\+A\+LE}}&\multirow{2}{\linewidth}{P\+B\+YP}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*13)*2/17}|}{\multirow{2}{\linewidth}{P\+CS  }}\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{4}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*4/17}|}{}&\multicolumn{1}{c|}{}&\multicolumn{2}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*2/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040004 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000004 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+3 -\/ 6&P\+R\+E\+S\+C\+A\+LE&0x00&Prescale Value \\\cline{1-4}
+2&P\+B\+YP&0x01&Prescaler Bypass \\\cline{1-4}
+0 -\/ 1&P\+CS&0x00&Prescaler Clock Select \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+P\+R7  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+31}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+30  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+29}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+28  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E41C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000080 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+24 -\/ 31&P\+R\+I\+\_\+31&0x00&Priority of interrupt 31 \\\cline{1-4}
+16 -\/ 23&P\+R\+I\+\_\+30&0x00&Priority of interrupt 30 \\\cline{1-4}
+8 -\/ 15&P\+R\+I\+\_\+29&0x00&Priority of interrupt 29 \\\cline{1-4}
+0 -\/ 7&P\+R\+I\+\_\+28&0x80&Priority of interrupt 28 \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+S\+ER  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{33}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-33}
+R&\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*2)*32/33}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*1)*32/33}|}{}\\\cline{1-33}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-33}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E100 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x1000\+D000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 31&S\+E\+T\+E\+NA&0x00&Interrupt set enable bits \\\cline{1-4}
 \end{longtabu}

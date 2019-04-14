@@ -1,0 +1,58 @@
+\hypertarget{_a_d_c0_8c}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+A\+D\+C0.c File Reference}
+\label{_a_d_c0_8c}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+A\+D\+C0.\+c@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+A\+D\+C0.\+c}}
+
+
+This device \char`\"{}\+A\+D\+C\char`\"{} implements an A/D converter, its control methods and interrupt/event handling procedure.  
+
+
+{\ttfamily \#include \char`\"{}A\+D\+C0\+Events.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}A\+D\+C0.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries S\+T\+OP}~0x00\+U          /$\ast$ S\+T\+O\+P state           $\ast$/
+\item 
+\#define {\bfseries M\+E\+A\+S\+U\+RE}~0x01\+U          /$\ast$ M\+E\+S\+U\+R\+E state         $\ast$/
+\item 
+\#define {\bfseries C\+O\+N\+T\+I\+N\+U\+O\+US}~0x02\+U          /$\ast$ C\+O\+N\+T\+I\+N\+U\+O\+U\+S state     $\ast$/
+\item 
+\#define {\bfseries S\+I\+N\+G\+LE}~0x03\+U          /$\ast$ S\+I\+N\+G\+L\+E state         $\ast$/
+\item 
+\#define {\bfseries C\+A\+L\+I\+B\+R\+A\+T\+I\+NG}~0x04\+U          /$\ast$ C\+A\+L\+I\+B\+R\+A\+T\+I\+N\+G state    $\ast$/
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries A\+D\+C0\+\_\+\+H\+W\+En\+Di} (void)
+\item 
+byte {\bfseries A\+D\+C0\+\_\+\+Enable\+Event} (void)
+\item 
+byte {\bfseries A\+D\+C0\+\_\+\+Disable\+Event} (void)
+\item 
+byte \hyperlink{group___a_d_c0__module_ga711a227f91b11ab087311d7a4f596323}{A\+D\+C0\+\_\+\+Measure} (bool Wait\+For\+Result)
+\begin{DoxyCompactList}\small\item\em This method performs one measurement on all channels that are set in the component inspector. (Note\+: If the \mbox{[}number of conversions\mbox{]} is more than one the conversion of A/D channels is performed specified number of times.) \end{DoxyCompactList}\item 
+byte \hyperlink{group___a_d_c0__module_ga60e325e636a51cf5c40b1ae5d887571e}{A\+D\+C0\+\_\+\+Get\+Value16} (word $\ast$Values)
+\begin{DoxyCompactList}\small\item\em This method returns the last measured values of all channels. Compared with \mbox{[}Get\+Value\mbox{]} method this method returns more accurate result if the \mbox{[}number of conversions\mbox{]} is greater than 1 and \mbox{[}AD resolution\mbox{]} is less than 16 bits. In addition, the user code dependency on \mbox{[}AD resolution\mbox{]} is eliminated. \end{DoxyCompactList}\item 
+byte \hyperlink{group___a_d_c0__module_gae338cdea1f89e3ae9bcac5801ebadcf8}{A\+D\+C0\+\_\+\+Calibrate} (bool Wait\+For\+Result)
+\begin{DoxyCompactList}\small\item\em This method returns the last measured values of all channels. Compared with \mbox{[}Get\+Value\mbox{]} method this method returns more accurate result if the \mbox{[}number of conversions\mbox{]} is greater than 1 and \mbox{[}AD resolution\mbox{]} is less than 16 bits. In addition, the user code dependency on \mbox{[}AD resolution\mbox{]} is eliminated. \end{DoxyCompactList}\item 
+void {\bfseries Adc\+Ldd1\+\_\+\+On\+Measurement\+Complete} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\+D\+D\+\_\+\+T\+User\+Data} $\ast$User\+Data\+Ptr)
+\item 
+void {\bfseries A\+D\+C0\+\_\+\+Init} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool {\bfseries A\+D\+C0\+\_\+\+En\+Event}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$ {\bfseries Adc\+Ldd1\+\_\+\+Device\+Data\+Ptr}
+\item 
+volatile word {\bfseries A\+D\+C0\+\_\+\+OutV}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This device \char`\"{}\+A\+D\+C\char`\"{} implements an A/D converter, its control methods and interrupt/event handling procedure. 
+
+\begin{DoxyVersion}{Version}
+01.\+00 
+\end{DoxyVersion}

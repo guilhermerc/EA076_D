@@ -1,5 +1,5 @@
-\hypertarget{_e_s_p01__comm_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.h File Reference}
-\label{_e_s_p01__comm_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+h}}
+\hypertarget{_e_s_p01__comm_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Include/\+E\+S\+P01\+\_\+comm.h File Reference}
+\label{_e_s_p01__comm_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Include/\+E\+S\+P01\+\_\+comm.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Include/\+E\+S\+P01\+\_\+comm.\+h}}
 
 
 This file exports the needed stuff from \hyperlink{_e_s_p01__comm_8c}{E\+S\+P01\+\_\+comm.\+c}.  
@@ -7,23 +7,80 @@ This file exports the needed stuff from \hyperlink{_e_s_p01__comm_8c}{E\+S\+P01\
 
 {\ttfamily \#include $<$P\+E\+\_\+\+Types.\+h$>$}\newline
 {\ttfamily \#include $<$U\+A\+R\+T2.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO}
+\end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ab7781d01486c68b7020916687376bc46}\label{_e_s_p01__comm_8h_ab7781d01486c68b7020916687376bc46}} 
+\#define {\bfseries T\+E\+R\+M\+I\+N\+A\+T\+I\+N\+G\+\_\+\+C\+H\+A\+RS}~\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
 \item 
 \mbox{\Hypertarget{_e_s_p01__comm_8h_a69e73620bd8f14313137ac04cf571477}\label{_e_s_p01__comm_8h_a69e73620bd8f14313137ac04cf571477}} 
 \#define {\bfseries M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~512
 \end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ad415ff12bf8c556b4497e7cf470e6f78}\label{_e_s_p01__comm_8h_ad415ff12bf8c556b4497e7cf470e6f78}} 
+typedef enum C\+O\+M\+M\+\_\+\+S\+E\+N\+D\+I\+N\+G\+\_\+\+S\+T\+A\+T\+US {\bfseries C\+O\+M\+M\+\_\+\+S\+E\+N\+D\+I\+N\+G\+\_\+\+S\+T\+A\+T\+US}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a9b5b3827d558ff358c0df8e7b18e201a}\label{_e_s_p01__comm_8h_a9b5b3827d558ff358c0df8e7b18e201a}} 
+typedef enum C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+US {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+US}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ac571f6b5ac06602a3d42fcb130e7cf7f}\label{_e_s_p01__comm_8h_ac571f6b5ac06602a3d42fcb130e7cf7f}} 
+typedef enum C\+O\+M\+M\+\_\+\+S\+T\+A\+TE {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+N\+UM}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a6bc1960bb8b1533d15b13213333c04c6}\label{_e_s_p01__comm_8h_a6bc1960bb8b1533d15b13213333c04c6}} 
+typedef struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO} {\bfseries C\+O\+M\+M\+\_\+\+I\+N\+F\+O\+\_\+\+S\+T\+R\+U\+CT}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ace8ecfcf4f943d5b8fd28c4a6711d5ac}\label{_e_s_p01__comm_8h_ace8ecfcf4f943d5b8fd28c4a6711d5ac}} 
+enum {\bfseries C\+O\+M\+M\+\_\+\+S\+E\+N\+D\+I\+N\+G\+\_\+\+S\+T\+A\+T\+US} \{ {\bfseries D\+O\+NE}, 
+{\bfseries S\+E\+N\+D\+I\+NG}
+ \}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a517cfacd9aab37fc0d0e87ea03877cc8}\label{_e_s_p01__comm_8h_a517cfacd9aab37fc0d0e87ea03877cc8}} 
+enum {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+US} \{ {\bfseries A\+V\+A\+I\+L\+A\+B\+LE}, 
+{\bfseries B\+U\+SY}
+ \}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_aebcaa819cd8e4630d0a322c90bc8b8a4}\label{_e_s_p01__comm_8h_aebcaa819cd8e4630d0a322c90bc8b8a4}} 
+enum {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+TE} \{ \newline
+{\bfseries C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+FI}, 
+{\bfseries G\+E\+T\+\_\+\+I\+P\+\_\+\+N\+U\+MB}, 
+{\bfseries G\+E\+T\+\_\+\+M\+A\+C\+\_\+\+A\+D\+DR}, 
+{\bfseries C\+O\+N\+N\+E\+C\+T\+\_\+\+M\+Q\+TT}, 
+\newline
+{\bfseries W\+A\+I\+T\+I\+N\+G\+\_\+\+F\+O\+R\+\_\+\+C\+MD}, 
+{\bfseries T\+O\+P\+I\+C\+\_\+\+S\+U\+B\+SC}, 
+{\bfseries T\+O\+P\+I\+C\+\_\+\+U\+N\+S\+U\+B\+SC}, 
+{\bfseries P\+U\+B\+L\+I\+S\+H\+I\+NG}, 
+\newline
+{\bfseries P\+I\+N\+G\+I\+NG}
+ \}
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}{comm\+\_\+start} ()
+void \hyperlink{_e_s_p01__comm_8h_ab2d2bcb7314dc4ab3839b02daf45ab9c}{comm\+\_\+init} ()
 \begin{DoxyCompactList}\small\item\em A function starts the communication with E\+S\+P01. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_a10df40ab29db50aa6d23cf3c1e01f8b6}\label{_e_s_p01__comm_8h_a10df40ab29db50aa6d23cf3c1e01f8b6}} 
+C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+US {\bfseries comm\+\_\+status} ()
+\item 
 void \hyperlink{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}{comm\+\_\+parse} ()
 \begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to parse a received msg. \end{DoxyCompactList}\item 
 void \hyperlink{_e_s_p01__comm_8h_a144515221297b75e9db38676fceae827}{comm\+\_\+response} ()
 \begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to respond to a received msg. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ac9d737509904eed2ad3d51065632d68b}\label{_e_s_p01__comm_8h_ac9d737509904eed2ad3d51065632d68b}} 
+\hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+F\+O\+\_\+\+S\+T\+R\+U\+CT} {\bfseries comm\+\_\+info}
 \item 
 \mbox{\Hypertarget{_e_s_p01__comm_8h_a02c559b27c951376e4917997ffb17030}\label{_e_s_p01__comm_8h_a02c559b27c951376e4917997ffb17030}} 
 U\+A\+R\+T2\+\_\+\+T\+Com\+Data {\bfseries message\+\_\+out} \mbox{[}M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE\mbox{]}
@@ -33,9 +90,6 @@ U\+A\+R\+T2\+\_\+\+T\+Com\+Data {\bfseries message\+\_\+in} \mbox{[}M\+E\+S\+S\+
 \item 
 \mbox{\Hypertarget{_e_s_p01__comm_8h_a1c7dabbefb86cb708480f9c6f0caf51c}\label{_e_s_p01__comm_8h_a1c7dabbefb86cb708480f9c6f0caf51c}} 
 volatile bool {\bfseries message\+\_\+recv}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8h_a466a14cf4cc66762c2db192d9e015004}\label{_e_s_p01__comm_8h_a466a14cf4cc66762c2db192d9e015004}} 
-volatile bool {\bfseries message\+\_\+sent}
 \end{DoxyCompactItemize}
 
 
@@ -45,7 +99,17 @@ This file exports the needed stuff from \hyperlink{_e_s_p01__comm_8c}{E\+S\+P01\
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}\label{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}} 
+\mbox{\Hypertarget{_e_s_p01__comm_8h_ab2d2bcb7314dc4ab3839b02daf45ab9c}\label{_e_s_p01__comm_8h_ab2d2bcb7314dc4ab3839b02daf45ab9c}} 
+\index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+init@{comm\+\_\+init}}
+\index{comm\+\_\+init@{comm\+\_\+init}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
+\subsubsection{\texorpdfstring{comm\+\_\+init()}{comm\_init()}}
+{\footnotesize\ttfamily void comm\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A function starts the communication with E\+S\+P01. 
+
+This function is responsible for starting the communication with E\+S\+P01 (consequently with the M\+Q\+TT broker). \mbox{\Hypertarget{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}\label{_e_s_p01__comm_8h_ae0bc91bb9b2098a47360820649cea4e2}} 
 \index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+parse@{comm\+\_\+parse}}
 \index{comm\+\_\+parse@{comm\+\_\+parse}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
 \subsubsection{\texorpdfstring{comm\+\_\+parse()}{comm\_parse()}}
@@ -65,14 +129,4 @@ This function is responsible for parsing a received message and change the state
 
 A function implementing a F\+SM to respond to a received msg. 
 
-This function is responsible for assembling a response to the last received message from the M\+Q\+TT broker. It also implements connection retries and logs the process. \mbox{\Hypertarget{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}\label{_e_s_p01__comm_8h_a3a46641f9c63b1c2b0e6d55716e5de91}} 
-\index{E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}!comm\+\_\+start@{comm\+\_\+start}}
-\index{comm\+\_\+start@{comm\+\_\+start}!E\+S\+P01\+\_\+comm.\+h@{E\+S\+P01\+\_\+comm.\+h}}
-\subsubsection{\texorpdfstring{comm\+\_\+start()}{comm\_start()}}
-{\footnotesize\ttfamily void comm\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-A function starts the communication with E\+S\+P01. 
-
-This function is responsible for starting the communication with E\+S\+P01 (consequently with the M\+Q\+TT broker). 
+This function is responsible for assembling a response to the last received message from the M\+Q\+TT broker. It also implements connection retries and logs the process. Here\textquotesingle{}s one the main current problems\+: It\textquotesingle{}s not possible to choose the desired topic to publish into. Since I\textquotesingle{}m testing the temperature reading, the temperature topic is hard-\/coded.

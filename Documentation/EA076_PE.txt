@@ -28,6 +28,36 @@ Module "UART2"     (component AsynchroSerial)
                 stored. Enabling the component (Enable method) starts the transmission of the stored data. This method is 
                 available only if the transmitter property is enabled.
 
+Module "ADC0"      (component ADC)
+   - ADC0_EnableEvent -Enables the <events>.
+   - ADC0_DisableEvent -Disables the <events>.
+   - ADC0_Measure -This method performs one measurement on all channels that are set in the component inspector. (Note: If the 
+                <number of conversions> is more than one the conversion of A/D channels is performed specified number of times.)
+   - ADC0_GetValue16 -This method returns the last measured values of all channels. Compared with <GetValue> method this method 
+                returns more accurate result if the <number of conversions> is greater than 1 and <AD resolution> is less than 
+                16 bits. In addition, the user code dependency on <AD resolution> is eliminated.
+   - ADC0_Calibrate -This method starts self calibration process. Calibration is typically used to remove the effects of the 
+                gain and offset from a specific reading.
+
+Module "TI0"       (component TimerInt)
+   - TI0_EnableEvent -This method enables the events.
+   - TI0_DisableEvent -This method disables the events.
+
+Module "TU1"       (component TimerUnit_LDD)
+   - TU1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+   - TU1_SetEventMask -Enables/disables event(s). The events contained within the mask are enabled. Events not contained within 
+                the mask are disabled. The component event masks are defined in the PE_Types.h file. Note: Event that are not 
+                generated (See the "Events" tab in the Component inspector) are not handled by this method. In this case the 
+                method returns ERR_PARAM_MASK error code. See also method <GetEventMask>.
+
+Module "MCUC1"     (component McuLibConfig)
+   - MCUC1_Init -Driver initialization method
+   - MCUC1_Deinit -Driver deinitialization method
+
 Module "Cpu"       (component MKL25Z128LK4)
 
 ===================================================================================

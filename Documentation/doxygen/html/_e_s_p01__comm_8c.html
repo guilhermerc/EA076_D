@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>EA076_PE: /home/guilherme/workspace.kds/EA076_PE/Sources/ESP01_comm.c File Reference</title>
+<title>EA076_PE: /home/guilherme/workspace.kds/EA076_PE/Programmer_code/Libraries/ESP01_comm.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,12 +59,8 @@ $(document).ready(function(){initNavTree('_e_s_p01__comm_8c.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ESP01_comm.c File Reference</div>  </div>
 </div><!--header-->
@@ -76,13 +72,8 @@ $(document).ready(function(){initNavTree('_e_s_p01__comm_8c.html','');});
 <code>#include &lt;LOG.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="_u_a_r_t2_events_8h_source.html">UART2Events.h</a>&gt;</code><br />
+<code>#include &lt;UART2Events.h&gt;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_o_m_m___i_n_f_o.html">COMM_INFO</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a586542b79d00e4db7e1d5a667ae83a2b"><td class="memItemLeft" align="right" valign="top"><a id="a586542b79d00e4db7e1d5a667ae83a2b"></a>
@@ -109,12 +100,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a7e02ee98d77b30fead4648fcb7c02f18"><td class="memItemLeft" align="right" valign="top"><a id="a7e02ee98d77b30fead4648fcb7c02f18"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>SMARTPHONE_TOPIC_WQ</b>&#160;&#160;&#160;&quot;EA076/grupoD3/celular&quot;</td></tr>
 <tr class="separator:a7e02ee98d77b30fead4648fcb7c02f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fbabfb4a7bd44a5970be5465e00eb25"><td class="memItemLeft" align="right" valign="top"><a id="a7fbabfb4a7bd44a5970be5465e00eb25"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TEMPERATURE_TOPIC</b>&#160;&#160;&#160;&quot;EA076/grupoD3/temp&quot;</td></tr>
+<tr class="separator:a7fbabfb4a7bd44a5970be5465e00eb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a7b656132fea12304108ed97d9d5728"><td class="memItemLeft" align="right" valign="top"><a id="a3a7b656132fea12304108ed97d9d5728"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ESP_TOPIC</b>&#160;&#160;&#160;&quot;\&quot;EA076/grupoD3/ESP\&quot;&quot;</td></tr>
 <tr class="separator:a3a7b656132fea12304108ed97d9d5728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7781d01486c68b7020916687376bc46"><td class="memItemLeft" align="right" valign="top"><a id="ab7781d01486c68b7020916687376bc46"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TERMINATING_CHARS</b>&#160;&#160;&#160;&quot;\r\n&quot;</td></tr>
-<tr class="separator:ab7781d01486c68b7020916687376bc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09886d6ba96e67553bf3c49ed8ade975"><td class="memItemLeft" align="right" valign="top"><a id="a09886d6ba96e67553bf3c49ed8ade975"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TOKENS</b>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:a09886d6ba96e67553bf3c49ed8ade975"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,41 +116,17 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MAC_ADDR_SIZE</b>&#160;&#160;&#160;64</td></tr>
 <tr class="separator:ae01dbae885bc8abecb82bd865515c081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ac571f6b5ac06602a3d42fcb130e7cf7f"><td class="memItemLeft" align="right" valign="top"><a id="ac571f6b5ac06602a3d42fcb130e7cf7f"></a>
-typedef enum COMM_STATE&#160;</td><td class="memItemRight" valign="bottom"><b>COMM_STATE_ENUM</b></td></tr>
-<tr class="separator:ac571f6b5ac06602a3d42fcb130e7cf7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bc1960bb8b1533d15b13213333c04c6"><td class="memItemLeft" align="right" valign="top"><a id="a6bc1960bb8b1533d15b13213333c04c6"></a>
-typedef struct <a class="el" href="struct_c_o_m_m___i_n_f_o.html">COMM_INFO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>COMM_INFO_STRUCT</b></td></tr>
-<tr class="separator:a6bc1960bb8b1533d15b13213333c04c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aebcaa819cd8e4630d0a322c90bc8b8a4"><td class="memItemLeft" align="right" valign="top"><a id="aebcaa819cd8e4630d0a322c90bc8b8a4"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>COMM_STATE</b> { <br />
-&#160;&#160;<b>CONNECT_WIFI</b>, 
-<b>GET_IP_NUMB</b>, 
-<b>GET_MAC_ADDR</b>, 
-<b>CONNECT_MQTT</b>, 
-<br />
-&#160;&#160;<b>WAITING_FOR_CMD</b>, 
-<b>TOPIC_SUBSC</b>, 
-<b>TOPIC_UNSUBSC</b>, 
-<b>PUBLISHING</b>, 
-<br />
-&#160;&#160;<b>PINGING</b>
-<br />
- }</td></tr>
-<tr class="separator:aebcaa819cd8e4630d0a322c90bc8b8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a93f264a629ebca38a12689abd4f83fc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p01__comm_8c.html#a93f264a629ebca38a12689abd4f83fc8">comm_are_there_conn_errors</a> ()</td></tr>
 <tr class="memdesc:a93f264a629ebca38a12689abd4f83fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function that checks if there is a connection error.  <a href="#a93f264a629ebca38a12689abd4f83fc8">More...</a><br /></td></tr>
 <tr class="separator:a93f264a629ebca38a12689abd4f83fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a46641f9c63b1c2b0e6d55716e5de91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p01__comm_8c.html#a3a46641f9c63b1c2b0e6d55716e5de91">comm_start</a> ()</td></tr>
-<tr class="memdesc:a3a46641f9c63b1c2b0e6d55716e5de91"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function starts the communication with ESP01.  <a href="#a3a46641f9c63b1c2b0e6d55716e5de91">More...</a><br /></td></tr>
-<tr class="separator:a3a46641f9c63b1c2b0e6d55716e5de91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d2bcb7314dc4ab3839b02daf45ab9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p01__comm_8c.html#ab2d2bcb7314dc4ab3839b02daf45ab9c">comm_init</a> ()</td></tr>
+<tr class="memdesc:ab2d2bcb7314dc4ab3839b02daf45ab9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function starts the communication with ESP01.  <a href="#ab2d2bcb7314dc4ab3839b02daf45ab9c">More...</a><br /></td></tr>
+<tr class="separator:ab2d2bcb7314dc4ab3839b02daf45ab9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10df40ab29db50aa6d23cf3c1e01f8b6"><td class="memItemLeft" align="right" valign="top"><a id="a10df40ab29db50aa6d23cf3c1e01f8b6"></a>
+COMM_STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>comm_status</b> ()</td></tr>
+<tr class="separator:a10df40ab29db50aa6d23cf3c1e01f8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa32b4183bfbec8fb1b879a653ad14c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p01__comm_8c.html#aa32b4183bfbec8fb1b879a653ad14c99">comm_send_msg</a> ()</td></tr>
 <tr class="memdesc:aa32b4183bfbec8fb1b879a653ad14c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function triggers the message sending process (to ESP01)  <a href="#aa32b4183bfbec8fb1b879a653ad14c99">More...</a><br /></td></tr>
 <tr class="separator:aa32b4183bfbec8fb1b879a653ad14c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,12 +136,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ae0bc91bb9b2098a47360820649cea4e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p01__comm_8c.html#ae0bc91bb9b2098a47360820649cea4e2">comm_parse</a> ()</td></tr>
 <tr class="memdesc:ae0bc91bb9b2098a47360820649cea4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function implementing a FSM to parse a received msg.  <a href="#ae0bc91bb9b2098a47360820649cea4e2">More...</a><br /></td></tr>
 <tr class="separator:ae0bc91bb9b2098a47360820649cea4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ac9d737509904eed2ad3d51065632d68b"><td class="memItemLeft" align="right" valign="top"><a id="ac9d737509904eed2ad3d51065632d68b"></a>
-<a class="el" href="struct_c_o_m_m___i_n_f_o.html">COMM_INFO_STRUCT</a>&#160;</td><td class="memItemRight" valign="bottom"><b>comm_info</b></td></tr>
-<tr class="separator:ac9d737509904eed2ad3d51065632d68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the FSM implementation for communicating with the MQTT Broker (using the ESP-01 module). </p>
@@ -196,6 +157,26 @@ Variables</h2></td></tr>
 
 <p>A function that checks if there is a connection error. </p>
 <p>This function is responsible for checking if the message received is one of global connection errors. </p>
+
+</div>
+</div>
+<a id="ab2d2bcb7314dc4ab3839b02daf45ab9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2d2bcb7314dc4ab3839b02daf45ab9c">&#9670;&nbsp;</a></span>comm_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void comm_init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function starts the communication with ESP01. </p>
+<p>This function is responsible for starting the communication with ESP01 (consequently with the MQTT broker). </p>
 
 </div>
 </div>
@@ -236,6 +217,7 @@ Variables</h2></td></tr>
 
 <p>A function implementing a FSM to respond to a received msg. </p>
 <p>This function is responsible for assembling a response to the last received message from the MQTT broker. It also implements connection retries and logs the process. </p>
+<p>Here's one the main current problems: It's not possible to choose the desired topic to publish into. Since I'm testing the temperature reading, the temperature topic is hard-coded.</p>
 
 </div>
 </div>
@@ -259,33 +241,13 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3a46641f9c63b1c2b0e6d55716e5de91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a46641f9c63b1c2b0e6d55716e5de91">&#9670;&nbsp;</a></span>comm_start()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void comm_start </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A function starts the communication with ESP01. </p>
-<p>This function is responsible for starting the communication with ESP01 (consequently with the MQTT broker). </p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_937900b87e0c7a5fa01190c395fb83f7.html">Sources</a></li><li class="navelem"><a class="el" href="_e_s_p01__comm_8c.html">ESP01_comm.c</a></li>
-    <li class="footer">Generated on Sun Apr 7 2019 21:47:09 for EA076_PE by
+    <li class="navelem"><a class="el" href="dir_6ae4f4877bb0cc25eea279218443ab86.html">Programmer_code</a></li><li class="navelem"><a class="el" href="dir_7adc21be920395dcce6526e6ca22b6a9.html">Libraries</a></li><li class="navelem"><a class="el" href="_e_s_p01__comm_8c.html">ESP01_comm.c</a></li>
+    <li class="footer">Generated on Sun Apr 14 2019 13:22:07 for EA076_PE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

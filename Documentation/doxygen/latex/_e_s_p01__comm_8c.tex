@@ -1,5 +1,5 @@
-\hypertarget{_e_s_p01__comm_8c}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.c File Reference}
-\label{_e_s_p01__comm_8c}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+c@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+E\+S\+P01\+\_\+comm.\+c}}
+\hypertarget{_e_s_p01__comm_8c}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Libraries/\+E\+S\+P01\+\_\+comm.c File Reference}
+\label{_e_s_p01__comm_8c}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Libraries/\+E\+S\+P01\+\_\+comm.\+c@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Programmer\+\_\+code/\+Libraries/\+E\+S\+P01\+\_\+comm.\+c}}
 
 
 This file contains the F\+SM implementation for communicating with the M\+Q\+TT Broker (using the E\+S\+P-\/01 module).  
@@ -10,11 +10,6 @@ This file contains the F\+SM implementation for communicating with the M\+Q\+TT 
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$U\+A\+R\+T2\+Events.\+h$>$}\newline
-\subsection*{Data Structures}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO}
-\end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -42,11 +37,11 @@ struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO}
 \mbox{\Hypertarget{_e_s_p01__comm_8c_a7e02ee98d77b30fead4648fcb7c02f18}\label{_e_s_p01__comm_8c_a7e02ee98d77b30fead4648fcb7c02f18}} 
 \#define {\bfseries S\+M\+A\+R\+T\+P\+H\+O\+N\+E\+\_\+\+T\+O\+P\+I\+C\+\_\+\+WQ}~\char`\"{}E\+A076/grupo\+D3/celular\char`\"{}
 \item 
+\mbox{\Hypertarget{_e_s_p01__comm_8c_a7fbabfb4a7bd44a5970be5465e00eb25}\label{_e_s_p01__comm_8c_a7fbabfb4a7bd44a5970be5465e00eb25}} 
+\#define {\bfseries T\+E\+M\+P\+E\+R\+A\+T\+U\+R\+E\+\_\+\+T\+O\+P\+IC}~\char`\"{}E\+A076/grupo\+D3/temp\char`\"{}
+\item 
 \mbox{\Hypertarget{_e_s_p01__comm_8c_a3a7b656132fea12304108ed97d9d5728}\label{_e_s_p01__comm_8c_a3a7b656132fea12304108ed97d9d5728}} 
 \#define {\bfseries E\+S\+P\+\_\+\+T\+O\+P\+IC}~\char`\"{}\textbackslash{}\char`\"{}E\+A076/grupo\+D3/E\+S\+P\textbackslash{}\char`\"{}\char`\"{}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8c_ab7781d01486c68b7020916687376bc46}\label{_e_s_p01__comm_8c_ab7781d01486c68b7020916687376bc46}} 
-\#define {\bfseries T\+E\+R\+M\+I\+N\+A\+T\+I\+N\+G\+\_\+\+C\+H\+A\+RS}~\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
 \item 
 \mbox{\Hypertarget{_e_s_p01__comm_8c_a09886d6ba96e67553bf3c49ed8ade975}\label{_e_s_p01__comm_8c_a09886d6ba96e67553bf3c49ed8ade975}} 
 \#define {\bfseries M\+A\+X\+\_\+\+T\+O\+K\+E\+NS}~32
@@ -57,52 +52,22 @@ struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO}
 \mbox{\Hypertarget{_e_s_p01__comm_8c_ae01dbae885bc8abecb82bd865515c081}\label{_e_s_p01__comm_8c_ae01dbae885bc8abecb82bd865515c081}} 
 \#define {\bfseries M\+A\+C\+\_\+\+A\+D\+D\+R\+\_\+\+S\+I\+ZE}~64
 \end{DoxyCompactItemize}
-\subsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8c_ac571f6b5ac06602a3d42fcb130e7cf7f}\label{_e_s_p01__comm_8c_ac571f6b5ac06602a3d42fcb130e7cf7f}} 
-typedef enum C\+O\+M\+M\+\_\+\+S\+T\+A\+TE {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+N\+UM}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8c_a6bc1960bb8b1533d15b13213333c04c6}\label{_e_s_p01__comm_8c_a6bc1960bb8b1533d15b13213333c04c6}} 
-typedef struct \hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+FO} {\bfseries C\+O\+M\+M\+\_\+\+I\+N\+F\+O\+\_\+\+S\+T\+R\+U\+CT}
-\end{DoxyCompactItemize}
-\subsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8c_aebcaa819cd8e4630d0a322c90bc8b8a4}\label{_e_s_p01__comm_8c_aebcaa819cd8e4630d0a322c90bc8b8a4}} 
-enum {\bfseries C\+O\+M\+M\+\_\+\+S\+T\+A\+TE} \{ \newline
-{\bfseries C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+FI}, 
-{\bfseries G\+E\+T\+\_\+\+I\+P\+\_\+\+N\+U\+MB}, 
-{\bfseries G\+E\+T\+\_\+\+M\+A\+C\+\_\+\+A\+D\+DR}, 
-{\bfseries C\+O\+N\+N\+E\+C\+T\+\_\+\+M\+Q\+TT}, 
-\newline
-{\bfseries W\+A\+I\+T\+I\+N\+G\+\_\+\+F\+O\+R\+\_\+\+C\+MD}, 
-{\bfseries T\+O\+P\+I\+C\+\_\+\+S\+U\+B\+SC}, 
-{\bfseries T\+O\+P\+I\+C\+\_\+\+U\+N\+S\+U\+B\+SC}, 
-{\bfseries P\+U\+B\+L\+I\+S\+H\+I\+NG}, 
-\newline
-{\bfseries P\+I\+N\+G\+I\+NG}
- \}
-\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 bool \hyperlink{_e_s_p01__comm_8c_a93f264a629ebca38a12689abd4f83fc8}{comm\+\_\+are\+\_\+there\+\_\+conn\+\_\+errors} ()
 \begin{DoxyCompactList}\small\item\em A function that checks if there is a connection error. \end{DoxyCompactList}\item 
-void \hyperlink{_e_s_p01__comm_8c_a3a46641f9c63b1c2b0e6d55716e5de91}{comm\+\_\+start} ()
+void \hyperlink{_e_s_p01__comm_8c_ab2d2bcb7314dc4ab3839b02daf45ab9c}{comm\+\_\+init} ()
 \begin{DoxyCompactList}\small\item\em A function starts the communication with E\+S\+P01. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_e_s_p01__comm_8c_a10df40ab29db50aa6d23cf3c1e01f8b6}\label{_e_s_p01__comm_8c_a10df40ab29db50aa6d23cf3c1e01f8b6}} 
+C\+O\+M\+M\+\_\+\+S\+T\+A\+T\+US {\bfseries comm\+\_\+status} ()
+\item 
 void \hyperlink{_e_s_p01__comm_8c_aa32b4183bfbec8fb1b879a653ad14c99}{comm\+\_\+send\+\_\+msg} ()
 \begin{DoxyCompactList}\small\item\em A function triggers the message sending process (to E\+S\+P01) \end{DoxyCompactList}\item 
 void \hyperlink{_e_s_p01__comm_8c_a144515221297b75e9db38676fceae827}{comm\+\_\+response} ()
 \begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to respond to a received msg. \end{DoxyCompactList}\item 
 void \hyperlink{_e_s_p01__comm_8c_ae0bc91bb9b2098a47360820649cea4e2}{comm\+\_\+parse} ()
 \begin{DoxyCompactList}\small\item\em A function implementing a F\+SM to parse a received msg. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{_e_s_p01__comm_8c_ac9d737509904eed2ad3d51065632d68b}\label{_e_s_p01__comm_8c_ac9d737509904eed2ad3d51065632d68b}} 
-\hyperlink{struct_c_o_m_m___i_n_f_o}{C\+O\+M\+M\+\_\+\+I\+N\+F\+O\+\_\+\+S\+T\+R\+U\+CT} {\bfseries comm\+\_\+info}
-\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -121,7 +86,17 @@ This file contains the F\+SM implementation for communicating with the M\+Q\+TT 
 
 A function that checks if there is a connection error. 
 
-This function is responsible for checking if the message received is one of global connection errors. \mbox{\Hypertarget{_e_s_p01__comm_8c_ae0bc91bb9b2098a47360820649cea4e2}\label{_e_s_p01__comm_8c_ae0bc91bb9b2098a47360820649cea4e2}} 
+This function is responsible for checking if the message received is one of global connection errors. \mbox{\Hypertarget{_e_s_p01__comm_8c_ab2d2bcb7314dc4ab3839b02daf45ab9c}\label{_e_s_p01__comm_8c_ab2d2bcb7314dc4ab3839b02daf45ab9c}} 
+\index{E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}!comm\+\_\+init@{comm\+\_\+init}}
+\index{comm\+\_\+init@{comm\+\_\+init}!E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}}
+\subsubsection{\texorpdfstring{comm\+\_\+init()}{comm\_init()}}
+{\footnotesize\ttfamily void comm\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A function starts the communication with E\+S\+P01. 
+
+This function is responsible for starting the communication with E\+S\+P01 (consequently with the M\+Q\+TT broker). \mbox{\Hypertarget{_e_s_p01__comm_8c_ae0bc91bb9b2098a47360820649cea4e2}\label{_e_s_p01__comm_8c_ae0bc91bb9b2098a47360820649cea4e2}} 
 \index{E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}!comm\+\_\+parse@{comm\+\_\+parse}}
 \index{comm\+\_\+parse@{comm\+\_\+parse}!E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}}
 \subsubsection{\texorpdfstring{comm\+\_\+parse()}{comm\_parse()}}
@@ -141,7 +116,7 @@ This function is responsible for parsing a received message and change the state
 
 A function implementing a F\+SM to respond to a received msg. 
 
-This function is responsible for assembling a response to the last received message from the M\+Q\+TT broker. It also implements connection retries and logs the process. \mbox{\Hypertarget{_e_s_p01__comm_8c_aa32b4183bfbec8fb1b879a653ad14c99}\label{_e_s_p01__comm_8c_aa32b4183bfbec8fb1b879a653ad14c99}} 
+This function is responsible for assembling a response to the last received message from the M\+Q\+TT broker. It also implements connection retries and logs the process. Here\textquotesingle{}s one the main current problems\+: It\textquotesingle{}s not possible to choose the desired topic to publish into. Since I\textquotesingle{}m testing the temperature reading, the temperature topic is hard-\/coded.\mbox{\Hypertarget{_e_s_p01__comm_8c_aa32b4183bfbec8fb1b879a653ad14c99}\label{_e_s_p01__comm_8c_aa32b4183bfbec8fb1b879a653ad14c99}} 
 \index{E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}!comm\+\_\+send\+\_\+msg@{comm\+\_\+send\+\_\+msg}}
 \index{comm\+\_\+send\+\_\+msg@{comm\+\_\+send\+\_\+msg}!E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}}
 \subsubsection{\texorpdfstring{comm\+\_\+send\+\_\+msg()}{comm\_send\_msg()}}
@@ -151,14 +126,4 @@ This function is responsible for assembling a response to the last received mess
 
 A function triggers the message sending process (to E\+S\+P01) 
 
-This function is responsible for triggering the sending message process (to E\+S\+P01). It also notifies the main loop that a message is being sent with U\+A\+R\+T2. \mbox{\Hypertarget{_e_s_p01__comm_8c_a3a46641f9c63b1c2b0e6d55716e5de91}\label{_e_s_p01__comm_8c_a3a46641f9c63b1c2b0e6d55716e5de91}} 
-\index{E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}!comm\+\_\+start@{comm\+\_\+start}}
-\index{comm\+\_\+start@{comm\+\_\+start}!E\+S\+P01\+\_\+comm.\+c@{E\+S\+P01\+\_\+comm.\+c}}
-\subsubsection{\texorpdfstring{comm\+\_\+start()}{comm\_start()}}
-{\footnotesize\ttfamily void comm\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-A function starts the communication with E\+S\+P01. 
-
-This function is responsible for starting the communication with E\+S\+P01 (consequently with the M\+Q\+TT broker). 
+This function is responsible for triggering the sending message process (to E\+S\+P01). It also notifies the main loop that a message is being sent with U\+A\+R\+T2. 
