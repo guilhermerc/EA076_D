@@ -75,6 +75,7 @@ var annotated_dup =
     [ "RCM_MemMap", "struct_r_c_m___mem_map.html", "struct_r_c_m___mem_map" ],
     [ "ROM_MemMap", "struct_r_o_m___mem_map.html", "struct_r_o_m___mem_map" ],
     [ "RTC_MemMap", "struct_r_t_c___mem_map.html", "struct_r_t_c___mem_map" ],
+    [ "RTC_TDeviceData", "struct_r_t_c___t_device_data.html", "struct_r_t_c___t_device_data" ],
     [ "SCB_MemMap", "struct_s_c_b___mem_map.html", "struct_s_c_b___mem_map" ],
     [ "SIM_MemMap", "struct_s_i_m___mem_map.html", "struct_s_i_m___mem_map" ],
     [ "SMC_MemMap", "struct_s_m_c___mem_map.html", "struct_s_m_c___mem_map" ],

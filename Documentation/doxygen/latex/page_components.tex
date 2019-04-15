@@ -4,7 +4,8 @@
 \item \hyperlink{ASerialLdd2}{A\+Serial\+Ldd2 (Serial\+\_\+\+L\+DD)}
 \item \hyperlink{AdcLdd1}{Adc\+Ldd1 (A\+D\+C\+\_\+\+L\+DD)}
 \item \hyperlink{TU1}{T\+U1 (Timer\+Unit\+\_\+\+L\+DD)}
-\item \hyperlink{TimerIntLdd1}{Timer\+Int\+Ldd1 (Timer\+Int\+\_\+\+L\+DD)} 
+\item \hyperlink{TimerIntLdd1}{Timer\+Int\+Ldd1 (Timer\+Int\+\_\+\+L\+DD)}
+\item \hyperlink{RTC}{R\+TC (R\+T\+C\+\_\+\+L\+DD)} 
 \end{DoxyItemize}\hypertarget{ASerialLdd1}{}\section{A\+Serial\+Ldd1 (Serial\+\_\+\+L\+DD)}\label{ASerialLdd1}
 This component \char`\"{}\+Serial\+\_\+\+L\+D\+D\char`\"{} implements an asynchronous serial communication. The component supports different settings of parity, word width, stop-\/bit and communication speed, user can select interrupt or polling handler. Communication speed can be changed also in runtime. The component requires one on-\/chip asynchronous serial communication channel.
 
@@ -693,14 +694,14 @@ This device \char`\"{}\+A\+D\+C\+\_\+\+L\+D\+D\char`\"{} implements an A/D conve
             Low-power mode                                 : Disabled
             High-speed conversion mode                     : Disabled
             Asynchro clock output                          : Disabled
-            Sample time                                    : 4 clock periods
+            Sample time                                    : 24 clock periods
             Number of conversions                          : 1
-            Conversion time                                : 4.768372 µs
-            ADC clock                                      : 5.242 MHz (190.735 ns)
-            Single conversion time - Single-ended          : 5.96 us
-            Single conversion time - Differential          : 7.677 us
-            Additional conversion time - Single-ended      : 4.768 us
-            Additional conversion time - Differential      : 6.484 us
+            Conversion time                                : 34.615385 µs
+            ADC clock                                      : 1.31 MHz (762.939 ns)
+            Single conversion time - Single-ended          : 36.859 us
+            Single conversion time - Differential          : 43.725 us
+            Additional conversion time - Single-ended      : 34.332 us
+            Additional conversion time - Differential      : 41.198 us
             Result type                                    : unsigned 16 bits, right justified
             Trigger                                        : Disabled
             Voltage reference                              : 
@@ -738,7 +739,7 @@ Address&Register&Register Value&Register Description \\\cline{1-4}
 0x\+E000\+E40C&N\+V\+I\+C\+\_\+\+I\+P\+R3 &0x80800080 &N\+V\+I\+C\+\_\+\+I\+P\+R3 register, peripheral Adc\+Ldd1. \\\cline{1-4}
 0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x0000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral Adc\+Ldd1. \\\cline{1-4}
 0x4004\+A000&P\+O\+R\+T\+B\+\_\+\+P\+C\+R0 &0x00000000 &P\+O\+R\+T\+B\+\_\+\+P\+C\+R0 register, peripheral Adc\+Ldd1. \\\cline{1-4}
-0x4003\+B008&A\+D\+C0\+\_\+\+C\+F\+G1 &0x0000004C &A\+D\+C0\+\_\+\+C\+F\+G1 register, peripheral Adc\+Ldd1. \\\cline{1-4}
+0x4003\+B008&A\+D\+C0\+\_\+\+C\+F\+G1 &0x0000007D &A\+D\+C0\+\_\+\+C\+F\+G1 register, peripheral Adc\+Ldd1. \\\cline{1-4}
 0x4003\+B00C&A\+D\+C0\+\_\+\+C\+F\+G2 &0x00000000 &A\+D\+C0\+\_\+\+C\+F\+G2 register, peripheral Adc\+Ldd1. \\\cline{1-4}
 0x4003\+B020&A\+D\+C0\+\_\+\+S\+C2 &0x00000000 &A\+D\+C0\+\_\+\+S\+C2 register, peripheral Adc\+Ldd1. \\\cline{1-4}
 0x4003\+B024&A\+D\+C0\+\_\+\+S\+C3 &0x00000040 &A\+D\+C0\+\_\+\+S\+C3 register, peripheral Adc\+Ldd1. \\\cline{1-4}
@@ -925,12 +926,12 @@ Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
 \begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
 \hline
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+B008 }\\\cline{1-4}
-\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x0000004C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x0000007D }\\\cline{1-4}
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
 Bit&Field&Value&Description \\\cline{1-4}
 7&A\+D\+L\+PC&0x00&Low-\/\+Power Configuration \\\cline{1-4}
 5 -\/ 6&A\+D\+IV&0x02&Clock Divide Select \\\cline{1-4}
-4&A\+D\+L\+S\+MP&0x00&Sample time configuration \\\cline{1-4}
+4&A\+D\+L\+S\+MP&0x01&Sample time configuration \\\cline{1-4}
 2 -\/ 3&M\+O\+DE&0x02&Conversion mode selection \\\cline{1-4}
 0 -\/ 1&A\+D\+I\+C\+LK&0x00&Input Clock Select \\\cline{1-4}
 \end{longtabu}
@@ -1050,7 +1051,7 @@ This Timer\+Unit component provides a low level A\+PI for unified hardware acces
               Counter frequency                            : Auto select
             Counter restart                                : On-match
               Period device                                : LPTMR0\_CMR
-              Period                                       : 1 sec
+              Period                                       : 2 ms
               Interrupt                                    : Enabled
                 Interrupt                                  : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8dadb33151c23fc4df6fa87f60d1df02dae}{INT\_LPTMR0}
                 Interrupt priority                         : medium priority
@@ -1087,7 +1088,7 @@ This page contains the initialization values for the registers of the peripheral
 Address&Register&Register Value&Register Description \\\cline{1-4}
 0x40048038&S\+I\+M\+\_\+\+S\+C\+G\+C5 &0x00000181 &S\+I\+M\+\_\+\+S\+C\+G\+C5 register, peripheral T\+U1. \\\cline{1-4}
 0x40040000&L\+P\+T\+M\+R0\+\_\+\+C\+SR &0x00000081 &L\+P\+T\+M\+R0\+\_\+\+C\+SR register, peripheral T\+U1. \\\cline{1-4}
-0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00007\+F\+FF &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral T\+U1. \\\cline{1-4}
+0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00000041 &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral T\+U1. \\\cline{1-4}
 0x40040004&L\+P\+T\+M\+R0\+\_\+\+P\+SR &0x00000004 &L\+P\+T\+M\+R0\+\_\+\+P\+SR register, peripheral T\+U1. \\\cline{1-4}
 0x\+E000\+E41C&N\+V\+I\+C\+\_\+\+I\+P\+R7 &0x00000080 &N\+V\+I\+C\+\_\+\+I\+P\+R7 register, peripheral T\+U1. \\\cline{1-4}
 0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x1000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral T\+U1. \\\cline{1-4}
@@ -1184,7 +1185,7 @@ Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
 \begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
 \hline
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040008 }\\\cline{1-4}
-\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00007\+F\+FF }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000041 }\\\cline{1-4}
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
 Bit&Field&Value&Description \\\cline{1-4}
 0 -\/ 15&C\+O\+M\+P\+A\+RE&0x00&Compare Value \\\cline{1-4}
@@ -1293,7 +1294,7 @@ This Timer\+Int component implements a periodic interrupt. When the component an
             Interrupt service/event                        : Enabled
               Interrupt                                    : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8dadb33151c23fc4df6fa87f60d1df02dae}{INT\_LPTMR0}
               Interrupt priority                           : medium priority
-            Interrupt period                               : 1 sec
+            Interrupt period                               : 2 ms
             Initialization                                 : 
               Enabled in init. code                        : yes
               Auto initialization                          : yes
@@ -1320,7 +1321,7 @@ This page contains the initialization values for the registers of the peripheral
 Address&Register&Register Value&Register Description \\\cline{1-4}
 0x40048038&S\+I\+M\+\_\+\+S\+C\+G\+C5 &0x00000181 &S\+I\+M\+\_\+\+S\+C\+G\+C5 register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
 0x40040000&L\+P\+T\+M\+R0\+\_\+\+C\+SR &0x00000081 &L\+P\+T\+M\+R0\+\_\+\+C\+SR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
-0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00007\+F\+FF &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
+0x40040008&L\+P\+T\+M\+R0\+\_\+\+C\+MR &0x00000041 &L\+P\+T\+M\+R0\+\_\+\+C\+MR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
 0x40040004&L\+P\+T\+M\+R0\+\_\+\+P\+SR &0x00000004 &L\+P\+T\+M\+R0\+\_\+\+P\+SR register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
 0x\+E000\+E41C&N\+V\+I\+C\+\_\+\+I\+P\+R7 &0x00000080 &N\+V\+I\+C\+\_\+\+I\+P\+R7 register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
 0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x1000\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral Timer\+Int\+Ldd1. \\\cline{1-4}
@@ -1417,7 +1418,7 @@ Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
 \begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
 \hline
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x40040008 }\\\cline{1-4}
-\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00007\+F\+FF }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000041 }\\\cline{1-4}
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
 Bit&Field&Value&Description \\\cline{1-4}
 0 -\/ 15&C\+O\+M\+P\+A\+RE&0x00&Compare Value \\\cline{1-4}
@@ -1504,6 +1505,195 @@ Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-33}
 \hline
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E100 }\\\cline{1-4}
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x1000\+D000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+0 -\/ 31&S\+E\+T\+E\+NA&0x00&Interrupt set enable bits \\\cline{1-4}
+\end{longtabu}
+\hypertarget{RTC}{}\section{R\+TC (R\+T\+C\+\_\+\+L\+DD)}\label{RTC}
+This component implements a real time clock (R\+TC). Actual date may also be obtained and an alarm function is included.
+
+
+\begin{DoxyItemize}
+\item \hyperlink{RTC_settings}{Component Settings}
+\item \hyperlink{RTC_regs_overview}{Registers Initialization Overview}
+\item \hyperlink{RTC_regs_details}{Register Initialization Details}
+\item \hyperlink{group___r_t_c__module}{Component documentation} 
+\end{DoxyItemize}\hypertarget{RTC_settings}{}\subsection{Component Settings}\label{RTC_settings}
+
+\begin{DoxyCode}
+            Component name                                 : RTC
+            Device                                         : RTC
+            Input clock frequency [s]                      : 1 sec
+            Clock frequency [kHz]                          : 
+            Interrupt service/event                        : Enabled
+              Interrupt                                    : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8daa4162d8752ffcf07bd0b1197f8c68f44}{INT\_RTC}
+              Interrupt priority                           : medium priority
+              Interrupt                                    : \hyperlink{group___interrupt__vector__numbers_gga5f3656e2a154b64aa378a2f3856c3a8da45c91289c03c8e8e65f1993cef955930}{INT\_RTC\_Seconds}
+              Interrupt priority                           : medium priority
+            Min year                                       : 2000
+            Max year                                       : 2099
+            Initialization                                 : 
+              Enabled in init. code                        : yes
+              Auto Initialization                          : no
+              Event mask                                   : 
+                OnAlarm                                    : Disabled
+                OnSecond                                   : Disabled
+                OnTimeOverflow                             : Disabled
+                OnTimeInvalid                              : Disabled
+              Time and date settings                       : 
+                Time                                       : 00:00:01
+                Date                                       : 2000-01-01
+              Alarm settings                               : Enabled
+                Alarm time                                 : 00:00:00
+                Alarm date                                 : 2000-01-01
+              Compensation settings                        : 
+                Compensation period [s]                    : 0
+                Compensation value [clock cycles]          : 0
+            CPU clock/configuration selection              : 
+              Clock configuration 0                        : This component enabled
+              Clock configuration 1                        : This component disabled
+              Clock configuration 2                        : This component disabled
+              Clock configuration 3                        : This component disabled
+              Clock configuration 4                        : This component disabled
+              Clock configuration 5                        : This component disabled
+              Clock configuration 6                        : This component disabled
+              Clock configuration 7                        : This component disabled
+<h1>
+\end{DoxyCode}
+ \hypertarget{RTC_regs_overview}{}\subsection{Registers Initialization Overview}\label{RTC_regs_overview}
+This page contains the initialization values for the registers of the peripheral(s) configured by the component. \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{4}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*1)*4/4}|}{R\+TC Initialization }\\\cline{1-4}
+Address&Register&Register Value&Register Description \\\cline{1-4}
+0x4004803C&S\+I\+M\+\_\+\+S\+C\+G\+C6 &0x28000001 &S\+I\+M\+\_\+\+S\+C\+G\+C6 register, peripheral R\+TC. \\\cline{1-4}
+0x4003\+D01C&R\+T\+C\+\_\+\+I\+ER &0x00000000 &R\+T\+C\+\_\+\+I\+ER register, peripheral R\+TC. \\\cline{1-4}
+0x\+E000\+E414&N\+V\+I\+C\+\_\+\+I\+P\+R5 &0x00000080 &N\+V\+I\+C\+\_\+\+I\+P\+R5 register, peripheral R\+TC. \\\cline{1-4}
+0x\+E000\+E100&N\+V\+I\+C\+\_\+\+I\+S\+ER &0x1010\+D000 &N\+V\+I\+C\+\_\+\+I\+S\+ER register, peripheral R\+TC. \\\cline{1-4}
+\end{longtabu}
+Color Denotes Reset Value ~\newline
+ \hypertarget{RTC_regs_details}{}\subsection{Register Initialization Details}\label{RTC_regs_details}
+This page contains detailed description of initialization values for the registers of the peripheral(s) configured by the component.
+
+S\+I\+M\+\_\+\+S\+C\+G\+C6  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{D\+A\+C0}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{R\+TC}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{A\+D\+C0 }&\multirow{2}{\linewidth}{T\+P\+M2}&\multirow{2}{\linewidth}{T\+P\+M1}&\multirow{2}{\linewidth}{T\+P\+M0 }&\multirow{2}{\linewidth}{P\+IT}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{D\+M\+A\+M\+UX }&\multirow{2}{\linewidth}{F\+TF  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&1  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4004803C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x28000001 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000001 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+31&D\+A\+C0&0x00&D\+A\+C0 Clock Gate Control \\\cline{1-4}
+29&R\+TC&0x01&R\+TC Access Control \\\cline{1-4}
+27&A\+D\+C0&0x01&A\+D\+C0 Clock Gate Control \\\cline{1-4}
+26&T\+P\+M2&0x00&T\+P\+M2 Clock Gate Control \\\cline{1-4}
+25&T\+P\+M1&0x00&T\+P\+M1 Clock Gate Control \\\cline{1-4}
+24&T\+P\+M0&0x00&T\+P\+M0 Clock Gate Control \\\cline{1-4}
+23&P\+IT&0x00&P\+IT Clock Gate Control \\\cline{1-4}
+1&D\+M\+A\+M\+UX&0x00&D\+MA Mux Clock Gate Control \\\cline{1-4}
+0&F\+TF&0x01&Flash Memory Clock Gate Control \\\cline{1-4}
+\end{longtabu}
+R\+T\+C\+\_\+\+I\+ER  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/ }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{W\+P\+ON }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+S\+IE }&\multirow{2}{\linewidth}{-\/}&\multirow{2}{\linewidth}{T\+A\+IE}&\multirow{2}{\linewidth}{T\+O\+IE }&\multirow{2}{\linewidth}{T\+I\+IE  }\\\cline{1-1}
+W  &\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}&\multicolumn{1}{c|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&1&1&1  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x4003\+D01C }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000007 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+7&W\+P\+ON&0x00&Wakeup Pin On \\\cline{1-4}
+4&T\+S\+IE&0x00&Time Seconds Interrupt Enable \\\cline{1-4}
+2&T\+A\+IE&0x00&Time Alarm Interrupt Enable \\\cline{1-4}
+1&T\+O\+IE&0x00&Time Overflow Interrupt Enable \\\cline{1-4}
+0&T\+I\+IE&0x00&Time Invalid Interrupt Enable \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+P\+R5  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+23}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+22  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-17}
+R&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+21}}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*3)*8/17}|}{\multirow{2}{\linewidth}{P\+R\+I\+\_\+20  }}\\\cline{1-1}
+W  &\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}&\multicolumn{8}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*8/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E414 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000080 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
+Bit&Field&Value&Description \\\cline{1-4}
+24 -\/ 31&P\+R\+I\+\_\+23&0x00&Priority of interrupt 23 \\\cline{1-4}
+16 -\/ 23&P\+R\+I\+\_\+22&0x00&Priority of interrupt 22 \\\cline{1-4}
+8 -\/ 15&P\+R\+I\+\_\+21&0x00&Priority of interrupt 21 \\\cline{1-4}
+0 -\/ 7&P\+R\+I\+\_\+20&0x80&Priority of interrupt 0 \\\cline{1-4}
+\end{longtabu}
+N\+V\+I\+C\+\_\+\+I\+S\+ER  \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{17}{|X[-1]}|}
+\hline
+Bit&31&30&29&28&27&26&25&24&23 &22&21&20&19&18&17&16  \\\cline{1-17}
+R&\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*2)*16/17}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{16}{p{(\linewidth-\tabcolsep*17-\arrayrulewidth*1)*16/17}|}{}\\\cline{1-17}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-17}
+\end{longtabu}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{33}{|X[-1]}|}
+\hline
+Bit&15&14&13&12&11&10&9&8&7 &6&5&4&3&2&1&0  \\\cline{1-33}
+R&\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*2)*32/33}|}{\multirow{2}{\linewidth}{S\+E\+T\+E\+NA  }}\\\cline{1-1}
+W  &\multicolumn{32}{p{(\linewidth-\tabcolsep*33-\arrayrulewidth*1)*32/33}|}{}\\\cline{1-33}
+Reset&0&0&0&0&0&0&0&0&0&0 &0&0&0&0&0&0  \\\cline{1-33}
+\end{longtabu}
+
+
+ \tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Address}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x\+E000\+E100 }\\\cline{1-4}
+\multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{Initial value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x1010\+D000 }\\\cline{1-4}
 \multicolumn{2}{|p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{After-\/reset value}&\multicolumn{2}{p{(\linewidth-\tabcolsep*4-\arrayrulewidth*2)*2/4}|}{0x00000000 }\\\cline{1-4}
 Bit&Field&Value&Description \\\cline{1-4}
 0 -\/ 31&S\+E\+T\+E\+NA&0x00&Interrupt set enable bits \\\cline{1-4}

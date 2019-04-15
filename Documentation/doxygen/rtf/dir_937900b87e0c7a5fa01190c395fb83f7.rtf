@@ -86,23 +86,23 @@
 /home/guilherme/workspace.kds/EA076_PE/Sources Directory Reference\par \pard\plain 
 {\tc\tcl2 \v /home/guilherme/workspace.kds/EA076_PE/Sources Directory Reference}
 {\xe \v /home/guilherme/workspace.kds/EA076_PE/Sources Directory Reference}
-{\bkmkstart AAAAAAAJKK}
-{\bkmkend AAAAAAAJKK}
+{\bkmkstart AAAAAAAJOH}
+{\bkmkend AAAAAAAJOH}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Files\par
 \pard\plain 
 
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b ESP01_comm.c}\par
+file {\b ADC0Events.c}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-This file contains the FSM implementation for communicating with the MQTT Broker (using the ESP-01 module). }}}
+This is user's event module. Put your event handler code here. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b ESP01_comm.h}\par
+file {\b ADC0Events.h}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-This file exports the needed stuff from {\b ESP01_comm.c}. }}}
+This is user's event module. Put your event handler code here. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 file {\b Events.c}\par
 {
@@ -118,6 +118,16 @@ file {\b main.c}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 This module contains user's application code. This module contains the main loop, in which communication-related flags are monitored. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+file {\b TimerInt0Events.c}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+This is user's event module. Put your event handler code here. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+file {\b TimerInt0Events.h}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+This is user's event module. Put your event handler code here. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 file {\b UART0Events.c}\par
 {
@@ -137,6 +147,6 @@ This is user's event module. Put your event handler code here. }}}
 file {\b UART2Events.h}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-This module contains the handlers related to UART2 interruptions (events). }}}
+This is user's event module. Put your event handler code here. }}}
 }
 }

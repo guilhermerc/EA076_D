@@ -21,7 +21,7 @@ by the component.
 <td class="regNotResetVal">0x00000081</td>
  <td>LPTMR0_CSR register, peripheral TU1.</td></tr>
 <tr><td>0x40040008</td><td>LPTMR0_CMR</td>
-<td class="regNotResetVal">0x00007FFF</td>
+<td class="regNotResetVal">0x00000041</td>
  <td>LPTMR0_CMR register, peripheral TU1.</td></tr>
 <tr><td>0x40040004</td><td>LPTMR0_PSR</td>
 <td class="regNotResetVal">0x00000004</td>
@@ -30,7 +30,7 @@ by the component.
 <td class="regNotResetVal">0x00000080</td>
  <td>NVIC_IPR7 register, peripheral TU1.</td></tr>
 <tr><td>0xE000E100</td><td>NVIC_ISER</td>
-<td class="regNotResetVal">0x1000D000</td>
+<td class="regNotResetVal">0x10108000</td>
  <td>NVIC_ISER register, peripheral TU1.</td></tr>
 </table>
 Color Denotes Reset Value
@@ -196,7 +196,7 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40040008</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00007FFF</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000041</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>0 - 15</td><td>COMPARE</td><td>0x00</td><td>Compare Value</td>
@@ -335,7 +335,7 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0xE000E100</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x1000D000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x10108000</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>0 - 31</td><td>SETENA</td><td>0x00</td><td>Interrupt set enable bits</td>
@@ -354,7 +354,7 @@ registers of the peripheral(s) configured by the component.
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : LPTMR0_CMR
-**            Period                                       : 1 sec
+**            Period                                       : 2 ms
 **            Interrupt                                    : Enabled
 **              Interrupt                                  : INT_LPTMR0
 **              Interrupt priority                         : medium priority

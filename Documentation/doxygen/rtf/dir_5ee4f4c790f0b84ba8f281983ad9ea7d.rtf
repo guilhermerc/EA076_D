@@ -86,8 +86,8 @@
 /home/guilherme/workspace.kds/EA076_PE/Generated_Code Directory Reference\par \pard\plain 
 {\tc\tcl2 \v /home/guilherme/workspace.kds/EA076_PE/Generated_Code Directory Reference}
 {\xe \v /home/guilherme/workspace.kds/EA076_PE/Generated_Code Directory Reference}
-{\bkmkstart AAAAAAAJOR}
-{\bkmkend AAAAAAAJOR}
+{\bkmkstart AAAAAAAJOE}
+{\bkmkend AAAAAAAJOE}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Files\par
 \pard\plain 
@@ -134,9 +134,9 @@ file {\b ASerialLdd2.h}\par
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 This component "Serial_LDD" implements an asynchronous serial communication. The component supports different settings of parity, word width, stop-bit and communication speed, user can select interrupt or polling handler. Communication speed can be changed also in runtime. The component requires one on-chip asynchronous serial communication channel. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b Cpu.c}\par
+file {\b CPU.c}\par
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b Cpu.h}\par
+file {\b CPU.h}\par
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 file {\b MCUC1.c}\par
 {
@@ -172,12 +172,22 @@ file {\b PE_Types.h}\par
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 {\b PE_Types.h} - contains definitions of basic types, register access macros and hardware specific macros which can be used in user application. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b TI0.c}\par
+file {\b RTC.c}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+This component implements a real time clock (RTC). Actual date may also be obtained and an alarm function is included. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+file {\b RTC.h}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+This component implements a real time clock (RTC). Actual date may also be obtained and an alarm function is included. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+file {\b TimerInt0.c}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 This component "TimerInt" implements a periodic interrupt. When the component and its events are enabled, the "OnInterrupt" event is called periodically with the period that you specify. TimerInt supports also changing the period in runtime. The source of periodic interrupt can be timer compare or reload register or timer-overflow interrupt (of free running counter). }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-file {\b TI0.h}\par
+file {\b TimerInt0.h}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 This component "TimerInt" implements a periodic interrupt. When the component and its events are enabled, the "OnInterrupt" event is called periodically with the period that you specify. TimerInt supports also changing the period in runtime. The source of periodic interrupt can be timer compare or reload register or timer-overflow interrupt (of free running counter). }}}

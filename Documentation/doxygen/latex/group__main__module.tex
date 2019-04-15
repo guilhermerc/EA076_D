@@ -17,8 +17,8 @@ int \hyperlink{group__main__module_ga840291bc02cba5474a4cb46a9b9566fe}{main} (vo
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-Starts the communication
+Initializing the communication, temperature and timestamp modules
 
-Infinite loop that checks if a message was received and; if the last message was completely sent and; if the last log entry was completely sent.
+Infinite loop that checks if the communication channel is available. If it is, then it checks if a message was received or a new temperature measurement is already available to be published, handling the one that occurs.
 
-If all of the above tests are T\+R\+UE, then it calls the function that parses the received message. Thereafter, it calls the function that responds to the received message.
+If both of them happen to occur at the same time, the priority belongs to the former (the latter will still be handled, probably in the next iteration).

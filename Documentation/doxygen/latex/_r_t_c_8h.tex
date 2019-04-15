@@ -1,0 +1,40 @@
+\hypertarget{_r_t_c_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+R\+TC.h File Reference}
+\label{_r_t_c_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+R\+T\+C.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+R\+T\+C.\+h}}
+
+
+This component implements a real time clock (R\+TC). Actual date may also be obtained and an alarm function is included.  
+
+
+{\ttfamily \#include \char`\"{}C\+P\+U.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries R\+T\+C\+\_\+\+I\+N\+T\+E\+R\+R\+U\+P\+T\+\_\+\+M\+O\+DE}
+\item 
+\#define \hyperlink{group___r_t_c__module_gaed4d12db83d7558ef7b713084d0a488e}{R\+T\+C\+\_\+\+P\+R\+P\+H\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+E\+SS}~0x4003\+D000U
+\item 
+\#define \hyperlink{group___r_t_c__module_ga2359447ebbc6d08d33a8ee6ce53ab22d}{R\+T\+C\+\_\+\+Init\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{group___r_t_c__module_ga28e10bb5b6a4946d27063f0f989ea136}{R\+T\+C\+\_\+\+Get\+Time\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{group___r_t_c__module_ga89cd8bb411583901f1c1a0e76ca5d9de}{R\+T\+C\+\_\+\+Set\+Time\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+E\+N\+A\+B\+L\+ED}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$ \hyperlink{group___r_t_c__module_ga8493e21872f656aa30a9e13b522aa1cb}{R\+T\+C\+\_\+\+Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\+D\+D\+\_\+\+T\+User\+Data} $\ast$User\+Data\+Ptr, bool Soft\+Init)
+\begin{DoxyCompactList}\small\item\em Initializes the device. There are two modes of initialization. 1) R\+TC device is N\+OT battery backed up. (Soft\+Init = F\+A\+L\+SE) All registers (interrupts, counters, clock routing �) that influence R\+TC behavior are initialized. Note\+: This initialization mode doesn\textquotesingle{}t preserve time and date settings. 2) R\+TC device IS battery backed up. (Soft\+Init = T\+R\+UE). Only registers that are not backed up are initialized (Interrupt priority �). R\+TC device is running, time and date a preserved, R\+TC interrupts (events) are preserved too. Allocates memory for the device data structure. This method can be called only once. Before the second call of Init() the Deinit() must be called first. \end{DoxyCompactList}\item 
+void \hyperlink{group___r_t_c__module_gae7aa19d663f150815eba0a2738ef22fb}{R\+T\+C\+\_\+\+Get\+Time} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$Device\+Data\+Ptr, \hyperlink{struct_l_d_d___r_t_c___t_time}{L\+D\+D\+\_\+\+R\+T\+C\+\_\+\+T\+Time} $\ast$Time\+Ptr)
+\begin{DoxyCompactList}\small\item\em Returns actual time and date. Note\+: Fields not supported by HW are calculated in software. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\+D\+D\+\_\+\+T\+Error} \hyperlink{group___r_t_c__module_gaa23aacdc2ac44dbcb0b4efeb7e394b8b}{R\+T\+C\+\_\+\+Set\+Time} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$Device\+Data\+Ptr, \hyperlink{struct_l_d_d___r_t_c___t_time}{L\+D\+D\+\_\+\+R\+T\+C\+\_\+\+T\+Time} $\ast$Time\+Ptr)
+\begin{DoxyCompactList}\small\item\em Sets new time and date. Note\+: All \hyperlink{struct_l_d_d___r_t_c___t_time}{L\+D\+D\+\_\+\+R\+T\+C\+\_\+\+T\+Time} structure members must be correctly filled in. \end{DoxyCompactList}\item 
+{\bfseries P\+E\+\_\+\+I\+SR} (R\+T\+C\+\_\+\+Interrupt)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This component implements a real time clock (R\+TC). Actual date may also be obtained and an alarm function is included. 
+
+\begin{DoxyVersion}{Version}
+01.\+08 
+\end{DoxyVersion}
