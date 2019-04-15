@@ -1853,6 +1853,76 @@ D = Direct mounting &lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="linear" urn="urn:adsk.eagle:library:262">
+<description>&lt;b&gt;Linear Devices&lt;/b&gt;&lt;p&gt;
+Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="TO92" urn="urn:adsk.eagle:footprint:16150/1" library_version="3">
+<description>&lt;b&gt;TO-92&lt;/b&gt;</description>
+<wire x1="-2.095" y1="-1.651" x2="-0.7869" y2="2.5484" width="0.1524" layer="21" curve="-111.097684"/>
+<wire x1="0.7869" y1="2.5484" x2="2.095" y2="-1.651" width="0.1524" layer="21" curve="-111.097684"/>
+<wire x1="-2.095" y1="-1.651" x2="2.095" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="-2.254" y1="-0.254" x2="-0.286" y2="-0.254" width="0.1524" layer="51"/>
+<wire x1="-2.655" y1="-0.254" x2="-2.254" y2="-0.254" width="0.1524" layer="21"/>
+<wire x1="-0.286" y1="-0.254" x2="0.286" y2="-0.254" width="0.1524" layer="21"/>
+<wire x1="2.254" y1="-0.254" x2="2.655" y2="-0.254" width="0.1524" layer="21"/>
+<wire x1="0.286" y1="-0.254" x2="2.254" y2="-0.254" width="0.1524" layer="51"/>
+<wire x1="-0.7864" y1="2.5484" x2="0.7864" y2="2.5484" width="0.1524" layer="51" curve="-34.298964"/>
+<pad name="1" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="2" x="0" y="1.905" drill="0.8128" shape="octagon"/>
+<pad name="3" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="2.413" y="1.651" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="2.921" y="-1.27" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="TO92" urn="urn:adsk.eagle:package:16416/2" type="model" library_version="3">
+<description>TO-92</description>
+<packageinstances>
+<packageinstance name="TO92"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="AD590" urn="urn:adsk.eagle:symbol:16160/1" library_version="3">
+<wire x1="0" y1="4.572" x2="0" y2="3.048" width="0.1524" layer="94"/>
+<wire x1="-0.889" y1="3.81" x2="0.889" y2="3.81" width="0.1524" layer="94"/>
+<wire x1="-0.889" y1="-1.27" x2="0.889" y2="-1.27" width="0.1524" layer="94"/>
+<circle x="0" y="2.54" radius="2.54" width="0.254" layer="94"/>
+<circle x="0" y="0" radius="2.54" width="0.254" layer="94"/>
+<text x="3.81" y="0" size="1.778" layer="95">&gt;NAME</text>
+<text x="3.81" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="+" x="0" y="7.62" visible="pad" length="short" direction="in" rot="R270"/>
+<pin name="-" x="0" y="-5.08" visible="pad" length="short" direction="in" rot="R90"/>
+<pin name="CAN" x="-5.08" y="0" visible="pad" length="short" direction="pas"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="AD590ZR" urn="urn:adsk.eagle:component:16667/2" prefix="IC" library_version="3">
+<description>&lt;b&gt;TEMPERATURE SENSOR&lt;/b&gt;&lt;p&gt;
+current output</description>
+<gates>
+<gate name="A" symbol="AD590" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TO92">
+<connects>
+<connect gate="A" pin="+" pad="1"/>
+<connect gate="A" pin="-" pad="2"/>
+<connect gate="A" pin="CAN" pad="3"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:16416/2"/>
+</package3dinstances>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1867,6 +1937,8 @@ D = Direct mounting &lt;p&gt;
 <part name="X1" library="con-subd" library_urn="urn:adsk.eagle:library:189" deviceset="F09" device="D" package3d_urn="urn:adsk.eagle:package:10273/1"/>
 <part name="X_1" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="AD590ZR" device="" package3d_urn="urn:adsk.eagle:package:16416/2"/>
+<part name="X_2" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1876,14 +1948,19 @@ D = Direct mounting &lt;p&gt;
 <instance part="FRDM1" gate="G$1" x="127" y="-12.7" smashed="yes">
 <attribute name="NAME" x="71.12" y="20.32" size="2.032" layer="95"/>
 </instance>
-<instance part="X1" gate="G$1" x="33.02" y="-43.18" smashed="yes">
-<attribute name="VALUE" x="29.21" y="-53.975" size="1.778" layer="96"/>
-<attribute name="NAME" x="29.21" y="-34.29" size="1.778" layer="95"/>
+<instance part="X1" gate="G$1" x="22.86" y="-43.18" smashed="yes">
+<attribute name="VALUE" x="19.05" y="-53.975" size="1.778" layer="96"/>
+<attribute name="NAME" x="19.05" y="-34.29" size="1.778" layer="95"/>
 </instance>
-<instance part="X_1" gate="G$1" x="21.40940625" y="-59.382446875" smashed="yes"/>
-<instance part="P+1" gate="VCC" x="45.72" y="-20.32" smashed="yes">
-<attribute name="VALUE" x="43.18" y="-22.86" size="1.778" layer="96" rot="R90"/>
+<instance part="X_1" gate="G$1" x="11.24940625" y="-59.382446875" smashed="yes"/>
+<instance part="P+1" gate="VCC" x="35.56" y="-20.32" smashed="yes">
+<attribute name="VALUE" x="33.02" y="-22.86" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="IC1" gate="A" x="48.26" y="-10.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="44.45" y="-10.16" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="44.45" y="-12.7" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="X_2" gate="G$1" x="48.26" y="-17.78" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -1891,9 +1968,9 @@ D = Direct mounting &lt;p&gt;
 <net name="N$1" class="0">
 <segment>
 <pinref part="X1" gate="G$1" pin="2"/>
-<wire x1="25.4" y1="-40.64" x2="22.86" y2="-40.64" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="-40.64" x2="22.86" y2="-30.48" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="-30.48" x2="109.22" y2="-30.48" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="-40.64" x2="12.7" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-40.64" x2="12.7" y2="-30.48" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-30.48" x2="109.22" y2="-30.48" width="0.1524" layer="91"/>
 <pinref part="FRDM1" gate="G$1" pin="PTE22"/>
 <wire x1="109.22" y1="-30.48" x2="109.22" y2="-45.72" width="0.1524" layer="91"/>
 <wire x1="109.22" y1="-45.72" x2="101.6" y2="-45.72" width="0.1524" layer="91"/>
@@ -1902,9 +1979,9 @@ D = Direct mounting &lt;p&gt;
 <net name="N$2" class="0">
 <segment>
 <pinref part="X1" gate="G$1" pin="3"/>
-<wire x1="25.4" y1="-43.18" x2="20.32" y2="-43.18" width="0.1524" layer="91"/>
-<wire x1="20.32" y1="-43.18" x2="20.32" y2="-27.94" width="0.1524" layer="91"/>
-<wire x1="20.32" y1="-27.94" x2="111.76" y2="-27.94" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="-43.18" x2="10.16" y2="-43.18" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="-43.18" x2="10.16" y2="-27.94" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="-27.94" x2="111.76" y2="-27.94" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="-27.94" x2="111.76" y2="-50.8" width="0.1524" layer="91"/>
 <pinref part="FRDM1" gate="G$1" pin="PTE23"/>
 <wire x1="111.76" y1="-50.8" x2="101.6" y2="-50.8" width="0.1524" layer="91"/>
@@ -1914,16 +1991,48 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="X_1" gate="G$1" pin="0"/>
 <pinref part="X1" gate="G$1" pin="5"/>
-<wire x1="21.40940625" y1="-59.382446875" x2="21.40940625" y2="-48.26" width="0.1524" layer="91"/>
-<wire x1="21.40940625" y1="-48.26" x2="25.4" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="11.24940625" y1="-59.382446875" x2="11.24940625" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="11.24940625" y1="-48.26" x2="15.24" y2="-48.26" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="X_2" gate="G$1" pin="0"/>
+<pinref part="IC1" gate="A" pin="-"/>
+<wire x1="48.26" y1="-17.78" x2="48.26" y2="-15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCC" class="0">
 <segment>
-<pinref part="X1" gate="G$1" pin="9"/>
-<wire x1="40.64" y1="-48.26" x2="45.72" y2="-48.26" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
-<wire x1="45.72" y1="-48.26" x2="45.72" y2="-22.86" width="0.1524" layer="91"/>
+<pinref part="X1" gate="G$1" pin="9"/>
+<wire x1="30.48" y1="-48.26" x2="35.56" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="-48.26" x2="35.56" y2="-22.86" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="FRDM1" gate="G$1" pin="A5/PTC1"/>
+<wire x1="66.04" y1="-60.96" x2="60.96" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="-60.96" x2="60.96" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="-68.58" x2="137.16" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-68.58" x2="137.16" y2="-50.8" width="0.1524" layer="91"/>
+<pinref part="FRDM1" gate="G$1" pin="PTC3"/>
+<wire x1="137.16" y1="-50.8" x2="144.78" y2="-50.8" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="IC1" gate="A" pin="+"/>
+<pinref part="FRDM1" gate="G$1" pin="3V3"/>
+<wire x1="66.04" y1="-2.54" x2="48.26" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="IC1" gate="A" pin="CAN"/>
+<wire x1="53.34" y1="-10.16" x2="55.88" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-10.16" x2="55.88" y2="-35.56" width="0.1524" layer="91"/>
+<pinref part="FRDM1" gate="G$1" pin="A0/PTB0"/>
+<wire x1="55.88" y1="-35.56" x2="66.04" y2="-35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
