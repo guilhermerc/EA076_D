@@ -26,19 +26,18 @@
 **  @{
 */         
 /* MODULE UART0Events */
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
 
 #include <comm.h>
 #include <LOG.h>
 #include <PE_Types.h>
 #include <stdint.h>
 #include <UART0.h>
-#include <UART0Events.h>
+#include "CPU.h"
+#include "Events.h"
+#include "ADC0Events.h"
+#include "TimerInt0Events.h"
+#include "UART0Events.h"
+#include "UART2Events.h"
 
 
 #ifdef __cplusplus

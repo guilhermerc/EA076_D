@@ -19,11 +19,5 @@ var modules =
     [ "Vectors module documentation", "group___vectors__module.html", null ],
     [ "Interrupt vector numbers", "group___interrupt__vector__numbers.html", "group___interrupt__vector__numbers" ],
     [ "Peripheral type defines", "group___peripheral__defines.html", "group___peripheral__defines" ],
-    [ "Backward Compatibility", "group___backward___compatibility___symbols.html", null ],
-    [ "ADC0Events module documentation", "group___a_d_c0_events__module.html", "group___a_d_c0_events__module" ],
-    [ "Events module documentation", "group___events__module.html", "group___events__module" ],
-    [ "main module documentation", "group__main__module.html", "group__main__module" ],
-    [ "TimerInt0Events module documentation", "group___timer_int0_events__module.html", "group___timer_int0_events__module" ],
-    [ "UART0Events module documentation", "group___u_a_r_t0_events__module.html", "group___u_a_r_t0_events__module" ],
-    [ "UART2Events module documentation", "group___u_a_r_t2_events__module.html", "group___u_a_r_t2_events__module" ]
+    [ "Backward Compatibility", "group___backward___compatibility___symbols.html", null ]
 ];

@@ -1,3 +1,7 @@
+/*!
+** @file temp.c
+*/
+
 /*
  * LM61_temp.c
  *

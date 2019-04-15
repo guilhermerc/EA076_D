@@ -1,3 +1,7 @@
+/*!
+** @file timestamp.h
+*/
+
 /*
  * Timestamp.h
  *
@@ -15,6 +19,7 @@
 
 LDD_TDeviceData * RTC_dd_ptr;
 
+void timestamp_init();
 void timestamp_get_time(LDD_RTC_TTime * current_time_ptr);
 
 #endif /* PROGRAMMER_CODE_LIBRARIES_TIMESTAMP_H_ */

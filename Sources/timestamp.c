@@ -1,3 +1,7 @@
+/*!
+** @file timestamp.c
+*/
+
 /*
  * Timestamp.c
  *

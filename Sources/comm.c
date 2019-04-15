@@ -1,5 +1,5 @@
 /*!
- ** @file ESP01_comm.c
+ ** @file comm.c
  ** @brief
  **         This file contains the FSM implementation for communicating
  **         with the MQTT Broker (using the ESP-01 module).
@@ -20,7 +20,7 @@
 #define MQTT_PASSWORD "\"UNICAMP\""
 #define SMARTPHONE_TOPIC "\"EA076/grupoD3/celular\""
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
-#define TEMPERATURE_TOPIC "EA076/grupoD3/temp"
+#define TEMPERATURE_TOPIC "\"EA076/grupoD3/temp\""
 #define ESP_TOPIC "\"EA076/grupoD3/ESP\""
 #define MAX_TOKENS	32
 
@@ -162,9 +162,11 @@ void comm_response()
 		strcat(message_out, "\"");
 		strcat(message_out, TERMINATING_CHARS);
 
+		/*
 		// DEBUGGING PURPOSES
 		comm_info.state = WAITING_FOR_CMD;
 		// DEBUGGING PURPOSES
+		 */
 	}
 	}
 

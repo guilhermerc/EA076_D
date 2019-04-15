@@ -52,6 +52,7 @@
 #include <CPU.h>
 #include <PE_Types.h>
 #include <temp.h>
+#include <timestamp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
