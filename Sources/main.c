@@ -41,8 +41,15 @@
 #include "ASerialLdd1.h"
 #include "UART2.h"
 #include "ASerialLdd2.h"
+#include "L293D_1_2_EN.h"
+#include "PwmLdd1.h"
 #include "TU1.h"
 #include "MCUC1.h"
+#include "TU2.h"
+#include "L293D_1A.h"
+#include "BitIoLdd1.h"
+#include "L293D_2A.h"
+#include "BitIoLdd2.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -76,6 +83,8 @@ int main(void)
 	comm_init();
 	temp_init();
 	timestamp_init();
+
+	dc_motor_init();
 
 	/*!
 	 * Infinite loop that checks if the communication channel is
