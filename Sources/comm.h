@@ -8,24 +8,23 @@
 #define SOURCES_COMM_H_
 
 #include <PE_Types.h>
-#include <UART2.h>
 
 #define TERMINATING_CHARS "\r\n"
 #define MESSAGE_BUFFER_SIZE	512
 
-typedef enum COMM_SENDING_STATUS
+typedef enum
 {
 	DONE,
 	SENDING
 } COMM_SENDING_STATUS;
 
-typedef enum COMM_STATUS
+typedef enum
 {
 	AVAILABLE,
 	BUSY
 } COMM_STATUS;
 
-typedef enum COMM_STATE
+typedef enum
 {
 	CONNECT_WIFI,
 	GET_IP_NUMB,
@@ -38,22 +37,27 @@ typedef enum COMM_STATE
 	PINGING
 } COMM_STATE_ENUM;
 
-typedef struct COMM_INFO
+typedef struct
 {
 	volatile COMM_STATE_ENUM state;
 	volatile bool message_received;
 	volatile COMM_SENDING_STATUS sending_status;
 	volatile COMM_SENDING_STATUS loging_status;
+	char message_in[MESSAGE_BUFFER_SIZE];
+	char message_out[MESSAGE_BUFFER_SIZE];
 } COMM_INFO_STRUCT;
 
 COMM_INFO_STRUCT comm_info;
+
+/*
 UART2_TComData message_out[MESSAGE_BUFFER_SIZE];
 UART2_TComData message_in[MESSAGE_BUFFER_SIZE];
 volatile bool message_recv;
+*/
 
 void comm_init();
 COMM_STATUS comm_status();
-void comm_parse();
-void comm_response();
+void comm_process_msg();
+void comm_clear_input_buffer();
 
 #endif /* SOURCES_COMM_H_ */

@@ -29,13 +29,7 @@
 
 #include <ADC0.h>
 #include <stdint.h>
-#include "CPU.h"
-#include "Events.h"
 #include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-
 
 #ifdef __cplusplus
 extern "C" {

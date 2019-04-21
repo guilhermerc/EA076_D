@@ -1,4 +1,4 @@
-/* ###################################################################
+ /* ###################################################################
 **     Filename    : Events.c
 **     Project     : EA076_D
 **     Processor   : MKL25Z128VLK4
@@ -26,12 +26,7 @@
 */         
 /* MODULE Events */
 
-#include "CPU.h"
 #include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
 
 
 #ifdef __cplusplus

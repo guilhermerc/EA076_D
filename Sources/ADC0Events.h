@@ -29,22 +29,6 @@
 #ifndef __ADC0Events_H
 #define __ADC0Events_H
 /* MODULE ADC0Events */
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "TU1.h"
-#include "MCUC1.h"
-
 
 #ifdef __cplusplus
 extern "C" {

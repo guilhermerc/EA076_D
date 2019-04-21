@@ -28,14 +28,9 @@
 /* MODULE UART2Events */
 
 #include <comm.h>
-#include <PE_Types.h>
+#include <event_ring_buff.h>
 #include <stdint.h>
 #include <UART2.h>
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
 #include "UART2Events.h"
 
 
@@ -92,20 +87,8 @@ void UART2_OnError(void)
 */
 void UART2_OnRxChar(void)
 {
-	static volatile uint8_t curr_idx = 0;
-
-	UART2_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
-
-	// Test if the buffer has a complete message
-	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
-	{
-		message_in[curr_idx + 1] = '\0';
-		curr_idx = 0;
-
-		comm_info.message_received = TRUE;
-	}
-	else
-		curr_idx++;
+	if(UART2_HasACompleteMessage())
+		event_ring_buff_insert_event(NEW_MESSAGE_FROM_BROKER);
 }
 
 /*! \brief A event that indicates that a new character can be sent
@@ -137,7 +120,7 @@ void UART2_OnTxChar(void)
 {
 	static uint8_t curr_idx = 0;
 
-	UART2_TComData curr_char = message_out[curr_idx++];
+	UART2_TComData curr_char = comm_info.message_out[curr_idx++];
 	if(curr_char != '\0')
 	{
 		UART2_SendChar(curr_char);
@@ -145,7 +128,6 @@ void UART2_OnTxChar(void)
 	else
 	{
 		curr_idx = 0;
-
 		comm_info.sending_status = DONE;
 	}
 }

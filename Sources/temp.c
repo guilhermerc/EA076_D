@@ -71,19 +71,19 @@ void temp_assemble_message()
 	sprintf(temperature_string, "%d", temp_info.temperature);
 
 	sprintf(time_aux_string, "%2d", current_time.Hour);
-	strcpy(message_in, time_aux_string);
-	strcat(message_in, ":");
+	strcpy(comm_info.message_in, time_aux_string);
+	strcat(comm_info.message_in, ":");
 
 	sprintf(time_aux_string, "%2d", current_time.Minute);
-	strcat(message_in, time_aux_string);
-	strcat(message_in, ":");
+	strcat(comm_info.message_in, time_aux_string);
+	strcat(comm_info.message_in, ":");
 
 	sprintf(time_aux_string, "%2d", current_time.Second);
-	strcat(message_in, time_aux_string);
-	strcat(message_in, " | ");
+	strcat(comm_info.message_in, time_aux_string);
+	strcat(comm_info.message_in, " | ");
 
-	strcat(message_in, "Temperature: ");
-	strcat(message_in, temperature_string);
-	strcat(message_in, " degrees Celsius");
-	strcat(message_in, TERMINATING_CHARS);
+	strcat(comm_info.message_in, "Temperature: ");
+	strcat(comm_info.message_in, temperature_string);
+	strcat(comm_info.message_in, " degrees Celsius");
+	strcat(comm_info.message_in, TERMINATING_CHARS);
 }

@@ -28,16 +28,11 @@
 /* MODULE UART0Events */
 
 #include <comm.h>
+#include <event_ring_buff.h>
 #include <LOG.h>
-#include <PE_Types.h>
 #include <stdint.h>
 #include <UART0.h>
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
 #include "UART0Events.h"
-#include "UART2Events.h"
 
 
 #ifdef __cplusplus
@@ -93,20 +88,8 @@ void UART0_OnError(void)
 */
 void UART0_OnRxChar(void)
 {
-	static volatile uint8_t curr_idx = 0;
-
-	UART0_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
-
-	// Test if the buffer has a complete message
-	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
-	{
-		message_in[curr_idx + 1] = '\0';
-		curr_idx = 0;
-
-		comm_info.message_received = TRUE;
-	}
-	else
-		curr_idx++;
+	if(UART0_HasACompleteMessage())
+		event_ring_buff_insert_event(NEW_MESSAGE_FROM_TERMINAL);
 }
 
 /*! \brief A event that indicates that a new character can be sent

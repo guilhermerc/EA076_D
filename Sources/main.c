@@ -26,31 +26,11 @@
  **  @{
  */
 /* MODULE main */
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "TU1.h"
-#include "MCUC1.h"
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
 
 #include <comm.h>
 #include <CPU.h>
-#include <PE_Types.h>
+#include <event_handler.h>
+#include <event_ring_buff.h>
 #include <temp.h>
 #include <timestamp.h>
 
@@ -77,6 +57,8 @@ int main(void)
 	temp_init();
 	timestamp_init();
 
+	event_ring_buff_init();
+
 	/*!
 	 * Infinite loop that checks if the communication channel is
 	 * available. If it is, then it checks if a message was received or
@@ -89,27 +71,8 @@ int main(void)
 	 */
 	for(;;)
 	{
-		if((comm_status() == AVAILABLE))
-		{
-			if(comm_info.message_received == TRUE)
-			{
-				comm_parse();
-				comm_response();
-
-				comm_info.message_received = FALSE;
-			}
-			else if(temp_info.measurement_state == HAS_RAW_MEASUREMENT)
-			{
-				if(comm_info.state == WAITING_FOR_CMD)
-				{
-					temp_assemble_message();
-
-					comm_parse();
-					comm_response();
-				}
-				temp_info.measurement_state = REQUESTING;
-			}
-		}
+		if(!event_ring_buff_is_empty())
+			event_handler(event_ring_buff_consume_event());
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/

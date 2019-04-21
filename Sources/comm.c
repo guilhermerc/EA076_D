@@ -9,6 +9,7 @@
 #include <LOG.h>
 #include <stdint.h>
 #include <string.h>
+#include <UART2.h>
 #include <UART2Events.h>
 
 
@@ -33,6 +34,7 @@ static char mac_addr[MAC_ADDR_SIZE];	// it should be const
 static bool is_subsc_to_smartp = FALSE;
 static UART2_TComData * tokens[MAX_TOKENS];
 
+void comm_response();
 bool comm_are_there_conn_errors();
 
 /*! \brief A function starts the communication with ESP01
@@ -48,6 +50,7 @@ void comm_init()
 	comm_info.loging_status = DONE;
 	comm_info.sending_status = DONE;
 
+	comm_clear_input_buffer();
 	comm_response();
 }
 
@@ -73,6 +76,11 @@ void comm_send_msg()
 	UART2_OnTxChar();
 }
 
+void comm_clear_input_buffer()
+{
+	memset(comm_info.message_in, 0, MESSAGE_BUFFER_SIZE);
+}
+
 /*! \brief A function implementing a FSM to respond to a received msg
 **
 ** 	This function is responsible for assembling a response to
@@ -87,49 +95,49 @@ void comm_response()
 	{
 	case CONNECT_WIFI:
 	{
-		strcpy(message_out, "CONNWIFI ");
-		strcat(message_out, WIFI_SSID);
-		strcat(message_out, ",");
-		strcat(message_out, WIFI_PASSWORD);
-		strcat(message_out, TERMINATING_CHARS);
+		strcpy(comm_info.message_out, "CONNWIFI ");
+		strcat(comm_info.message_out, WIFI_SSID);
+		strcat(comm_info.message_out, ",");
+		strcat(comm_info.message_out, WIFI_PASSWORD);
+		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		LOG("CONNECTION_REQUEST", "Connection to Wi-Fi requested.\n");
+		//LOG("CONNECTION_REQUEST", "Connection to Wi-Fi requested.\n");
 
 		break;
 	}
 	case GET_IP_NUMB:
 	{
-		strcpy(message_out, "GETIP");
-		strcat(message_out, TERMINATING_CHARS);
+		strcpy(comm_info.message_out, "GETIP");
+		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		LOG("CONNECTION_REQUEST", "ESP01 IP number requested.\n");
+		//LOG("CONNECTION_REQUEST", "ESP01 IP number requested.\n");
 
 		break;
 	}
 	case GET_MAC_ADDR:
 	{
-		strcpy(message_out, "GETMAC");
-		strcat(message_out, TERMINATING_CHARS);
+		strcpy(comm_info.message_out, "GETMAC");
+		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		LOG("CONNECTION_REQUEST", "ESP01 MAC ADDRESS requested.\n");
+		//LOG("CONNECTION_REQUEST", "ESP01 MAC ADDRESS requested.\n");
 
 		break;
 	}
 	case CONNECT_MQTT:
 	{
-		strcpy(message_out, "CONNMQTT ");
-		strcat(message_out, MQTT_IP);
-		strcat(message_out, ",");
-		strcat(message_out, MQTT_PORT);
-		strcat(message_out, ",");
-		strcat(message_out, mac_addr);
-		strcat(message_out, ",");
-		strcat(message_out, MQTT_USERNAME);
-		strcat(message_out, ",");
-		strcat(message_out, MQTT_PASSWORD);
-		strcat(message_out, TERMINATING_CHARS);
+		strcpy(comm_info.message_out, "CONNMQTT ");
+		strcat(comm_info.message_out, MQTT_IP);
+		strcat(comm_info.message_out, ",");
+		strcat(comm_info.message_out, MQTT_PORT);
+		strcat(comm_info.message_out, ",");
+		strcat(comm_info.message_out, mac_addr);
+		strcat(comm_info.message_out, ",");
+		strcat(comm_info.message_out, MQTT_USERNAME);
+		strcat(comm_info.message_out, ",");
+		strcat(comm_info.message_out, MQTT_PASSWORD);
+		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		LOG("CONNECTION_REQUEST", "Connection to MQTT broker requested.\n");
+		//LOG("CONNECTION_REQUEST", "Connection to MQTT broker requested.\n");
 
 		break;
 	}
@@ -137,36 +145,30 @@ void comm_response()
 	{
 		if(is_subsc_to_smartp == FALSE)
 		{
-			strcpy(message_out, "SUBSCRIBE ");
-			strcat(message_out, SMARTPHONE_TOPIC);
-			strcat(message_out, TERMINATING_CHARS);
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, SMARTPHONE_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
 
-			LOG("CONNECTION_REQUEST", "Connection to \"EA076/grupoD3/celular\" requested.\n");
+			//LOG("CONNECTION_REQUEST", "Connection to \"EA076/grupoD3/celular\" requested.\n");
 
 			break;
 		}
 	}
 	case PUBLISHING:
 	{
-		strcpy(message_out, "PUBLISH ");
+		strcpy(comm_info.message_out, "PUBLISH ");
 		/*! Here's one the main current problems:
 		 * It's not possible to choose the desired topic to publish
 		 * into. Since I'm testing the temperature reading, the
 		 * temperature topic is hard-coded.
 		 */
-		strcat(message_out, TEMPERATURE_TOPIC);
-		strcat(message_out, ",\"");
+		strcat(comm_info.message_out, TEMPERATURE_TOPIC);
+		strcat(comm_info.message_out, ",\"");
 		// The index which corresponds to the '\r' char is overwritten with '\0'
-		message_in[strlen(message_in) - 2] = '\0';
-		strcat(message_out, message_in);
-		strcat(message_out, "\"");
-		strcat(message_out, TERMINATING_CHARS);
-
-		/*
-		// DEBUGGING PURPOSES
-		comm_info.state = WAITING_FOR_CMD;
-		// DEBUGGING PURPOSES
-		 */
+		comm_info.message_in[strlen(comm_info.message_in) - 2] = '\0';
+		strcat(comm_info.message_out, comm_info.message_in);
+		strcat(comm_info.message_out, "\"");
+		strcat(comm_info.message_out, TERMINATING_CHARS);
 	}
 	}
 
@@ -192,7 +194,7 @@ void comm_parse()
 	{
 	case CONNECT_WIFI:
 	{
-		if(strcmp(message_in, "CONNECT WIFI\r\n") == 0)
+		if(strcmp(comm_info.message_in, "CONNECT WIFI\r\n") == 0)
 		{
 			if(has_ip_number != TRUE)
 				comm_info.state = GET_IP_NUMB;
@@ -202,7 +204,7 @@ void comm_parse()
 				comm_info.state = CONNECT_MQTT;
 
 		}
-		else if(strcmp(message_in, "ERROR WIFI\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "ERROR WIFI\r\n") == 0)
 		{
 			comm_info.state = CONNECT_WIFI;
 		}
@@ -211,18 +213,18 @@ void comm_parse()
 	}
 	case GET_IP_NUMB:
 	{
-		if(strcmp(message_in, "NOIP\r\n") == 0)
+		if(strcmp(comm_info.message_in, "NOIP\r\n") == 0)
 		{
 			comm_info.state = GET_IP_NUMB;
 		}
 		else
 		{
 			strcpy(ip_number, "\"");
-			strcat(ip_number, message_in);
+			strcat(ip_number, comm_info.message_in);
 			// The index which corresponds to the '\r' char is overwritten with '\"'
-			ip_number[strlen(message_in) - 1] = '\"';
+			ip_number[strlen(comm_info.message_in) - 1] = '\"';
 			// The index which corresponds to the '\n' char is overwritten with '\0'
-			ip_number[strlen(message_in)] = '\0';
+			ip_number[strlen(comm_info.message_in)] = '\0';
 			has_ip_number = TRUE;
 			comm_info.state = GET_MAC_ADDR;
 		}
@@ -232,11 +234,11 @@ void comm_parse()
 	case GET_MAC_ADDR:
 	{
 		strcpy(mac_addr, "\"");
-		strcat(mac_addr, message_in);
+		strcat(mac_addr, comm_info.message_in);
 		// The index which corresponds to the '\r' char is overwritten with '\"'
-		mac_addr[strlen(message_in) - 1] = '\"';
+		mac_addr[strlen(comm_info.message_in) - 1] = '\"';
 		// The index which corresponds to the '\n' char is overwritten with '\0'
-		mac_addr[strlen(message_in)] = '\0';
+		mac_addr[strlen(comm_info.message_in)] = '\0';
 		has_mac_addr = TRUE;
 		comm_info.state = CONNECT_MQTT;
 
@@ -244,7 +246,7 @@ void comm_parse()
 	}
 	case CONNECT_MQTT:
 	{
-		if(strcmp(message_in, "CONNECT MQTT\r\n") == 0)
+		if(strcmp(comm_info.message_in, "CONNECT MQTT\r\n") == 0)
 		{
 			if(is_subsc_to_smartp == FALSE)
 				comm_info.state = TOPIC_SUBSC;
@@ -253,15 +255,15 @@ void comm_parse()
 				comm_info.state = WAITING_FOR_CMD;
 			}
 		}
-		else if(strcmp(message_in, "NOWIFI\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "NOWIFI\r\n") == 0)
 		{
 			comm_info.state = CONNECT_WIFI;
 		}
-		else if(strcmp(message_in, "ERROR: -1\r\n") == 0 ||
-				strcmp(message_in, "ERROR: -2\r\n") == 0 ||
-				strcmp(message_in, "ERROR: -3\r\n") == 0 ||
-				strcmp(message_in, "ERROR: -4\r\n") == 0 ||
-				strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "ERROR: -1\r\n") == 0 ||
+				strcmp(comm_info.message_in, "ERROR: -2\r\n") == 0 ||
+				strcmp(comm_info.message_in, "ERROR: -3\r\n") == 0 ||
+				strcmp(comm_info.message_in, "ERROR: -4\r\n") == 0 ||
+				strcmp(comm_info.message_in, "MQTT_DISCONNECTED\r\n") == 0)
 		{
 			comm_info.state = CONNECT_MQTT;
 		}
@@ -270,8 +272,8 @@ void comm_parse()
 	}
 	case WAITING_FOR_CMD:
 	{
-		UART2_TComData message_in_copy[strlen(message_in) + 1];
-		strcpy(message_in_copy, message_in);
+		UART2_TComData message_in_copy[strlen(comm_info.message_in) + 1];
+		strcpy(message_in_copy, comm_info.message_in);
 
 		uint8_t curr_token_idx = 0;
 
@@ -299,20 +301,20 @@ void comm_parse()
 	}
 	case TOPIC_SUBSC:
 	{
-		if(strcmp(message_in, "OK SUBSCRIBE\r\n") == 0)
+		if(strcmp(comm_info.message_in, "OK SUBSCRIBE\r\n") == 0)
 		{
 			if(is_subsc_to_smartp == FALSE)
 				is_subsc_to_smartp = TRUE;
 
-			LOG("COMMUNICATION", "Communication established with success!\n");
+			//LOG("COMMUNICATION", "Communication established with success!\n");
 
 			comm_info.state = WAITING_FOR_CMD;
 		}
-		else if(strcmp(message_in, "NOT CONNECTED\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
 		{
 			comm_info.state = CONNECT_MQTT;
 		}
-		else if(strcmp(message_in, "ERROR SUBSCRIBE\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "ERROR SUBSCRIBE\r\n") == 0)
 		{
 			comm_info.state = WAITING_FOR_CMD;
 		}
@@ -321,26 +323,33 @@ void comm_parse()
 	}
 	case PUBLISHING:
 	{
-		if(strcmp(message_in, "OK PUBLISH\r\n") == 0)
+		if(strcmp(comm_info.message_in, "OK PUBLISH\r\n") == 0)
 		{
-			LOG("COMMUNICATION", "Message published with success!\n");
+			//LOG("COMMUNICATION", "Message published with success!\n");
 
 			comm_info.state = WAITING_FOR_CMD;
 		}
-		else if(strcmp(message_in, "NOT CONNECTED\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
 		{
-			LOG("COMMUNICATION", "Connection with MQTT broker lost. Retrying...\n");
+			//LOG("COMMUNICATION", "Connection with MQTT broker lost. Retrying...\n");
 
 			comm_info.state = CONNECT_MQTT;
 		}
-		else if(strcmp(message_in, "ERROR SUBSCRIBE\r\n") == 0)
+		else if(strcmp(comm_info.message_in, "ERROR SUBSCRIBE\r\n") == 0)
 		{
-			LOG("COMMUNICATION_ERROR", "Message couldn't be published. Please, try again.\n");
+			//LOG("COMMUNICATION_ERROR", "Message couldn't be published. Please, try again.\n");
 
 			comm_info.state = WAITING_FOR_CMD;
 		}
 	}
 	}
+}
+
+void comm_process_msg()
+{
+	comm_parse();
+	comm_response();
+	comm_clear_input_buffer();
 }
 
 /*! \brief A function that checks if there is a connection error
@@ -351,16 +360,16 @@ void comm_parse()
 bool comm_are_there_conn_errors()
 {
 	bool status = FALSE;
-	if(strcmp(message_in, "WIFI_DISCONNECTED\r\n") == 0)
+	if(strcmp(comm_info.message_in, "WIFI_DISCONNECTED\r\n") == 0)
 	{
-		LOG("CONNECTION_ERROR", "Connection with Wi-Fi lost. Retrying...\n");
+		//LOG("CONNECTION_ERROR", "Connection with Wi-Fi lost. Retrying...\n");
 
 		comm_info.state = CONNECT_WIFI;
 		status = TRUE;
 	}
-	else if(strcmp(message_in, "MQTT_DISCONNECTED\r\n") == 0)
+	else if(strcmp(comm_info.message_in, "MQTT_DISCONNECTED\r\n") == 0)
 	{
-		LOG("CONNECTION_ERROR", "Connection with MQTT broker lost. Retrying...\n");
+		//LOG("CONNECTION_ERROR", "Connection with MQTT broker lost. Retrying...\n");
 
 		comm_info.state = CONNECT_MQTT;
 		status = TRUE;
