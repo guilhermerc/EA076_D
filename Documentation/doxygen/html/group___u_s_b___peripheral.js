@@ -10,7 +10,7 @@ var group___u_s_b___peripheral =
       [ "BDTPAGE3", "struct_u_s_b___mem_map.html#afd1f5b8867e36b32297641c5fe0b283b", null ],
       [ "CONTROL", "struct_u_s_b___mem_map.html#a98ff4d7ab9c41c673ee41053dc484447", null ],
       [ "CTL", "struct_u_s_b___mem_map.html#a52b35d0e8644631558a65f9b7a9b8b4b", null ],
-      [ "ENDPOINT", "struct_u_s_b___mem_map.html#a08b26653cb0bb4345ab30a51d2ce6958", null ],
+      [ "ENDPOINT", "struct_u_s_b___mem_map.html#a9bffd97483e5bce748122e57d913794f", null ],
       [ "ENDPT", "struct_u_s_b___mem_map.html#a86aaba02227a45a333f72565b0bec378", null ],
       [ "ERREN", "struct_u_s_b___mem_map.html#a810f265a9ad6dc0f51834d0cecf24a79", null ],
       [ "ERRSTAT", "struct_u_s_b___mem_map.html#ad86f18ee95df11168d4b6cf68578e0fa", null ],

@@ -9,7 +9,6 @@
  *      Author: guilherme
  */
 
-#include <comm.h>
 #include <LOG.h>
 #include <string.h>
 #include <UART0Events.h>
@@ -24,8 +23,6 @@
 */
 void LOG(char * tag, UART0_TComData * message)
 {
-	comm_info.loging_status = SENDING;
-
 	strcpy(log_buffer, tag);
 	strcat(log_buffer, ": ");
 	strcat(log_buffer, message);

@@ -1,0 +1,34 @@
+\hypertarget{_l_o_g_8h}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+OG.h File Reference}
+\label{_l_o_g_8h}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+O\+G.\+h@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+O\+G.\+h}}
+{\ttfamily \#include $<$U\+A\+R\+T0.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_l_o_g_8h_a381c342b2b34df0b1a5b39c0d94da4e1}\label{_l_o_g_8h_a381c342b2b34df0b1a5b39c0d94da4e1}} 
+\#define {\bfseries L\+O\+G\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~512
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_l_o_g_8h_af947b67845669314f8249914b062f395}{L\+OG} (char $\ast$function\+\_\+name, U\+A\+R\+T0\+\_\+\+T\+Com\+Data $\ast$message)
+\begin{DoxyCompactList}\small\item\em A function that logs something into U\+A\+R\+T0 TX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_l_o_g_8h_a66556898bc7dd3c169241da604e2d2f4}\label{_l_o_g_8h_a66556898bc7dd3c169241da604e2d2f4}} 
+volatile U\+A\+R\+T0\+\_\+\+T\+Com\+Data {\bfseries log\+\_\+buffer} \mbox{[}L\+O\+G\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_l_o_g_8h_af947b67845669314f8249914b062f395}\label{_l_o_g_8h_af947b67845669314f8249914b062f395}} 
+\index{L\+O\+G.\+h@{L\+O\+G.\+h}!L\+OG@{L\+OG}}
+\index{L\+OG@{L\+OG}!L\+O\+G.\+h@{L\+O\+G.\+h}}
+\subsubsection{\texorpdfstring{L\+O\+G()}{LOG()}}
+{\footnotesize\ttfamily void L\+OG (\begin{DoxyParamCaption}\item[{char $\ast$}]{tag,  }\item[{U\+A\+R\+T0\+\_\+\+T\+Com\+Data $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+A function that logs something into U\+A\+R\+T0 TX. 
+
+This function assembles the log entry message and triggers the sending process. This handler also notifies the main loop when a log entry is being sent (using the log\+\_\+entry\+\_\+sent flags). 

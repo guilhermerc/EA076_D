@@ -73,7 +73,7 @@ $(document).ready(function(){initNavTree('_t_u1_8h.html','');});
 <code>#include &quot;<a class="el" href="_p_e___error_8h_source.html">PE_Error.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_e___const_8h_source.html">PE_Const.h</a>&quot;</code><br />
 <code>#include &quot;IO_Map.h&quot;</code><br />
-<code>#include &quot;LPTMR_PDD.h&quot;</code><br />
+<code>#include &quot;TPM_PDD.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_c_p_u_8h_source.html">CPU.h</a>&quot;</code><br />
 </div>
 <p><a href="_t_u1_8h_source.html">Go to the source code of this file.</a></p>
@@ -84,19 +84,19 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>__BWUserType_TU1_TValueType</b></td></tr>
 <tr class="separator:gaf0b58bf613a080724fc73a1d8b13ff39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga85cc4897457440a2308166668f49da10"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_CNT_INP_FREQ_U_0</b>&#160;&#160;&#160;0x8000UL  /* Counter input frequency in Hz */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_CNT_INP_FREQ_U_0</b>&#160;&#160;&#160;0x01400000UL /* Counter input frequency in Hz */</td></tr>
 <tr class="separator:ga85cc4897457440a2308166668f49da10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4913c95039859613c2db9d00795ab5d6"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_CNT_INP_FREQ_R_0</b>&#160;&#160;&#160;32768.00013421773F /* Counter input frequency in Hz */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_CNT_INP_FREQ_R_0</b>&#160;&#160;&#160;20971395.017196544F /* Counter input frequency in Hz */</td></tr>
 <tr class="separator:ga4913c95039859613c2db9d00795ab5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga855f7e71146b18903d56643ec80c5ddb"><td class="memItemLeft" align="right" valign="top">
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_CNT_INP_FREQ_COUNT</b>&#160;&#160;&#160;0U      /* Count of predefined counter input frequencies */</td></tr>
 <tr class="separator:ga855f7e71146b18903d56643ec80c5ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga17e6ec4b6bb1df9067daf9ac4204db66"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_PERIOD_TICKS</b>&#160;&#160;&#160;0x42UL      /* Initialization value of period in 'counter ticks' */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_PERIOD_TICKS</b>&#160;&#160;&#160;0x51ECUL    /* Initialization value of period in 'counter ticks' */</td></tr>
 <tr class="separator:ga17e6ec4b6bb1df9067daf9ac4204db66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga15dbabf955f2e2b0f888b98320eabfa3"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_NUMBER_OF_CHANNELS</b>&#160;&#160;&#160;0x00U   /* Count of predefined channels */</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_NUMBER_OF_CHANNELS</b>&#160;&#160;&#160;0x01U   /* Count of predefined channels */</td></tr>
 <tr class="separator:ga15dbabf955f2e2b0f888b98320eabfa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f7080987fb558b36a77447a61d7ec4a"><td class="memItemLeft" align="right" valign="top">
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_COUNTER_WIDTH</b>&#160;&#160;&#160;0x10U       /* Counter width in bits  */</td></tr>
@@ -104,14 +104,29 @@ Macros</h2></td></tr>
 <tr class="memitem:ga199a6b62d73e2782f77ac6c4f7a5ea41"><td class="memItemLeft" align="right" valign="top">
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_COUNTER_DIR</b>&#160;&#160;&#160;<a class="el" href="group___p_e___types__module.html#gga89181fe4df1c4701239176768b4a9ce5a0b76fb863426c07c6c997a8d9523257b">DIR_UP</a>      /* Direction of counting */</td></tr>
 <tr class="separator:ga199a6b62d73e2782f77ac6c4f7a5ea41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga791d7a56f94f745b0dbb9a0ff09ee0d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga791d7a56f94f745b0dbb9a0ff09ee0d4">TU1_PRPH_BASE_ADDRESS</a>&#160;&#160;&#160;0x40040000U</td></tr>
+<tr class="memitem:gaf2cdea3bc905d8525cfc0022dfe6c4ee"><td class="memItemLeft" align="right" valign="top">
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TU1_OFFSET_0_TICKS</b>&#160;&#160;&#160;0x28F6ul    /* Initialization value of offset as 'counter ticks' for channel 0 */</td></tr>
+<tr class="separator:gaf2cdea3bc905d8525cfc0022dfe6c4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga791d7a56f94f745b0dbb9a0ff09ee0d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga791d7a56f94f745b0dbb9a0ff09ee0d4">TU1_PRPH_BASE_ADDRESS</a>&#160;&#160;&#160;0x40039000U</td></tr>
 <tr class="separator:ga791d7a56f94f745b0dbb9a0ff09ee0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2532ba47f579738a2f954e79d2d99e9d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga2532ba47f579738a2f954e79d2d99e9d">TU1_Init_METHOD_ENABLED</a></td></tr>
 <tr class="separator:ga2532ba47f579738a2f954e79d2d99e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad5683773669c6d1a98cc77b56ccbc9e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#gad5683773669c6d1a98cc77b56ccbc9e8">TU1_SetEventMask_METHOD_ENABLED</a></td></tr>
-<tr class="separator:gad5683773669c6d1a98cc77b56ccbc9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga776fe3d89696e57b98cf36b71dbcc86c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga776fe3d89696e57b98cf36b71dbcc86c">TU1_OnCounterRestart_EVENT_ENABLED</a></td></tr>
-<tr class="separator:ga776fe3d89696e57b98cf36b71dbcc86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ad9e0de1c10fddf5dc67630e02946b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga5ad9e0de1c10fddf5dc67630e02946b0">TU1_Enable_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga5ad9e0de1c10fddf5dc67630e02946b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1064e0a63c9149f572ce33287e9cb656"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga1064e0a63c9149f572ce33287e9cb656">TU1_Disable_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga1064e0a63c9149f572ce33287e9cb656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabd70124050f4035fcee63321d7d3a99c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#gabd70124050f4035fcee63321d7d3a99c">TU1_GetPeriodTicks_METHOD_ENABLED</a></td></tr>
+<tr class="separator:gabd70124050f4035fcee63321d7d3a99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96fb49b417be2f405bf36f8a53fa7317"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga96fb49b417be2f405bf36f8a53fa7317">TU1_ResetCounter_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga96fb49b417be2f405bf36f8a53fa7317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3259d4aea5a2118f1800156dbf7013ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga3259d4aea5a2118f1800156dbf7013ce">TU1_GetCounterValue_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga3259d4aea5a2118f1800156dbf7013ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90698898a684132fd97e9dd6196060ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga90698898a684132fd97e9dd6196060ae">TU1_SetOffsetTicks_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga90698898a684132fd97e9dd6196060ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab9d6c0bb1c02d3702052b98d932f0915"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#gab9d6c0bb1c02d3702052b98d932f0915">TU1_GetOffsetTicks_METHOD_ENABLED</a></td></tr>
+<tr class="separator:gab9d6c0bb1c02d3702052b98d932f0915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga342afc8257cb609573d8bb4a9904e66b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga342afc8257cb609573d8bb4a9904e66b">TU1_SelectOutputAction_METHOD_ENABLED</a></td></tr>
+<tr class="separator:ga342afc8257cb609573d8bb4a9904e66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -124,12 +139,30 @@ Functions</h2></td></tr>
 <tr class="memitem:ga9bfbdf45fe9128c8d9e4245e3480d6da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga9bfbdf45fe9128c8d9e4245e3480d6da">TU1_Init</a> (<a class="el" href="group___p_e___types__module.html#ga0b66a73f87238a782318aa0be7578e35">LDD_TUserData</a> *UserDataPtr)</td></tr>
 <tr class="memdesc:ga9bfbdf45fe9128c8d9e4245e3480d6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets interrupt priority, sets pin routing, sets timing, etc. If the property ["Enable in init. code"] is set to "yes" value then the device is also enabled (see the description of the [Enable] method). In this case the [Enable] method is not necessary and needn't to be generated. This method can be called only once. Before the second call of Init the [Deinit] must be called first.  <a href="group___t_u1__module.html#ga9bfbdf45fe9128c8d9e4245e3480d6da">More...</a><br /></td></tr>
 <tr class="separator:ga9bfbdf45fe9128c8d9e4245e3480d6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0e3a03c2724bd7f8b64d8dd2c8796fd2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga0e3a03c2724bd7f8b64d8dd2c8796fd2">TU1_SetEventMask</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr, <a class="el" href="group___p_e___types__module.html#gafbe7f4d4e51560399c3bdd0218584533">LDD_TEventMask</a> EventMask)</td></tr>
-<tr class="memdesc:ga0e3a03c2724bd7f8b64d8dd2c8796fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables/disables event(s). The events contained within the mask are enabled. Events not contained within the mask are disabled. The component event masks are defined in the <a class="el" href="_p_e___types_8h.html" title="PE_Types.h - contains definitions of basic types, register access macros and hardware specific macros...">PE_Types.h</a> file. Note: Event that are not generated (See the "Events" tab in the Component inspector) are not handled by this method. In this case the method returns ERR_PARAM_MASK error code. See also method [GetEventMask].  <a href="group___t_u1__module.html#ga0e3a03c2724bd7f8b64d8dd2c8796fd2">More...</a><br /></td></tr>
-<tr class="separator:ga0e3a03c2724bd7f8b64d8dd2c8796fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa41b92c05e2ee5c591e4960928551eb0"><td class="memItemLeft" align="right" valign="top">
-&#160;</td><td class="memItemRight" valign="bottom"><b>PE_ISR</b> (TU1_Interrupt)</td></tr>
-<tr class="separator:gaa41b92c05e2ee5c591e4960928551eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8afe0865e773903efe7de4629c06eaa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga8afe0865e773903efe7de4629c06eaa1">TU1_Enable</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr)</td></tr>
+<tr class="memdesc:ga8afe0865e773903efe7de4629c06eaa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the component - it starts the signal generation. Events may be generated (see SetEventMask). The method is not available if the counter can't be disabled/enabled by HW.  <a href="group___t_u1__module.html#ga8afe0865e773903efe7de4629c06eaa1">More...</a><br /></td></tr>
+<tr class="separator:ga8afe0865e773903efe7de4629c06eaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9b93f60b75b41cf6a57cf827467c0690"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga9b93f60b75b41cf6a57cf827467c0690">TU1_Disable</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr)</td></tr>
+<tr class="memdesc:ga9b93f60b75b41cf6a57cf827467c0690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the component - it stops signal generation and events calling. The method is not available if the counter can't be disabled/enabled by HW.  <a href="group___t_u1__module.html#ga9b93f60b75b41cf6a57cf827467c0690">More...</a><br /></td></tr>
+<tr class="separator:ga9b93f60b75b41cf6a57cf827467c0690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa378924b104d5f8423920b110e8941e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#gaa378924b104d5f8423920b110e8941e9">TU1_GetPeriodTicks</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr, TU1_TValueType *TicksPtr)</td></tr>
+<tr class="memdesc:gaa378924b104d5f8423920b110e8941e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of counter ticks before re-initialization. See also method [SetPeriodTicks]. This method is available only if the property ["Counter restart"] is switched to 'on-match' value.  <a href="group___t_u1__module.html#gaa378924b104d5f8423920b110e8941e9">More...</a><br /></td></tr>
+<tr class="separator:gaa378924b104d5f8423920b110e8941e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8086edd7db7d8006a1bb8f3882a6706b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga8086edd7db7d8006a1bb8f3882a6706b">TU1_ResetCounter</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr)</td></tr>
+<tr class="memdesc:ga8086edd7db7d8006a1bb8f3882a6706b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets counter. If counter is counting up then it is set to zero. If counter is counting down then counter is updated to the reload value. The method is not available if HW doesn't allow resetting of the counter.  <a href="group___t_u1__module.html#ga8086edd7db7d8006a1bb8f3882a6706b">More...</a><br /></td></tr>
+<tr class="separator:ga8086edd7db7d8006a1bb8f3882a6706b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c2dce8338fb8784787fca8a8162ddbc"><td class="memItemLeft" align="right" valign="top">TU1_TValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga1c2dce8338fb8784787fca8a8162ddbc">TU1_GetCounterValue</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr)</td></tr>
+<tr class="memdesc:ga1c2dce8338fb8784787fca8a8162ddbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the content of counter register. This method can be used both if counter is enabled and if counter is disabled. The method is not available if HW doesn't allow reading of the counter.  <a href="group___t_u1__module.html#ga1c2dce8338fb8784787fca8a8162ddbc">More...</a><br /></td></tr>
+<tr class="separator:ga1c2dce8338fb8784787fca8a8162ddbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc1056f77dad3dc9f11ccb4c2f3a9b47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#gabc1056f77dad3dc9f11ccb4c2f3a9b47">TU1_SetOffsetTicks</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr, uint8_t ChannelIdx, TU1_TValueType Ticks)</td></tr>
+<tr class="memdesc:gabc1056f77dad3dc9f11ccb4c2f3a9b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the new offset value to channel specified by the parameter ChannelIdx. It is user responsibility to use value below selected period. This method is available when at least one channel is configured.  <a href="group___t_u1__module.html#gabc1056f77dad3dc9f11ccb4c2f3a9b47">More...</a><br /></td></tr>
+<tr class="separator:gabc1056f77dad3dc9f11ccb4c2f3a9b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga92c04b5447fde657da71680968acd784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga92c04b5447fde657da71680968acd784">TU1_GetOffsetTicks</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr, uint8_t ChannelIdx, TU1_TValueType *TicksPtr)</td></tr>
+<tr class="memdesc:ga92c04b5447fde657da71680968acd784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of counter ticks to compare match channel specified by the parameter ChannelIdx. See also method [SetOffsetTicks]. This method is available when at least one channel is configured.  <a href="group___t_u1__module.html#ga92c04b5447fde657da71680968acd784">More...</a><br /></td></tr>
+<tr class="separator:ga92c04b5447fde657da71680968acd784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga69e314f91fe2ea96524ce0c389505b6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group___p_e___types__module.html#ga24c2b045fd04e79e85f261ce4df35588">LDD_TError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___t_u1__module.html#ga69e314f91fe2ea96524ce0c389505b6b">TU1_SelectOutputAction</a> (<a class="el" href="group___p_e___types__module.html#gac5cf1362f1f0e3a2ce71b1bf2276d091">LDD_TDeviceData</a> *DeviceDataPtr, uint8_t ChannelIdx, <a class="el" href="group___p_e___types__module.html#ga2c05e6e8b549483727170a429c03425e">LDD_TimerUnit_TOutAction</a> CompareAction, <a class="el" href="group___p_e___types__module.html#ga2c05e6e8b549483727170a429c03425e">LDD_TimerUnit_TOutAction</a> CounterAction)</td></tr>
+<tr class="memdesc:ga69e314f91fe2ea96524ce0c389505b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of compare match and counter overflow action on channel output. This method is available when at least one channel is configured.  <a href="group___t_u1__module.html#ga69e314f91fe2ea96524ce0c389505b6b">More...</a><br /></td></tr>
+<tr class="separator:ga69e314f91fe2ea96524ce0c389505b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This TimerUnit component provides a low level API for unified hardware access across various timer devices using the Prescaler-Counter-Compare-Capture timer structure. </p>
@@ -140,7 +173,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_5ee4f4c790f0b84ba8f281983ad9ea7d.html">Generated_Code</a></li><li class="navelem"><a class="el" href="_t_u1_8h.html">TU1.h</a></li>
-    <li class="footer">Generated on Mon Apr 15 2019 12:31:06 for EA076_PE by
+    <li class="footer">Generated on Mon Apr 22 2019 00:30:13 for EA076_PE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

@@ -1,0 +1,24 @@
+\hypertarget{_l_o_g_8c}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+OG.c File Reference}
+\label{_l_o_g_8c}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+O\+G.\+c@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Sources/\+L\+O\+G.\+c}}
+{\ttfamily \#include $<$L\+O\+G.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$U\+A\+R\+T0\+Events.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_l_o_g_8c_a3de1afdafc85ced45aba27311c8d3bed}{L\+OG} (char $\ast$tag, U\+A\+R\+T0\+\_\+\+T\+Com\+Data $\ast$message)
+\begin{DoxyCompactList}\small\item\em A function that logs something into U\+A\+R\+T0 TX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_l_o_g_8c_a3de1afdafc85ced45aba27311c8d3bed}\label{_l_o_g_8c_a3de1afdafc85ced45aba27311c8d3bed}} 
+\index{L\+O\+G.\+c@{L\+O\+G.\+c}!L\+OG@{L\+OG}}
+\index{L\+OG@{L\+OG}!L\+O\+G.\+c@{L\+O\+G.\+c}}
+\subsubsection{\texorpdfstring{L\+O\+G()}{LOG()}}
+{\footnotesize\ttfamily void L\+OG (\begin{DoxyParamCaption}\item[{char $\ast$}]{tag,  }\item[{U\+A\+R\+T0\+\_\+\+T\+Com\+Data $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+A function that logs something into U\+A\+R\+T0 TX. 
+
+This function assembles the log entry message and triggers the sending process. This handler also notifies the main loop when a log entry is being sent (using the log\+\_\+entry\+\_\+sent flags). 

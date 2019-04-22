@@ -4,7 +4,7 @@ var group___m_t_b_d_w_t___peripheral =
     [ "MTBDWT Register Masks", "group___m_t_b_d_w_t___register___masks.html", null ],
     [ "MTBDWT_MemMap", "struct_m_t_b_d_w_t___mem_map.html", [
       [ "COMP", "struct_m_t_b_d_w_t___mem_map.html#a2dc253306d19e9f365e7ac79eecb8f07", null ],
-      [ "COMPARATOR", "struct_m_t_b_d_w_t___mem_map.html#aad4b02afcf439960acb58504bce08479", null ],
+      [ "COMPARATOR", "struct_m_t_b_d_w_t___mem_map.html#a30cf021d84f1eae5535e83d6ae3e1483", null ],
       [ "COMPID", "struct_m_t_b_d_w_t___mem_map.html#a4a32a81244f65ec304572767d33fcbce", null ],
       [ "CTRL", "struct_m_t_b_d_w_t___mem_map.html#aba0d8163fee473f1b1a2a8528f49639c", null ],
       [ "DEVICECFG", "struct_m_t_b_d_w_t___mem_map.html#a836782ca35496627b905b98747e750c9", null ],

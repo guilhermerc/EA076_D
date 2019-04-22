@@ -1,9 +1,30 @@
 \hypertarget{group__main__module}{}\section{main module documentation}
 \label{group__main__module}\index{main module documentation@{main module documentation}}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group__main__module_ga4cb0befa11db6e30cc1d9f5a514e25cc}\label{group__main__module_ga4cb0befa11db6e30cc1d9f5a514e25cc}} 
+\#define {\bfseries O\+P\+E\+R\+A\+T\+I\+O\+N\+\_\+\+C\+H\+A\+R\+\_\+\+I\+N\+D\+EX}~0
+\item 
+\mbox{\Hypertarget{group__main__module_ga2c87544a1e911893640803d8d53eb359}\label{group__main__module_ga2c87544a1e911893640803d8d53eb359}} 
+\#define {\bfseries A\+R\+G\+U\+M\+E\+N\+T\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+R\+T\+\_\+\+I\+N\+D\+EX}~2
+\item 
+\mbox{\Hypertarget{group__main__module_ga0a6be681e3cf415db61acfcf8ef8b49e}\label{group__main__module_ga0a6be681e3cf415db61acfcf8ef8b49e}} 
+\#define {\bfseries M\+E\+S\+S\+A\+G\+E\+\_\+\+I\+N\+\_\+\+S\+I\+ZE}~512
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{group__main__module_ga840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group__main__module_ga35ff2cde27431c086ae7048c761c5c49}\label{group__main__module_ga35ff2cde27431c086ae7048c761c5c49}} 
+char {\bfseries message\+\_\+in} \mbox{[}M\+E\+S\+S\+A\+G\+E\+\_\+\+I\+N\+\_\+\+S\+I\+ZE\mbox{]}
+\item 
+\mbox{\Hypertarget{group__main__module_ga9a75d3b2e50a13d5eed2e8c1068f0acb}\label{group__main__module_ga9a75d3b2e50a13d5eed2e8c1068f0acb}} 
+bool {\bfseries message\+\_\+received} = F\+A\+L\+SE
 \end{DoxyCompactItemize}
 
 
@@ -17,8 +38,20 @@ int \hyperlink{group__main__module_ga840291bc02cba5474a4cb46a9b9566fe}{main} (vo
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
-Initializing the communication, temperature and timestamp modules
+Initializing the communication (actually a minimalist version of it) and dc motor modules.
 
-Infinite loop that checks if the communication channel is available. If it is, then it checks if a message was received or a new temperature measurement is already available to be published, handling the one that occurs.
+Infinite loop that checks if a message was received from the Terminal. If it was, then the msg is parsed and handled.
 
-If both of them happen to occur at the same time, the priority belongs to the former (the latter will still be handled, probably in the next iteration).
+N\+O\+TE\+: This code is only used to test the dc\+\_\+motor library.
+
+Checks if a message was received. The flag \textquotesingle{}message\+\_\+received\textquotesingle{} is set when a sequence of \char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{} arrives at U\+A\+R\+T0 RX (check \hyperlink{_u_a_r_t0_events_8c}{U\+A\+R\+T0\+Events.\+c} to more on that).
+
+\char`\"{}\+P\char`\"{}\+: P\+WM setting
+
+This function is responsible for ensuring that the P\+WM passed as argument is valid
+
+\char`\"{}\+D\char`\"{}\+: Direction setting
+
+\char`\"{}\+S\char`\"{}\+: Stops the motor
+
+\char`\"{}\+C\char`\"{}\+: Continues to spin the motor with the last P\+WM setted

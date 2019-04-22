@@ -1,7 +1,7 @@
 var struct_d_w_t___mem_map =
 [
     [ "COMP", "struct_d_w_t___mem_map.html#ae10b19c1d610d27a71a1dc34a84a0e60", null ],
-    [ "COMPARATOR", "struct_d_w_t___mem_map.html#a3fc2f758c9b4ff82f596eff2431722d1", null ],
+    [ "COMPARATOR", "struct_d_w_t___mem_map.html#a3b238c752c3cd9f864480452c65a0bdd", null ],
     [ "CTRL", "struct_d_w_t___mem_map.html#ab3581abb33e428126e7ec339e66514e4", null ],
     [ "FUNCTION", "struct_d_w_t___mem_map.html#ad60c09cefe311e7809d9a57fad402f5c", null ],
     [ "MASK", "struct_d_w_t___mem_map.html#a34e5e25a9ec81fc61eca09c6d6adadfa", null ],

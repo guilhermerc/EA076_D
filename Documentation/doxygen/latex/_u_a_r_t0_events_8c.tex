@@ -5,12 +5,16 @@
 This is user\textquotesingle{}s event module. Put your event handler code here.  
 
 
-{\ttfamily \#include $<$comm.\+h$>$}\newline
 {\ttfamily \#include $<$L\+O\+G.\+h$>$}\newline
 {\ttfamily \#include $<$P\+E\+\_\+\+Types.\+h$>$}\newline
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include $<$U\+A\+R\+T0.\+h$>$}\newline
-{\ttfamily \#include $<$U\+A\+R\+T0\+Events.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}U\+A\+R\+T0\+Events.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries M\+E\+S\+S\+A\+G\+E\+\_\+\+I\+N\+\_\+\+S\+I\+ZE}~512
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,6 +24,13 @@ void \hyperlink{group___u_a_r_t0_events__module_gabb812347b38dc208a03fb309a1978e
 \begin{DoxyCompactList}\small\item\em A handler that bufferizes that received character. \end{DoxyCompactList}\item 
 void \hyperlink{group___u_a_r_t0_events__module_ga96b3fd9eb4bbaf0ad2eb012cd3738ed0}{U\+A\+R\+T0\+\_\+\+On\+Tx\+Char} (void)
 \begin{DoxyCompactList}\small\item\em A event that indicates that a new character can be sent. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char {\bfseries message\+\_\+in} \mbox{[}M\+E\+S\+S\+A\+G\+E\+\_\+\+I\+N\+\_\+\+S\+I\+ZE\mbox{]}
+\item 
+bool {\bfseries message\+\_\+received}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

@@ -59,16 +59,39 @@ $(document).ready(function(){initNavTree('group__main__module.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">main module documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga4cb0befa11db6e30cc1d9f5a514e25cc"><td class="memItemLeft" align="right" valign="top"><a id="ga4cb0befa11db6e30cc1d9f5a514e25cc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OPERATION_CHAR_INDEX</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga4cb0befa11db6e30cc1d9f5a514e25cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c87544a1e911893640803d8d53eb359"><td class="memItemLeft" align="right" valign="top"><a id="ga2c87544a1e911893640803d8d53eb359"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ARGUMENT_STRING_START_INDEX</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ga2c87544a1e911893640803d8d53eb359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a6be681e3cf415db61acfcf8ef8b49e"><td class="memItemLeft" align="right" valign="top"><a id="ga0a6be681e3cf415db61acfcf8ef8b49e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MESSAGE_IN_SIZE</b>&#160;&#160;&#160;512</td></tr>
+<tr class="separator:ga0a6be681e3cf415db61acfcf8ef8b49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__main__module.html#ga840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr class="separator:ga840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga35ff2cde27431c086ae7048c761c5c49"><td class="memItemLeft" align="right" valign="top"><a id="ga35ff2cde27431c086ae7048c761c5c49"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>message_in</b> [MESSAGE_IN_SIZE]</td></tr>
+<tr class="separator:ga35ff2cde27431c086ae7048c761c5c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9a75d3b2e50a13d5eed2e8c1068f0acb"><td class="memItemLeft" align="right" valign="top"><a id="ga9a75d3b2e50a13d5eed2e8c1068f0acb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>message_received</b> = FALSE</td></tr>
+<tr class="separator:ga9a75d3b2e50a13d5eed2e8c1068f0acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -87,9 +110,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initializing the communication, temperature and timestamp modules</p>
-<p>Infinite loop that checks if the communication channel is available. If it is, then it checks if a message was received or a new temperature measurement is already available to be published, handling the one that occurs.</p>
-<p>If both of them happen to occur at the same time, the priority belongs to the former (the latter will still be handled, probably in the next iteration).</p>
+<p>Initializing the communication (actually a minimalist version of it) and dc motor modules.</p>
+<p>Infinite loop that checks if a message was received from the Terminal. If it was, then the msg is parsed and handled.</p>
+<p>NOTE: This code is only used to test the dc_motor library.</p>
+<p>Checks if a message was received. The flag 'message_received' is set when a sequence of "\r\n" arrives at UART0 RX (check <a class="el" href="_u_a_r_t0_events_8c.html" title="This is user&#39;s event module. Put your event handler code here. ">UART0Events.c</a> to more on that).</p>
+<p>"P": PWM setting</p>
+<p>This function is responsible for ensuring that the PWM passed as argument is valid</p>
+<p>"D": Direction setting</p>
+<p>"S": Stops the motor</p>
+<p>"C": Continues to spin the motor with the last PWM setted</p>
 
 </div>
 </div>
@@ -98,7 +127,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Apr 14 2019 22:52:36 for EA076_PE by
+    <li class="footer">Generated on Mon Apr 22 2019 00:30:13 for EA076_PE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

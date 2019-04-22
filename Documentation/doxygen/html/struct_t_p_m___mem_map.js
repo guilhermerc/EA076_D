@@ -4,7 +4,7 @@ var struct_t_p_m___mem_map =
     [ "CNT", "struct_t_p_m___mem_map.html#ac86225aa77135d95142aa86b8c0fe010", null ],
     [ "CnV", "struct_t_p_m___mem_map.html#a352e4ab0141e02eff068ec3047693065", null ],
     [ "CONF", "struct_t_p_m___mem_map.html#ad54647b8ab5b1dab6948a3d5a13ea8d7", null ],
-    [ "CONTROLS", "struct_t_p_m___mem_map.html#a504ffd3defd9ff6816e51c11a912595b", null ],
+    [ "CONTROLS", "struct_t_p_m___mem_map.html#ad5aeca1d7b95d24e651f826713e43f81", null ],
     [ "MOD", "struct_t_p_m___mem_map.html#af46c48b6009bc12f49d484ee9859bcf9", null ],
     [ "RESERVED_0", "struct_t_p_m___mem_map.html#ab36427a89ccceaa5fce62275f286f205", null ],
     [ "RESERVED_1", "struct_t_p_m___mem_map.html#a499e989c62e9a964e2fdb7ef685ea038", null ],

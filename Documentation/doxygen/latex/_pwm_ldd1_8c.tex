@@ -1,0 +1,42 @@
+\hypertarget{_pwm_ldd1_8c}{}\section{/home/guilherme/workspace.kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Pwm\+Ldd1.c File Reference}
+\label{_pwm_ldd1_8c}\index{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Pwm\+Ldd1.\+c@{/home/guilherme/workspace.\+kds/\+E\+A076\+\_\+\+P\+E/\+Generated\+\_\+\+Code/\+Pwm\+Ldd1.\+c}}
+
+
+This component implements a pulse-\/width modulation generator that generates signal with variable duty and fixed cycle. This P\+WM component provides a high level A\+PI for unified hardware access to various timer devices using the Timer\+Unit component.  
+
+
+{\ttfamily \#include \char`\"{}Pwm\+Ldd1.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_pwm_ldd1___t_device_data}{Pwm\+Ldd1\+\_\+\+T\+Device\+Data}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries C\+H\+A\+N\+N\+EL}~0x00U
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{struct_pwm_ldd1___t_device_data}{Pwm\+Ldd1\+\_\+\+T\+Device\+Data} $\ast$ {\bfseries Pwm\+Ldd1\+\_\+\+T\+Device\+Data\+Ptr}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$ \hyperlink{group___pwm_ldd1__module_ga275bfbba3cebf17ba3f7ca816cb83da4}{Pwm\+Ldd1\+\_\+\+Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\+D\+D\+\_\+\+T\+User\+Data} $\ast$User\+Data\+Ptr)
+\begin{DoxyCompactList}\small\item\em Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets interrupt priority, sets pin routing, sets timing, etc. If the property \mbox{[}\char`\"{}\+Enable in init. code\char`\"{}\mbox{]} is set to \char`\"{}yes\char`\"{} value then the device is also enabled (see the description of the \mbox{[}Enable\mbox{]} method). In this case the \mbox{[}Enable\mbox{]} method is not necessary and needn\textquotesingle{}t to be generated. This method can be called only once. Before the second call of Init the \mbox{[}Deinit\mbox{]} must be called first. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\+D\+D\+\_\+\+T\+Error} \hyperlink{group___pwm_ldd1__module_gaf9431af80fbe8bb8cd7e756d4b54968f}{Pwm\+Ldd1\+\_\+\+Enable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$Device\+Data\+Ptr)
+\begin{DoxyCompactList}\small\item\em Enables the component -\/ it starts the signal generation. Events may be generated (see Set\+Event\+Mask). \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\+D\+D\+\_\+\+T\+Error} \hyperlink{group___pwm_ldd1__module_gadaeb47f81e90a1e38e65d1bc79fbe794}{Pwm\+Ldd1\+\_\+\+Disable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$Device\+Data\+Ptr)
+\begin{DoxyCompactList}\small\item\em Disables the component -\/ it stops signal generation and events calling. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\+D\+D\+\_\+\+T\+Error} \hyperlink{group___pwm_ldd1__module_gacc3364eaed4b107d6f9c1e5b0c4325ef}{Pwm\+Ldd1\+\_\+\+Set\+Ratio8} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\+D\+D\+\_\+\+T\+Device\+Data} $\ast$Device\+Data\+Ptr, uint8\+\_\+t Ratio)
+\begin{DoxyCompactList}\small\item\em This method sets a new duty-\/cycle ratio. Ratio is expressed as an 8-\/bit unsigned integer number. 0 -\/ FF value is proportional to ratio 0 -\/ 100\%. The method is available only if it is not selected list of predefined values in \mbox{[}Starting pulse width\mbox{]} property. Note\+: Calculated duty depends on the timer capabilities and on the selected period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This component implements a pulse-\/width modulation generator that generates signal with variable duty and fixed cycle. This P\+WM component provides a high level A\+PI for unified hardware access to various timer devices using the Timer\+Unit component. 
+
+\begin{DoxyVersion}{Version}
+01.\+03 
+\end{DoxyVersion}

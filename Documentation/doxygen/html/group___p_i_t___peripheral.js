@@ -3,7 +3,7 @@ var group___p_i_t___peripheral =
     [ "PIT - Register accessor macros", "group___p_i_t___register___accessor___macros.html", null ],
     [ "PIT Register Masks", "group___p_i_t___register___masks.html", null ],
     [ "PIT_MemMap", "struct_p_i_t___mem_map.html", [
-      [ "CHANNEL", "struct_p_i_t___mem_map.html#a7d3480290ee79d0a1b814f57abe966d8", null ],
+      [ "CHANNEL", "struct_p_i_t___mem_map.html#ac24e2a5eb6ce9a8bdcf3c636e0cbeb7f", null ],
       [ "CVAL", "struct_p_i_t___mem_map.html#a7d3d1a5913a28cfb4ca0e120ebf37087", null ],
       [ "LDVAL", "struct_p_i_t___mem_map.html#ad664bbe0f8b53ee1e533727db4da3fb2", null ],
       [ "LTMR64H", "struct_p_i_t___mem_map.html#ad3448e6c2eea0b7ed2addf8ab1919bdf", null ],

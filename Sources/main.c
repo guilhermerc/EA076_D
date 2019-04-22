@@ -26,42 +26,21 @@
  **  @{
  */
 /* MODULE main */
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "L293D_1_2_EN.h"
-#include "PwmLdd1.h"
-#include "TU1.h"
-#include "MCUC1.h"
-#include "TU2.h"
-#include "L293D_1A.h"
-#include "BitIoLdd1.h"
-#include "L293D_2A.h"
-#include "BitIoLdd2.h"
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
 
-#include <comm.h>
 #include <CPU.h>
+#include <dc_motor.h>
 #include <PE_Types.h>
-#include <temp.h>
-#include <timestamp.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#define OPERATION_CHAR_INDEX	0
+#define ARGUMENT_STRING_START_INDEX	2
+
+#define MESSAGE_IN_SIZE	512
+char message_in[MESSAGE_IN_SIZE];
+bool message_received = FALSE;
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -77,47 +56,74 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the communication, temperature and timestamp
-	 * modules
+	 * Initializing the communication (actually a minimalist version
+	 * of it) and dc motor modules.
 	 */
-	comm_init();
-	temp_init();
-	timestamp_init();
-
+	message_received = FALSE;
 	dc_motor_init();
 
 	/*!
-	 * Infinite loop that checks if the communication channel is
-	 * available. If it is, then it checks if a message was received or
-	 * a new temperature measurement is already available to be
-	 * published, handling the one that occurs.
+	 * Infinite loop that checks if a message was received from the
+	 * Terminal. If it was, then the msg is parsed and handled.
 	 *
-	 * If both of them happen to occur at the same time,
-	 * the priority belongs to the former (the latter will still be
-	 * handled, probably in the next iteration).
+	 * NOTE: This code is only used to test the dc_motor library.
 	 */
 	for(;;)
 	{
-		if((comm_status() == AVAILABLE))
+		static int16_t pwm = 0;
+		/*!
+		 * Checks if a message was received. The flag
+		 * 'message_received' is set when a sequence of "\r\n" arrives
+		 * at UART0 RX (check UART0Events.c to more on that).
+		 */
+		if(message_received == TRUE)
 		{
-			if(comm_info.message_received == TRUE)
+			/*!
+			 *	"P": PWM setting
+			 */
+			if(message_in[OPERATION_CHAR_INDEX] == 'P')
 			{
-				comm_parse();
-				comm_response();
+				message_in[strlen(message_in) - 1] = '\0';
+				pwm = atoi(message_in + ARGUMENT_STRING_START_INDEX);
 
-				comm_info.message_received = FALSE;
+				/*!
+				 * This function is responsible for ensuring that the
+				 * PWM passed as argument is valid
+				 */
+				dc_motor_set_pwm(pwm);
 			}
-			else if(temp_info.measurement_state == HAS_RAW_MEASUREMENT)
+			/*!
+			 * "D": Direction setting
+			 */
+			else if(message_in[OPERATION_CHAR_INDEX]  == 'D')
 			{
-				if(comm_info.state == WAITING_FOR_CMD)
+				if(strcmp((message_in + ARGUMENT_STRING_START_INDEX),
+						"CLOCKWISE\n") == 0)
 				{
-					temp_assemble_message();
-
-					comm_parse();
-					comm_response();
+					dc_motor_set_dir(CLOCKWISE);
 				}
-				temp_info.measurement_state = REQUESTING;
+				else if(strcmp((message_in + ARGUMENT_STRING_START_INDEX),
+						"ANTICLOCKWISE\n") == 0)
+				{
+					dc_motor_set_dir(ANTICLOCKWISE);
+				}
 			}
+			/*!
+			 * "S": Stops the motor
+			 */
+			else if(message_in[OPERATION_CHAR_INDEX] == 'S')
+			{
+				dc_motor_set_pwm(MINIMUM_PWM);
+			}
+			/*!
+			 * "C": Continues to spin the motor with the last PWM
+			 * setted
+			 */
+			else if(message_in[OPERATION_CHAR_INDEX] == 'C')
+			{
+				dc_motor_set_pwm(pwm);
+			}
+		message_received = FALSE;
 		}
 	}
 

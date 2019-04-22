@@ -27,17 +27,11 @@
 */         
 /* MODULE UART0Events */
 
-#include <comm.h>
 #include <LOG.h>
 #include <PE_Types.h>
 #include <stdint.h>
 #include <UART0.h>
-#include "CPU.h"
-#include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
 #include "UART0Events.h"
-#include "UART2Events.h"
 
 
 #ifdef __cplusplus
@@ -46,7 +40,10 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#define MESSAGE_IN_SIZE	512
 
+extern char message_in[MESSAGE_IN_SIZE];
+extern bool message_received;
 
 /*
 ** ===================================================================
@@ -98,12 +95,12 @@ void UART0_OnRxChar(void)
 	UART0_RecvChar(&(message_in[curr_idx]));	// Receiving the char from RX buffer
 
 	// Test if the buffer has a complete message
-	if(message_in[curr_idx] == '\n' && message_in[curr_idx - 1] == '\r')
+	if(message_in[curr_idx] == '\n')
 	{
 		message_in[curr_idx + 1] = '\0';
 		curr_idx = 0;
 
-		comm_info.message_received = TRUE;
+		message_received = TRUE;
 	}
 	else
 		curr_idx++;
@@ -146,8 +143,6 @@ void UART0_OnTxChar(void)
 	else
 	{
 		curr_idx = 0;
-
-		comm_info.loging_status = DONE;
 	}
 }
 
