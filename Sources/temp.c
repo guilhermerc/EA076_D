@@ -33,7 +33,6 @@ void temp_init()
 	temp_info.temperature = 0;
 	temp_info.raw_temperature = 0;
 	temp_info.curr_samples_number = 0;
-	temp_info.measurement_state = REQUESTING;
 
 	TimerInt0_EnableEvent();
 	ADC0_EnableEvent();
@@ -68,22 +67,35 @@ void temp_assemble_message()
 
 	temp_convert_raw_value();
 	char temperature_string[TEMPERATURE_STRING_SIZE];
+	/*!
+	 * TODO: I still have to implement the float-to-string conversion
+	 */
 	sprintf(temperature_string, "%d", temp_info.temperature);
 
+	/*!
+	 * "HH:"
+	 */
 	sprintf(time_aux_string, "%2d", current_time.Hour);
-	strcpy(comm_info.message_in, time_aux_string);
-	strcat(comm_info.message_in, ":");
+	strcpy(temp_info.message, time_aux_string);
+	strcat(temp_info.message, ":");
 
+	/*!
+	 * "MM:"
+	 */
 	sprintf(time_aux_string, "%2d", current_time.Minute);
-	strcat(comm_info.message_in, time_aux_string);
-	strcat(comm_info.message_in, ":");
+	strcat(temp_info.message, time_aux_string);
+	strcat(temp_info.message, ":");
 
+	/*!
+	 * "SS | "
+	 */
 	sprintf(time_aux_string, "%2d", current_time.Second);
-	strcat(comm_info.message_in, time_aux_string);
-	strcat(comm_info.message_in, " | ");
+	strcat(temp_info.message, time_aux_string);
+	strcat(temp_info.message, " | ");
 
-	strcat(comm_info.message_in, "Temperature: ");
-	strcat(comm_info.message_in, temperature_string);
-	strcat(comm_info.message_in, " degrees Celsius");
-	strcat(comm_info.message_in, TERMINATING_CHARS);
+	/*!
+	 * "0.0 C"
+	 */
+	strcat(temp_info.message, temperature_string);
+	strcat(temp_info.message, " C");
 }

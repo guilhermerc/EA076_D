@@ -12,23 +12,19 @@
 #ifndef SOURCES_TEMP_H_
 #define SOURCES_TEMP_H_
 
+#include <timestamp.h>
+
 #define TEMPERATURE_SIZE 32
 #define TEMPERATURE_STRING_SIZE 8
+#define TEMPERATURE_MESSAGE_SIZE (TIME_AUX_STRING_SIZE + TEMPERATURE_STRING_SIZE + 8)
 #define MAX_NUMBER_OF_SAMPLES 500
-
-typedef enum MEASUREMENT_STATE
-{
-	REQUESTING,
-	HAS_RAW_MEASUREMENT,
-	HAS_PRINTABLE_MEASUREMENT
-} MEASUREMENT_STATE;
 
 typedef struct TEMPERATURE_INFO
 {
 	volatile int16_t temperature;	// [-60˚C, 270˚C]
 	volatile uint16_t raw_temperature;
 	volatile uint16_t curr_samples_number;
-	volatile MEASUREMENT_STATE measurement_state;
+	volatile char message[TEMPERATURE_MESSAGE_SIZE];
 } TEMPERATURE_INFO;
 
 TEMPERATURE_INFO temp_info;
