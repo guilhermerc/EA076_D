@@ -12,6 +12,8 @@
 #include <UART0.h>
 #include <UART2.h>
 
+
+
 typedef enum
 {
 	BROKER,
@@ -65,17 +67,12 @@ void event_handler(EVENT_RING_BUFF_TYPE event)
 	}
 	case NEW_TEMPERATURE_MEAS:
 	{
-		/*
-		if(temp_info.measurement_state == HAS_RAW_MEASUREMENT)
+		if(comm_info.state == WAITING_FOR_CMD)
 		{
-			if(comm_info.state == WAITING_FOR_CMD)
-			{
-				temp_assemble_message();
-				comm_process_msg();
-			}
-			temp_info.measurement_state = REQUESTING;
+			temp_assemble_message();
+			comm_publish(TEMPERATURE_TOPIC, temp_info.message);
 		}
-		*/
+
 		break;
 	}
 	}
