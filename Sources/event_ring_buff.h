@@ -23,8 +23,9 @@ typedef struct
 {
 	EVENT_RING_BUFF_TYPE ring_buff[EVENT_RING_BUFF_SIZE];
 	/*!
-	 * The 'head pointer' will point to the last inserted event, while
-	 * the 'tail_pointer' will point to next event to be consumed
+	 * The 'head pointer' will point to the next possibly available
+	 * slot, while the 'tail_pointer' will point to next event to be
+	 * consumed
 	 */
 	uint8_t head_ptr;
 	uint8_t tail_ptr;
