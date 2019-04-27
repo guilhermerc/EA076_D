@@ -30,6 +30,7 @@
 #include <comm.h>
 #include <event_ring_buff.h>
 #include <LOG.h>
+#include <PE_Types.h>
 #include <stdint.h>
 #include <UART0.h>
 #include "UART0Events.h"
@@ -88,6 +89,13 @@ void UART0_OnError(void)
 */
 void UART0_OnRxChar(void)
 {
+	/*!
+	 * Echoes the just received char
+	 * Using the LOG function ensures that the handling of a message
+	 * will wait this echoing to be done
+	 */
+	LOG(NULL, UART0_GetPtrToLastRecvChar());
+
 	if(UART0_HasACompleteMessage())
 		event_ring_buff_insert_event(NEW_MESSAGE_FROM_TERMINAL);
 }
