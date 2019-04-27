@@ -178,6 +178,13 @@ bool UART0_HasACompleteMessage()
 	return status;
 }
 
+UART0_TComData * UART0_GetPtrToLastRecvChar()
+{
+	uint8_t previous_index = (InpIndexW - 1 < 0) ? (UART0_InpLen +
+				InpIndexW - 1) : (InpIndexW - 1);
+	return &InpBuffer[previous_index];
+}
+
 /*
 ** ===================================================================
 **     Method      :  HWEnDi (component AsynchroSerial)

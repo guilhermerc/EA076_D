@@ -150,6 +150,7 @@ extern "C" {
 #define UART0_OUT_BUF_SIZE  0x80U      /* Length of the TX buffer */
 
 bool UART0_HasACompleteMessage();
+UART0_TComData * UART0_GetPtrToLastRecvChar();
 
 /*
 ** ===================================================================
