@@ -56,7 +56,7 @@ extern "C" {
 */
 void TI1_OnInterrupt(void)
 {
-	if(temp_info.measurement_state == REQUESTING)	ADC0_Measure(FALSE);
+	ADC0_Measure(FALSE);
 }
 
 /* END TimerInt0Events */
