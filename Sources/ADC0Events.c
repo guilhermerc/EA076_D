@@ -28,6 +28,7 @@
 /* MODULE ADC0Events */
 
 #include <ADC0.h>
+#include <event_ring_buff.h>
 #include <stdint.h>
 #include "ADC0Events.h"
 
@@ -76,9 +77,9 @@ void AD1_OnEnd(void)
 		curr_avg_reading /= temp_info.curr_samples_number;
 		temp_info.raw_temperature = curr_avg_reading;
 
-		temp_info.measurement_state = HAS_RAW_MEASUREMENT;
-		temp_info.curr_samples_number = 0;
+		event_ring_buff_insert_event(NEW_TEMPERATURE_MEAS);
 
+		temp_info.curr_samples_number = 0;
 		curr_avg_reading = 0;
 	}
 }
