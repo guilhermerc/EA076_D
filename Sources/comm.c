@@ -19,7 +19,10 @@
 #define MQTT_PORT "1883"
 #define MQTT_USERNAME "\"aluno\""
 #define MQTT_PASSWORD "\"UNICAMP\""
-#define SMARTPHONE_TOPIC "\"EA076/grupoD3/celular\""
+#define DC_MOTOR_DIR_TOPIC "\"EA076/grupoD3/dir\""
+#define DC_MOTOR_POWER_TOPIC "\"EA076/grupoD3/power\""
+#define DC_MOTOR_MODE_TOPIC "\"EA076/grupoD3/mode\""
+#define DC_MOTOR_THRESHOLD_TOPIC "\"EA076/grupoD3/threshold\""
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
 #define TEMPERATURE_TOPIC "\"EA076/grupoD3/temp\""
 #define ESP_TOPIC "\"EA076/grupoD3/ESP\""
@@ -31,21 +34,31 @@ static char ip_number[IP_NUMBER_SIZE];	// it should be const
 #define MAC_ADDR_SIZE	64
 static char mac_addr[MAC_ADDR_SIZE];	// it should be const
 
-static bool is_subsc_to_smartp = FALSE;
+typedef enum SUBSCRIPTIONS_STATE_ENUM
+{
+	DC_MOTOR_DIR,
+	DC_MOTOR_POWER,
+	DC_MOTOR_MODE,
+	DC_MOTOR_THRESHOLD,
+	CONCLUDED
+} SUBSCRIPTIONS_STATE_ENUM;
+
+static SUBSCRIPTIONS_STATE_ENUM subscriptions;
 static UART2_TComData * tokens[MAX_TOKENS];
 
 void comm_response();
 bool comm_are_there_conn_errors();
 
 /*! \brief A function starts the communication with ESP01
-**
-** 	This function is responsible for starting the communication
-** 	with ESP01 (consequently with the MQTT broker).
-*/
+ **
+ ** 	This function is responsible for starting the communication
+ ** 	with ESP01 (consequently with the MQTT broker).
+ */
 void comm_init()
 {
-	comm_info.state = CONNECT_WIFI;
+	subscriptions = DC_MOTOR_DIR;
 
+	comm_info.state = CONNECT_WIFI;
 	comm_info.message_received = FALSE;
 	comm_info.loging_status = DONE;
 	comm_info.sending_status = DONE;
@@ -58,18 +71,18 @@ COMM_STATUS comm_status()
 {
 	COMM_STATUS comm_status = BUSY;
 	if((comm_info.sending_status == DONE) && (comm_info.loging_status == DONE))
-			comm_status = AVAILABLE;
+		comm_status = AVAILABLE;
 
 	return comm_status;
 }
 
 /*! \brief A function triggers the message sending process (to ESP01)
-**
-** 	This function is responsible for triggering the
-** 	sending message process (to ESP01).
-** 	It also notifies the main loop that a message is
-** 	being sent with UART2.
-*/
+ **
+ ** 	This function is responsible for triggering the
+ ** 	sending message process (to ESP01).
+ ** 	It also notifies the main loop that a message is
+ ** 	being sent with UART2.
+ */
 void comm_send_msg()
 {
 	comm_info.sending_status = SENDING;
@@ -82,11 +95,11 @@ void comm_clear_input_buffer()
 }
 
 /*! \brief A function implementing a FSM to respond to a received msg
-**
-** 	This function is responsible for assembling a response to
-** 	the last received message from the MQTT broker.
-**	It also implements connection retries and logs the process.
-*/
+ **
+ ** 	This function is responsible for assembling a response to
+ ** 	the last received message from the MQTT broker.
+ **	It also implements connection retries and logs the process.
+ */
 void comm_response()
 {
 	if(comm_info.state == WAITING_FOR_CMD)	return;
@@ -143,16 +156,38 @@ void comm_response()
 	}
 	case TOPIC_SUBSC:
 	{
-		if(is_subsc_to_smartp == FALSE)
+		switch(subscriptions)
+		{
+		case DC_MOTOR_DIR:
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
-			strcat(comm_info.message_out, SMARTPHONE_TOPIC);
+			strcat(comm_info.message_out, DC_MOTOR_DIR_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
-
-			//LOG("CONNECTION_REQUEST", "Connection to \"EA076/grupoD3/celular\" requested.\n");
-
 			break;
 		}
+		case DC_MOTOR_POWER:
+		{
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, DC_MOTOR_POWER_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
+			break;
+		}
+		case DC_MOTOR_MODE:
+		{
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, DC_MOTOR_MODE_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
+			break;
+		}
+		case DC_MOTOR_THRESHOLD:
+		{
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, DC_MOTOR_THRESHOLD_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
+			break;
+		}
+		}
+		break;
 	}
 	case PUBLISHING:
 	{
@@ -176,13 +211,13 @@ void comm_response()
 }
 
 /*! \brief A function implementing a FSM to parse a received msg
-**
-** 	This function is responsible for parsing a received
-** 	message and change the state of the FSM (if needed).
-** 	the last received message from the MQTT broker.
-**	It also logs some information when the connection is
-**	already established.
-*/
+ **
+ ** 	This function is responsible for parsing a received
+ ** 	message and change the state of the FSM (if needed).
+ ** 	the last received message from the MQTT broker.
+ **	It also logs some information when the connection is
+ **	already established.
+ */
 void comm_parse()
 {
 	static bool has_ip_number = FALSE;
@@ -248,12 +283,10 @@ void comm_parse()
 	{
 		if(strcmp(comm_info.message_in, "CONNECT MQTT\r\n") == 0)
 		{
-			if(is_subsc_to_smartp == FALSE)
+			if(subscriptions != CONCLUDED)
 				comm_info.state = TOPIC_SUBSC;
 			else
-			{
 				comm_info.state = WAITING_FOR_CMD;
-			}
 		}
 		else if(strcmp(comm_info.message_in, "NOWIFI\r\n") == 0)
 		{
@@ -303,12 +336,15 @@ void comm_parse()
 	{
 		if(strcmp(comm_info.message_in, "OK SUBSCRIBE\r\n") == 0)
 		{
-			if(is_subsc_to_smartp == FALSE)
-				is_subsc_to_smartp = TRUE;
+			/*!
+			 * Moving to the next topic to subscribe (or to 'CONCLUDED')
+			 */
+			subscriptions++;
 
 			//LOG("COMMUNICATION", "Communication established with success!\n");
 
-			comm_info.state = WAITING_FOR_CMD;
+			if(subscriptions == CONCLUDED)
+				comm_info.state = WAITING_FOR_CMD;
 		}
 		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
 		{
@@ -353,10 +389,10 @@ void comm_process_msg()
 }
 
 /*! \brief A function that checks if there is a connection error
-**
-** 	This function is responsible for checking if the message
-** 	received is one of global connection errors.
-*/
+ **
+ ** 	This function is responsible for checking if the message
+ ** 	received is one of global connection errors.
+ */
 bool comm_are_there_conn_errors()
 {
 	bool status = FALSE;
