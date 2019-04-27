@@ -24,7 +24,6 @@
 #define DC_MOTOR_MODE_TOPIC "\"EA076/grupoD3/mode\""
 #define DC_MOTOR_THRESHOLD_TOPIC "\"EA076/grupoD3/threshold\""
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
-#define TEMPERATURE_TOPIC "\"EA076/grupoD3/temp\""
 #define ESP_TOPIC "\"EA076/grupoD3/ESP\""
 #define MAX_TOKENS	32
 
@@ -191,19 +190,8 @@ void comm_response()
 	}
 	case PUBLISHING:
 	{
-		strcpy(comm_info.message_out, "PUBLISH ");
-		/*! Here's one the main current problems:
-		 * It's not possible to choose the desired topic to publish
-		 * into. Since I'm testing the temperature reading, the
-		 * temperature topic is hard-coded.
-		 */
-		strcat(comm_info.message_out, TEMPERATURE_TOPIC);
-		strcat(comm_info.message_out, ",\"");
-		// The index which corresponds to the '\r' char is overwritten with '\0'
-		comm_info.message_in[strlen(comm_info.message_in) - 2] = '\0';
-		strcat(comm_info.message_out, comm_info.message_in);
-		strcat(comm_info.message_out, "\"");
-		strcat(comm_info.message_out, TERMINATING_CHARS);
+		strcpy(comm_info.message_out, comm_info.message_in);
+		break;
 	}
 	}
 
@@ -325,7 +313,7 @@ void comm_parse()
 				LOG("MESSAGE_RECEIVED", tokens[2]);
 			}
 		}
-		else
+		else if((strcmp(tokens[0], "PUBLISH") == 0))
 		{
 			comm_info.state = PUBLISHING;
 		}
@@ -412,4 +400,16 @@ bool comm_are_there_conn_errors()
 	}
 
 	return status;
+}
+
+void comm_publish(char * topic, char * message)
+{
+	strcpy(comm_info.message_in, "PUBLISH ");
+	strcat(comm_info.message_in, topic);
+	strcat(comm_info.message_in, ",\"");
+	strcat(comm_info.message_in, message);
+	strcat(comm_info.message_in, "\"");
+	strcat(comm_info.message_in, TERMINATING_CHARS);
+
+	comm_process_msg();
 }

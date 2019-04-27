@@ -10,6 +10,7 @@
 #include <PE_Types.h>
 
 #define TERMINATING_CHARS "\r\n"
+#define TEMPERATURE_TOPIC "\"EA076/grupoD3/temp\""
 #define MESSAGE_BUFFER_SIZE	512
 
 typedef enum
@@ -59,5 +60,6 @@ void comm_init();
 COMM_STATUS comm_status();
 void comm_process_msg();
 void comm_clear_input_buffer();
+void comm_publish(char * topic, char * message);
 
 #endif /* SOURCES_COMM_H_ */
