@@ -19,6 +19,8 @@
 ** @brief
 **         This is user's event module.
 **         Put your event handler code here.
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */         
 /*!
 **  @addtogroup TimerInt0Events_module TimerInt0Events module documentation
@@ -28,7 +30,6 @@
 
 #include <ADC0.h>
 #include <PE_Types.h>
-#include <temp.h>
 #include "TimerInt0Events.h"
 
 #ifdef __cplusplus

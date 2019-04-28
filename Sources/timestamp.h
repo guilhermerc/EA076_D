@@ -1,5 +1,8 @@
 /*!
 ** @file timestamp.h
+** @brief This file exports what is necessary from timestamp.c
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 /*

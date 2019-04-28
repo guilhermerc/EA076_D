@@ -1,35 +1,38 @@
 /*!
- ** @file comm.c
- ** @brief
- **         This file contains the FSM implementation for communicating
- **         with the MQTT Broker (using the ESP-01 module).
+ * @file comm.c
+ * @brief This file contains the function implementations related to
+ * the communication.
+ *
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #include <comm.h>
 #include <dc_motor.h>
+#include <LOG.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <UART2.h>
 #include <UART2Events.h>
 
-
 #define WIFI_SSID "\"EA076R\""
 #define WIFI_PASSWORD "\"FRDMKL25\""
+
 #define MQTT_IP "\"192.168.1.111\""
 #define MQTT_PORT "1883"
 #define MQTT_USERNAME "\"aluno\""
 #define MQTT_PASSWORD "\"UNICAMP\""
-#define DC_MOTOR_DIR_TOPIC "\"EA076/grupoD3/dir\""
-#define DC_MOTOR_POWER_TOPIC "\"EA076/grupoD3/power\""
-#define DC_MOTOR_MODE_TOPIC "\"EA076/grupoD3/mode\""
-#define DC_MOTOR_THRESHOLD_TOPIC "\"EA076/grupoD3/threshold\""
-#define DC_MOTOR_DIR_TOPIC_WQ "EA076/grupoD3/dir"
-#define DC_MOTOR_POWER_TOPIC_WQ "EA076/grupoD3/power"
-#define DC_MOTOR_MODE_TOPIC_WQ "EA076/grupoD3/mode"
-#define DC_MOTOR_THRESHOLD_TOPIC_WQ "EA076/grupoD3/threshold"
-#define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
-#define ESP_TOPIC "\"EA076/grupoD3/ESP\""
+
+#define DIR_TOPIC "\"EA076/grupoD3/dir\""
+#define POWER_TOPIC "\"EA076/grupoD3/power\""
+#define MODE_TOPIC "\"EA076/grupoD3/mode\""
+#define THRESHOLD_TOPIC "\"EA076/grupoD3/threshold\""
+
+#define DIR_TOPIC_WQ "EA076/grupoD3/dir"
+#define POWER_TOPIC_WQ "EA076/grupoD3/power"
+#define MODE_TOPIC_WQ "EA076/grupoD3/mode"
+#define THRESHOLD_TOPIC_WQ "EA076/grupoD3/threshold"
+
 #define MAX_TOKENS	32
 
 #define CMD_TYPE_INDEX	0
@@ -37,34 +40,34 @@
 #define MESSAGE_INDEX	2
 
 #define IP_NUMBER_SIZE	32
-static char ip_number[IP_NUMBER_SIZE];	// it should be const
-
 #define MAC_ADDR_SIZE	64
-static char mac_addr[MAC_ADDR_SIZE];	// it should be const
 
-typedef enum SUBSCRIPTIONS_STATE_ENUM
+static char ip_number[IP_NUMBER_SIZE];	/**< TODO: It should be const */
+static char mac_addr[MAC_ADDR_SIZE];	/**< TODO: IT should be const */
+
+typedef enum
 {
-	DC_MOTOR_DIR,
-	DC_MOTOR_POWER,
-	DC_MOTOR_MODE,
-	DC_MOTOR_THRESHOLD,
+	SUBSCRIBING_TO_DIR_TOPIC,
+	SUBSCRIBING_TO_POWER_TOPIC,
+	SUBSCRIBING_TO_MODE_TOPIC,
+	SUBSCRIBING_TO_THRESHOLD_TOPIC,
 	CONCLUDED
 } SUBSCRIPTIONS_STATE_ENUM;
 
-static SUBSCRIPTIONS_STATE_ENUM subscriptions;
+static SUBSCRIPTIONS_STATE_ENUM subscriptions_state;
 static UART2_TComData * tokens[MAX_TOKENS];
 
 void comm_response();
 bool comm_are_there_conn_errors();
 
-/*! \brief A function starts the communication with ESP01
- **
- ** 	This function is responsible for starting the communication
- ** 	with ESP01 (consequently with the MQTT broker).
+/*! @brief A function starts the communication with ESP01
+ *
+ * This function is responsible for starting the communication
+ * with ESP01 (consequently with the MQTT broker).
  */
 void comm_init()
 {
-	subscriptions = DC_MOTOR_DIR;
+	subscriptions_state = SUBSCRIBING_TO_DIR_TOPIC;
 
 	comm_info.state = CONNECT_WIFI;
 	comm_info.message_received = FALSE;
@@ -75,6 +78,9 @@ void comm_init()
 	comm_response();
 }
 
+/*! @brief A function that checks wether the FSM that handles the
+ * communication is available.
+ */
 COMM_STATUS comm_status()
 {
 	COMM_STATUS comm_status = BUSY;
@@ -84,12 +90,11 @@ COMM_STATUS comm_status()
 	return comm_status;
 }
 
-/*! \brief A function triggers the message sending process (to ESP01)
- **
- ** 	This function is responsible for triggering the
- ** 	sending message process (to ESP01).
- ** 	It also notifies the main loop that a message is
- ** 	being sent with UART2.
+/*! @brief A function that triggers the message sending process (to
+ * ESP01)
+ *
+ * 	This function is responsible for triggering the sending message
+ * 	process (to ESP01).
  */
 void comm_send_msg()
 {
@@ -97,16 +102,17 @@ void comm_send_msg()
 	UART2_OnTxChar();
 }
 
+/*! @brief A function that clears the communication input buffer */
 void comm_clear_input_buffer()
 {
 	memset(comm_info.message_in, 0, MESSAGE_BUFFER_SIZE);
 }
 
-/*! \brief A function implementing a FSM to respond to a received msg
- **
- ** 	This function is responsible for assembling a response to
- ** 	the last received message from the MQTT broker.
- **	It also implements connection retries and logs the process.
+/*! @brief A function that responds to a received msg
+ *
+ * This function is responsible for assembling a response to the last
+ * received message from the MQTT broker. It also implements connection
+ * retries.
  */
 void comm_response()
 {
@@ -122,8 +128,6 @@ void comm_response()
 		strcat(comm_info.message_out, WIFI_PASSWORD);
 		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		//LOG("CONNECTION_REQUEST", "Connection to Wi-Fi requested.\n");
-
 		break;
 	}
 	case GET_IP_NUMB:
@@ -131,16 +135,12 @@ void comm_response()
 		strcpy(comm_info.message_out, "GETIP");
 		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		//LOG("CONNECTION_REQUEST", "ESP01 IP number requested.\n");
-
 		break;
 	}
 	case GET_MAC_ADDR:
 	{
 		strcpy(comm_info.message_out, "GETMAC");
 		strcat(comm_info.message_out, TERMINATING_CHARS);
-
-		//LOG("CONNECTION_REQUEST", "ESP01 MAC ADDRESS requested.\n");
 
 		break;
 	}
@@ -158,39 +158,37 @@ void comm_response()
 		strcat(comm_info.message_out, MQTT_PASSWORD);
 		strcat(comm_info.message_out, TERMINATING_CHARS);
 
-		//LOG("CONNECTION_REQUEST", "Connection to MQTT broker requested.\n");
-
 		break;
 	}
 	case TOPIC_SUBSC:
 	{
-		switch(subscriptions)
+		switch(subscriptions_state)
 		{
-		case DC_MOTOR_DIR:
+		case SUBSCRIBING_TO_DIR_TOPIC:
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
-			strcat(comm_info.message_out, DC_MOTOR_DIR_TOPIC);
+			strcat(comm_info.message_out, DIR_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
-		case DC_MOTOR_POWER:
+		case SUBSCRIBING_TO_POWER_TOPIC:
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
-			strcat(comm_info.message_out, DC_MOTOR_POWER_TOPIC);
+			strcat(comm_info.message_out, POWER_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
-		case DC_MOTOR_MODE:
+		case SUBSCRIBING_TO_MODE_TOPIC:
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
-			strcat(comm_info.message_out, DC_MOTOR_MODE_TOPIC);
+			strcat(comm_info.message_out, MODE_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
-		case DC_MOTOR_THRESHOLD:
+		case SUBSCRIBING_TO_THRESHOLD_TOPIC:
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
-			strcat(comm_info.message_out, DC_MOTOR_THRESHOLD_TOPIC);
+			strcat(comm_info.message_out, THRESHOLD_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
@@ -201,9 +199,11 @@ void comm_response()
 	{
 		strcpy(comm_info.message_out, comm_info.message_in);
 		/*!
-		 * TODO: REMOVE THIS! DEBUG PURPOSES!!
-		 */
-		comm_info.state = WAITING_FOR_CMD;
+		 * TODO: DEBUGGING PURPOSES!! PAY ATTENTION HERE!
+		 *
+		 * comm_info.state = WAITING_FOR_CMD;
+		 *
+		*/
 		break;
 	}
 	}
@@ -211,13 +211,10 @@ void comm_response()
 	comm_send_msg();
 }
 
-/*! \brief A function implementing a FSM to parse a received msg
- **
- ** 	This function is responsible for parsing a received
- ** 	message and change the state of the FSM (if needed).
- ** 	the last received message from the MQTT broker.
- **	It also logs some information when the connection is
- **	already established.
+/*! @brief A function that parses a received msg
+ *
+ * This function is responsible for parsing a received message and
+ * change the state of the FSM (if needed).
  */
 void comm_parse()
 {
@@ -257,9 +254,14 @@ void comm_parse()
 		{
 			strcpy(ip_number, "\"");
 			strcat(ip_number, comm_info.message_in);
-			// The index which corresponds to the '\r' char is overwritten with '\"'
+			/*!
+			 * The index which corresponds to the '\r' char is
+			 * overwritten with '\"'
+			 */
 			ip_number[strlen(comm_info.message_in) - 1] = '\"';
-			// The index which corresponds to the '\n' char is overwritten with '\0'
+			/*!
+			 * The index which corresponds to the '\n' char is overwritten with '\0'
+			 */
 			ip_number[strlen(comm_info.message_in)] = '\0';
 			has_ip_number = TRUE;
 			comm_info.state = GET_MAC_ADDR;
@@ -271,9 +273,14 @@ void comm_parse()
 	{
 		strcpy(mac_addr, "\"");
 		strcat(mac_addr, comm_info.message_in);
-		// The index which corresponds to the '\r' char is overwritten with '\"'
+		/*!
+		 * The index which corresponds to the '\r' char is
+		 * overwritten with '\"'
+		 */
 		mac_addr[strlen(comm_info.message_in) - 1] = '\"';
-		// The index which corresponds to the '\n' char is overwritten with '\0'
+		/*!
+		 * The index which corresponds to the '\n' char is overwritten with '\0'
+		 */
 		mac_addr[strlen(comm_info.message_in)] = '\0';
 		has_mac_addr = TRUE;
 		comm_info.state = CONNECT_MQTT;
@@ -284,7 +291,7 @@ void comm_parse()
 	{
 		if(strcmp(comm_info.message_in, "CONNECT MQTT\r\n") == 0)
 		{
-			if(subscriptions != CONCLUDED)
+			if(subscriptions_state != CONCLUDED)
 				comm_info.state = TOPIC_SUBSC;
 			else
 				comm_info.state = WAITING_FOR_CMD;
@@ -317,10 +324,10 @@ void comm_parse()
 		if((strcmp(tokens[CMD_TYPE_INDEX], "MESSAGE") == 0))
 		{
 			tokens[curr_token_idx++] = strtok(NULL, " [],");
-			// The message cannot contain '[', ']' or ','
+			/**< The message cannot contain '[', ']' or ',' */
 			tokens[curr_token_idx++] = strtok(NULL, "[],");
 
-			if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_DIR_TOPIC_WQ) == 0)
+			if(strcmp(tokens[TOPIC_INDEX], DIR_TOPIC_WQ) == 0)
 			{
 				/*!
 				 * The motor direction can only be changed when in 'ON'
@@ -338,7 +345,7 @@ void comm_parse()
 					}
 				}
 			}
-			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_POWER_TOPIC_WQ) == 0)
+			else if(strcmp(tokens[TOPIC_INDEX], POWER_TOPIC_WQ) == 0)
 			{
 				/*!
 				 * The motor PWM can only be changed when in 'ON' mode.
@@ -349,7 +356,7 @@ void comm_parse()
 					dc_motor_set_pwm(percentage * (MAXIMUM_PWM/100));
 				}
 			}
-			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_MODE_TOPIC_WQ) == 0)
+			else if(strcmp(tokens[TOPIC_INDEX], MODE_TOPIC_WQ) == 0)
 			{
 				if(strcmp(tokens[MESSAGE_INDEX], "ON") == 0)
 				{
@@ -364,7 +371,7 @@ void comm_parse()
 					dc_motor_set_mode(AUTO);
 				}
 			}
-			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_THRESHOLD_TOPIC_WQ) == 0)
+			else if(strcmp(tokens[TOPIC_INDEX], THRESHOLD_TOPIC_WQ) == 0)
 			{
 				int16_t threshold = (int16_t) atoi(tokens[MESSAGE_INDEX]);
 				dc_motor_set_threshold(threshold);
@@ -384,12 +391,13 @@ void comm_parse()
 			/*!
 			 * Moving to the next topic to subscribe (or to 'CONCLUDED')
 			 */
-			subscriptions++;
+			subscriptions_state++;
 
-			//LOG("COMMUNICATION", "Communication established with success!\n");
-
-			if(subscriptions == CONCLUDED)
+			if(subscriptions_state == CONCLUDED)
+			{
 				comm_info.state = WAITING_FOR_CMD;
+				LOG("COMMUNICATION", "Communication established with success!\n");
+			}
 		}
 		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
 		{
@@ -406,26 +414,24 @@ void comm_parse()
 	{
 		if(strcmp(comm_info.message_in, "OK PUBLISH\r\n") == 0)
 		{
-			//LOG("COMMUNICATION", "Message published with success!\n");
-
 			comm_info.state = WAITING_FOR_CMD;
 		}
 		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
 		{
-			//LOG("COMMUNICATION", "Connection with MQTT broker lost. Retrying...\n");
-
 			comm_info.state = CONNECT_MQTT;
 		}
 		else if(strcmp(comm_info.message_in, "ERROR SUBSCRIBE\r\n") == 0)
 		{
-			//LOG("COMMUNICATION_ERROR", "Message couldn't be published. Please, try again.\n");
-
 			comm_info.state = WAITING_FOR_CMD;
 		}
 	}
 	}
 }
 
+/*!
+ * @brief A function that processes a received message into the current
+ * communication context.
+ */
 void comm_process_msg()
 {
 	comm_parse();
@@ -433,25 +439,21 @@ void comm_process_msg()
 	comm_clear_input_buffer();
 }
 
-/*! \brief A function that checks if there is a connection error
- **
- ** 	This function is responsible for checking if the message
- ** 	received is one of global connection errors.
+/*! @brief A function that checks if there is a connection error
+ *
+ * This function is responsible for checking if the message
+ * received is one of the global connection errors.
  */
 bool comm_are_there_conn_errors()
 {
 	bool status = FALSE;
 	if(strcmp(comm_info.message_in, "WIFI_DISCONNECTED\r\n") == 0)
 	{
-		//LOG("CONNECTION_ERROR", "Connection with Wi-Fi lost. Retrying...\n");
-
 		comm_info.state = CONNECT_WIFI;
 		status = TRUE;
 	}
 	else if(strcmp(comm_info.message_in, "MQTT_DISCONNECTED\r\n") == 0)
 	{
-		//LOG("CONNECTION_ERROR", "Connection with MQTT broker lost. Retrying...\n");
-
 		comm_info.state = CONNECT_MQTT;
 		status = TRUE;
 	}
@@ -459,6 +461,12 @@ bool comm_are_there_conn_errors()
 	return status;
 }
 
+
+/*! @brief A function that publishes a message into a topic
+ *
+ * @param	topic	The topic on which to publish
+ * @param	message The message to be published
+ */
 void comm_publish(char * topic, char * message)
 {
 	strcpy(comm_info.message_in, "PUBLISH ");

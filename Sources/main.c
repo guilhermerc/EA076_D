@@ -18,8 +18,8 @@
  ** @version 01.01
  ** @brief
  **         This module contains user's application code.
- **         This module contains the main loop, in which
- **         communication-related flags are monitored.
+ **
+ ** @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 /*!
  **  @addtogroup main_module main module documentation
@@ -32,6 +32,7 @@
 #include <dc_motor.h>
 #include <event_handler.h>
 #include <event_ring_buff.h>
+#include <temp.h>
 #include <timestamp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
@@ -50,24 +51,18 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the communication, temperature and timestamp
-	 * modules
+	 * Initializing the communication, dc motor, temperature, timestamp,
+	 * and event ring buffer modules
 	 */
 	comm_init();
+	dc_motor_init();
 	temp_init();
 	timestamp_init();
-	dc_motor_init();
 	event_ring_buff_init();
 
 	/*!
-	 * Infinite loop that checks if the communication channel is
-	 * available. If it is, then it checks if a message was received or
-	 * a new temperature measurement is already available to be
-	 * published, handling the one that occurs.
-	 *
-	 * If both of them happen to occur at the same time,
-	 * the priority belongs to the former (the latter will still be
-	 * handled, probably in the next iteration).
+	 * Infinite loop that checks if the event ring buffer has events to
+	 * be handled.
 	 */
 	for(;;)
 	{

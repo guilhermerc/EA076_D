@@ -1,5 +1,9 @@
 /*!
 ** @file LOG.c
+** @brief This file contains the implementations related to the logging
+** process
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 /*
@@ -14,18 +18,16 @@
 #include <string.h>
 #include <UART0Events.h>
 
-/*! \brief A function that logs something into UART0 TX
-**
-** 	This function assembles the log entry message and
-**  triggers the sending process.
-** 	This handler also notifies the main loop when a
-** 	log entry is being sent (using the log_entry_sent
-** 	flags).
-**
-** 	NOTE: If tag is passed as NULL, then the only message logged
-** 	is the 'message' string. This is used to echo the received
-** 	characters from terminal.
-*/
+/*!
+ * @brief A function that logs into UART0 TX
+ *
+ * @param	tag		The tag of the log entry
+ * @param 	message	The log entry content to be logged
+ *
+ * NOTE: If tag is passed as NULL, then the only string logged is
+ * 'message'. This is useful to echo the received characters from
+ * terminal.
+ */
 void LOG(char * tag, UART0_TComData * message)
 {
 	comm_info.loging_status = SENDING;

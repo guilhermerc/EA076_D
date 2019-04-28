@@ -14,6 +14,9 @@
 **         AD1_OnCalibrationEnd - void AD1_OnCalibrationEnd(void);
 **
 ** ###################################################################*/
+
+/**< @author Guilherme R C <guilherme.riciolic@gmail.com> */
+
 /*!
 ** @file ADC0Events.h
 ** @version 01.00

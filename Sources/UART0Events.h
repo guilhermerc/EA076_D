@@ -20,6 +20,8 @@
 ** @brief
 **         This module contains the handlers related to
 **         UART0 interruptions (events).
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */         
 /*!
 **  @addtogroup UART0Events_module UART0Events module documentation

@@ -1,5 +1,8 @@
 /*!
 ** @file temp.h
+** @brief This file exports what is necessary from temp.c
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 /*
@@ -17,6 +20,7 @@
 #define TEMPERATURE_SIZE 32
 #define TEMPERATURE_STRING_SIZE 8
 #define TEMPERATURE_MESSAGE_SIZE (TIME_AUX_STRING_SIZE + TEMPERATURE_STRING_SIZE + 8)
+
 #define MAX_NUMBER_OF_SAMPLES 500
 
 typedef struct TEMPERATURE_INFO

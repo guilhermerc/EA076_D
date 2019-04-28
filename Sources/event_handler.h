@@ -1,8 +1,8 @@
-/*
- * event_handler.h
+/*!
+ * @file event_handler.h
+ * @brief This file exports what is necessary from event_handler.c
  *
- *  Created on: 19/04/2019
- *      Author: guilherme
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #ifndef SOURCES_EVENT_HANDLER_H_

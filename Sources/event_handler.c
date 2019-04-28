@@ -1,8 +1,10 @@
-/*
- * event_handler.c
+/*!
+ * @file event_handler.c
+ * @brief This file contains the handler of all events that can be
+ * inserted in the event ring buffer
  *
- *  Created on: 19/04/2019
- *      Author: guilherme
+ *
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #include <comm.h>
@@ -19,6 +21,11 @@ typedef enum
 	TERMINAL
 } EVENT_HANDLER_MESSAGE_ORIGIN;
 
+/*!
+ * @brief A function to read a message from a determined UART
+ * @param	origin	A param that indicates from which UART ring buffer
+ * 					should this function read a message
+ */
 void event_handler_read_message(EVENT_HANDLER_MESSAGE_ORIGIN origin)
 {
 	uint8_t index = 0;
@@ -41,6 +48,10 @@ void event_handler_read_message(EVENT_HANDLER_MESSAGE_ORIGIN origin)
 	} while(comm_info.message_in[index++] != '\n');
 }
 
+/*!
+ * @brief A function that handles an event
+ * @param	event	The event to be handled
+ */
 void event_handler(EVENT_RING_BUFF_TYPE event)
 {
 	while(comm_status() != AVAILABLE);

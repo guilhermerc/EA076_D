@@ -19,6 +19,8 @@
 ** @brief
 **         This is user's event module.
 **         Put your event handler code here.
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */         
 /*!
 **  @addtogroup TimerInt0Events_module TimerInt0Events module documentation

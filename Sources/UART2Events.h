@@ -21,6 +21,8 @@
 ** @brief
 **         This is user's event module.
 **         Put your event handler code here.
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com
 */         
 /*!
 **  @addtogroup UART2Events_module UART2Events module documentation

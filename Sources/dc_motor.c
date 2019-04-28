@@ -1,8 +1,8 @@
-/*
- * dc_motor.c
+/*!
+ * @file dc_motor.c
+ * @brief This file contains implementations related to the dc motor.
  *
- *  Created on: 15/04/2019
- *      Author: guilherme
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #include <dc_motor.h>
@@ -13,18 +13,20 @@
 
 #define STOP_PWM	0
 #define HALF_PWM	127
+
 #define INITIAL_THRESHOLD	40
 
 /*! @brief A function that initializes the dc motor module
  *
  * This function sets 'CLOCKWISE' as the default direction, '0' as the
- * default PWM and 'OFF' as the default mode. It also enables the PWM.
+ * default PWM, 'OFF' as the default mode and 40 degrees celsius as the
+ * default threshold for 'AUTO' mode. It also enables the PWM.
  */
 void dc_motor_init()
 {
 	dc_motor_set_dir(CLOCKWISE);
 	dc_motor_set_pwm(STOP_PWM);
-	dc_motor_set_mode(ON);
+	dc_motor_set_mode(OFF);
 	dc_motor_set_threshold(INITIAL_THRESHOLD);
 
 	L293D_1_2_EN_Enable();
@@ -32,11 +34,9 @@ void dc_motor_init()
 
 /*! @brief A function that sets the dc motor direction
  *
- *  @param	dc_motor_dir:
- * 				CLOCKWISE
- * 				ANTICLOCKWISE
+ *  @param	dc_motor_dir	CLOCKWISE or ANTICLOCKWISE
  */
-void dc_motor_set_dir(_DC_MOTOR_DIR dc_motor_dir)
+void dc_motor_set_dir(DC_MOTOR_DIR dc_motor_dir)
 {
 	if(dc_motor_dir == CLOCKWISE)
 	{
@@ -54,8 +54,8 @@ void dc_motor_set_dir(_DC_MOTOR_DIR dc_motor_dir)
 
 /*! @brief A function that sets the dc motor PWM speed
  *
- *  @param	dc_motor_pwm:
- * 				A value between MINIMUM_PWM and MAXIMUM_PWM
+ *  @param	dc_motor_pwm	The PWM value (can be any value, the
+ *  						function handles corner cases)
  */
 void dc_motor_set_pwm(uint8_t dc_motor_pwm)
 {
@@ -77,22 +77,25 @@ void dc_motor_set_pwm(uint8_t dc_motor_pwm)
 
 /*! @brief A function to set the dc motor MODE
  *
- * @param dc_motor_mode
- * 				ON - In this mode the PWM and direction can be changed.
- * 				The PWM will start with 0 and the direction keeps the
- * 				same as the previous setting.
- * 				OFF -  In this mode the PWM is set to 0 and it becomes
- * 				unchangeable. The direction is also unchangeable.
- * 				AUTO - In this mode the PWM is set to 255 when the
- * 				temperature reading reaches a threshold set by the user
- * 				(default: 28 degrees C). Also, the direction is set to
- * 				CLOCKWSISE (no reason, just standardizing it). The PWM
- * 				and the direction are unchangeable.
+ * @param	dc_motor_mode 	ON: In this mode the PWM and direction are
+ * 							allowed to be changed. The PWM  and the
+ * 							direction keep the same as the previous
+ * 							setting.
+ * 							OFF: In this mode the PWM is set to 0 and
+ * 							the PWM and direction aren't allowed to be
+ * 							changed.
+ * 							AUTO: In this mode the PWM is set to 255
+ * 							when the temperature reading reaches the
+ * 							threshold (dc_motor_info.threshold) set by
+ * 							the user (default: 40 degrees C). Also, the
+ * 							direction is set to CLOCKWSISE (no reason,
+ * 							just standardizing it). The PWM and the
+ * 							direction aren't allowed to be changed.
  */
-void dc_motor_set_mode(_DC_MOTOR_MODE dc_motor_mode)
+void dc_motor_set_mode(DC_MOTOR_MODE dc_motor_mode)
 {
 	static uint8_t previous_pwm = NULL;
-	static _DC_MOTOR_DIR previous_dir = NULL;
+	static DC_MOTOR_DIR previous_dir = NULL;
 
 	/*!
 	 * If changing from 'ON' mode, saves the current settings.

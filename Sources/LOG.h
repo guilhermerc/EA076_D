@@ -1,5 +1,8 @@
 /*!
 ** @file LOG.h
+** @brief This file exports what is necessary from LOG.c
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 /*

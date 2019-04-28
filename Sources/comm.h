@@ -1,7 +1,8 @@
 /*!
 ** @file comm.h
-** @brief
-**         This file exports the needed stuff from ESP01_comm.c
+** @brief This file exports what is necessary of comm.c
+**
+**  @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 #ifndef SOURCES_COMM_H_
@@ -9,8 +10,10 @@
 
 #include <PE_Types.h>
 
-#define TERMINATING_CHARS "\r\n"
-#define TEMPERATURE_TOPIC "\"EA076/grupoD3/temp\""
+#define TERMINATING_CHARS	"\r\n"
+
+#define TEMPERATURE_TOPIC	"\"EA076/grupoD3/temp\""
+
 #define MESSAGE_BUFFER_SIZE	512
 
 typedef enum

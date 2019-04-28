@@ -5,6 +5,13 @@
  *      Author: guilherme
  */
 
+/*!
+ * @file event_ring_buff.h
+ * @brief This file exports what is necessary from event_ring_buff.c
+ *
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
+ */
+
 #ifndef SOURCES_EVENT_RING_BUFF_H_
 #define SOURCES_EVENT_RING_BUFF_H_
 
@@ -14,9 +21,9 @@
 
 typedef enum
 {
-	NEW_MESSAGE_FROM_BROKER,
-	NEW_MESSAGE_FROM_TERMINAL,
-	NEW_TEMPERATURE_MEAS,
+	NEW_MESSAGE_FROM_BROKER,  //!< NEW_MESSAGE_FROM_BROKER
+	NEW_MESSAGE_FROM_TERMINAL,//!< NEW_MESSAGE_FROM_TERMINAL
+	NEW_TEMPERATURE_MEAS,     //!< NEW_TEMPERATURE_MEAS
 } EVENT_RING_BUFF_TYPE;
 
 typedef struct

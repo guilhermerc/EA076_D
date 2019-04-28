@@ -1,5 +1,9 @@
 /*!
 ** @file temp.c
+** @brief This file contains implementations related to the temperature
+** reading
+**
+** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
 /*
@@ -10,23 +14,22 @@
  */
 
 #include <ADC0.h>
-#include <comm.h>
 #include <PE_Types.h>
 #include <stdio.h>
 #include <string.h>
 #include <temp.h>
-#include <timestamp.h>
 #include <TimerInt0.h>
 
-#define ADC_AREF	3300
+#define ADC_AREF		3300
 #define ADC_MAX_RANGE	65536
+
 #define ANGULAR_CONV_CONST	10
 #define LINEAR_CONV_CONST	600
 
-/*! \brief A function that initializes the temperature module
+/*! @brief A function that initializes the temperature module
  *
  * This function initializes the temp_info structure and also enables
- * the events from the TimerInt and ADC0 PE modules.
+ * the events from the TimerInt0 and ADC0 PE modules.
 */
 void temp_init()
 {
@@ -38,7 +41,7 @@ void temp_init()
 	ADC0_EnableEvent();
 }
 
-/*! \brief A function that converts a raw reading to a temperature
+/*! @brief A function that converts a raw reading to a temperature
  *
  * Using the ADC0 configuration (ADC_AREF and ADC_MAX_RANGE) and the
  * correspondence between voltage and temperature equation given in the
@@ -54,9 +57,9 @@ void temp_convert_raw_value()
 			ANGULAR_CONV_CONST;
 }
 
-/*! \brief A function that assembles a message to be published
+/*! @brief A function that assembles a message to be published
  *
- * This function assembles a message containing a timestamp and the
+ * This function assembles a message containing a time stamp and the
  * current temperature.
 */
 void temp_assemble_message()
