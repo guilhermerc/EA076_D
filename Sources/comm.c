@@ -6,8 +6,9 @@
  */
 
 #include <comm.h>
-#include <LOG.h>
+#include <dc_motor.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <UART2.h>
 #include <UART2Events.h>
@@ -23,9 +24,17 @@
 #define DC_MOTOR_POWER_TOPIC "\"EA076/grupoD3/power\""
 #define DC_MOTOR_MODE_TOPIC "\"EA076/grupoD3/mode\""
 #define DC_MOTOR_THRESHOLD_TOPIC "\"EA076/grupoD3/threshold\""
+#define DC_MOTOR_DIR_TOPIC_WQ "EA076/grupoD3/dir"
+#define DC_MOTOR_POWER_TOPIC_WQ "EA076/grupoD3/power"
+#define DC_MOTOR_MODE_TOPIC_WQ "EA076/grupoD3/mode"
+#define DC_MOTOR_THRESHOLD_TOPIC_WQ "EA076/grupoD3/threshold"
 #define SMARTPHONE_TOPIC_WQ "EA076/grupoD3/celular"
 #define ESP_TOPIC "\"EA076/grupoD3/ESP\""
 #define MAX_TOKENS	32
+
+#define CMD_TYPE_INDEX	0
+#define TOPIC_INDEX	1
+#define MESSAGE_INDEX	2
 
 #define IP_NUMBER_SIZE	32
 static char ip_number[IP_NUMBER_SIZE];	// it should be const
@@ -301,16 +310,59 @@ void comm_parse()
 		tokens[curr_token_idx++] = strtok(message_in_copy, " ");
 
 
-		if((strcmp(tokens[0], "MESSAGE") == 0))
+		if((strcmp(tokens[CMD_TYPE_INDEX], "MESSAGE") == 0))
 		{
 			tokens[curr_token_idx++] = strtok(NULL, " [],");
 			// The message cannot contain '[', ']' or ','
 			tokens[curr_token_idx++] = strtok(NULL, "[],");
 
-			if(strcmp(tokens[1], SMARTPHONE_TOPIC_WQ) == 0)
+			if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_DIR_TOPIC_WQ) == 0)
 			{
-				strcat(tokens[2], "\n");
-				LOG("MESSAGE_RECEIVED", tokens[2]);
+				/*!
+				 * The motor direction can only be changed when in 'ON'
+				 * mode.
+				 */
+				if(dc_motor_info.current_mode == ON)
+				{
+					if(strcmp(tokens[MESSAGE_INDEX], "CLOCKWISE") == 0)
+					{
+						dc_motor_set_dir(CLOCKWISE);
+					}
+					else if(strcmp(tokens[MESSAGE_INDEX], "ANTICLOCKWISE") == 0)
+					{
+						dc_motor_set_dir(ANTICLOCKWISE);
+					}
+				}
+			}
+			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_POWER_TOPIC_WQ) == 0)
+			{
+				/*!
+				 * The motor PWM can only be changed when in 'ON' mode.
+				 */
+				if(dc_motor_info.current_mode == ON)
+				{
+					uint8_t percentage = (uint8_t) atoi(tokens[MESSAGE_INDEX]);
+					dc_motor_set_pwm(percentage * (MAXIMUM_PWM/100));
+				}
+			}
+			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_MODE_TOPIC_WQ) == 0)
+			{
+				if(strcmp(tokens[MESSAGE_INDEX], "ON") == 0)
+				{
+					dc_motor_set_mode(ON);
+				}
+				else if(strcmp(tokens[MESSAGE_INDEX], "OFF") == 0)
+				{
+					dc_motor_set_mode(OFF);
+				}
+				else if(strcmp(tokens[MESSAGE_INDEX], "AUTO") == 0)
+				{
+					dc_motor_set_mode(AUTO);
+				}
+			}
+			else if(strcmp(tokens[TOPIC_INDEX], DC_MOTOR_THRESHOLD_TOPIC_WQ) == 0)
+			{
+
 			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))

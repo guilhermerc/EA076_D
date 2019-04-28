@@ -29,9 +29,9 @@
 
 #include <comm.h>
 #include <CPU.h>
+#include <dc_motor.h>
 #include <event_handler.h>
 #include <event_ring_buff.h>
-#include <temp.h>
 #include <timestamp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
@@ -54,9 +54,9 @@ int main(void)
 	 * modules
 	 */
 	comm_init();
-	temp_init();
+	//temp_init();
 	timestamp_init();
-
+	dc_motor_init();
 	event_ring_buff_init();
 
 	/*!

@@ -50,12 +50,6 @@ typedef struct
 
 COMM_INFO_STRUCT comm_info;
 
-/*
-UART2_TComData message_out[MESSAGE_BUFFER_SIZE];
-UART2_TComData message_in[MESSAGE_BUFFER_SIZE];
-volatile bool message_recv;
-*/
-
 void comm_init();
 COMM_STATUS comm_status();
 void comm_process_msg();
