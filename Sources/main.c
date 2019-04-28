@@ -54,7 +54,7 @@ int main(void)
 	 * modules
 	 */
 	comm_init();
-	//temp_init();
+	temp_init();
 	timestamp_init();
 	dc_motor_init();
 	event_ring_buff_init();

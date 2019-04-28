@@ -13,6 +13,7 @@
 
 #define STOP_PWM	0
 #define HALF_PWM	127
+#define INITIAL_THRESHOLD	40
 
 /*! @brief A function that initializes the dc motor module
  *
@@ -24,6 +25,7 @@ void dc_motor_init()
 	dc_motor_set_dir(CLOCKWISE);
 	dc_motor_set_pwm(STOP_PWM);
 	dc_motor_set_mode(ON);
+	dc_motor_set_threshold(INITIAL_THRESHOLD);
 
 	L293D_1_2_EN_Enable();
 }
@@ -119,4 +121,9 @@ void dc_motor_set_mode(_DC_MOTOR_MODE dc_motor_mode)
 	}
 
 	dc_motor_info.current_mode = dc_motor_mode;
+}
+
+void dc_motor_set_threshold(int16_t threshold)
+{
+	dc_motor_info.threshold = threshold;
 }
