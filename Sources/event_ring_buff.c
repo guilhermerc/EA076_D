@@ -6,7 +6,7 @@
  */
 
 /*!
- * @file event_ring_buffer.c
+ * @file event_ring_buff.c
  * @brief This file contains implementations related to the event ring
  * buffer
  *
