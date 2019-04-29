@@ -14,12 +14,12 @@
 #define STOP_PWM	0
 #define HALF_PWM	127
 
-#define INITIAL_THRESHOLD	40
+#define INITIAL_THRESHOLD	30.0
 
 /*! @brief A function that initializes the dc motor module
  *
  * This function sets 'CLOCKWISE' as the default direction, '0' as the
- * default PWM, 'OFF' as the default mode and 40 degrees celsius as the
+ * default PWM, 'OFF' as the default mode and 30.0 degrees celsius as the
  * default threshold for 'AUTO' mode. It also enables the PWM.
  */
 void dc_motor_init()
@@ -126,7 +126,7 @@ void dc_motor_set_mode(DC_MOTOR_MODE dc_motor_mode)
 	dc_motor_info.current_mode = dc_motor_mode;
 }
 
-void dc_motor_set_threshold(int16_t threshold)
+void dc_motor_set_threshold(float threshold)
 {
 	dc_motor_info.threshold = threshold;
 }

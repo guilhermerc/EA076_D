@@ -31,7 +31,7 @@ typedef struct
 	uint8_t current_pwm;
 	DC_MOTOR_DIR current_dir;
 	DC_MOTOR_MODE current_mode;
-	int16_t threshold;
+	float threshold;
 } DC_MOTOR_INFO;
 
 DC_MOTOR_INFO dc_motor_info;
@@ -40,6 +40,6 @@ void dc_motor_init();
 void dc_motor_set_dir(DC_MOTOR_DIR dc_motor_dir);
 void dc_motor_set_pwm(uint8_t dc_motor_pwm);
 void dc_motor_set_mode(DC_MOTOR_MODE dc_motor_mode);
-void dc_motor_set_threshold(int16_t threshold);
+void dc_motor_set_threshold(float threshold);
 
 #endif /* SOURCES_DC_MOTOR_H_ */
