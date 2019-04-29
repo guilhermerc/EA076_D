@@ -199,11 +199,11 @@ void comm_response()
 	{
 		strcpy(comm_info.message_out, comm_info.message_in);
 		/*!
-		 * TODO: DEBUGGING PURPOSES!! PAY ATTENTION HERE!
+		 * TODO: DEBUGGING PURPOSES!! REMOVE IT BEFORE SUBMITTING!
 		 *
-		 * comm_info.state = WAITING_FOR_CMD;
+		comm_info.state = WAITING_FOR_CMD;
 		 *
-		*/
+		 */
 		break;
 	}
 	}
@@ -373,7 +373,7 @@ void comm_parse()
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], THRESHOLD_TOPIC_WQ) == 0)
 			{
-				int16_t threshold = (int16_t) atoi(tokens[MESSAGE_INDEX]);
+				float threshold = (float) atof(tokens[MESSAGE_INDEX]);
 				dc_motor_set_threshold(threshold);
 			}
 		}
