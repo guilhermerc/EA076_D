@@ -64,39 +64,9 @@ void temp_convert_raw_value()
 */
 void temp_assemble_message()
 {
-	LDD_RTC_TTime current_time;
-	timestamp_get_time(&current_time);
-	char time_aux_string[TIME_AUX_STRING_SIZE];
-
 	temp_convert_raw_value();
 	char temperature_string[TEMPERATURE_STRING_SIZE];
 
 	sprintf(temperature_string, "%.1f", temp_info.temperature);
-
-	/*!
-	 * "HH:"
-	 */
-	sprintf(time_aux_string, "%2d", current_time.Hour);
-	strcpy(temp_info.message, time_aux_string);
-	strcat(temp_info.message, ":");
-
-	/*!
-	 * "MM:"
-	 */
-	sprintf(time_aux_string, "%2d", current_time.Minute);
-	strcat(temp_info.message, time_aux_string);
-	strcat(temp_info.message, ":");
-
-	/*!
-	 * "SS | "
-	 */
-	sprintf(time_aux_string, "%2d", current_time.Second);
-	strcat(temp_info.message, time_aux_string);
-	strcat(temp_info.message, " | ");
-
-	/*!
-	 * "0.0 C"
-	 */
-	strcat(temp_info.message, temperature_string);
-	strcat(temp_info.message, " C");
+	strcpy(temp_info.message, temperature_string);
 }
