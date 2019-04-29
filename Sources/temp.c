@@ -23,8 +23,8 @@
 #define ADC_AREF		3300
 #define ADC_MAX_RANGE	65536
 
-#define ANGULAR_CONV_CONST	10
-#define LINEAR_CONV_CONST	600
+#define ANGULAR_CONV_CONST	10.0
+#define LINEAR_CONV_CONST	600.0
 
 /*! @brief A function that initializes the temperature module
  *
@@ -53,7 +53,7 @@ void temp_convert_raw_value()
 	// T ˚C = (VO - 600 mV) / (+10 mV/˚C)
 	uint16_t raw_temperature_in_mv = (temp_info.raw_temperature *
 			ADC_AREF) / ADC_MAX_RANGE;
-	temp_info.temperature = (raw_temperature_in_mv - LINEAR_CONV_CONST) /
+	temp_info.temperature = ((float) raw_temperature_in_mv - LINEAR_CONV_CONST) /
 			ANGULAR_CONV_CONST;
 }
 
@@ -70,10 +70,8 @@ void temp_assemble_message()
 
 	temp_convert_raw_value();
 	char temperature_string[TEMPERATURE_STRING_SIZE];
-	/*!
-	 * TODO: I still have to implement the float-to-string conversion
-	 */
-	sprintf(temperature_string, "%d", temp_info.temperature);
+
+	sprintf(temperature_string, "%.1f", temp_info.temperature);
 
 	/*!
 	 * "HH:"
