@@ -56,9 +56,9 @@ int main(void)
 	 */
 	comm_init();
 	dc_motor_init();
+	event_ring_buff_init();
 	temp_init();
 	timestamp_init();
-	event_ring_buff_init();
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to
