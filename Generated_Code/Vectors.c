@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-15, 17:43, # CodeGen: 106
+**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
 **     Abstract    :
 **
 **     Settings    :
@@ -73,6 +73,14 @@
   #include "BitIoLdd1.h"
   #include "L293D_2A.h"
   #include "BitIoLdd2.h"
+  #include "NOKIA5110_CONTROLLER.h"
+  #include "RESpin1.h"
+  #include "SCEpin1.h"
+  #include "D_Cpin1.h"
+  #include "WAIT1.h"
+  #include "SM1.h"
+  #include "NOKIA5110_LIGHT.h"
+  #include "BitIoLdd3.h"
   #include "Events.h"
   #include "ADC0Events.h"
   #include "TimerInt0Events.h"
@@ -122,7 +130,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x17  0x0000005C   -   ivINT_LLWU                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x18  0x00000060   -   ivINT_I2C0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x19  0x00000064   -   ivINT_I2C1                    unused by PE */
-    (tIsrFunc)&CPU_Interrupt,          /* 0x1A  0x00000068   -   ivINT_SPI0                    unused by PE */
+    (tIsrFunc)&SM1_Interrupt,          /* 0x1A  0x00000068   2   ivINT_SPI0                    used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x1B  0x0000006C   -   ivINT_SPI1                    unused by PE */
     (tIsrFunc)&ASerialLdd1_Interrupt,  /* 0x1C  0x00000070   2   ivINT_UART0                   used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x1D  0x00000074   -   ivINT_UART1                   unused by PE */

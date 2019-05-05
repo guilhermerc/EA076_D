@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-15, 17:43, # CodeGen: 106
+**     Date/Time   : 2019-05-04, 19:30, # CodeGen: 133
 **     Abstract    :
 **
 **     Settings    :
@@ -267,6 +267,14 @@
 #include "BitIoLdd1.h"
 #include "L293D_2A.h"
 #include "BitIoLdd2.h"
+#include "NOKIA5110_CONTROLLER.h"
+#include "RESpin1.h"
+#include "SCEpin1.h"
+#include "D_Cpin1.h"
+#include "WAIT1.h"
+#include "SM1.h"
+#include "NOKIA5110_LIGHT.h"
+#include "BitIoLdd3.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -493,6 +501,12 @@ void PE_low_level_init(void)
   (void)BitIoLdd1_Init(NULL);
   /* ### BitIO_LDD "BitIoLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd2_Init(NULL);
+  WAIT1_Init(); /* ### Wait "WAIT1" init code ... */
+  /* ### SPIMaster_LDD "SM1" component auto initializatation. Auto initialization feature can be disabled by component's property "Auto initialization". */
+  (void)SM1_Init(NULL);
+  /* ### PDC8544 "NOKIA5110_CONTROLLER" init code ... */
+  /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd3_Init(NULL);
   __EI();
 }
   /* Flash configuration field */
