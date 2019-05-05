@@ -8,6 +8,8 @@
 #ifndef SOURCES_DISPLAY_H_
 #define SOURCES_DISPLAY_H_
 
+#include <PE_Types.h>
+
 void display_init();
 void display_write_line(uint8_t line, char * string);
 
