@@ -115,6 +115,83 @@ Module "L293D_2A"  (component BitIO)
                 [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
                 the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
 
+Module "NOKIA5110_CONTROLLER" (component PDC8544)
+   - NOKIA5110_CONTROLLER_GetWidth -Returns the width of the display in pixels
+   - NOKIA5110_CONTROLLER_GetHeight -Returns the height of the display in pixels
+   - NOKIA5110_CONTROLLER_GetLongerSide -Returns the longer side of the display in pixels
+   - NOKIA5110_CONTROLLER_GetShorterSide -Returns the shorter side of the display in pixels
+   - NOKIA5110_CONTROLLER_SetDisplayOrientation -Sets current display orientation
+   - NOKIA5110_CONTROLLER_GetDisplayOrientation -Returns the current display orientation
+   - NOKIA5110_CONTROLLER_SetPos -Sets the cursor to the given position
+   - NOKIA5110_CONTROLLER_Clear -Clears the whole display memory.
+   - NOKIA5110_CONTROLLER_ClearLine -Clears a character line on the display
+   - NOKIA5110_CONTROLLER_WriteChar -Writes a single character to the display at the current position.
+   - NOKIA5110_CONTROLLER_WriteString -Writes a zero byte terminated string to the display at the current cursor position.
+   - NOKIA5110_CONTROLLER_WriteLineStr -Writes a string to the given line position.
+   - NOKIA5110_CONTROLLER_SetContrast -Sets the display contrast.
+   - NOKIA5110_CONTROLLER_SetMode -Sets the mode of the display (if inverted or not).
+   - NOKIA5110_CONTROLLER_UpdateFull -Updates the whole display
+   - NOKIA5110_CONTROLLER_UpdateRegion -Updates a region of the display
+   - NOKIA5110_CONTROLLER_GetLCD -Method to be called for mutual exclusive access to the LCD
+   - NOKIA5110_CONTROLLER_GiveLCD -Method to be called for mutual exclusive access to the LCD
+   - NOKIA5110_CONTROLLER_Init -Display driver initialization
+   - NOKIA5110_CONTROLLER_Deinit -Module Deinitialization
+
+Module "WAIT1"     (component Wait)
+   - WAIT1_Wait10Cycles -Wait for 10 CPU cycles.
+   - WAIT1_Wait100Cycles -Wait for 100 CPU cycles.
+   - WAIT1_WaitCycles -Wait for a specified number of CPU cycles (16bit data type).
+   - WAIT1_WaitLongCycles -Wait for a specified number of CPU cycles (32bit data type).
+   - WAIT1_Waitms -Wait for a specified time in milliseconds.
+   - WAIT1_Waitus -Wait for a specified time in microseconds.
+   - WAIT1_Waitns -Wait for a specified time in nano seconds.
+   - WAIT1_WaitOSms -If an RTOS is enabled, this routine will use a non-blocking wait method. Otherwise it will do a 
+                busy/blocking wait.
+   - WAIT1_Init -Driver initialization routine.
+   - WAIT1_DeInit -Driver de-initialization routine
+
+Module "SM1"       (component SPIMaster_LDD)
+   - SM1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc.   If the "Enable in init. code" is set to "yes" value 
+                then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
+                is not necessary and needn't to be generated.    This method can be called only once. Before the second call of 
+                Init() the Deinit() must be called first.
+   - SM1_SendBlock -Sends a block of characters. The method returns ERR_BUSY when the previous block transmission is not 
+                completed. The method <CancelBlockTransmission> can be used to cancel a transmit operation. This method 
+                finishes immediately after calling it - it doesn't wait the end of data transmission. Use event <OnBlockSent> 
+                to check the end of data transmission or method GetSentDataNum to check the state of sending.
+   - SM1_ReceiveBlock -This method specifies the number of data to receive. The method returns ERR_BUSY until the specified 
+                number of characters is received. The method <CancelBlockReception> can be used to cancel a running receive 
+                operation. If a receive operation is not in progress (the method was not called or a previous operation has 
+                already finished) all received characters will be lost without any notification. To prevent the loss of data 
+                call the method immediately after the last receive operation has finished (e.g. from the <OnBlockReceived> 
+                event). This method finishes immediately after calling it - it doesn't wait the end of data reception. Use 
+                event <OnBlockReceived> to check the end of data reception or method GetReceivedDataNum to check the state of 
+                receiving.
+
+Module "NOKIA5110_LIGHT" (component BitIO)
+   - NOKIA5110_LIGHT_SetDir -Sets a pin direction (available only if the direction = _[input/output]_).
+   - NOKIA5110_LIGHT_GetVal -Returns the input/output value. If the direction is [input] then the input value of the pin is 
+                read and returned. If the direction is [output] then the last written value is returned (see <Safe mode> 
+                property for limitations). This method cannot be disabled if direction is [input].
+   - NOKIA5110_LIGHT_PutVal -The specified output value is set. If the direction is [input], the component saves the value to a 
+                memory or a register and this value will be written to the pin after switching to the output mode (using 
+                [SetDir(TRUE)]; see <Safe mode> property for limitations). If the direction is [output], it writes the value to 
+                the pin. (Method is available only if the direction = _[output]_ or _[input/output]_).
+   - NOKIA5110_LIGHT_ClrVal -Clears (set to zero) the output value. It is equivalent to the [PutVal(FALSE)]. This method is 
+                available only if the direction = _[output]_ or _[input/output]_.
+   - NOKIA5110_LIGHT_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available 
+                only if the direction = _[output]_ or _[input/output]_.
+
+Module "TU3"       (component TimerUnit_LDD)
+   - TU3_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+
+Module "TimerInt1" (component TimerInt)
+
 Module "CPU"       (component MKL25Z128LK4)
 
 ===================================================================================

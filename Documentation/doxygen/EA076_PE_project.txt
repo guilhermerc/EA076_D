@@ -32,6 +32,13 @@
 - \subpage PwmLdd1
 - \subpage BitIoLdd1
 - \subpage BitIoLdd2
+- \subpage SM1
+- \subpage RESpin1
+- \subpage SCEpin1
+- \subpage D_Cpin1
+- \subpage BitIoLdd3
+- \subpage TU3
+- \subpage TimerIntLdd2
 
 */
 

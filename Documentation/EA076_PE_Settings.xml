@@ -1649,10 +1649,10 @@ Autoselect
       <event name="OnChannel7" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="TimerInterrupt1" type="TimerInt">
+  <Bean name="TimerInt1" type="TimerInt">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="TimerInterrupt1" />
+      <Component_name v="TimerInt1" />
       <Periodic_interrupt_source v="TPM2_MOD" />
       <Counter v="TPM2_CNT" />
       <boolgroup name="Interrupt service/event" v="Enabled">
@@ -1738,7 +1738,7 @@ Autoselect
       <SetFreqMHz v="don&amp;apos;t generate code" />
     </Methods>
     <Events>
-      <Event_module_name v="TimerInterrupt1Events" />
+      <Event_module_name v="TimerInt1Events" />
       <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
       <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
       <event name="OnInterrupt" v="generate code">
