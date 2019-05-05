@@ -30,7 +30,7 @@
 /* MODULE UART0Events */
 
 #include <comm.h>
-#include <event_ring_buff.h>
+#include <event_buff.h>
 #include <LOG.h>
 #include <PE_Types.h>
 #include <stdint.h>
@@ -96,7 +96,7 @@ void UART0_OnRxChar(void)
 	LOG(NULL, UART0_GetPtrToLastRecvChar());
 
 	if(UART0_HasACompleteMessage())
-		event_ring_buff_insert_event(NEW_MESSAGE_FROM_TERMINAL);
+		event_buff_insert_event(NEW_MESSAGE_FROM_TERMINAL);
 }
 
 /*! @brief A function that indicates that a character was sent into the

@@ -29,8 +29,8 @@
 
 #include <comm.h>
 #include <CPU.h>
+#include <event_buff.h>
 #include <event_handler.h>
-#include <event_ring_buff.h>
 #include <motor.h>
 #include <stamp.h>
 #include <temp.h>
@@ -56,7 +56,7 @@ int main(void)
 	 */
 	comm_init();
 	motor_init();
-	event_ring_buff_init();
+	event_buff_init();
 	temp_init();
 	stamp_init();
 
@@ -66,8 +66,8 @@ int main(void)
 	 */
 	for(;;)
 	{
-		if(!event_ring_buff_is_empty())
-			event_handler(event_ring_buff_consume_event());
+		if(!event_buff_is_empty())
+			event_handler(event_buff_consume_event());
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/

@@ -30,7 +30,7 @@
 /* MODULE UART2Events */
 
 #include <comm.h>
-#include <event_ring_buff.h>
+#include <event_buff.h>
 #include <stdint.h>
 #include <UART2.h>
 #include "UART2Events.h"
@@ -84,7 +84,7 @@ void UART2_OnError(void)
 void UART2_OnRxChar(void)
 {
 	if(UART2_HasACompleteMessage())
-		event_ring_buff_insert_event(NEW_MESSAGE_FROM_BROKER);
+		event_buff_insert_event(NEW_MESSAGE_FROM_BROKER);
 }
 
 /*! @brief A handler that indicates that a character was sent into the

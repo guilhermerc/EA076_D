@@ -8,7 +8,7 @@
  */
 
 #include <comm.h>
-#include <event_ring_buff.h>
+#include <event_buff.h>
 #include <motor.h>
 #include <stdint.h>
 #include <temp.h>
@@ -52,7 +52,7 @@ void event_handler_read_message(EVENT_HANDLER_MESSAGE_ORIGIN origin)
  * @brief A function that handles an event
  * @param	event	The event to be handled
  */
-void event_handler(EVENT_RING_BUFF_TYPE event)
+void event_handler(EVENT_BUFF_TYPE event)
 {
 	while(comm_status() != AVAILABLE);
 
