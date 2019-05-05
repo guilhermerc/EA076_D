@@ -47,7 +47,6 @@ typedef enum
 } DISPLAY_STATE_ENUM;
 
 #define DISPLAY_STATE_ENUM_RANGE	2
-#define DISPLAY_LINE_STRING_SIZE	16
 
 typedef enum
 {

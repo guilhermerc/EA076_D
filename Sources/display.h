@@ -10,6 +10,8 @@
 
 #include <PE_Types.h>
 
+#define DISPLAY_LINE_STRING_SIZE	16
+
 void display_init();
 void display_write_line(uint8_t line, char * string);
 
