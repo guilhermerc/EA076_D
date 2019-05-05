@@ -53,6 +53,12 @@ void timestamp_get_time(LDD_RTC_TTime * current_time_ptr)
 	RTC_GetTime(RTC_dd_ptr, current_time_ptr);
 }
 
+void timestamp_set_current_time(uint32_t second, uint32_t minute,
+		uint32_t hour)
+{
+	timestamp_set_time(second, minute, hour, 0, 0, 0, 0);
+}
+
 /*! @brief A function that sets the current time in the RTC
  *
  * This function sets the current time in the RTC with a nice
