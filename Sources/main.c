@@ -29,6 +29,7 @@
 
 #include <comm.h>
 #include <CPU.h>
+#include <display.h>
 #include <event_handler.h>
 #include <event_ring_buff.h>
 #include <motor.h>
@@ -55,10 +56,11 @@ int main(void)
 	 * and event ring buffer modules
 	 */
 	comm_init();
-	motor_init();
+	display_init();
 	event_ring_buff_init();
-	temp_init();
+	motor_init();
 	stamp_init();
+	temp_init();
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to
