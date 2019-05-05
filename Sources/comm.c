@@ -7,12 +7,12 @@
  */
 
 #include <comm.h>
-#include <dc_motor.h>
 #include <LOG.h>
+#include <motor.h>
+#include <stamp.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <timestamp.h>
 #include <UART2.h>
 #include <UART2Events.h>
 #include <UTIL1.h>
@@ -360,15 +360,15 @@ void comm_parse()
 				 * The motor direction can only be changed when in 'ON'
 				 * mode.
 				 */
-				if(dc_motor_info.current_mode == ON)
+				if(motor_info.current_mode == ON)
 				{
 					if(strcmp(tokens[MESSAGE_INDEX], "CLOCKWISE") == 0)
 					{
-						dc_motor_set_dir(CLOCKWISE);
+						motor_set_dir(CLOCKWISE);
 					}
 					else if(strcmp(tokens[MESSAGE_INDEX], "ANTICLOCKWISE") == 0)
 					{
-						dc_motor_set_dir(ANTICLOCKWISE);
+						motor_set_dir(ANTICLOCKWISE);
 					}
 				}
 			}
@@ -377,31 +377,31 @@ void comm_parse()
 				/*!
 				 * The motor PWM can only be changed when in 'ON' mode.
 				 */
-				if(dc_motor_info.current_mode == ON)
+				if(motor_info.current_mode == ON)
 				{
 					uint8_t percentage = (uint8_t) atoi(tokens[MESSAGE_INDEX]);
-					dc_motor_set_pwm(percentage * (MAXIMUM_PWM/100));
+					motor_set_pwm(percentage * (MAXIMUM_PWM/100));
 				}
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], MODE_TOPIC_WQ) == 0)
 			{
 				if(strcmp(tokens[MESSAGE_INDEX], "ON") == 0)
 				{
-					dc_motor_set_mode(ON);
+					motor_set_mode(ON);
 				}
 				else if(strcmp(tokens[MESSAGE_INDEX], "OFF") == 0)
 				{
-					dc_motor_set_mode(OFF);
+					motor_set_mode(OFF);
 				}
 				else if(strcmp(tokens[MESSAGE_INDEX], "AUTO") == 0)
 				{
-					dc_motor_set_mode(AUTO);
+					motor_set_mode(AUTO);
 				}
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], THRESHOLD_TOPIC_WQ) == 0)
 			{
 				float threshold = (float) atof(tokens[MESSAGE_INDEX]);
-				dc_motor_set_threshold(threshold);
+				motor_set_threshold(threshold);
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], TIME_ADJUSTMENT_TOPIC_WQ) == 0)
 			{

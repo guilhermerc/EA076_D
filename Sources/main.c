@@ -29,11 +29,11 @@
 
 #include <comm.h>
 #include <CPU.h>
-#include <dc_motor.h>
 #include <event_handler.h>
 #include <event_ring_buff.h>
+#include <motor.h>
+#include <stamp.h>
 #include <temp.h>
-#include <timestamp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
@@ -51,14 +51,14 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the communication, dc motor, temperature, timestamp,
+	 * Initializing the communication, dc motor, temperature, stamp,
 	 * and event ring buffer modules
 	 */
 	comm_init();
-	dc_motor_init();
+	motor_init();
 	event_ring_buff_init();
 	temp_init();
-	timestamp_init();
+	stamp_init();
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to

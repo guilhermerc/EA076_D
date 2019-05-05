@@ -15,7 +15,7 @@
 #ifndef SOURCES_TEMP_H_
 #define SOURCES_TEMP_H_
 
-#include <timestamp.h>
+#include <stamp.h>
 
 #define TEMPERATURE_SIZE 32
 #define TEMPERATURE_STRING_SIZE 8

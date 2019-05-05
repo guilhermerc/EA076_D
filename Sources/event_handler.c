@@ -8,8 +8,8 @@
  */
 
 #include <comm.h>
-#include <dc_motor.h>
 #include <event_ring_buff.h>
+#include <motor.h>
 #include <stdint.h>
 #include <temp.h>
 #include <UART0.h>
@@ -87,15 +87,15 @@ void event_handler(EVENT_RING_BUFF_TYPE event)
 		 * The 'AUTO' mode and the threshold thing is checked whenever
 		 * a new temperature measurement was published
 		 */
-		if(dc_motor_info.current_mode == AUTO)
+		if(motor_info.current_mode == AUTO)
 		{
-			if(temp_info.temperature >= dc_motor_info.threshold)
+			if(temp_info.temperature >= motor_info.threshold)
 			{
-				dc_motor_set_pwm(MAXIMUM_PWM);
+				motor_set_pwm(MAXIMUM_PWM);
 			}
 			else
 			{
-				dc_motor_set_pwm(MINIMUM_PWM);
+				motor_set_pwm(MINIMUM_PWM);
 			}
 
 		break;

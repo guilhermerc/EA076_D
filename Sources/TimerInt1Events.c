@@ -28,7 +28,7 @@
 
 #include <display.h>
 #include <PE_Types.h>
-#include <timestamp.h>
+#include <stamp.h>
 #include <UTIL1.h>
 #include "TimerInt1Events.h"
 
@@ -90,7 +90,7 @@ void TI1_OnInterrupt0(void)
 	}
 	case GETTING_CURR_TIME:
 	{
-		timestamp_get_time(&time);
+		stamp_get_time(&time);
 		break;
 	}
 	case ASSEMBLING_STRING:
