@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
+**     Date/Time   : 2019-05-05, 02:00, # CodeGen: 142
 **     Abstract    :
 **
 **     Settings    :
@@ -87,6 +87,9 @@
 #include "SM1.h"
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
+#include "TU3.h"
+#include "TimerInt1.h"
+#include "TimerIntLdd2.h"
 
 
 /*

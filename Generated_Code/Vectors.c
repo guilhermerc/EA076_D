@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
+**     Date/Time   : 2019-05-05, 02:00, # CodeGen: 142
 **     Abstract    :
 **
 **     Settings    :
@@ -81,11 +81,15 @@
   #include "SM1.h"
   #include "NOKIA5110_LIGHT.h"
   #include "BitIoLdd3.h"
+  #include "TU3.h"
+  #include "TimerInt1.h"
+  #include "TimerIntLdd2.h"
   #include "Events.h"
   #include "ADC0Events.h"
   #include "TimerInt0Events.h"
   #include "UART0Events.h"
   #include "UART2Events.h"
+  #include "TimerInt1Events.h"
 
 
   /* ISR prototype */
@@ -139,7 +143,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x20  0x00000080   -   ivINT_CMP0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x21  0x00000084   -   ivINT_TPM0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x22  0x00000088   -   ivINT_TPM1                    unused by PE */
-    (tIsrFunc)&CPU_Interrupt,          /* 0x23  0x0000008C   -   ivINT_TPM2                    unused by PE */
+    (tIsrFunc)&TU3_Interrupt,          /* 0x23  0x0000008C   2   ivINT_TPM2                    used by PE */
     (tIsrFunc)&RTC_Interrupt,          /* 0x24  0x00000090   2   ivINT_RTC                     used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x25  0x00000094   2   ivINT_RTC_Seconds             unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x26  0x00000098   -   ivINT_PIT                     unused by PE */

@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:30, # CodeGen: 133
+**     Date/Time   : 2019-05-05, 02:00, # CodeGen: 142
 **     Abstract    :
 **
 **     Settings    :
@@ -275,6 +275,9 @@
 #include "SM1.h"
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
+#include "TU3.h"
+#include "TimerInt1.h"
+#include "TimerIntLdd2.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -284,6 +287,7 @@
 #include "TimerInt0Events.h"
 #include "UART0Events.h"
 #include "UART2Events.h"
+#include "TimerInt1Events.h"
 #include "CPU.h"
 
 #ifdef __cplusplus
@@ -507,6 +511,9 @@ void PE_low_level_init(void)
   /* ### PDC8544 "NOKIA5110_CONTROLLER" init code ... */
   /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd3_Init(NULL);
+  /* ### TimerInt_LDD "TimerIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)TimerIntLdd2_Init(NULL);
+  /* ### TimerInt "TimerInt1" init code ... */
   __EI();
 }
   /* Flash configuration field */
