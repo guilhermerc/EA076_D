@@ -12,8 +12,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <timestamp.h>
 #include <UART2.h>
 #include <UART2Events.h>
+#include <UTIL1.h>
 
 #define WIFI_SSID "\"EA076R\""
 #define WIFI_PASSWORD "\"FRDMKL25\""
@@ -32,6 +34,10 @@
 #define POWER_TOPIC_WQ "EA076/grupoD3/power"
 #define MODE_TOPIC_WQ "EA076/grupoD3/mode"
 #define THRESHOLD_TOPIC_WQ "EA076/grupoD3/threshold"
+
+#define TIME_ADJUSTMENT_TOPIC "\"EA076/grupoD3/adjust\""
+
+#define TIME_ADJUSTMENT_TOPIC_WQ "EA076/grupoD3/adjust"
 
 #define MAX_TOKENS	32
 
@@ -53,6 +59,7 @@ typedef enum
 	SUBSCRIBING_TO_POWER_TOPIC,
 	SUBSCRIBING_TO_MODE_TOPIC,
 	SUBSCRIBING_TO_THRESHOLD_TOPIC,
+	SUBSCRIBING_TO_ADJUST_TOPIC,
 	CONCLUDED
 } SUBSCRIPTIONS_STATE_ENUM;
 
@@ -192,6 +199,13 @@ void comm_response()
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
 			strcat(comm_info.message_out, THRESHOLD_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
+			break;
+		}
+		case SUBSCRIBING_TO_ADJUST_TOPIC:
+		{
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, TIME_ADJUSTMENT_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
@@ -388,6 +402,14 @@ void comm_parse()
 			{
 				float threshold = (float) atof(tokens[MESSAGE_INDEX]);
 				dc_motor_set_threshold(threshold);
+			}
+			else if(strcmp(tokens[TOPIC_INDEX], TIME_ADJUSTMENT_TOPIC_WQ) == 0)
+			{
+				/*! TODO: Test this.
+				uint8_t hour = 0, minute = 0, second = 0;
+				UTIL1_ScanTime(&(tokens[MESSAGE_INDEX]), &hour, &minute, &second, NULL);
+				timestamp_set_current_time(second, minute, hour);
+				*/
 			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))
