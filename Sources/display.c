@@ -13,6 +13,7 @@
 
 #include <display.h>
 #include <NOKIA5110_CONTROLLER.h>
+#include <NOKIA5110_LIGHT.h>
 #include <stdint.h>
 
 /*! @brief A function that performs the display's initialization
@@ -21,6 +22,7 @@
 void display_init()
 {
 	NOKIA5110_CONTROLLER_Init();
+	NOKIA5110_LIGHT_ClrVal();
 }
 
 /*! @brief A function that writes a single line in the display
