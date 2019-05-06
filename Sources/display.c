@@ -16,3 +16,8 @@ void display_write_line(uint8_t line, char * string)
 {
 	NOKIA5110_CONTROLLER_WriteLineStr(line, string);
 }
+
+void display_clean_line(uint8_t line)
+{
+	display_write_line(line, "                    ");
+}
