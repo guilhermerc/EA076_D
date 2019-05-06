@@ -405,11 +405,10 @@ void comm_parse()
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], TIME_ADJUSTMENT_TOPIC_WQ) == 0)
 			{
-				/*! TODO: Test this.
+				/*! TODO: Test this. */
 				uint8_t hour = 0, minute = 0, second = 0;
 				UTIL1_ScanTime(&(tokens[MESSAGE_INDEX]), &hour, &minute, &second, NULL);
-				timestamp_set_current_time(second, minute, hour);
-				*/
+				stamp_set_current_time(second, minute, hour);
 			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))
