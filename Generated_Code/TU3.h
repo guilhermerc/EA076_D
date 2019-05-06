@@ -7,7 +7,7 @@
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-05, 01:59, # CodeGen: 141
+**     Date/Time   : 2019-05-06, 12:42, # CodeGen: 154
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -22,13 +22,13 @@
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : TPM2_MOD
-**            Period                                       : 16.666667 ms
+**            Period                                       : 400 ms
 **            Interrupt                                    : Enabled
 **              Interrupt                                  : INT_TPM2
 **              Interrupt priority                         : medium priority
 **          Channel list                                   : 0
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Auto initialization                          : no
 **            Event mask                                   : 
 **              OnCounterRestart                           : Enabled
@@ -50,7 +50,9 @@
 **            Clock configuration 6                        : This component disabled
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
-**         Init - LDD_TDeviceData* TU3_Init(LDD_TUserData *UserDataPtr);
+**         Init    - LDD_TDeviceData* TU3_Init(LDD_TUserData *UserDataPtr);
+**         Enable  - LDD_TError TU3_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable - LDD_TError TU3_Disable(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -119,10 +121,10 @@ extern "C" {
 #define __BWUserType_TU3_TValueType
   typedef uint16_t TU3_TValueType ;    /* Type for data parameters of methods */
 #endif
-#define TU3_CNT_INP_FREQ_U_0 0x00280000UL /* Counter input frequency in Hz */
-#define TU3_CNT_INP_FREQ_R_0 2621438.120953155F /* Counter input frequency in Hz */
+#define TU3_CNT_INP_FREQ_U_0 0x00028000UL /* Counter input frequency in Hz */
+#define TU3_CNT_INP_FREQ_R_0 163839.98993367102F /* Counter input frequency in Hz */
 #define TU3_CNT_INP_FREQ_COUNT 0U      /* Count of predefined counter input frequencies */
-#define TU3_PERIOD_TICKS   0xAAABUL    /* Initialization value of period in 'counter ticks' */
+#define TU3_PERIOD_TICKS   0x00010000UL /* Initialization value of period in 'counter ticks' */
 #define TU3_NUMBER_OF_CHANNELS 0x00U   /* Count of predefined channels */
 #define TU3_COUNTER_WIDTH  0x10U       /* Counter width in bits  */
 #define TU3_COUNTER_DIR    DIR_UP      /* Direction of counting */
@@ -131,6 +133,8 @@ extern "C" {
   
 /* Methods configuration constants - generated for all enabled component's methods */
 #define TU3_Init_METHOD_ENABLED        /*!< Init method of the component TU3 is enabled (generated) */
+#define TU3_Enable_METHOD_ENABLED      /*!< Enable method of the component TU3 is enabled (generated) */
+#define TU3_Disable_METHOD_ENABLED     /*!< Disable method of the component TU3 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define TU3_OnCounterRestart_EVENT_ENABLED /*!< OnCounterRestart event of the component TU3 is enabled (generated) */
@@ -162,6 +166,48 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* TU3_Init(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  TU3_Enable (component TimerUnit_LDD)
+*/
+/*!
+**     @brief
+**         Enables the component - it starts the signal generation.
+**         Events may be generated (see SetEventMask). The method is
+**         not available if the counter can't be disabled/enabled by HW.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TU3_Enable(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  TU3_Disable (component TimerUnit_LDD)
+*/
+/*!
+**     @brief
+**         Disables the component - it stops signal generation and
+**         events calling. The method is not available if the counter
+**         can't be disabled/enabled by HW.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TU3_Disable(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================

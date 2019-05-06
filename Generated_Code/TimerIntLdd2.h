@@ -7,7 +7,7 @@
 **     Version     : Component 01.018, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-05, 01:59, # CodeGen: 141
+**     Date/Time   : 2019-05-06, 12:42, # CodeGen: 154
 **     Abstract    :
 **          This TimerInt component implements a periodic interrupt.
 **          When the component and its events are enabled, the "OnInterrupt"
@@ -23,9 +23,9 @@
 **          Interrupt service/event                        : Enabled
 **            Interrupt                                    : INT_TPM2
 **            Interrupt priority                           : medium priority
-**          Interrupt period                               : 16.666667 ms
+**          Interrupt period                               : 400 ms
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Auto initialization                          : yes
 **            Event mask                                   : 
 **              OnInterrupt                                : Enabled
@@ -41,7 +41,9 @@
 **          Referenced components                          : 
 **            Linked TimerUnit                             : TU3
 **     Contents    :
-**         Init - LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr);
+**         Init    - LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr);
+**         Enable  - LDD_TError TimerIntLdd2_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable - LDD_TError TimerIntLdd2_Disable(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -119,6 +121,8 @@ extern "C" {
 
 /* Methods configuration constants - generated for all enabled component's methods */
 #define TimerIntLdd2_Init_METHOD_ENABLED /*!< Init method of the component TimerIntLdd2 is enabled (generated) */
+#define TimerIntLdd2_Enable_METHOD_ENABLED /*!< Enable method of the component TimerIntLdd2 is enabled (generated) */
+#define TimerIntLdd2_Disable_METHOD_ENABLED /*!< Disable method of the component TimerIntLdd2 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define TimerIntLdd2_OnInterrupt_EVENT_ENABLED /*!< OnInterrupt event of the component TimerIntLdd2 is enabled (generated) */
@@ -150,6 +154,46 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  TimerIntLdd2_Enable (component TimerInt_LDD)
+*/
+/*!
+**     @brief
+**         Enables the component - it starts the signal generation.
+**         Events may be generated (see SetEventMask).
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TimerIntLdd2_Enable(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  TimerIntLdd2_Disable (component TimerInt_LDD)
+*/
+/*!
+**     @brief
+**         Disables the component - it stops signal generation and
+**         events calling.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TimerIntLdd2_Disable(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================

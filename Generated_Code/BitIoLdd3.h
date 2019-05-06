@@ -7,7 +7,7 @@
 **     Version     : Component 01.033, Driver 01.03, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
+**     Date/Time   : 2019-05-06, 15:42, # CodeGen: 160
 **     Abstract    :
 **         The HAL BitIO component provides a low level API for unified
 **         access to general purpose digital input/output pins across
@@ -19,7 +19,7 @@
 **          Component name                                 : BitIoLdd3
 **          Pin for I/O                                    : PTE2/SPI1_SCK
 **          Pin signal                                     : 
-**          Direction                                      : Input/Output
+**          Direction                                      : Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
@@ -27,7 +27,6 @@
 **          Safe mode                                      : yes
 **     Contents    :
 **         Init   - LDD_TDeviceData* BitIoLdd3_Init(LDD_TUserData *UserDataPtr);
-**         SetDir - void BitIoLdd3_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
 **         GetVal - bool BitIoLdd3_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **         PutVal - void BitIoLdd3_PutVal(LDD_TDeviceData *DeviceDataPtr, bool Val);
 **         ClrVal - void BitIoLdd3_ClrVal(LDD_TDeviceData *DeviceDataPtr);
@@ -110,7 +109,6 @@ extern "C" {
 
 /* Methods configuration constants - generated for all enabled component's methods */
 #define BitIoLdd3_Init_METHOD_ENABLED  /*!< Init method of the component BitIoLdd3 is enabled (generated) */
-#define BitIoLdd3_SetDir_METHOD_ENABLED /*!< SetDir method of the component BitIoLdd3 is enabled (generated) */
 #define BitIoLdd3_GetVal_METHOD_ENABLED /*!< GetVal method of the component BitIoLdd3 is enabled (generated) */
 #define BitIoLdd3_PutVal_METHOD_ENABLED /*!< PutVal method of the component BitIoLdd3 is enabled (generated) */
 #define BitIoLdd3_ClrVal_METHOD_ENABLED /*!< ClrVal method of the component BitIoLdd3 is enabled (generated) */
@@ -146,25 +144,6 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* BitIoLdd3_Init(LDD_TUserData *UserDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  BitIoLdd3_SetDir (component BitIO_LDD)
-*/
-/*!
-**     @brief
-**         Sets a pin direction (available only if the direction =
-**         _[input/output]_).
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @param
-**         Dir             - Direction to set. Possible values:
-**                           <false> - Input
-**                           <true> - Output
-*/
-/* ===================================================================*/
-void BitIoLdd3_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
 
 /*
 ** ===================================================================

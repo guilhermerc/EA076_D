@@ -7,7 +7,7 @@
 **     Version     : Component 01.018, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-05, 02:00, # CodeGen: 142
+**     Date/Time   : 2019-05-06, 12:42, # CodeGen: 154
 **     Abstract    :
 **          This TimerInt component implements a periodic interrupt.
 **          When the component and its events are enabled, the "OnInterrupt"
@@ -23,9 +23,9 @@
 **          Interrupt service/event                        : Enabled
 **            Interrupt                                    : INT_TPM2
 **            Interrupt priority                           : medium priority
-**          Interrupt period                               : 16.666667 ms
+**          Interrupt period                               : 400 ms
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Auto initialization                          : yes
 **            Event mask                                   : 
 **              OnInterrupt                                : Enabled
@@ -41,7 +41,9 @@
 **          Referenced components                          : 
 **            Linked TimerUnit                             : TU3
 **     Contents    :
-**         Init - LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr);
+**         Init    - LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr);
+**         Enable  - LDD_TError TimerIntLdd2_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable - LDD_TError TimerIntLdd2_Disable(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -145,7 +147,7 @@ LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr)
   /* {Default RTOS Adapter} Driver memory allocation: Dynamic allocation is simulated by a pointer to the static object */
   DeviceDataPrv = &DeviceDataPrv__DEFAULT_RTOS_ALLOC;
   DeviceDataPrv->UserDataPtr = UserDataPtr; /* Store the RTOS device structure */
-  DeviceDataPrv->EnUser = TRUE;        /* Set the flag "device enabled" */
+  DeviceDataPrv->EnUser = FALSE;       /* Set the flag "device disabled" */
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_TimerIntLdd2_ID,DeviceDataPrv);
   DeviceDataPrv->LinkedDeviceDataPtr = TU3_Init((LDD_TUserData *)NULL);
@@ -157,6 +159,64 @@ LDD_TDeviceData* TimerIntLdd2_Init(LDD_TUserData *UserDataPtr)
     return NULL;                       /* If so, then the TimerInt initialization is also unsuccessful */
   }
   return ((LDD_TDeviceData *)DeviceDataPrv); /* Return pointer to the device data structure */
+}
+
+/*
+** ===================================================================
+**     Method      :  TimerIntLdd2_Enable (component TimerInt_LDD)
+*/
+/*!
+**     @brief
+**         Enables the component - it starts the signal generation.
+**         Events may be generated (see SetEventMask).
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TimerIntLdd2_Enable(LDD_TDeviceData *DeviceDataPtr)
+{
+  TimerIntLdd2_TDeviceData *DeviceDataPrv = (TimerIntLdd2_TDeviceData *)DeviceDataPtr;
+
+  if (!DeviceDataPrv->EnUser) {        /* Is the device disabled by user? */
+    DeviceDataPrv->EnUser = TRUE;      /* If yes then set the flag "device enabled" */
+    (void)TU3_Enable(DeviceDataPrv->LinkedDeviceDataPtr); /* Enable TimerUnit */
+  }
+  return ERR_OK;
+}
+
+/*
+** ===================================================================
+**     Method      :  TimerIntLdd2_Disable (component TimerInt_LDD)
+*/
+/*!
+**     @brief
+**         Disables the component - it stops signal generation and
+**         events calling.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - The component does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError TimerIntLdd2_Disable(LDD_TDeviceData *DeviceDataPtr)
+{
+  TimerIntLdd2_TDeviceData *DeviceDataPrv = (TimerIntLdd2_TDeviceData *)DeviceDataPtr;
+
+  if (DeviceDataPrv->EnUser) {         /* Is the device enabled by user? */
+    DeviceDataPrv->EnUser = FALSE;     /* If yes then set the flag "device enabled" */
+   (void)TU3_Disable(DeviceDataPrv->LinkedDeviceDataPtr); /* Disable TimerUnit component */
+  }
+  return ERR_OK;
 }
 
 /*

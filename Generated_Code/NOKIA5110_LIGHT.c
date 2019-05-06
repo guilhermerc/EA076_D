@@ -7,10 +7,11 @@
 **     Version     : Component 02.086, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
+**     Date/Time   : 2019-05-06, 15:42, # CodeGen: 160
 **     Abstract    :
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
+**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 **     Settings    :
@@ -18,14 +19,13 @@
 **          Pin for I/O                                    : PTE2/SPI1_SCK
 **          Pin signal                                     : 
 **          BitIO_LDD                                      : BitIO_LDD
-**          Direction                                      : Input/Output
+**          Direction                                      : Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
 **          Safe mode                                      : yes
 **          Optimization for                               : speed
 **     Contents    :
-**         SetDir - void NOKIA5110_LIGHT_SetDir(bool Dir);
 **         GetVal - bool NOKIA5110_LIGHT_GetVal(void);
 **         PutVal - void NOKIA5110_LIGHT_PutVal(bool Val);
 **         ClrVal - void NOKIA5110_LIGHT_ClrVal(void);
@@ -68,6 +68,7 @@
 ** @brief
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
+**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 */         
@@ -86,30 +87,13 @@ extern "C" {
 
 /*
 ** ===================================================================
-**     Method      :  NOKIA5110_LIGHT_SetDir (component BitIO)
-**     Description :
-**         This method sets direction of the component.
-**     Parameters  :
-**         NAME       - DESCRIPTION
-**         Dir        - Direction to set (FALSE or TRUE)
-**                      FALSE = Input, TRUE = Output
-**     Returns     : Nothing
-** ===================================================================
-*/
-/*
-void NOKIA5110_LIGHT_SetDir(bool Dir)
-
-**  This method is implemented as a macro. See NOKIA5110_LIGHT.h file.  **
-*/
-
-/*
-** ===================================================================
 **     Method      :  NOKIA5110_LIGHT_GetVal (component BitIO)
 **     Description :
 **         This method returns an input value.
 **           a) direction = Input  : reads the input value from the
 **                                   pin and returns it
 **           b) direction = Output : returns the last written value
+**         Note: This component is set to work in Output direction only.
 **     Parameters  : None
 **     Returns     :
 **         ---             - Input value. Possible values:
@@ -129,13 +113,6 @@ bool NOKIA5110_LIGHT_GetVal(void)
 **     Method      :  NOKIA5110_LIGHT_PutVal (component BitIO)
 **     Description :
 **         This method writes the new output value.
-**           a) direction = Input  : sets the new output value;
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes the value to the
-**                                   appropriate pin
 **     Parameters  :
 **         NAME       - DESCRIPTION
 **         Val             - Output value. Possible values:
@@ -155,13 +132,6 @@ void NOKIA5110_LIGHT_PutVal(bool Val)
 **     Method      :  NOKIA5110_LIGHT_ClrVal (component BitIO)
 **     Description :
 **         This method clears (sets to zero) the output value.
-**           a) direction = Input  : sets the output value to "0";
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes "0" to the
-**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
@@ -177,13 +147,6 @@ void NOKIA5110_LIGHT_ClrVal(void)
 **     Method      :  NOKIA5110_LIGHT_SetVal (component BitIO)
 **     Description :
 **         This method sets (sets to one) the output value.
-**           a) direction = Input  : sets the output value to "1";
-**                                   this operation will be shown on
-**                                   output after the direction has
-**                                   been switched to output
-**                                   (SetDir(TRUE);)
-**           b) direction = Output : directly writes "1" to the
-**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

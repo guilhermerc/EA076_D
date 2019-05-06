@@ -7,7 +7,7 @@
 **     Version     : Component 01.033, Driver 01.03, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-04, 19:17, # CodeGen: 129
+**     Date/Time   : 2019-05-06, 15:42, # CodeGen: 160
 **     Abstract    :
 **         The HAL BitIO component provides a low level API for unified
 **         access to general purpose digital input/output pins across
@@ -19,7 +19,7 @@
 **          Component name                                 : BitIoLdd3
 **          Pin for I/O                                    : PTE2/SPI1_SCK
 **          Pin signal                                     : 
-**          Direction                                      : Input/Output
+**          Direction                                      : Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
@@ -27,7 +27,6 @@
 **          Safe mode                                      : yes
 **     Contents    :
 **         Init   - LDD_TDeviceData* BitIoLdd3_Init(LDD_TUserData *UserDataPtr);
-**         SetDir - void BitIoLdd3_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
 **         GetVal - bool BitIoLdd3_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **         PutVal - void BitIoLdd3_PutVal(LDD_TDeviceData *DeviceDataPtr, bool Val);
 **         ClrVal - void BitIoLdd3_ClrVal(LDD_TDeviceData *DeviceDataPtr);
@@ -147,35 +146,6 @@ LDD_TDeviceData* BitIoLdd3_Init(LDD_TUserData *UserDataPtr)
 }
 /*
 ** ===================================================================
-**     Method      :  BitIoLdd3_SetDir (component BitIO_LDD)
-*/
-/*!
-**     @brief
-**         Sets a pin direction (available only if the direction =
-**         _[input/output]_).
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @param
-**         Dir             - Direction to set. Possible values:
-**                           <false> - Input
-**                           <true> - Output
-*/
-/* ===================================================================*/
-void BitIoLdd3_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir)
-{
-  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
-  if (Dir) {
-    /* Output */
-    GPIO_PDD_SetPortOutputDirectionMask(BitIoLdd3_MODULE_BASE_ADDRESS, BitIoLdd3_PORT_MASK);
-  } else {
-    /* Input */
-    GPIO_PDD_SetPortInputDirectionMask(BitIoLdd3_MODULE_BASE_ADDRESS, BitIoLdd3_PORT_MASK);
-  }
-}
-
-/*
-** ===================================================================
 **     Method      :  BitIoLdd3_GetVal (component BitIO_LDD)
 */
 /*!
@@ -199,13 +169,7 @@ bool BitIoLdd3_GetVal(LDD_TDeviceData *DeviceDataPtr)
   uint32_t PortData;                   /* Port data masked according to the bit used */
 
   (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
-  if ((GPIO_PDD_GetPortDirection(BitIoLdd3_MODULE_BASE_ADDRESS) & BitIoLdd3_PORT_MASK) == 0U) {
-    /* Port is configured as input */
-    PortData = GPIO_PDD_GetPortDataInput(BitIoLdd3_MODULE_BASE_ADDRESS) & BitIoLdd3_PORT_MASK;
-  } else {
-    /* Port is configured as output */
-    PortData = GPIO_PDD_GetPortDataOutput(BitIoLdd3_MODULE_BASE_ADDRESS) & BitIoLdd3_PORT_MASK;
-  }
+  PortData = GPIO_PDD_GetPortDataOutput(BitIoLdd3_MODULE_BASE_ADDRESS) & BitIoLdd3_PORT_MASK;
   return (PortData != 0U) ? (bool)TRUE : (bool)FALSE;
 }
 

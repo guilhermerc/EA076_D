@@ -7,7 +7,7 @@
 **     Version     : Component 02.161, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-05, 02:00, # CodeGen: 142
+**     Date/Time   : 2019-05-06, 12:42, # CodeGen: 154
 **     Abstract    :
 **         This component "TimerInt" implements a periodic interrupt.
 **         When the component and its events are enabled, the "OnInterrupt"
@@ -22,11 +22,11 @@
 **          Interrupt service/event                        : Enabled
 **            Interrupt                                    : INT_TPM2
 **            Interrupt priority                           : medium priority
-**          Interrupt period                               : 16.666667 ms
+**          Interrupt period                               : 400 ms
 **          Same period in modes                           : yes
 **          Component uses entire timer                    : no
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Events enabled in init.                      : yes
 **          CPU clock/speed selection                      : 
 **            High speed mode                              : This component enabled
@@ -35,7 +35,8 @@
 **          Referenced components                          : 
 **            TimerInt_LDD                                 : TimerInt_LDD
 **     Contents    :
-**         No public methods
+**         Enable  - byte TimerInt1_Enable(void);
+**         Disable - byte TimerInt1_Disable(void);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -105,6 +106,38 @@ extern "C" {
 
 
 
+
+/*
+** ===================================================================
+**     Method      :  TimerInt1_Enable (component TimerInt)
+**     Description :
+**         This method enables the component - it starts the timer.
+**         Events may be generated (<DisableEvent>/<EnableEvent>).
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
+#define TimerInt1_Enable() (TimerIntLdd2_Enable(TimerIntLdd2_DeviceData))
+
+/*
+** ===================================================================
+**     Method      :  TimerInt1_Disable (component TimerInt)
+**     Description :
+**         This method disables the component - it stops the timer. No
+**         events will be generated.
+**     Parameters  : None
+**     Returns     :
+**         ---             - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active speed mode
+** ===================================================================
+*/
+#define TimerInt1_Disable() (TimerIntLdd2_Disable(TimerIntLdd2_DeviceData))
 
 /*
 ** ===================================================================
