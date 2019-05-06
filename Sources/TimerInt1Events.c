@@ -30,8 +30,6 @@
 #include <PE_Types.h>
 #include <stamp.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <string.h>
 #include <temp.h>
 #include <UTIL1.h>
 #include "TimerInt1Events.h"
@@ -53,6 +51,8 @@ typedef enum
 #define DISPLAY_STATE_ENUM_RANGE	2
 
 #define ITERATION_MAX	4
+
+static LDD_RTC_TTime current_time;
 
 /*! @brief A timer interrupt handler used to update the display
  *
@@ -93,12 +93,11 @@ void TI1_OnInterrupt0(void)
 	static DISPLAY_STATE_ENUM state = CLEANING;
 	static uint8_t iteration = 1;
 
-	static LDD_RTC_TTime time;
-
 	/*! TODO: Check if the current implementation makes sense, I'm sleepy */
 
 	switch(state)
 	{
+
 	/*! Cleans each line (being used: 1-3) of the display */
 	case CLEANING:
 	{
@@ -115,8 +114,8 @@ void TI1_OnInterrupt0(void)
 	/*! Gets the current time from RTC module */
 	case GETTING_CURR_TIME:
 	{
-		stamp_get_time(&time);
-
+		stamp_get_time(&current_time);
+		//RTC_GetTime(RTC_dd_ptr, &current_time);
 		state = ASSEMBLING_STRING;
 
 		break;
@@ -127,38 +126,40 @@ void TI1_OnInterrupt0(void)
 	{
 		if(iteration == 1)
 		{
-			/*! Assembles the string "Date:     MM/DD/YYYY" */
+			/*! Assembles the string "    MM/DD/YYYY" */
 			UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE,
-					"Date: ");
+					"    ");
 			UTIL1_strcatNum32uFormatted(line_string,
-								DISPLAY_LINE_STRING_SIZE, time.Month, '0', 2);
+								DISPLAY_LINE_STRING_SIZE, current_time.Month, '0', 2);
 			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, "/");
 			UTIL1_strcatNum32uFormatted(line_string,
-					DISPLAY_LINE_STRING_SIZE, time.Day, '0', 2);
+					DISPLAY_LINE_STRING_SIZE, current_time.Day, '0', 2);
 			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, "/");
 			UTIL1_strcatNum32uFormatted(line_string,
-					DISPLAY_LINE_STRING_SIZE, time.Year, '0', 4);
+					DISPLAY_LINE_STRING_SIZE, current_time.Year, '0', 4);
 		}
 		else if(iteration == 2)
 		{
-			/*! Assembles the string "Time:       HH:MM:SS" */
+
+			/*! Assembles the string "Time: HH:MM:SS" */
 			UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE,
 					"Time: ");
 			UTIL1_strcatNum32uFormatted(line_string,
-					DISPLAY_LINE_STRING_SIZE, time.Hour, '0', 2);
+					DISPLAY_LINE_STRING_SIZE, current_time.Hour, '0', 2);
 			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, ":");
 			UTIL1_strcatNum32uFormatted(line_string,
-					DISPLAY_LINE_STRING_SIZE, time.Minute, '0', 2);
+					DISPLAY_LINE_STRING_SIZE, current_time.Minute, '0', 2);
 			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, ":");
 			UTIL1_strcatNum32uFormatted(line_string,
-					DISPLAY_LINE_STRING_SIZE, time.Second, '0', 2);
+					DISPLAY_LINE_STRING_SIZE, current_time.Second, '0', 2);
 		}
 		else if(iteration == 3)
 		{
-			/*! Assembles the string "Temperature:    TT.T" */
+			/*! Assembles the string "Temp:   TT.T C" */
 			UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE,
-								"Temperature: ");
+					"Temp:   ");
 			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, temp_info.message);
+			UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, " C");
 		}
 
 		state = WRITING_STRING;
