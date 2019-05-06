@@ -37,6 +37,10 @@
 #include <temp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+/*! List of TODO's that as soon as I have time I'll integrate
+ *
+ *  TODO: Use the average calculation integrated in the ADC component (PE)
+ *  TODO: Change ANTICLOCKWISE to CLOCKWISE
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
