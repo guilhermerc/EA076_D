@@ -21,9 +21,9 @@
 #define CURRENT_MINUTE		0
 #define CURRENT_HOUR		0
 #define CURRENT_DAY_OF_WEEK	0
-#define CURRENT_DAY			0
-#define CURRENT_MONTH		0
-#define CURRENT_YEAR		0
+#define CURRENT_DAY			1
+#define CURRENT_MONTH		1
+#define CURRENT_YEAR		2000
 
 static void stamp_set_time(uint32_t second, uint32_t minute, uint32_t hour,
 		uint32_t day_of_week, uint32_t day, uint32_t month, uint32_t year);
@@ -56,7 +56,8 @@ void stamp_get_time(LDD_RTC_TTime * current_time_ptr)
 void stamp_set_current_time(uint32_t second, uint32_t minute,
 		uint32_t hour)
 {
-	stamp_set_time(second, minute, hour, 0, 0, 0, 0);
+	stamp_set_time(second, minute, hour, CURRENT_DAY_OF_WEEK,
+			CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
 }
 
 /*! @brief A function that sets the current time in the RTC
