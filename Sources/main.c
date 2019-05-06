@@ -52,8 +52,8 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the communication, dc motor, temperature, stamp,
-	 * and event ring buffer modules
+	 * Initializing the communication, display, event buffer, motor,
+	 * time stamp and temperature modules
 	 */
 	comm_init();
 	display_init();
