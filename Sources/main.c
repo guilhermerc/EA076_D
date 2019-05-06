@@ -35,6 +35,7 @@
 #include <motor.h>
 #include <stamp.h>
 #include <temp.h>
+#include <TimerInt1Events.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 /*! List of TODO's that as soon as I have time I'll integrate
@@ -42,6 +43,7 @@
  *	TODO: Check with the event ring buffer indexes are properly changed
  *  TODO: Use the average calculation integrated in the ADC component (PE)
  *  TODO: Change ANTICLOCKWISE to CLOCKWISE
+ *  TODO: Change what have to be changed due to the correct size of display = 14
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -61,12 +63,13 @@ int main(void)
 	 * Initializing the communication, display, event buffer, motor,
 	 * time stamp and temperature modules
 	 */
-	comm_init();
 	display_init();
 	event_buff_init();
 	motor_init();
 	stamp_init();
 	temp_init();
+
+	comm_init();
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to
@@ -76,6 +79,7 @@ int main(void)
 	{
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
+		TI1_OnInterrupt0();
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
