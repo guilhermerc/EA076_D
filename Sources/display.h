@@ -5,11 +5,19 @@
  *      Author: guilherme
  */
 
+/*!
+ * @file display.h
+ * @brief This file exports what is necessary from display.c
+ *
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
+ */
+
 #ifndef SOURCES_DISPLAY_H_
 #define SOURCES_DISPLAY_H_
 
 #include <PE_Types.h>
 
+/*! TODO: Check the width of the display */
 #define DISPLAY_LINE_STRING_SIZE	20
 
 void display_init();
