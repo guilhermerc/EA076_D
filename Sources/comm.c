@@ -13,9 +13,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <UART2.h>
 #include <UART2Events.h>
-#include <UTIL1.h>
 
 #define WIFI_SSID "\"EA076R\""
 #define WIFI_PASSWORD "\"FRDMKL25\""
@@ -405,10 +405,9 @@ void comm_parse()
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], TIME_ADJUSTMENT_TOPIC_WQ) == 0)
 			{
-				/*! TODO: Test this. */
-				uint8_t hour = 0, minute = 0, second = 0;
-				UTIL1_ScanTime(&(tokens[MESSAGE_INDEX]), &hour, &minute, &second, NULL);
-				stamp_set_current_time(second, minute, hour);
+				struct tm time;
+				strptime(tokens[MESSAGE_INDEX], "%T", &time);
+				stamp_set_current_time(time.tm_sec, time.tm_min, time.tm_hour);
 			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))
