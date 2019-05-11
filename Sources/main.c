@@ -44,6 +44,8 @@
  *  TODO: Use the average calculation integrated in the ADC component (PE)
  *  TODO: Change ANTICLOCKWISE to CLOCKWISE
  *  TODO: Change what have to be changed due to the correct size of display = 14
+ *  TODO: Encapsulate the TI1_OnInterrupt0() handler in the display library
+ *  TODO: Call the above mentioned handler at each 1 sec in the RTC 1 sec interruption
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
