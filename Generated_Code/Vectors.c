@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
 **     Abstract    :
 **
 **     Settings    :
@@ -84,12 +84,29 @@
   #include "BitIoLdd1.h"
   #include "TimerInt1.h"
   #include "TimerIntLdd2.h"
+  #include "KBOARDC1.h"
+  #include "ExtIntLdd1.h"
+  #include "KBOARDC2.h"
+  #include "ExtIntLdd2.h"
+  #include "KBOARDC3.h"
+  #include "ExtIntLdd3.h"
+  #include "KBOARDR1.h"
+  #include "BitIoLdd4.h"
+  #include "KBOARDR2.h"
+  #include "BitIoLdd5.h"
+  #include "KBOARDR3.h"
+  #include "BitIoLdd6.h"
+  #include "KBOARDR4.h"
+  #include "BitIoLdd7.h"
   #include "Events.h"
   #include "ADC0Events.h"
   #include "TimerInt0Events.h"
   #include "UART0Events.h"
   #include "UART2Events.h"
   #include "TimerInt1Events.h"
+  #include "KBOARDC1Events.h"
+  #include "KBOARDC2Events.h"
+  #include "KBOARDC3Events.h"
 
 
   /* ISR prototype */
@@ -154,7 +171,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x2B  0x000000AC   -   ivINT_MCG                     unused by PE */
     (tIsrFunc)&TU1_Interrupt,          /* 0x2C  0x000000B0   2   ivINT_LPTMR0                  used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x2D  0x000000B4   -   ivINT_Reserved45              unused by PE */
-    (tIsrFunc)&CPU_Interrupt,          /* 0x2E  0x000000B8   -   ivINT_PORTA                   unused by PE */
+    (tIsrFunc)&CPU_ivINT_PORTA,        /* 0x2E  0x000000B8   2   ivINT_PORTA                   used by PE */
     (tIsrFunc)&CPU_Interrupt           /* 0x2F  0x000000BC   -   ivINT_PORTD                   unused by PE */
     }
   };

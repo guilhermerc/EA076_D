@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
 **     Abstract    :
 **
 **     Settings    :
@@ -90,6 +90,20 @@
 #include "BitIoLdd1.h"
 #include "TimerInt1.h"
 #include "TimerIntLdd2.h"
+#include "KBOARDC1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARDC2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARDC3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARDR1.h"
+#include "BitIoLdd4.h"
+#include "KBOARDR2.h"
+#include "BitIoLdd5.h"
+#include "KBOARDR3.h"
+#include "BitIoLdd6.h"
+#include "KBOARDR4.h"
+#include "BitIoLdd7.h"
 
 
 /*

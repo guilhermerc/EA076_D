@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
 **     Abstract    :
 **
 **     Settings    :
@@ -278,6 +278,20 @@
 #include "BitIoLdd1.h"
 #include "TimerInt1.h"
 #include "TimerIntLdd2.h"
+#include "KBOARDC1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARDC2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARDC3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARDR1.h"
+#include "BitIoLdd4.h"
+#include "KBOARDR2.h"
+#include "BitIoLdd5.h"
+#include "KBOARDR3.h"
+#include "BitIoLdd6.h"
+#include "KBOARDR4.h"
+#include "BitIoLdd7.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -288,6 +302,9 @@
 #include "UART0Events.h"
 #include "UART2Events.h"
 #include "TimerInt1Events.h"
+#include "KBOARDC1Events.h"
+#include "KBOARDC2Events.h"
+#include "KBOARDC3Events.h"
 #include "CPU.h"
 
 #ifdef __cplusplus
@@ -298,6 +315,23 @@ extern "C" {
 volatile uint8_t SR_reg;               /* Current value of the FAULTMASK register */
 volatile uint8_t SR_lock = 0x00U;      /* Lock */
 
+
+/*
+** ===================================================================
+**     Method      :  CPU_CPU_ivINT_PORTA (component MKL25Z128LK4)
+**
+**     Description :
+**         This ISR services the ivINT_PORTA interrupt shared by several 
+**         components.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+PE_ISR(CPU_ivINT_PORTA)
+{
+  ExtIntLdd1_Interrupt();              /* Call the service routine */
+  ExtIntLdd2_Interrupt();              /* Call the service routine */
+  ExtIntLdd3_Interrupt();              /* Call the service routine */
+}
 
 /*
 ** ===================================================================
@@ -348,8 +382,9 @@ void __init_hardware(void)
   /* System clock initialization */
   /* SIM_CLKDIV1: OUTDIV1=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,OUTDIV4=3,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0 */
   SIM_CLKDIV1 = (SIM_CLKDIV1_OUTDIV1(0x00) | SIM_CLKDIV1_OUTDIV4(0x03)); /* Set the system prescalers to safe value */
-  /* SIM_SCGC5: PORTE=1,PORTC=1,PORTB=1,PORTA=1 */
+  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTC=1,PORTB=1,PORTA=1 */
   SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK |
+               SIM_SCGC5_PORTD_MASK |
                SIM_SCGC5_PORTC_MASK |
                SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
@@ -474,6 +509,8 @@ void PE_low_level_init(void)
   /* SMC_PMPROT: ??=0,??=0,AVLP=0,??=0,ALLS=0,??=0,AVLLS=0,??=0 */
   SMC_PMPROT = 0x00U;                  /* Setup Power mode protection register */
   /* Common initialization of the CPU registers */
+  /* GPIOA_PDDR: PDD&=~0x3020 */
+  GPIOA_PDDR &= (uint32_t)~(uint32_t)(GPIO_PDDR_PDD(0x3020));
   /* PORTC_PCR3: ISF=0,MUX=5 */
   PORTC_PCR3 = (uint32_t)((PORTC_PCR3 & (uint32_t)~(uint32_t)(
                 PORT_PCR_ISF_MASK |
@@ -514,6 +551,20 @@ void PE_low_level_init(void)
   /* ### TimerInt_LDD "TimerIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)TimerIntLdd2_Init(NULL);
   /* ### TimerInt "TimerInt1" init code ... */
+  /* ### ExtInt_LDD "ExtIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)ExtIntLdd1_Init(NULL);
+  /* ### ExtInt_LDD "ExtIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)ExtIntLdd2_Init(NULL);
+  /* ### ExtInt_LDD "ExtIntLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)ExtIntLdd3_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd4" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd4_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd5" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd5_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd6" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd6_Init(NULL);
+  /* ### BitIO_LDD "BitIoLdd7" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)BitIoLdd7_Init(NULL);
   __EI();
 }
   /* Flash configuration field */
