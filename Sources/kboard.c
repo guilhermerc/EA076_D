@@ -17,7 +17,6 @@
 #include <stdint.h>
 
 void kboard_activate_rows();
-void kboard_deactivate_rows();
 
 void kboard_init()
 {
@@ -45,30 +44,28 @@ void kboard_init()
 	KBOARDC3_Enable();
 }
 
-void kboard_scan_row(uint8_t row)
+void kboard_deactivate_row(uint8_t row)
 {
-	kboard_deactivate_rows();
-
 	switch(row)
 	{
 	case 1:
 	{
-		KBOARDR1_ClrVal();
+		KBOARDR1_SetVal();
 		break;
 	}
 	case 2:
 	{
-		KBOARDR2_ClrVal();
+		KBOARDR2_SetVal();
 		break;
 	}
 	case 3:
 	{
-		KBOARDR3_ClrVal();
+		KBOARDR3_SetVal();
 		break;
 	}
 	case 4:
 	{
-		KBOARDR4_ClrVal();
+		KBOARDR4_SetVal();
 		break;
 	}
 	}
@@ -80,12 +77,4 @@ void kboard_activate_rows()
 	KBOARDR2_ClrVal();
 	KBOARDR3_ClrVal();
 	KBOARDR4_ClrVal();
-}
-
-void kboard_deactivate_rows()
-{
-	KBOARDR1_SetVal();
-	KBOARDR2_SetVal();
-	KBOARDR3_SetVal();
-	KBOARDR4_SetVal();
 }
