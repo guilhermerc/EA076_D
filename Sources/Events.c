@@ -28,7 +28,12 @@
 */         
 /* MODULE Events */
 
+#include <kboard.h>
+#include <WAIT1.h>
+#include "CPU.h"
 #include "Events.h"
+
+#include <PORT_PDD.h>
 
 
 #ifdef __cplusplus
@@ -72,6 +77,61 @@ void CPU_OnNMIINT(void)
 void Cpu_OnNMIINT(void)
 {
   /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  KBOARDC3_OnInterrupt (module Events)
+**
+**     Component   :  KBOARDC3 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void KBOARDC3_OnInterrupt(void)
+{
+	WAIT1_Waitms(300);
+	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C3_PIN);
+}
+
+
+/*
+** ===================================================================
+**     Event       :  KBOARDC2_OnInterrupt (module Events)
+**
+**     Component   :  KBOARDC2 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void KBOARDC2_OnInterrupt(void)
+{
+	WAIT1_Waitms(300);
+	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C2_PIN);
+}
+
+/*
+** ===================================================================
+**     Event       :  KBOARDC1_OnInterrupt (module Events)
+**
+**     Component   :  KBOARDC1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void KBOARDC1_OnInterrupt(void)
+{
+	WAIT1_Waitms(300);
+	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C1_PIN);
 }
 
 /* END Events */

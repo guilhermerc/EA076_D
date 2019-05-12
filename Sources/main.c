@@ -27,15 +27,8 @@
  */
 /* MODULE main */
 
-#include <comm.h>
 #include <CPU.h>
-#include <display.h>
-#include <event_buff.h>
-#include <event_handler.h>
-#include <motor.h>
-#include <stamp.h>
-#include <temp.h>
-#include <TimerInt1Events.h>
+#include <kboard.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 /*! List of TODO's that as soon as I have time I'll integrate
@@ -65,23 +58,19 @@ int main(void)
 	 * Initializing the communication, display, event buffer, motor,
 	 * time stamp and temperature modules
 	 */
-	display_init();
-	event_buff_init();
-	motor_init();
-	stamp_init();
-	temp_init();
 
-	comm_init();
-
+	kboard_init();
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to
 	 * be handled.
 	 */
 	for(;;)
 	{
+		/*
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
 		TI1_OnInterrupt0();
+		*/
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
