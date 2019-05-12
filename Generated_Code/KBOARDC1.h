@@ -7,7 +7,7 @@
 **     Version     : Component 02.105, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 02:29, # CodeGen: 199
+**     Date/Time   : 2019-05-12, 14:40, # CodeGen: 223
 **     Abstract    :
 **         This component "ExtInt" implements an external 
 **         interrupt, its control methods and interrupt/event 
@@ -25,9 +25,8 @@
 **          Initialization                                 : 
 **            Enabled in init. code                        : no
 **     Contents    :
-**         Enable  - void KBOARDC1_Enable(void);
-**         Disable - void KBOARDC1_Disable(void);
-**         GetVal  - bool KBOARDC1_GetVal(void);
+**         Enable - void KBOARDC1_Enable(void);
+**         GetVal - bool KBOARDC1_GetVal(void);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -109,19 +108,6 @@ extern "C" {
 ** ===================================================================
 */
 #define KBOARDC1_Enable() (ExtIntLdd1_Enable(ExtIntLdd1_DeviceData))
-
-/*
-** ===================================================================
-**     Method      :  KBOARDC1_Disable (component ExtInt)
-**     Description :
-**         Disable the component - the external events are not accepted.
-**         This method is available only if HW module allows
-**         enable/disable of the interrupt.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-#define KBOARDC1_Disable() (ExtIntLdd1_Disable(ExtIntLdd1_DeviceData))
 
 /*
 ** ===================================================================

@@ -7,7 +7,7 @@
 **     Version     : Component 02.156, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 02:29, # CodeGen: 199
+**     Date/Time   : 2019-05-12, 14:40, # CodeGen: 223
 **     Abstract    :
 **         This component, "ExtInt_LDD", provide a low level API 
 **         for unified access of external interrupts handling
@@ -25,10 +25,9 @@
 **            Enabled in init. code                        : no
 **            Auto initialization                          : yes
 **     Contents    :
-**         Init    - LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr);
-**         Enable  - void ExtIntLdd1_Enable(LDD_TDeviceData *DeviceDataPtr);
-**         Disable - void ExtIntLdd1_Disable(LDD_TDeviceData *DeviceDataPtr);
-**         GetVal  - bool ExtIntLdd1_GetVal(LDD_TDeviceData *DeviceDataPtr);
+**         Init   - LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr);
+**         Enable - void ExtIntLdd1_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         GetVal - bool ExtIntLdd1_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -175,29 +174,6 @@ void ExtIntLdd1_Enable(LDD_TDeviceData *DeviceDataPtr)
   PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
     ExtIntLdd1_PIN_INDEX, PORT_PDD_INTERRUPT_ON_RISING_FALLING);
   DeviceDataPrv->UserEnabled = TRUE;   /* Set device as Enabled */
-}
-
-/*
-** ===================================================================
-**     Method      :  ExtIntLdd1_Disable (component ExtInt_LDD)
-*/
-/*!
-**     @brief
-**         Disable the component - the external events are not accepted.
-**         This method is available only if HW module allows
-**         enable/disable of the interrupt.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-*/
-/* ===================================================================*/
-void ExtIntLdd1_Disable(LDD_TDeviceData *DeviceDataPtr)
-{
-  ExtIntLdd1_TDeviceData *DeviceDataPrv = (ExtIntLdd1_TDeviceData *)DeviceDataPtr;
-
-  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
-    ExtIntLdd1_PIN_INDEX, PORT_PDD_INTERRUPT_DMA_DISABLED);
-  DeviceDataPrv->UserEnabled = FALSE;  /* Set device as Disabled */
 }
 
 /*

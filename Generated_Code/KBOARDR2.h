@@ -7,11 +7,10 @@
 **     Version     : Component 02.086, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 14:13, # CodeGen: 217
 **     Abstract    :
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
-**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 **     Settings    :
@@ -19,13 +18,14 @@
 **          Pin for I/O                                    : PTD3/SPI0_MISO/UART2_TX/TPM0_CH3/SPI0_MOSI
 **          Pin signal                                     : 
 **          BitIO_LDD                                      : BitIO_LDD
-**          Direction                                      : Output
+**          Direction                                      : Input/Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
 **          Safe mode                                      : yes
 **          Optimization for                               : speed
 **     Contents    :
+**         SetDir - void KBOARDR2_SetDir(bool Dir);
 **         GetVal - bool KBOARDR2_GetVal(void);
 **         PutVal - void KBOARDR2_PutVal(bool Val);
 **         ClrVal - void KBOARDR2_ClrVal(void);
@@ -68,7 +68,6 @@
 ** @brief
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
-**         Note: This component is set to work in Output direction only.
 **         Methods of this component are mostly implemented as a macros
 **         (if supported by target language and compiler).
 */         
@@ -88,7 +87,7 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* Include inherited beans */
-#include "BitIoLdd5.h"
+#include "BitIoLdd2.h"
 
 #include "CPU.h"
 
@@ -101,13 +100,26 @@ extern "C" {
 
 /*
 ** ===================================================================
+**     Method      :  KBOARDR2_SetDir (component BitIO)
+**     Description :
+**         This method sets direction of the component.
+**     Parameters  :
+**         NAME       - DESCRIPTION
+**         Dir        - Direction to set (FALSE or TRUE)
+**                      FALSE = Input, TRUE = Output
+**     Returns     : Nothing
+** ===================================================================
+*/
+#define KBOARDR2_SetDir(Dir) (BitIoLdd2_SetDir(BitIoLdd2_DeviceData, (Dir)))
+
+/*
+** ===================================================================
 **     Method      :  KBOARDR2_GetVal (component BitIO)
 **     Description :
 **         This method returns an input value.
 **           a) direction = Input  : reads the input value from the
 **                                   pin and returns it
 **           b) direction = Output : returns the last written value
-**         Note: This component is set to work in Output direction only.
 **     Parameters  : None
 **     Returns     :
 **         ---             - Input value. Possible values:
@@ -116,13 +128,20 @@ extern "C" {
 
 ** ===================================================================
 */
-#define KBOARDR2_GetVal() (BitIoLdd5_GetVal(BitIoLdd5_DeviceData))
+#define KBOARDR2_GetVal() (BitIoLdd2_GetVal(BitIoLdd2_DeviceData))
 
 /*
 ** ===================================================================
 **     Method      :  KBOARDR2_PutVal (component BitIO)
 **     Description :
 **         This method writes the new output value.
+**           a) direction = Input  : sets the new output value;
+**                                   this operation will be shown on
+**                                   output after the direction has
+**                                   been switched to output
+**                                   (SetDir(TRUE);)
+**           b) direction = Output : directly writes the value to the
+**                                   appropriate pin
 **     Parameters  :
 **         NAME       - DESCRIPTION
 **         Val             - Output value. Possible values:
@@ -131,29 +150,43 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR2_PutVal(Val) (BitIoLdd5_PutVal(BitIoLdd5_DeviceData, (Val)))
+#define KBOARDR2_PutVal(Val) (BitIoLdd2_PutVal(BitIoLdd2_DeviceData, (Val)))
 
 /*
 ** ===================================================================
 **     Method      :  KBOARDR2_ClrVal (component BitIO)
 **     Description :
 **         This method clears (sets to zero) the output value.
+**           a) direction = Input  : sets the output value to "0";
+**                                   this operation will be shown on
+**                                   output after the direction has
+**                                   been switched to output
+**                                   (SetDir(TRUE);)
+**           b) direction = Output : directly writes "0" to the
+**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR2_ClrVal() (BitIoLdd5_ClrVal(BitIoLdd5_DeviceData))
+#define KBOARDR2_ClrVal() (BitIoLdd2_ClrVal(BitIoLdd2_DeviceData))
 
 /*
 ** ===================================================================
 **     Method      :  KBOARDR2_SetVal (component BitIO)
 **     Description :
 **         This method sets (sets to one) the output value.
+**           a) direction = Input  : sets the output value to "1";
+**                                   this operation will be shown on
+**                                   output after the direction has
+**                                   been switched to output
+**                                   (SetDir(TRUE);)
+**           b) direction = Output : directly writes "1" to the
+**                                   appropriate pin
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR2_SetVal() (BitIoLdd5_SetVal(BitIoLdd5_DeviceData))
+#define KBOARDR2_SetVal() (BitIoLdd2_SetVal(BitIoLdd2_DeviceData))
 
 /* END KBOARDR2. */
 

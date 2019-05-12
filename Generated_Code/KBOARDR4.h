@@ -7,7 +7,7 @@
 **     Version     : Component 02.086, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 14:13, # CodeGen: 217
 **     Abstract    :
 **         This component "BitIO" implements an one-bit input/output.
 **         It uses one bit/pin of a port.
@@ -88,7 +88,7 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* Include inherited beans */
-#include "BitIoLdd7.h"
+#include "BitIoLdd5.h"
 
 #include "CPU.h"
 
@@ -116,7 +116,7 @@ extern "C" {
 
 ** ===================================================================
 */
-#define KBOARDR4_GetVal() (BitIoLdd7_GetVal(BitIoLdd7_DeviceData))
+#define KBOARDR4_GetVal() (BitIoLdd5_GetVal(BitIoLdd5_DeviceData))
 
 /*
 ** ===================================================================
@@ -131,7 +131,7 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR4_PutVal(Val) (BitIoLdd7_PutVal(BitIoLdd7_DeviceData, (Val)))
+#define KBOARDR4_PutVal(Val) (BitIoLdd5_PutVal(BitIoLdd5_DeviceData, (Val)))
 
 /*
 ** ===================================================================
@@ -142,7 +142,7 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR4_ClrVal() (BitIoLdd7_ClrVal(BitIoLdd7_DeviceData))
+#define KBOARDR4_ClrVal() (BitIoLdd5_ClrVal(BitIoLdd5_DeviceData))
 
 /*
 ** ===================================================================
@@ -153,7 +153,7 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-#define KBOARDR4_SetVal() (BitIoLdd7_SetVal(BitIoLdd7_DeviceData))
+#define KBOARDR4_SetVal() (BitIoLdd5_SetVal(BitIoLdd5_DeviceData))
 
 /* END KBOARDR4. */
 

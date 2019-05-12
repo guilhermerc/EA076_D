@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 01:39, # CodeGen: 189
+**     Date/Time   : 2019-05-12, 15:30, # CodeGen: 228
 **     Abstract    :
 **
 **     Settings    :
@@ -77,13 +77,19 @@
 #include "KBOARDC3.h"
 #include "ExtIntLdd3.h"
 #include "KBOARDR1.h"
-#include "BitIoLdd4.h"
+#include "BitIoLdd1.h"
 #include "KBOARDR2.h"
-#include "BitIoLdd5.h"
+#include "BitIoLdd2.h"
 #include "KBOARDR3.h"
-#include "BitIoLdd6.h"
+#include "BitIoLdd4.h"
 #include "KBOARDR4.h"
+#include "BitIoLdd5.h"
+#include "LEDR.h"
+#include "BitIoLdd6.h"
+#include "LEDG.h"
 #include "BitIoLdd7.h"
+#include "LEDB.h"
+#include "BitIoLdd8.h"
 
 
 /*
