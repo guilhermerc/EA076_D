@@ -12,6 +12,8 @@
 #define KBOARD_C2_PIN	12
 #define KBOARD_C3_PIN	13
 
+#define DEBOUNCING_DELAY	50
+
 void kboard_init();
 
 #endif /* SOURCES_KBOARD_H_ */
