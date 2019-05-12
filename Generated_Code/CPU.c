@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 02:17, # CodeGen: 198
 **     Abstract    :
 **
 **     Settings    :
@@ -249,22 +249,7 @@
 /* MODULE CPU. */
 
 /* {Default RTOS Adapter} No RTOS includes */
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "L293D_1_2_EN.h"
-#include "PwmLdd1.h"
-#include "TU1.h"
 #include "MCUC1.h"
-#include "TU2.h"
-#include "L293D_2A.h"
-#include "BitIoLdd2.h"
 #include "NOKIA5110_CONTROLLER.h"
 #include "RESpin1.h"
 #include "SCEpin1.h"
@@ -273,11 +258,6 @@
 #include "SM1.h"
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
-#include "TU3.h"
-#include "L293D_1A.h"
-#include "BitIoLdd1.h"
-#include "TimerInt1.h"
-#include "TimerIntLdd2.h"
 #include "KBOARDC1.h"
 #include "ExtIntLdd1.h"
 #include "KBOARDC2.h"
@@ -297,14 +277,6 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "Events.h"
-#include "ADC0Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-#include "TimerInt1Events.h"
-#include "KBOARDC1Events.h"
-#include "KBOARDC2Events.h"
-#include "KBOARDC3Events.h"
 #include "CPU.h"
 
 #ifdef __cplusplus
@@ -382,14 +354,11 @@ void __init_hardware(void)
   /* System clock initialization */
   /* SIM_CLKDIV1: OUTDIV1=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,OUTDIV4=3,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0 */
   SIM_CLKDIV1 = (SIM_CLKDIV1_OUTDIV1(0x00) | SIM_CLKDIV1_OUTDIV4(0x03)); /* Set the system prescalers to safe value */
-  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTC=1,PORTB=1,PORTA=1 */
+  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTC=1,PORTA=1 */
   SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK |
                SIM_SCGC5_PORTD_MASK |
                SIM_SCGC5_PORTC_MASK |
-               SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
-  /* SIM_SCGC5: LPTMR=1 */
-  SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
   if ((PMC_REGSC & PMC_REGSC_ACKISO_MASK) != 0x0U) {
     /* PMC_REGSC: ACKISO=1 */
     PMC_REGSC |= PMC_REGSC_ACKISO_MASK; /* Release IO pads after wakeup from VLLS mode. */
@@ -526,31 +495,13 @@ void PE_low_level_init(void)
                 ));
   /* NVIC_IPR1: PRI_6=0 */
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
-  /* ### ADC "ADC0" init code ... */
-  ADC0_Init();
-  /* ### TimerInt_LDD "TimerIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)TimerIntLdd1_Init(NULL);
-  /* ### TimerInt "TimerInt0" init code ... */
-  /* ### Asynchro serial "UART0" init code ... */
-  UART0_Init();
-  /* ### Asynchro serial "UART2" init code ... */
-  UART2_Init();
-  /* ### PWM_LDD "PwmLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)PwmLdd1_Init(NULL);
   MCUC1_Init(); /* ### McuLibConfig "MCUC1" init code ... */
-  /* ### BitIO_LDD "BitIoLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd2_Init(NULL);
   WAIT1_Init(); /* ### Wait "WAIT1" init code ... */
   /* ### SPIMaster_LDD "SM1" component auto initializatation. Auto initialization feature can be disabled by component's property "Auto initialization". */
   (void)SM1_Init(NULL);
   /* ### PDC8544 "NOKIA5110_CONTROLLER" init code ... */
   /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd3_Init(NULL);
-  /* ### BitIO_LDD "BitIoLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd1_Init(NULL);
-  /* ### TimerInt_LDD "TimerIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)TimerIntLdd2_Init(NULL);
-  /* ### TimerInt "TimerInt1" init code ... */
   /* ### ExtInt_LDD "ExtIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)ExtIntLdd1_Init(NULL);
   /* ### ExtInt_LDD "ExtIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */

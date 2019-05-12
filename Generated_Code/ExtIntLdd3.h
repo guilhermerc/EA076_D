@@ -7,7 +7,7 @@
 **     Version     : Component 02.156, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:10, # CodeGen: 166
+**     Date/Time   : 2019-05-12, 02:29, # CodeGen: 199
 **     Abstract    :
 **         This component, "ExtInt_LDD", provide a low level API 
 **         for unified access of external interrupts handling
@@ -18,11 +18,11 @@
 **          Component name                                 : ExtIntLdd3
 **          Pin                                            : PTA13/TPM1_CH1
 **          Pin signal                                     : 
-**          Generate interrupt on                          : rising or falling edge
+**          Generate interrupt on                          : both edges
 **          Interrupt                                      : INT_PORTA
 **          Interrupt priority                             : medium priority
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Auto initialization                          : yes
 **     Contents    :
 **         Init    - LDD_TDeviceData* ExtIntLdd3_Init(LDD_TUserData *UserDataPtr);

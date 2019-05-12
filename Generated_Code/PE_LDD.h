@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 01:39, # CodeGen: 189
 **     Abstract    :
 **
 **     Settings    :
@@ -61,22 +61,7 @@
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "L293D_1_2_EN.h"
-#include "PwmLdd1.h"
-#include "TU1.h"
 #include "MCUC1.h"
-#include "TU2.h"
-#include "L293D_2A.h"
-#include "BitIoLdd2.h"
 #include "NOKIA5110_CONTROLLER.h"
 #include "RESpin1.h"
 #include "SCEpin1.h"
@@ -85,11 +70,6 @@
 #include "SM1.h"
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
-#include "TU3.h"
-#include "L293D_1A.h"
-#include "BitIoLdd1.h"
-#include "TimerInt1.h"
-#include "TimerIntLdd2.h"
 #include "KBOARDC1.h"
 #include "ExtIntLdd1.h"
 #include "KBOARDC2.h"

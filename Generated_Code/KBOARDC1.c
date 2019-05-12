@@ -7,7 +7,7 @@
 **     Version     : Component 02.105, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 02:29, # CodeGen: 199
 **     Abstract    :
 **         This component "ExtInt" implements an external 
 **         interrupt, its control methods and interrupt/event 
@@ -19,12 +19,13 @@
 **          Pin                                            : PTA5/USB_CLKIN/TPM0_CH2
 **          Pin signal                                     : 
 **          ExtInt_LDD                                     : ExtInt_LDD
-**          Generate interrupt on                          : rising or falling edge
+**          Generate interrupt on                          : both edges
 **          Interrupt                                      : INT_PORTA
 **          Interrupt priority                             : medium priority
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **     Contents    :
+**         Enable  - void KBOARDC1_Enable(void);
 **         Disable - void KBOARDC1_Disable(void);
 **         GetVal  - bool KBOARDC1_GetVal(void);
 **
@@ -76,12 +77,29 @@
 
 /* MODULE KBOARDC1. */
 
-#include "KBOARDC1Events.h"
+#include "Events.h"
 #include "KBOARDC1.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
+
+/*
+** ===================================================================
+**     Method      :  KBOARDC1_Enable (component ExtInt)
+**     Description :
+**         Enable the component - the external events are accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+/*
+void KBOARDC1_Enable(void)
+
+**  This method is implemented as a macro. See KBOARDC1.h file.  **
+*/
 
 /*
 ** ===================================================================

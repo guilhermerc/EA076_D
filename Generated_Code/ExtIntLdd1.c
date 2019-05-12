@@ -7,7 +7,7 @@
 **     Version     : Component 02.156, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-11, 15:36, # CodeGen: 173
+**     Date/Time   : 2019-05-12, 02:29, # CodeGen: 199
 **     Abstract    :
 **         This component, "ExtInt_LDD", provide a low level API 
 **         for unified access of external interrupts handling
@@ -18,14 +18,15 @@
 **          Component name                                 : ExtIntLdd1
 **          Pin                                            : PTA5/USB_CLKIN/TPM0_CH2
 **          Pin signal                                     : 
-**          Generate interrupt on                          : rising or falling edge
+**          Generate interrupt on                          : both edges
 **          Interrupt                                      : INT_PORTA
 **          Interrupt priority                             : medium priority
 **          Initialization                                 : 
-**            Enabled in init. code                        : yes
+**            Enabled in init. code                        : no
 **            Auto initialization                          : yes
 **     Contents    :
 **         Init    - LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr);
+**         Enable  - void ExtIntLdd1_Enable(LDD_TDeviceData *DeviceDataPtr);
 **         Disable - void ExtIntLdd1_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         GetVal  - bool ExtIntLdd1_GetVal(LDD_TDeviceData *DeviceDataPtr);
 **
@@ -86,6 +87,7 @@ extern "C" {
 #endif 
 
 typedef struct {
+  bool UserEnabled;                    /* Enable/disable device flag */
   LDD_TUserData *UserData;             /* RTOS device data structure */
 } ExtIntLdd1_TDeviceData, *ExtIntLdd1_TDeviceDataPtr; /* Device data structure type */
 
@@ -122,6 +124,8 @@ LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr)
   DeviceDataPrv = &DeviceDataPrv__DEFAULT_RTOS_ALLOC;
   /* Store the UserData pointer */
   DeviceDataPrv->UserData = UserDataPtr;
+  /* Set device as Disable */
+  DeviceDataPrv->UserEnabled = FALSE;
   /* Interrupt vector(s) allocation */
   /* {Default RTOS Adapter} Set interrupt vector: IVT is static, ISR parameter is passed by the global variable */
   INT_PORTA__DEFAULT_RTOS_ISRPARAM = DeviceDataPrv;
@@ -133,13 +137,8 @@ LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr)
                )) | (uint32_t)(
                 PORT_PCR_MUX(0x01)
                ));
-  /* PORTA_PCR5: ISF=1,IRQC=9 */
-  PORTA_PCR5 = (uint32_t)((PORTA_PCR5 & (uint32_t)~(uint32_t)(
-                PORT_PCR_IRQC(0x06)
-               )) | (uint32_t)(
-                PORT_PCR_ISF_MASK |
-                PORT_PCR_IRQC(0x09)
-               ));
+  /* Clear interrupt status flag */
+  PORTA_ISFR = PORT_ISFR_ISF(0x20);
   /* NVIC_IPR7: PRI_30=0x80 */
   NVIC_IPR7 = (uint32_t)((NVIC_IPR7 & (uint32_t)~(uint32_t)(
                NVIC_IP_PRI_30(0x7F)
@@ -151,6 +150,31 @@ LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr)
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_ExtIntLdd1_ID,DeviceDataPrv);
   return ((LDD_TDeviceData *)DeviceDataPrv);
+}
+
+/*
+** ===================================================================
+**     Method      :  ExtIntLdd1_Enable (component ExtInt_LDD)
+*/
+/*!
+**     @brief
+**         Enable the component - the external events are accepted.
+**         This method is available only if HW module allows
+**         enable/disable of the interrupt.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void ExtIntLdd1_Enable(LDD_TDeviceData *DeviceDataPtr)
+{
+  ExtIntLdd1_TDeviceData *DeviceDataPrv = (ExtIntLdd1_TDeviceData *)DeviceDataPtr;
+
+  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+  PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd1_PIN_INDEX);
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
+    ExtIntLdd1_PIN_INDEX, PORT_PDD_INTERRUPT_ON_RISING_FALLING);
+  DeviceDataPrv->UserEnabled = TRUE;   /* Set device as Enabled */
 }
 
 /*
@@ -169,9 +193,11 @@ LDD_TDeviceData* ExtIntLdd1_Init(LDD_TUserData *UserDataPtr)
 /* ===================================================================*/
 void ExtIntLdd1_Disable(LDD_TDeviceData *DeviceDataPtr)
 {
-  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+  ExtIntLdd1_TDeviceData *DeviceDataPrv = (ExtIntLdd1_TDeviceData *)DeviceDataPtr;
+
   PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR,
     ExtIntLdd1_PIN_INDEX, PORT_PDD_INTERRUPT_DMA_DISABLED);
+  DeviceDataPrv->UserEnabled = FALSE;  /* Set device as Disabled */
 }
 
 /*
@@ -189,6 +215,10 @@ void ExtIntLdd1_Interrupt(void)
   /* {Default RTOS Adapter} ISR parameter is passed through the global variable */
   ExtIntLdd1_TDeviceDataPtr DeviceDataPrv = INT_PORTA__DEFAULT_RTOS_ISRPARAM;
 
+  /* Check if the component is disabled */
+  if (!DeviceDataPrv->UserEnabled) {
+    return;
+  }
   /* Check the pin interrupt flag of the shared interrupt */
   if (PORT_PDD_GetPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd1_PIN_INDEX)) {
     /* Clear the interrupt flag */
