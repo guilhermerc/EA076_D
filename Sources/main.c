@@ -58,20 +58,9 @@ int main(void)
 	 * Initializing the communication, display, event buffer, motor,
 	 * time stamp and temperature modules
 	 */
-
+	//display_init();
 	kboard_init();
-	/*!
-	 * Infinite loop that checks if the event ring buffer has events to
-	 * be handled.
-	 */
-	for(;;)
-	{
-		/*
-		if(!event_buff_is_empty())
-			event_handler(event_buff_consume_event());
-		TI1_OnInterrupt0();
-		*/
-	}
+
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

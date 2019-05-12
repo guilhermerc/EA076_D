@@ -35,6 +35,9 @@
 
 #include <PORT_PDD.h>
 
+#include <LEDR.h>
+#include <LEDG.h>
+#include <LEDB.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -63,24 +66,6 @@ void CPU_OnNMIINT(void)
 
 /*
 ** ===================================================================
-**     Event       :  Cpu_OnNMIINT (module Events)
-**
-**     Component   :  CPU [MKL25Z128LK4]
-*/
-/*!
-**     @brief
-**         This event is called when the Non maskable interrupt had
-**         occurred. This event is automatically enabled when the [NMI
-**         interrupt] property is set to 'Enabled'.
-*/
-/* ===================================================================*/
-void Cpu_OnNMIINT(void)
-{
-  /* Write your code here ... */
-}
-
-/*
-** ===================================================================
 **     Event       :  KBOARDC3_OnInterrupt (module Events)
 **
 **     Component   :  KBOARDC3 [ExtInt]
@@ -93,7 +78,12 @@ void Cpu_OnNMIINT(void)
 */
 void KBOARDC3_OnInterrupt(void)
 {
-	WAIT1_Waitms(300);
+	WAIT1_Waitms(200);
+
+	LEDR_PutVal(FALSE);
+	LEDG_PutVal(FALSE);
+	LEDB_PutVal(TRUE);
+
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C3_PIN);
 }
 
@@ -112,7 +102,12 @@ void KBOARDC3_OnInterrupt(void)
 */
 void KBOARDC2_OnInterrupt(void)
 {
-	WAIT1_Waitms(300);
+	WAIT1_Waitms(200);
+
+	LEDR_PutVal(FALSE);
+	LEDG_PutVal(TRUE);
+	LEDB_PutVal(FALSE);
+
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C2_PIN);
 }
 
@@ -130,8 +125,31 @@ void KBOARDC2_OnInterrupt(void)
 */
 void KBOARDC1_OnInterrupt(void)
 {
-	WAIT1_Waitms(300);
+	WAIT1_Waitms(200);
+
+	LEDR_PutVal(TRUE);
+	LEDG_PutVal(FALSE);
+	LEDB_PutVal(FALSE);
+
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C1_PIN);
+}
+
+/*
+** ===================================================================
+**     Event       :  Cpu_OnNMIINT (module Events)
+**
+**     Component   :  CPU [MKL25Z128LK4]
+*/
+/*!
+**     @brief
+**         This event is called when the Non maskable interrupt had
+**         occurred. This event is automatically enabled when the [NMI
+**         interrupt] property is set to 'Enabled'.
+*/
+/* ===================================================================*/
+void Cpu_OnNMIINT(void)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */

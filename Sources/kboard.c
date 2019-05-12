@@ -19,12 +19,6 @@
 void kboard_activate_rows();
 void kboard_deactivate_rows();
 
-/*! TODO: Column 1 interruption doesn't work and I don't know why.
- * Things that I've already checked:
- * 1. Internal pull-up resistors were properly configured
- * 2. Pressing a button does change the PTA5 from 3.3 V to 0.0 V
- */
-
 void kboard_init()
 {
 	/*! Selecting the pull up resistor on KBOARD_C[1|2|3]_PIN pins */
