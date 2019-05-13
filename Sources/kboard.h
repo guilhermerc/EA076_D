@@ -5,6 +5,13 @@
  *      Author: guilherme
  */
 
+/*!
+ * @file kboard.h
+ * @brief This file exports what is necessary from kboard.c
+ *
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
+ */
+
 #ifndef SOURCES_KBOARD_H_
 #define SOURCES_KBOARD_H_
 

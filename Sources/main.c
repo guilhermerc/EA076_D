@@ -31,15 +31,6 @@
 #include <kboard.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-/*! List of TODO's that as soon as I have time I'll integrate
- *
- *	TODO: Check with the event ring buffer indexes are properly changed
- *  TODO: Use the average calculation integrated in the ADC component (PE)
- *  TODO: Change ANTICLOCKWISE to CLOCKWISE
- *  TODO: Change what have to be changed due to the correct size of display = 14
- *  TODO: Encapsulate the TI1_OnInterrupt0() handler in the display library
- *  TODO: Call the above mentioned handler at each 1 sec in the RTC 1 sec interruption
-*/
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -55,10 +46,8 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the communication, display, event buffer, motor,
-	 * time stamp and temperature modules
+	 * Initializing the keyboard module
 	 */
-	//display_init();
 	kboard_init();
 
 

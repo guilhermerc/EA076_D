@@ -67,12 +67,12 @@ void CPU_OnNMIINT(void);
 /* ===================================================================*/
 void Cpu_OnNMIINT(void);
 
-void KBOARDC3_OnInterrupt(void);
+void KBOARD_C3_OnInterrupt(void);
 /*
 ** ===================================================================
-**     Event       :  KBOARDC3_OnInterrupt (module Events)
+**     Event       :  KBOARD_C3_OnInterrupt (module Events)
 **
-**     Component   :  KBOARDC3 [ExtInt]
+**     Component   :  KBOARD_C3 [ExtInt]
 **     Description :
 **         This event is called when an active signal edge/level has
 **         occurred.
@@ -81,12 +81,12 @@ void KBOARDC3_OnInterrupt(void);
 ** ===================================================================
 */
 
-void KBOARDC2_OnInterrupt(void);
+void KBOARD_C2_OnInterrupt(void);
 /*
 ** ===================================================================
-**     Event       :  KBOARDC2_OnInterrupt (module Events)
+**     Event       :  KBOARD_C2_OnInterrupt (module Events)
 **
-**     Component   :  KBOARDC2 [ExtInt]
+**     Component   :  KBOARD_C2 [ExtInt]
 **     Description :
 **         This event is called when an active signal edge/level has
 **         occurred.
@@ -95,12 +95,12 @@ void KBOARDC2_OnInterrupt(void);
 ** ===================================================================
 */
 
-void KBOARDC1_OnInterrupt(void);
+void KBOARD_C1_OnInterrupt(void);
 /*
 ** ===================================================================
-**     Event       :  KBOARDC1_OnInterrupt (module Events)
+**     Event       :  KBOARD_C1_OnInterrupt (module Events)
 **
-**     Component   :  KBOARDC1 [ExtInt]
+**     Component   :  KBOARD_C1 [ExtInt]
 **     Description :
 **         This event is called when an active signal edge/level has
 **         occurred.
