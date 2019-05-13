@@ -28,7 +28,6 @@
 */         
 /* MODULE Events */
 
-#include <display.h>
 #include <kboard.h>
 #include <KBOARD_C1.h>
 #include <KBOARD_C2.h>
@@ -48,6 +47,8 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+extern volatile bool external_interrupt;
+extern volatile KBOARD_KEY_TYPE last_key_pressed;
 
 /*
 ** ===================================================================
@@ -127,6 +128,9 @@ void KBOARD_C3_OnInterrupt(void)
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C3_PIN);
 
 	kboard_activate_rows();
+
+	external_interrupt = TRUE;
+	last_key_pressed = key_pressed;
 }
 
 
@@ -194,6 +198,10 @@ void KBOARD_C2_OnInterrupt(void)
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C2_PIN);
 
 	kboard_activate_rows();
+
+	external_interrupt = TRUE;
+	last_key_pressed = key_pressed;
+
 }
 
 /*!@brief An event handler called when a button from column 1 is
@@ -259,6 +267,9 @@ void KBOARD_C1_OnInterrupt(void)
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C1_PIN);
 
 	kboard_activate_rows();
+
+	external_interrupt = TRUE;
+	last_key_pressed = key_pressed;
 }
 
 /*

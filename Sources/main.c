@@ -31,6 +31,8 @@
 #include <kboard.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+volatile bool external_interrupt = FALSE;
+volatile KBOARD_KEY_TYPE last_key_pressed = NULL;
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -48,7 +50,8 @@ int main(void)
 	/*!
 	 * Initializing the keyboard module
 	 */
-	//display_init();
+	display_init();
+	display_write_line(1, "Last key press");
 	kboard_init();
 
 
@@ -68,6 +71,76 @@ int main(void)
 	 * any further.
 	 */
 
+	for(;;)
+	{
+		if(external_interrupt)
+		{
+			switch(last_key_pressed)
+			{
+			case KEY_0:
+			{
+				display_write_line(2, "0");
+				break;
+			}
+			case KEY_1:
+			{
+				display_write_line(2, "1");
+				break;
+			}
+			case KEY_2:
+			{
+				display_write_line(2, "2");
+				break;
+			}
+			case KEY_3:
+			{
+				display_write_line(2, "3");
+				break;
+			}
+			case KEY_4:
+			{
+				display_write_line(2, "4");
+				break;
+			}
+			case KEY_5:
+			{
+				display_write_line(2, "5");
+				break;
+			}
+			case KEY_6:
+			{
+				display_write_line(2, "6");
+				break;
+			}
+			case KEY_7:
+			{
+				display_write_line(2, "7");
+				break;
+			}
+			case KEY_8:
+			{
+				display_write_line(2, "8");
+				break;
+			}
+			case KEY_9:
+			{
+				display_write_line(2, "9");
+				break;
+			}
+			case KEY_ASTERISK:
+			{
+				display_write_line(2, "*");
+				break;
+			}
+			case KEY_HASHTAG:
+			{
+				display_write_line(2, "#");
+				break;
+			}
+			}
+			external_interrupt = FALSE;
+		}
+	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
