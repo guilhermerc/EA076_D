@@ -7,7 +7,7 @@
 **     Version     : Component 02.156, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 14:13, # CodeGen: 217
+**     Date/Time   : 2019-05-12, 22:45, # CodeGen: 242
 **     Abstract    :
 **         This component, "ExtInt_LDD", provide a low level API 
 **         for unified access of external interrupts handling
@@ -77,7 +77,7 @@
 
 /* MODULE ExtIntLdd3. */
 
-#include "KBOARDC3.h"
+#include "KBOARD_C3.h"
 #include "ExtIntLdd3.h"
 /* {Default RTOS Adapter} No RTOS includes */
 

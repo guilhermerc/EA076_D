@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 15:30, # CodeGen: 228
+**     Date/Time   : 2019-05-12, 22:45, # CodeGen: 242
 **     Abstract    :
 **
 **     Settings    :
@@ -64,19 +64,19 @@
   #include "SM1.h"
   #include "NOKIA5110_LIGHT.h"
   #include "BitIoLdd3.h"
-  #include "KBOARDC1.h"
+  #include "KBOARD_C1.h"
   #include "ExtIntLdd1.h"
-  #include "KBOARDC2.h"
+  #include "KBOARD_C2.h"
   #include "ExtIntLdd2.h"
-  #include "KBOARDC3.h"
+  #include "KBOARD_C3.h"
   #include "ExtIntLdd3.h"
-  #include "KBOARDR1.h"
+  #include "KBOARD_R1.h"
   #include "BitIoLdd1.h"
-  #include "KBOARDR2.h"
+  #include "KBOARD_R2.h"
   #include "BitIoLdd2.h"
-  #include "KBOARDR3.h"
+  #include "KBOARD_R3.h"
   #include "BitIoLdd4.h"
-  #include "KBOARDR4.h"
+  #include "KBOARD_R4.h"
   #include "BitIoLdd5.h"
   #include "LEDR.h"
   #include "BitIoLdd6.h"

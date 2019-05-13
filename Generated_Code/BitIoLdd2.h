@@ -7,7 +7,7 @@
 **     Version     : Component 01.033, Driver 01.03, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 14:13, # CodeGen: 217
+**     Date/Time   : 2019-05-12, 22:45, # CodeGen: 242
 **     Abstract    :
 **         The HAL BitIO component provides a low level API for unified
 **         access to general purpose digital input/output pins across
@@ -24,7 +24,7 @@
 **            Init. direction                              : Output
 **            Init. value                                  : 0
 **            Auto initialization                          : yes
-**          Safe mode                                      : yes
+**          Safe mode                                      : no
 **     Contents    :
 **         Init   - LDD_TDeviceData* BitIoLdd2_Init(LDD_TUserData *UserDataPtr);
 **         SetDir - void BitIoLdd2_SetDir(LDD_TDeviceData *DeviceDataPtr, bool Dir);
