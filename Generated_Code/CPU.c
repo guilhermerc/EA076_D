@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 22:45, # CodeGen: 242
+**     Date/Time   : 2019-05-12, 23:40, # CodeGen: 243
 **     Abstract    :
 **
 **     Settings    :
@@ -507,6 +507,7 @@ void PE_low_level_init(void)
   /* ### SPIMaster_LDD "SM1" component auto initializatation. Auto initialization feature can be disabled by component's property "Auto initialization". */
   (void)SM1_Init(NULL);
   /* ### PDC8544 "NOKIA5110_CONTROLLER" init code ... */
+  NOKIA5110_CONTROLLER_Init();
   /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd3_Init(NULL);
   /* ### ExtInt_LDD "ExtIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */

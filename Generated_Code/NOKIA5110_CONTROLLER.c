@@ -7,7 +7,7 @@
 **     Version     : Component 01.006, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 14:13, # CodeGen: 217
+**     Date/Time   : 2019-05-12, 23:40, # CodeGen: 243
 **     Abstract    :
 **
 **     Settings    :
@@ -36,7 +36,7 @@
 **            SPI                                          : SM1
 **          System                                         : 
 **            Wait                                         : WAIT1
-**            Initialize on Init                           : no
+**            Initialize on Init                           : yes
 **     Contents    :
 **         GetWidth              - NOKIA5110_CONTROLLER_PixelDim NOKIA5110_CONTROLLER_GetWidth(void);
 **         GetHeight             - NOKIA5110_CONTROLLER_PixelDim NOKIA5110_CONTROLLER_GetHeight(void);
