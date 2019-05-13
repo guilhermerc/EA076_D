@@ -28,7 +28,9 @@
 /* MODULE main */
 
 #include <CPU.h>
+#include <display.h>
 #include <kboard.h>
+#include <PE_Types.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 volatile bool external_interrupt = FALSE;

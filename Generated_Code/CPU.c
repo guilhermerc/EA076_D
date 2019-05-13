@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-12, 23:40, # CodeGen: 243
+**     Date/Time   : 2019-05-13, 16:34, # CodeGen: 246
 **     Abstract    :
 **
 **     Settings    :
@@ -272,12 +272,6 @@
 #include "BitIoLdd4.h"
 #include "KBOARD_R4.h"
 #include "BitIoLdd5.h"
-#include "LEDR.h"
-#include "BitIoLdd6.h"
-#include "LEDG.h"
-#include "BitIoLdd7.h"
-#include "LEDB.h"
-#include "BitIoLdd8.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -360,11 +354,10 @@ void __init_hardware(void)
   /* System clock initialization */
   /* SIM_CLKDIV1: OUTDIV1=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,OUTDIV4=3,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0 */
   SIM_CLKDIV1 = (SIM_CLKDIV1_OUTDIV1(0x00) | SIM_CLKDIV1_OUTDIV4(0x03)); /* Set the system prescalers to safe value */
-  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTC=1,PORTB=1,PORTA=1 */
+  /* SIM_SCGC5: PORTE=1,PORTD=1,PORTC=1,PORTA=1 */
   SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK |
                SIM_SCGC5_PORTD_MASK |
                SIM_SCGC5_PORTC_MASK |
-               SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
   if ((PMC_REGSC & PMC_REGSC_ACKISO_MASK) != 0x0U) {
     /* PMC_REGSC: ACKISO=1 */
@@ -524,12 +517,6 @@ void PE_low_level_init(void)
   (void)BitIoLdd4_Init(NULL);
   /* ### BitIO_LDD "BitIoLdd5" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd5_Init(NULL);
-  /* ### BitIO_LDD "BitIoLdd6" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd6_Init(NULL);
-  /* ### BitIO_LDD "BitIoLdd7" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd7_Init(NULL);
-  /* ### BitIO_LDD "BitIoLdd8" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)BitIoLdd8_Init(NULL);
   __EI();
 }
   /* Flash configuration field */
