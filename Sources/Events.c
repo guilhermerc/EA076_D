@@ -83,6 +83,7 @@ void CPU_OnNMIINT(void)
 void KBOARD_C3_OnInterrupt(void)
 {
 	static KBOARD_BUTTON_STATE state = RELEASED;
+	static KBOARD_KEY_TYPE key_pressed = NULL;
 
 	/*! Debouncing solution */
 	WAIT1_Waitms(DEBOUNCING_DELAY);
@@ -110,6 +111,15 @@ void KBOARD_C3_OnInterrupt(void)
 			kboard_deactivate_row(row);
 			if(KBOARD_C3_GetVal() == TRUE)	break;
 		}
+
+		if(row == 1)
+			key_pressed = KEY_3;
+		else if(row == 2)
+			key_pressed = KEY_6;
+		else if(row == 3)
+			key_pressed = KEY_9;
+		else if(row == 4)
+			key_pressed = KEY_HASHTAG;
 	}
 
 	//display_write_line(1, "Column 3");
@@ -137,6 +147,7 @@ void KBOARD_C3_OnInterrupt(void)
 void KBOARD_C2_OnInterrupt(void)
 {
 	static KBOARD_BUTTON_STATE state = RELEASED;
+	static KBOARD_KEY_TYPE key_pressed = NULL;
 
 	/*! Debouncing solution */
 	WAIT1_Waitms(DEBOUNCING_DELAY);
@@ -167,6 +178,15 @@ void KBOARD_C2_OnInterrupt(void)
 			kboard_deactivate_row(row);
 			if(KBOARD_C2_GetVal() == TRUE)	break;
 		}
+
+		if(row == 1)
+			key_pressed = KEY_2;
+		else if(row == 2)
+			key_pressed = KEY_5;
+		else if(row == 3)
+			key_pressed = KEY_8;
+		else if(row == 4)
+			key_pressed = KEY_0;
 	}
 
 	//display_write_line(1, "Column 2");
@@ -192,6 +212,7 @@ void KBOARD_C2_OnInterrupt(void)
 void KBOARD_C1_OnInterrupt(void)
 {
 	static KBOARD_BUTTON_STATE state = RELEASED;
+	static KBOARD_KEY_TYPE key_pressed = NULL;
 
 	/*! Debouncing solution */
 	WAIT1_Waitms(DEBOUNCING_DELAY);
@@ -222,6 +243,15 @@ void KBOARD_C1_OnInterrupt(void)
 			kboard_deactivate_row(row);
 			if(KBOARD_C1_GetVal() == TRUE)	break;
 		}
+
+		if(row == 1)
+			key_pressed = KEY_1;
+		else if(row == 2)
+			key_pressed = KEY_4;
+		else if(row == 3)
+			key_pressed = KEY_7;
+		else if(row == 4)
+			key_pressed = KEY_ASTERISK;
 	}
 
 	//display_write_line(1, "Column 1");
