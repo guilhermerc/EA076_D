@@ -112,6 +112,8 @@ void KBOARD_C3_OnInterrupt(void)
 		}
 	}
 
+	//display_write_line(1, "Column 3");
+
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C3_PIN);
 
 	kboard_activate_rows();
@@ -167,6 +169,8 @@ void KBOARD_C2_OnInterrupt(void)
 		}
 	}
 
+	//display_write_line(1, "Column 2");
+
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C2_PIN);
 
 	kboard_activate_rows();
@@ -219,6 +223,8 @@ void KBOARD_C1_OnInterrupt(void)
 			if(KBOARD_C1_GetVal() == TRUE)	break;
 		}
 	}
+
+	//display_write_line(1, "Column 1");
 
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C1_PIN);
 

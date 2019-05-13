@@ -48,7 +48,25 @@ int main(void)
 	/*!
 	 * Initializing the keyboard module
 	 */
+	//display_init();
 	kboard_init();
+
+
+	/*! TODO: I tried so hard to make this display thing works but it
+	 * doesn't work.
+	 * 1. I tried to reconfigure the PE components again.
+	 * 2. I tried to delete and create new PE components.
+	 * 3. I checked the connections and everything seems OK.
+	 * 4. I checked that both SPIMaster_LDD and WAIT components are
+	 * initialized.
+	 *
+	 * The funny thing is: If I write on the display on main loop, it
+	 * works just fine. The problem only happens when I call the
+	 * display functions inside the interruptions' handlers.
+	 * As far as I was able to debug, the program keeps stuck in
+	 * NOKIA5110_CONTROLLER.c#262. I didn't have time to investigate
+	 * any further.
+	 */
 
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
