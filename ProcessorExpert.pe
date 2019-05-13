@@ -3,7 +3,7 @@
   <Header>
     <Name>EA076_PE</Name>
     <SavedBy>guilherme</SavedBy>
-    <ModificationStamp>82</ModificationStamp>
+    <ModificationStamp>83</ModificationStamp>
     <Date>2019-03-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -8063,7 +8063,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.extint</ComponentUUID>
     <BeanType>ExtInt</BeanType>
-    <Name>KBOARDC1</Name>
+    <Name>KBOARD_C1</Name>
     <CompNumb>65</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -8078,7 +8078,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC1</Value>
+        <Value>KBOARD_C1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -8599,7 +8599,7 @@
         <ItemSymbol>OnInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC1_OnInterrupt</Value>
+        <Value>KBOARD_C1_OnInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnInterruptPriority</ItemSymbol>
@@ -8626,7 +8626,7 @@
         <ItemSymbol>OnTriggerInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC1_OnTriggerInterrupt</Value>
+        <Value>KBOARD_C1_OnTriggerInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTriggerInterruptPriority</ItemSymbol>
@@ -8640,7 +8640,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.extint</ComponentUUID>
     <BeanType>ExtInt</BeanType>
-    <Name>KBOARDC2</Name>
+    <Name>KBOARD_C2</Name>
     <CompNumb>67</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -8655,7 +8655,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC2</Value>
+        <Value>KBOARD_C2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -9176,7 +9176,7 @@
         <ItemSymbol>OnInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC2_OnInterrupt</Value>
+        <Value>KBOARD_C2_OnInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnInterruptPriority</ItemSymbol>
@@ -9203,7 +9203,7 @@
         <ItemSymbol>OnTriggerInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC2_OnTriggerInterrupt</Value>
+        <Value>KBOARD_C2_OnTriggerInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTriggerInterruptPriority</ItemSymbol>
@@ -9217,7 +9217,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.extint</ComponentUUID>
     <BeanType>ExtInt</BeanType>
-    <Name>KBOARDC3</Name>
+    <Name>KBOARD_C3</Name>
     <CompNumb>69</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -9232,7 +9232,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC3</Value>
+        <Value>KBOARD_C3</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -9753,7 +9753,7 @@
         <ItemSymbol>OnInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC3_OnInterrupt</Value>
+        <Value>KBOARD_C3_OnInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnInterruptPriority</ItemSymbol>
@@ -9780,7 +9780,7 @@
         <ItemSymbol>OnTriggerInterruptName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDC3_OnTriggerInterrupt</Value>
+        <Value>KBOARD_C3_OnTriggerInterrupt</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnTriggerInterruptPriority</ItemSymbol>
@@ -9794,7 +9794,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.bitio</ComponentUUID>
     <BeanType>BitIO</BeanType>
-    <Name>KBOARDR1</Name>
+    <Name>KBOARD_R1</Name>
     <CompNumb>71</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -9809,7 +9809,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDR1</Value>
+        <Value>KBOARD_R1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -10384,7 +10384,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.bitio</ComponentUUID>
     <BeanType>BitIO</BeanType>
-    <Name>KBOARDR2</Name>
+    <Name>KBOARD_R2</Name>
     <CompNumb>73</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -10399,7 +10399,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDR2</Value>
+        <Value>KBOARD_R2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -10806,8 +10806,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>0</Index>
-        <Value>true</Value>
+        <Index>1</Index>
+        <Value>false</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>Optimization</ItemSymbol>
@@ -10974,7 +10974,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.bitio</ComponentUUID>
     <BeanType>BitIO</BeanType>
-    <Name>KBOARDR3</Name>
+    <Name>KBOARD_R3</Name>
     <CompNumb>75</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -10989,7 +10989,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDR3</Value>
+        <Value>KBOARD_R3</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
@@ -11564,7 +11564,7 @@
     <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
     <ComponentUUID>com.freescale.processorexpert.bitio</ComponentUUID>
     <BeanType>BitIO</BeanType>
-    <Name>KBOARDR4</Name>
+    <Name>KBOARD_R4</Name>
     <CompNumb>77</CompNumb>
     <CompEnabled>true</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
@@ -11579,7 +11579,7 @@
         <ItemSymbol>DeviceName</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>KBOARDR4</Value>
+        <Value>KBOARD_R4</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>_Pin</ItemSymbol>
