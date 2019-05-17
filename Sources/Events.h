@@ -67,6 +67,48 @@ void CPU_OnNMIINT(void);
 /* ===================================================================*/
 void Cpu_OnNMIINT(void);
 
+void KBOARD_C3_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  KBOARD_C3_OnInterrupt (module Events)
+**
+**     Component   :  KBOARD_C3 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void KBOARD_C2_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  KBOARD_C2_OnInterrupt (module Events)
+**
+**     Component   :  KBOARD_C2 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void KBOARD_C1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  KBOARD_C1_OnInterrupt (module Events)
+**
+**     Component   :  KBOARD_C1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
 /* END Events */
 
 #ifdef __cplusplus
