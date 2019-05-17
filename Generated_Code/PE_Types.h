@@ -6,7 +6,7 @@
 **     Component   : PE_Types
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-17, 11:25, # CodeGen: 248
 **     Abstract    :
 **         PE_Types.h - contains definitions of basic types,
 **         register access macros and hardware specific macros
@@ -212,15 +212,22 @@ typedef unsigned long int       uint32;
 #define PE_LDD_COMPONENT_ASerialLdd2_ID          0x05U
 #define PE_LDD_COMPONENT_TU2_ID                  0x06U
 #define PE_LDD_COMPONENT_PwmLdd1_ID              0x07U
-#define PE_LDD_COMPONENT_BitIoLdd2_ID            0x08U
-#define PE_LDD_COMPONENT_SM1_ID                  0x09U
-#define PE_LDD_COMPONENT_RESpin1_ID              0x0AU
-#define PE_LDD_COMPONENT_SCEpin1_ID              0x0BU
-#define PE_LDD_COMPONENT_D_Cpin1_ID              0x0CU
-#define PE_LDD_COMPONENT_BitIoLdd3_ID            0x0DU
-#define PE_LDD_COMPONENT_TU3_ID                  0x0EU
-#define PE_LDD_COMPONENT_BitIoLdd1_ID            0x0FU
+#define PE_LDD_COMPONENT_BitIoLdd1_ID            0x08U
+#define PE_LDD_COMPONENT_BitIoLdd2_ID            0x09U
+#define PE_LDD_COMPONENT_SM1_ID                  0x0AU
+#define PE_LDD_COMPONENT_RESpin1_ID              0x0BU
+#define PE_LDD_COMPONENT_SCEpin1_ID              0x0CU
+#define PE_LDD_COMPONENT_D_Cpin1_ID              0x0DU
+#define PE_LDD_COMPONENT_BitIoLdd3_ID            0x0EU
+#define PE_LDD_COMPONENT_TU3_ID                  0x0FU
 #define PE_LDD_COMPONENT_TimerIntLdd2_ID         0x10U
+#define PE_LDD_COMPONENT_ExtIntLdd1_ID           0x11U
+#define PE_LDD_COMPONENT_ExtIntLdd2_ID           0x12U
+#define PE_LDD_COMPONENT_ExtIntLdd3_ID           0x13U
+#define PE_LDD_COMPONENT_BitIoLdd4_ID            0x14U
+#define PE_LDD_COMPONENT_BitIoLdd5_ID            0x15U
+#define PE_LDD_COMPONENT_BitIoLdd6_ID            0x16U
+#define PE_LDD_COMPONENT_BitIoLdd7_ID            0x17U
 
 /*
 ** ===================================================================

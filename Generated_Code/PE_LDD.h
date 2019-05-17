@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-17, 11:25, # CodeGen: 248
 **     Abstract    :
 **
 **     Settings    :
@@ -75,6 +75,8 @@
 #include "TU1.h"
 #include "MCUC1.h"
 #include "TU2.h"
+#include "L293D_1A.h"
+#include "BitIoLdd1.h"
 #include "L293D_2A.h"
 #include "BitIoLdd2.h"
 #include "NOKIA5110_CONTROLLER.h"
@@ -86,10 +88,22 @@
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
 #include "TU3.h"
-#include "L293D_1A.h"
-#include "BitIoLdd1.h"
 #include "TimerInt1.h"
 #include "TimerIntLdd2.h"
+#include "KBOARD_C1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARD_C2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARD_C3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARD_R1.h"
+#include "BitIoLdd4.h"
+#include "KBOARD_R2.h"
+#include "BitIoLdd5.h"
+#include "KBOARD_R3.h"
+#include "BitIoLdd6.h"
+#include "KBOARD_R4.h"
+#include "BitIoLdd7.h"
 
 
 /*

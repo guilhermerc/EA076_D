@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 15:41, # CodeGen: 159
+**     Date/Time   : 2019-05-17, 11:25, # CodeGen: 248
 **     Abstract    :
 **
 **     Settings    :
@@ -69,6 +69,8 @@
   #include "TU1.h"
   #include "MCUC1.h"
   #include "TU2.h"
+  #include "L293D_1A.h"
+  #include "BitIoLdd1.h"
   #include "L293D_2A.h"
   #include "BitIoLdd2.h"
   #include "NOKIA5110_CONTROLLER.h"
@@ -80,10 +82,22 @@
   #include "NOKIA5110_LIGHT.h"
   #include "BitIoLdd3.h"
   #include "TU3.h"
-  #include "L293D_1A.h"
-  #include "BitIoLdd1.h"
   #include "TimerInt1.h"
   #include "TimerIntLdd2.h"
+  #include "KBOARD_C1.h"
+  #include "ExtIntLdd1.h"
+  #include "KBOARD_C2.h"
+  #include "ExtIntLdd2.h"
+  #include "KBOARD_C3.h"
+  #include "ExtIntLdd3.h"
+  #include "KBOARD_R1.h"
+  #include "BitIoLdd4.h"
+  #include "KBOARD_R2.h"
+  #include "BitIoLdd5.h"
+  #include "KBOARD_R3.h"
+  #include "BitIoLdd6.h"
+  #include "KBOARD_R4.h"
+  #include "BitIoLdd7.h"
   #include "Events.h"
   #include "ADC0Events.h"
   #include "TimerInt0Events.h"
@@ -154,7 +168,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x2B  0x000000AC   -   ivINT_MCG                     unused by PE */
     (tIsrFunc)&TU1_Interrupt,          /* 0x2C  0x000000B0   2   ivINT_LPTMR0                  used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x2D  0x000000B4   -   ivINT_Reserved45              unused by PE */
-    (tIsrFunc)&CPU_Interrupt,          /* 0x2E  0x000000B8   -   ivINT_PORTA                   unused by PE */
+    (tIsrFunc)&CPU_ivINT_PORTA,        /* 0x2E  0x000000B8   2   ivINT_PORTA                   used by PE */
     (tIsrFunc)&CPU_Interrupt           /* 0x2F  0x000000BC   -   ivINT_PORTD                   unused by PE */
     }
   };
