@@ -28,6 +28,7 @@
 */         
 /* MODULE Events */
 
+#include <display.h>
 #include <kboard.h>
 #include <KBOARD_C1.h>
 #include <KBOARD_C2.h>
@@ -46,6 +47,8 @@ extern "C" {
 /* User includes (#include below this line is not maintained by Processor Expert) */
 extern volatile bool external_interrupt;
 extern volatile KBOARD_KEY_TYPE last_key_pressed;
+extern DISPLAY_TIMEOUT display_timeout;
+volatile bool timeout_reached = FALSE;
 
 /*
 ** ===================================================================
@@ -258,6 +261,39 @@ void KBOARD_C1_OnInterrupt(void)
 void Cpu_OnNMIINT(void)
 {
   /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  RTC1_OnSecond (module Events)
+**
+**     Component   :  RTC [RTC_LDD]
+*/
+/*!
+**     @brief
+**         Called each second if OnSecond event is enabled (see
+**         [SetEventMask] and [GetEventMask] methods) and RTC device is
+**         enabled. This event is available only if [Interrupt
+**         service/event] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method. 
+*/
+/* ===================================================================*/
+void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
+{
+	/*! Checks whether the timeout was triggered or not */
+	if(display_timeout.triggered = TRUE)
+		display_timeout.timer++;
+
+	/*! If timer has reached the target timeout configured, return to
+	 * main menu */
+	if(display_timeout.timer == display_timeout.target)
+	{
+		timeout_reached = TRUE;
+		display_unset_timeout();
+	}
 }
 
 /* END Events */

@@ -31,6 +31,8 @@
 #define __Events_H
 /* MODULE Events */
 
+#include <PE_Types.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -108,6 +110,26 @@ void KBOARD_C1_OnInterrupt(void);
 **     Returns     : Nothing
 ** ===================================================================
 */
+
+/*
+** ===================================================================
+**     Event       :  RTC1_OnSecond (module Events)
+**
+**     Component   :  RTC [RTC_LDD]
+*/
+/*!
+**     @brief
+**         Called each second if OnSecond event is enabled (see
+**         [SetEventMask] and [GetEventMask] methods) and RTC device is
+**         enabled. This event is available only if [Interrupt
+**         service/event] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method. 
+*/
+/* ===================================================================*/
+void RTC1_OnSecond(LDD_TUserData *UserDataPtr);
 
 /* END Events */
 
