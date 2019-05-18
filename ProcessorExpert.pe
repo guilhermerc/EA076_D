@@ -10177,7 +10177,7 @@
     <Name>UART0</Name>
     <CompNumb>13</CompNumb>
     <CompEnabled>true</CompEnabled>
-    <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
+    <GenCodeMode>DONT_WRITE</GenCodeMode>
     <IconName>PHONE</IconName>
     <UserFolderName />
     <Comment lines_count="0" />
@@ -13059,7 +13059,7 @@
     <Name>UART2</Name>
     <CompNumb>15</CompNumb>
     <CompEnabled>true</CompEnabled>
-    <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
+    <GenCodeMode>DONT_WRITE</GenCodeMode>
     <IconName>PHONE</IconName>
     <UserFolderName />
     <Comment lines_count="0" />
