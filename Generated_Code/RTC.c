@@ -7,7 +7,7 @@
 **     Version     : Component 01.165, Driver 01.08, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-14, 22:07, # CodeGen: 97
+**     Date/Time   : 2019-05-18, 14:07, # CodeGen: 250
 **     Abstract    :
 **         This component implements a real time clock (RTC). Actual date may also be
 **         obtained and an alarm function is included.
@@ -28,7 +28,7 @@
 **            Auto Initialization                          : no
 **            Event mask                                   : 
 **              OnAlarm                                    : Disabled
-**              OnSecond                                   : Disabled
+**              OnSecond                                   : Enabled
 **              OnTimeOverflow                             : Disabled
 **              OnTimeInvalid                              : Disabled
 **            Time and date settings                       : 
@@ -99,6 +99,7 @@
 
 /* MODULE RTC. */
 
+#include "Events.h"
 #include "RTC.h"
 /* {Default RTOS Adapter} No RTOS includes */
 #include "RTC_PDD.h"
@@ -114,6 +115,8 @@ typedef struct {
 static RTC_TDeviceData DevDataPtr__DEFAULT_RTOS_ALLOC;
 /* {Default RTOS Adapter} Global variable used for passing a parameter into ISR */
 static RTC_TDeviceDataPtr INT_RTC__DEFAULT_RTOS_ISRPARAM;
+/* {Default RTOS Adapter} Global variable used for passing a parameter into ISR */
+static RTC_TDeviceDataPtr INT_RTC_Seconds__DEFAULT_RTOS_ISRPARAM;
 /* Table of month length (in days) */
 static const uint8_t ULY[] = {0U,31U,28U,31U,30U,31U,30U,31U,31U,30U,31U,30U,31U}; /* Non-leap-year */
 static const uint8_t  LY[] = {0U,31U,29U,31U,30U,31U,30U,31U,31U,30U,31U,30U,31U}; /* Leap-year */
@@ -168,6 +171,8 @@ LDD_TDeviceData * RTC_Init(LDD_TUserData *UserDataPtr, bool SoftInit)
   /* Allocate interrupt vector(s) */
   /* {Default RTOS Adapter} Set interrupt vector: IVT is static, ISR parameter is passed by the global variable */
   INT_RTC__DEFAULT_RTOS_ISRPARAM = DevDataPtr;
+  /* {Default RTOS Adapter} Set interrupt vector: IVT is static, ISR parameter is passed by the global variable */
+  INT_RTC_Seconds__DEFAULT_RTOS_ISRPARAM = DevDataPtr;
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_RTC_ID,DevDataPtr);
   /* Enable module clock */
@@ -186,7 +191,7 @@ LDD_TDeviceData * RTC_Init(LDD_TUserData *UserDataPtr, bool SoftInit)
   }
   /* Enable interrupt */
   /* RTC_IER: TAIE=0,TOIE=0,TIIE=0 */
-  RTC_IER = 0x00U;                     /* Enable interrupts */
+  RTC_IER = RTC_IER_TSIE_MASK;         /* Enable interrupts */
   /* NVIC_IPR5: PRI_20=0x80 */
   NVIC_IPR5 = (uint32_t)((NVIC_IPR5 & (uint32_t)~(uint32_t)(
                NVIC_IP_PRI_20(0x7F)
@@ -195,6 +200,14 @@ LDD_TDeviceData * RTC_Init(LDD_TUserData *UserDataPtr, bool SoftInit)
               ));
   /* NVIC_ISER: SETENA|=0x00100000 */
   NVIC_ISER |= NVIC_ISER_SETENA(0x00100000);
+  /* NVIC_IPR5: PRI_21=0x80 */
+  NVIC_IPR5 = (uint32_t)((NVIC_IPR5 & (uint32_t)~(uint32_t)(
+               NVIC_IP_PRI_21(0x7F)
+              )) | (uint32_t)(
+               NVIC_IP_PRI_21(0x80)
+              ));
+  /* NVIC_ISER: SETENA|=0x00200000 */
+  NVIC_ISER |= NVIC_ISER_SETENA(0x00200000);
   return DevDataPtr;
 }
 
@@ -335,11 +348,25 @@ PE_ISR(RTC_Interrupt)
     RTC_PDD_WriteTimePrescalerReg(RTC_BASE_PTR, 0x00U); /* Reset prescaler */
     RTC_PDD_WriteTimeSecondsReg(RTC_BASE_PTR, 0x02UL); /* Set init. time - 2000-01-01 0:0:1 (clears flag)*/
   } else {                             /* Alarm interrupt */
-    (void)DevDataPtr;                  /* Parameter is not used, suppress unused argument warning */
     RTC_PDD_WriteTimeAlarmReg(RTC_BASE_PTR, RTC_PDD_ReadTimeAlarmReg(RTC_BASE_PTR)); /* Clear alarm interrupt flag */
   }
 }
 
+/*
+** ===================================================================
+**     Method      :  RTC_SecondsInterrupt (component RTC_LDD)
+**
+**     Description :
+**         RTC seconds interrupt handler
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+PE_ISR(RTC_SecondsInterrupt)
+{
+  /* {Default RTOS Adapter} ISR parameter is passed through the global variable */
+  RTC_TDeviceDataPtr DevDataPtr = INT_RTC_Seconds__DEFAULT_RTOS_ISRPARAM;
+  RTC1_OnSecond(DevDataPtr->UserDataPtr);
+}
 /* END RTC. */
 
 #ifdef __cplusplus

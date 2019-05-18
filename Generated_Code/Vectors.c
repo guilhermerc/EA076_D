@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-17, 11:25, # CodeGen: 248
+**     Date/Time   : 2019-05-18, 14:32, # CodeGen: 253
 **     Abstract    :
 **
 **     Settings    :
@@ -159,7 +159,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x22  0x00000088   -   ivINT_TPM1                    unused by PE */
     (tIsrFunc)&TU3_Interrupt,          /* 0x23  0x0000008C   2   ivINT_TPM2                    used by PE */
     (tIsrFunc)&RTC_Interrupt,          /* 0x24  0x00000090   2   ivINT_RTC                     used by PE */
-    (tIsrFunc)&CPU_Interrupt,          /* 0x25  0x00000094   2   ivINT_RTC_Seconds             unused by PE */
+    (tIsrFunc)&RTC_SecondsInterrupt,   /* 0x25  0x00000094   2   ivINT_RTC_Seconds             used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x26  0x00000098   -   ivINT_PIT                     unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x27  0x0000009C   -   ivINT_Reserved39              unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x28  0x000000A0   -   ivINT_USB0                    unused by PE */

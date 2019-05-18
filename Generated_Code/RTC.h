@@ -7,7 +7,7 @@
 **     Version     : Component 01.165, Driver 01.08, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-14, 22:07, # CodeGen: 97
+**     Date/Time   : 2019-05-18, 14:07, # CodeGen: 250
 **     Abstract    :
 **         This component implements a real time clock (RTC). Actual date may also be
 **         obtained and an alarm function is included.
@@ -28,7 +28,7 @@
 **            Auto Initialization                          : no
 **            Event mask                                   : 
 **              OnAlarm                                    : Disabled
-**              OnSecond                                   : Disabled
+**              OnSecond                                   : Enabled
 **              OnTimeOverflow                             : Disabled
 **              OnTimeInvalid                              : Disabled
 **            Time and date settings                       : 
@@ -121,6 +121,7 @@ extern "C" {
 #define RTC_SetTime_METHOD_ENABLED     /*!< SetTime method of the component RTC is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
+#define RTC_OnSecond_EVENT_ENABLED     /*!< OnSecond event of the component RTC is enabled (generated) */
 
 /*
 ** ===================================================================
@@ -216,6 +217,18 @@ LDD_TError RTC_SetTime(LDD_TDeviceData *DeviceDataPtr, LDD_RTC_TTime *TimePtr);
 */
 /* {Default RTOS Adapter} ISR function prototype */
 PE_ISR(RTC_Interrupt);
+
+/*
+** ===================================================================
+**     Method      :  RTC_SecondsInterrupt (component RTC_LDD)
+**
+**     Description :
+**         RTC seconds interrupt handler
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+/* {Default RTOS Adapter} ISR function prototype */
+PE_ISR(RTC_SecondsInterrupt);
 
 /* END RTC. */
 
