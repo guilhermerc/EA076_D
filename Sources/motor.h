@@ -41,5 +41,6 @@ void motor_set_dir(MOTOR_DIR motor_dir);
 void motor_set_pwm(uint8_t motor_pwm);
 void motor_set_mode(MOTOR_MODE motor_mode);
 void motor_set_threshold(float threshold);
+void motor_change_speed(int8_t amount);
 
 #endif /* SOURCES_MOTOR_H_ */

@@ -126,7 +126,23 @@ void motor_set_mode(MOTOR_MODE motor_mode)
 	motor_info.current_mode = motor_mode;
 }
 
+/*! @brief A function to set the threshold at which the motor will turn
+ * on when on AUTO mode
+ *
+ * @param	threshold	The threshold to be set
+ */
 void motor_set_threshold(float threshold)
 {
 	motor_info.threshold = threshold;
+}
+
+/*! @brief A function that changes the current speed by a certain
+ * amount (it could be positive or negative)
+ *
+ * @param 	amount	The amount to change the speed, in percentage
+ */
+void motor_change_speed(int8_t amount)
+{
+	motor_set_pwm(motor_info.current_pwm + (amount * MAXIMUM_PWM /
+			100));
 }
