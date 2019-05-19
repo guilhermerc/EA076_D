@@ -45,5 +45,6 @@ bool event_buff_is_empty();
 bool event_buff_is_full();
 void event_buff_insert_event(EVENT_BUFF_TYPE type);
 EVENT_BUFF_TYPE event_buff_consume_event();
+void event_handler(EVENT_BUFF_TYPE event);
 
 #endif /* SOURCES_EVENT_BUFFER_H_ */
