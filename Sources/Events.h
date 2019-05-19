@@ -163,6 +163,53 @@ void AD1_OnCalibrationEnd(void);
 ** ===================================================================
 */
 
+/*
+** ===================================================================
+**     Event       :  UART0_OnError (module Events)
+**
+**     Component   :  UART0 [AsynchroSerial]
+**     Description :
+**         This event is called when a channel error (not the error
+**         returned by a given method) occurs. The errors can be read
+**         using <GetError> method.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART0_OnError(void);
+
+/*
+** ===================================================================
+**     Event       :  UART0_OnRxChar (module Events)
+**
+**     Component   :  UART0 [AsynchroSerial]
+**     Description :
+**         This event is called after a correct character is received.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled and either the <Receiver>
+**         property is enabled or the <SCI output mode> property (if
+**         supported) is set to Single-wire mode.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART0_OnRxChar(void);
+
+/*
+** ===================================================================
+**     Event       :  UART0_OnTxChar (module Events)
+**
+**     Component   :  UART0 [AsynchroSerial]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void UART0_OnTxChar(void);
+
 /* END Events */
 
 #ifdef __cplusplus

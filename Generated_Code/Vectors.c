@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-18, 23:17, # CodeGen: 254
+**     Date/Time   : 2019-05-18, 23:23, # CodeGen: 255
 **     Abstract    :
 **
 **     Settings    :
@@ -100,7 +100,6 @@
   #include "BitIoLdd7.h"
   #include "Events.h"
   #include "TimerInt0Events.h"
-  #include "UART0Events.h"
   #include "UART2Events.h"
   #include "TimerInt1Events.h"
 

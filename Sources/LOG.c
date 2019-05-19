@@ -14,9 +14,9 @@
  */
 
 #include <comm.h>
+#include <Events.h>
 #include <LOG.h>
 #include <string.h>
-#include <UART0Events.h>
 
 /*!
  * @brief A function that logs into UART0 TX
