@@ -164,9 +164,13 @@ void display_update(DISPLAY_FSM_STATE state)
 
 		/*! 3rd line */
 		strcpy(line, "Speed:    ");
-		sprintf(speed, "%d", (motor_info.current_pwm * 100) /
-				MAXIMUM_PWM);
+
+		*speed = '\0'; /*! Ensuring that the following strcat will work
+		* properly */
+		UTIL1_strcatNum8u(speed, DISPLAY_LINE_STRING_SIZE,
+				(motor_info.current_pwm * 100) / MAXIMUM_PWM, '0', 3);
 		strcat(speed, "%");
+
 		strcpy(line, speed);
 		display_write_line(3, line);
 
@@ -215,11 +219,16 @@ void display_update(DISPLAY_FSM_STATE state)
 		display_clean_line(3);
 
 		/*! 4th line */
-		sprintf(last_speed, "%d", (last_pwm * 100) / MAXIMUM_PWM);
+		*last_speed = '\0'; /*! Ensuring that the following strcat will
+		* work properly */
+		UTIL1_strcatNum8u(last_speed, DISPLAY_LINE_STRING_SIZE,
+				(last_pwm * 100) / MAXIMUM_PWM, '0', 3);
 		strcat(last_speed, "%");
 
-		sprintf(speed, "%d", (motor_info.current_pwm * 100) /
-				MAXIMUM_PWM);
+		*speed = '\0'; /*! Ensuring that the following strcat will work
+		* properly */
+		UTIL1_strcatNum8u(speed, DISPLAY_LINE_STRING_SIZE,
+				(motor_info.current_pwm * 100) / MAXIMUM_PWM, '0', 3);
 		strcat(speed, "%");
 
 		strcpy(line, " ");
