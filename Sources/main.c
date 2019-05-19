@@ -26,6 +26,59 @@
  **  @{
  */
 /* MODULE main */
+#include "CPU.h"
+#include "Events.h"
+#include "TimerInt0Events.h"
+#include "UART0Events.h"
+#include "UART2Events.h"
+#include "TimerInt1Events.h"
+#include "ADC0.h"
+#include "AdcLdd1.h"
+#include "RTC.h"
+#include "TimerInt0.h"
+#include "TimerIntLdd1.h"
+#include "UART0.h"
+#include "ASerialLdd1.h"
+#include "UART2.h"
+#include "ASerialLdd2.h"
+#include "L293D_1_2_EN.h"
+#include "PwmLdd1.h"
+#include "TU1.h"
+#include "MCUC1.h"
+#include "TU2.h"
+#include "L293D_1A.h"
+#include "BitIoLdd1.h"
+#include "L293D_2A.h"
+#include "BitIoLdd2.h"
+#include "NOKIA5110_CONTROLLER.h"
+#include "RESpin1.h"
+#include "SCEpin1.h"
+#include "D_Cpin1.h"
+#include "WAIT1.h"
+#include "SM1.h"
+#include "NOKIA5110_LIGHT.h"
+#include "BitIoLdd3.h"
+#include "TU3.h"
+#include "TimerInt1.h"
+#include "TimerIntLdd2.h"
+#include "KBOARD_C1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARD_C2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARD_C3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARD_R1.h"
+#include "BitIoLdd4.h"
+#include "KBOARD_R2.h"
+#include "BitIoLdd5.h"
+#include "KBOARD_R3.h"
+#include "BitIoLdd6.h"
+#include "KBOARD_R4.h"
+#include "BitIoLdd7.h"
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
 
 #include <CPU.h>
 #include <display.h>
@@ -35,6 +88,7 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 volatile bool external_interrupt = FALSE;
 volatile KBOARD_KEY_TYPE last_key_pressed = NULL;
+extern volatile bool timeout_reached;
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -53,7 +107,6 @@ int main(void)
 	 * Initializing the keyboard module
 	 */
 	display_init();
-	display_write_line(1, "Last key press");
 	kboard_init();
 
 
@@ -77,70 +130,14 @@ int main(void)
 	{
 		if(external_interrupt)
 		{
-			switch(last_key_pressed)
-			{
-			case KEY_0:
-			{
-				display_write_line(2, "0");
-				break;
-			}
-			case KEY_1:
-			{
-				display_write_line(2, "1");
-				break;
-			}
-			case KEY_2:
-			{
-				display_write_line(2, "2");
-				break;
-			}
-			case KEY_3:
-			{
-				display_write_line(2, "3");
-				break;
-			}
-			case KEY_4:
-			{
-				display_write_line(2, "4");
-				break;
-			}
-			case KEY_5:
-			{
-				display_write_line(2, "5");
-				break;
-			}
-			case KEY_6:
-			{
-				display_write_line(2, "6");
-				break;
-			}
-			case KEY_7:
-			{
-				display_write_line(2, "7");
-				break;
-			}
-			case KEY_8:
-			{
-				display_write_line(2, "8");
-				break;
-			}
-			case KEY_9:
-			{
-				display_write_line(2, "9");
-				break;
-			}
-			case KEY_ASTERISK:
-			{
-				display_write_line(2, "*");
-				break;
-			}
-			case KEY_HASHTAG:
-			{
-				display_write_line(2, "#");
-				break;
-			}
-			}
+			display_fsm(last_key_pressed);
 			external_interrupt = FALSE;
+		}
+
+		if(timeout_reached)
+		{
+			display_update(OPTIONS_MENU_1);
+			timeout_reached = FALSE;
 		}
 	}
 
