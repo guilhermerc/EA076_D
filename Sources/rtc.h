@@ -17,14 +17,13 @@
 
 #include <PE_Types.h>
 
-
 #define TIME_AUX_STRING_SIZE	8
 
 LDD_TDeviceData * RTC_dd_ptr;
 
-void stamp_init();
-void stamp_get_time(LDD_RTC_TTime * current_time_ptr);
-void stamp_set_current_time(uint32_t second, uint32_t minute,
+void rtc_init();
+void rtc_get_time(LDD_RTC_TTime * current_time_ptr);
+void rtc_set_current_time(uint32_t second, uint32_t minute,
 		uint32_t hour);
 
 #endif /* PROGRAMMER_CODE_LIBRARIES_STAMP_H_ */

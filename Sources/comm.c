@@ -10,7 +10,7 @@
 #include <console.h>
 #include <Events.h>
 #include <motor.h>
-#include <stamp.h>
+#include <rtc.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>

@@ -39,7 +39,7 @@
 #include <KBOARD_C3.h>
 #include <PE_Types.h>
 #include <PORT_PDD.h>
-#include <stamp.h>
+#include <rtc.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <temp.h>
@@ -625,7 +625,7 @@ void TI1_OnInterrupt0(void)
 	/*! Gets the current time from RTC module */
 	case GETTING_CURR_TIME:
 	{
-		stamp_get_time(&current_time);
+		rtc_get_time(&current_time);
 		//RTC_GetTime(RTC_dd_ptr, &current_time);
 		state = ASSEMBLING_STRING;
 

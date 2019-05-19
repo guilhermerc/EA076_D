@@ -13,8 +13,8 @@
  *      Author: guilherme
  */
 
+#include <rtc.h>
 #include <RTC.h>
-#include <stamp.h>
 #include <stdint.h>
 
 #define CURRENT_SECOND		0
@@ -25,7 +25,7 @@
 #define CURRENT_MONTH		1
 #define CURRENT_YEAR		2000
 
-static void stamp_set_time(uint32_t second, uint32_t minute, uint32_t hour,
+static void rtc_set_time(uint32_t second, uint32_t minute, uint32_t hour,
 		uint32_t day_of_week, uint32_t day, uint32_t month, uint32_t year);
 
 /*! @brief A function that initializes the time stamp module
@@ -34,10 +34,10 @@ static void stamp_set_time(uint32_t second, uint32_t minute, uint32_t hour,
  * pointer, which will be useful to set and get the current time. Also,
  * this function sets a standard current time.
 */
-void stamp_init()
+void rtc_init()
 {
 	RTC_dd_ptr = RTC_Init((LDD_TUserData *)NULL, FALSE);
-	stamp_set_time(CURRENT_SECOND, CURRENT_MINUTE, CURRENT_HOUR,
+	rtc_set_time(CURRENT_SECOND, CURRENT_MINUTE, CURRENT_HOUR,
 			CURRENT_DAY_OF_WEEK, CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
 }
 
@@ -48,15 +48,15 @@ void stamp_init()
  *
  * @param	current_time_ptr	Time data structure to be filled
 */
-void stamp_get_time(LDD_RTC_TTime * current_time_ptr)
+void rtc_get_time(LDD_RTC_TTime * current_time_ptr)
 {
 	RTC_GetTime(RTC_dd_ptr, current_time_ptr);
 }
 
-void stamp_set_current_time(uint32_t second, uint32_t minute,
+void rtc_set_current_time(uint32_t second, uint32_t minute,
 		uint32_t hour)
 {
-	stamp_set_time(second, minute, hour, CURRENT_DAY_OF_WEEK,
+	rtc_set_time(second, minute, hour, CURRENT_DAY_OF_WEEK,
 			CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
 }
 
@@ -67,7 +67,7 @@ void stamp_set_current_time(uint32_t second, uint32_t minute,
  * to this file, but it might be useful at some point.
  *
 */
-static void stamp_set_time(uint32_t second, uint32_t minute, uint32_t hour,
+static void rtc_set_time(uint32_t second, uint32_t minute, uint32_t hour,
 		uint32_t day_of_week, uint32_t day, uint32_t month, uint32_t year)
 {
 	LDD_RTC_TTime time;
