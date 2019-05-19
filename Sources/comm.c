@@ -7,8 +7,8 @@
  */
 
 #include <comm.h>
+#include <console.h>
 #include <Events.h>
-#include <LOG.h>
 #include <motor.h>
 #include <stamp.h>
 #include <stdint.h>
@@ -81,7 +81,7 @@ void comm_init()
 
 	comm_info.state = CONNECT_WIFI;
 	comm_info.message_received = FALSE;
-	comm_info.loging_status = DONE;
+	console_info.status = DONE;
 	comm_info.sending_status = DONE;
 
 	comm_clear_input_buffer();
@@ -94,7 +94,7 @@ void comm_init()
 COMM_STATUS comm_status()
 {
 	COMM_STATUS comm_status = BUSY;
-	if((comm_info.sending_status == DONE) && (comm_info.loging_status == DONE))
+	if((comm_info.sending_status == DONE) && (console_info.status == DONE))
 		comm_status = AVAILABLE;
 
 	return comm_status;

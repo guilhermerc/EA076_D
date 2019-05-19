@@ -30,13 +30,13 @@
 
 #include <ADC0.h>
 #include <comm.h>
+#include <console.h>
 #include <display.h>
 #include <event_buff.h>
 #include <kboard.h>
 #include <KBOARD_C1.h>
 #include <KBOARD_C2.h>
 #include <KBOARD_C3.h>
-#include <LOG.h>
 #include <PE_Types.h>
 #include <PORT_PDD.h>
 #include <stamp.h>
@@ -417,7 +417,7 @@ void UART0_OnRxChar(void)
 	 * during this handling a LOG function can also be used and this
 	 * message would be overwritten.
 	 */
-	LOG(NULL, UART0_GetPtrToLastRecvChar());
+	console_write(NULL, UART0_GetPtrToLastRecvChar());
 
 	if(UART0_HasACompleteMessage())
 		event_buff_insert_event(NEW_MESSAGE_FROM_TERMINAL);
@@ -442,7 +442,7 @@ void UART0_OnTxChar(void)
 {
 	static uint8_t curr_idx = 0;
 
-	UART0_TComData curr_char = log_buffer[curr_idx++];
+	UART0_TComData curr_char = console_info.buffer[curr_idx++];
 	if(curr_char != '\0')
 	{
 		UART0_SendChar(curr_char);
@@ -451,7 +451,7 @@ void UART0_OnTxChar(void)
 	{
 		curr_idx = 0;
 
-		comm_info.loging_status = DONE;
+		console_info.status = DONE;
 	}
 }
 
