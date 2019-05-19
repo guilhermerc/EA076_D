@@ -189,6 +189,8 @@ void display_update(DISPLAY_FSM_STATE state)
 			display_write_line(5, "Mode:      OFF");
 
 		display_set_timeout(CURR_STATE_MENU_TIMEOUT);
+
+		break;
 	}
 	case SPEED_DEC_1_MENU:
 	case SPEED_INC_1_MENU:
@@ -243,6 +245,8 @@ void display_update(DISPLAY_FSM_STATE state)
 		display_clean_line(5);
 
 		display_set_timeout(SPEED_SETUP_MENU_TIMEOUT);
+
+		break;
 	}
 	}
 }
