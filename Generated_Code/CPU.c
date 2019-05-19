@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-18, 14:32, # CodeGen: 253
+**     Date/Time   : 2019-05-18, 23:17, # CodeGen: 254
 **     Abstract    :
 **
 **     Settings    :
@@ -297,7 +297,6 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "Events.h"
-#include "ADC0Events.h"
 #include "TimerInt0Events.h"
 #include "UART0Events.h"
 #include "UART2Events.h"

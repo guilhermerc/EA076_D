@@ -7,7 +7,7 @@
 **     Version     : Component 01.697, Driver 01.00, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-14, 22:07, # CodeGen: 97
+**     Date/Time   : 2019-05-18, 23:17, # CodeGen: 254
 **     Abstract    :
 **         This device "ADC" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -91,7 +91,7 @@
 
 /* MODULE ADC0. */
 
-#include "ADC0Events.h"
+#include "Events.h"
 #include "ADC0.h"
 
 #ifdef __cplusplus
