@@ -114,8 +114,8 @@
 /* MODULE UART2. */
 
 /* Include inherited components */
-#include "ASerialLdd2.h"
-#include "CPU.h"
+
+#include <PE_Types.h>
 
 #ifdef __cplusplus
 extern "C" {

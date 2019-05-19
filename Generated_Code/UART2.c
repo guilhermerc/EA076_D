@@ -110,8 +110,11 @@
 
 /* MODULE UART2. */
 
-#include "UART2.h"
-#include "UART2Events.h"
+#include <ASerialLdd2.h>
+#include <Events.h>
+#include <PE_Error.h>
+#include <stdint.h>
+#include <UART2.h>
 
 #ifdef __cplusplus
 extern "C" {

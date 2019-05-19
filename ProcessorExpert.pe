@@ -3,7 +3,7 @@
   <Header>
     <Name>EA076_PE</Name>
     <SavedBy>guilherme</SavedBy>
-    <ModificationStamp>74</ModificationStamp>
+    <ModificationStamp>75</ModificationStamp>
     <Date>2019-03-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -15658,7 +15658,7 @@
         <ItemSymbol>EventModule</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>UART2Events</Value>
+        <Value>Events</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>BeforeNewSpeed</ItemSymbol>

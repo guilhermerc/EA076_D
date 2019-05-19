@@ -7,6 +7,7 @@
  */
 
 #include <comm.h>
+#include <Events.h>
 #include <LOG.h>
 #include <motor.h>
 #include <stamp.h>
@@ -15,7 +16,6 @@
 #include <string.h>
 #include <time.h>
 #include <UART2.h>
-#include <UART2Events.h>
 
 #define WIFI_SSID "\"EA076R\""
 #define WIFI_PASSWORD "\"FRDMKL25\""
