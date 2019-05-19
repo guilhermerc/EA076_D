@@ -26,59 +26,6 @@
  **  @{
  */
 /* MODULE main */
-#include "CPU.h"
-#include "Events.h"
-#include "TimerInt0Events.h"
-#include "UART0Events.h"
-#include "UART2Events.h"
-#include "TimerInt1Events.h"
-#include "ADC0.h"
-#include "AdcLdd1.h"
-#include "RTC.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
-#include "L293D_1_2_EN.h"
-#include "PwmLdd1.h"
-#include "TU1.h"
-#include "MCUC1.h"
-#include "TU2.h"
-#include "L293D_1A.h"
-#include "BitIoLdd1.h"
-#include "L293D_2A.h"
-#include "BitIoLdd2.h"
-#include "NOKIA5110_CONTROLLER.h"
-#include "RESpin1.h"
-#include "SCEpin1.h"
-#include "D_Cpin1.h"
-#include "WAIT1.h"
-#include "SM1.h"
-#include "NOKIA5110_LIGHT.h"
-#include "BitIoLdd3.h"
-#include "TU3.h"
-#include "TimerInt1.h"
-#include "TimerIntLdd2.h"
-#include "KBOARD_C1.h"
-#include "ExtIntLdd1.h"
-#include "KBOARD_C2.h"
-#include "ExtIntLdd2.h"
-#include "KBOARD_C3.h"
-#include "ExtIntLdd3.h"
-#include "KBOARD_R1.h"
-#include "BitIoLdd4.h"
-#include "KBOARD_R2.h"
-#include "BitIoLdd5.h"
-#include "KBOARD_R3.h"
-#include "BitIoLdd6.h"
-#include "KBOARD_R4.h"
-#include "BitIoLdd7.h"
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
-#include "IO_Map.h"
 
 #include <CPU.h>
 #include <display.h>
@@ -89,6 +36,16 @@
 volatile bool external_interrupt = FALSE;
 volatile KBOARD_KEY_TYPE last_key_pressed = NULL;
 extern volatile bool timeout_reached;
+
+/*! List of TODO's that as soon as I have time I'll integrate
+ *
+ *	TODO: Check if the event ring buffer indexes are properly changed
+ *  TODO: Use the average calculation integrated in the ADC component (PE)
+ *  TODO: Change ANTICLOCKWISE to COUNTERCLOCKWISE
+ *  TODO: Change what have to be changed due to the correct size of display = 14
+ * 	TODO: The keyboard external interruptions should put an event in the event buffer
+ * 	TODO: The timeout also should put an event in the event buffer
+*/
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -109,21 +66,24 @@ int main(void)
 	display_init();
 	kboard_init();
 
+	// comm_init();
+	// console_init();
+	// display_init();
+	// event_buff_init();
+	// kboard_init();
+	// motor_init();
+	// rtc_init();
+	// temp_init();
 
-	/*! TODO: I tried so hard to make this display thing works but it
-	 * doesn't work.
-	 * 1. I tried to reconfigure the PE components again.
-	 * 2. I tried to delete and create new PE components.
-	 * 3. I checked the connections and everything seems OK.
-	 * 4. I checked that both SPIMaster_LDD and WAIT components are
-	 * initialized.
+	/*
+	 * Infinite loop that checks if the event ring buffer has events to
+	 * be handled.
+	for(;;)
+	{
+		if(!event_buff_is_empty())
+			event_handler(event_buff_consume_event());
+	}
 	 *
-	 * The funny thing is: If I write on the display on main loop, it
-	 * works just fine. The problem only happens when I call the
-	 * display functions inside the interruptions' handlers.
-	 * As far as I was able to debug, the program keeps stuck in
-	 * NOKIA5110_CONTROLLER.c#262. I didn't have time to investigate
-	 * any further.
 	 */
 
 	for(;;)
