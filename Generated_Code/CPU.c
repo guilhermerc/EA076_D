@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-18, 23:31, # CodeGen: 256
+**     Date/Time   : 2019-05-18, 23:35, # CodeGen: 258
 **     Abstract    :
 **
 **     Settings    :
@@ -254,10 +254,12 @@
 #include "RTC.h"
 #include "TimerInt0.h"
 #include "TimerIntLdd1.h"
-#include "UART0.h"
-#include "ASerialLdd1.h"
+#include "TimerInt1.h"
+#include "TimerIntLdd2.h"
 #include "UART2.h"
 #include "ASerialLdd2.h"
+#include "UART0.h"
+#include "ASerialLdd1.h"
 #include "L293D_1_2_EN.h"
 #include "PwmLdd1.h"
 #include "TU1.h"
@@ -276,8 +278,6 @@
 #include "NOKIA5110_LIGHT.h"
 #include "BitIoLdd3.h"
 #include "TU3.h"
-#include "TimerInt1.h"
-#include "TimerIntLdd2.h"
 #include "KBOARD_C1.h"
 #include "ExtIntLdd1.h"
 #include "KBOARD_C2.h"
@@ -297,8 +297,6 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "Events.h"
-#include "TimerInt0Events.h"
-#include "TimerInt1Events.h"
 #include "CPU.h"
 
 #ifdef __cplusplus
@@ -525,10 +523,13 @@ void PE_low_level_init(void)
   /* ### TimerInt_LDD "TimerIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)TimerIntLdd1_Init(NULL);
   /* ### TimerInt "TimerInt0" init code ... */
-  /* ### Asynchro serial "UART0" init code ... */
-  UART0_Init();
+  /* ### TimerInt_LDD "TimerIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)TimerIntLdd2_Init(NULL);
+  /* ### TimerInt "TimerInt1" init code ... */
   /* ### Asynchro serial "UART2" init code ... */
   UART2_Init();
+  /* ### Asynchro serial "UART0" init code ... */
+  UART0_Init();
   /* ### PWM_LDD "PwmLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)PwmLdd1_Init(NULL);
   MCUC1_Init(); /* ### McuLibConfig "MCUC1" init code ... */
@@ -542,9 +543,6 @@ void PE_low_level_init(void)
   /* ### PDC8544 "NOKIA5110_CONTROLLER" init code ... */
   /* ### BitIO_LDD "BitIoLdd3" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd3_Init(NULL);
-  /* ### TimerInt_LDD "TimerIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)TimerIntLdd2_Init(NULL);
-  /* ### TimerInt "TimerInt1" init code ... */
   /* ### ExtInt_LDD "ExtIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)ExtIntLdd1_Init(NULL);
   /* ### ExtInt_LDD "ExtIntLdd2" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */

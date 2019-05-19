@@ -7,7 +7,7 @@
 **     Version     : Component 02.161, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-06, 12:42, # CodeGen: 154
+**     Date/Time   : 2019-05-18, 23:35, # CodeGen: 258
 **     Abstract    :
 **         This component "TimerInt" implements a periodic interrupt.
 **         When the component and its events are enabled, the "OnInterrupt"
@@ -87,7 +87,7 @@
 
 /* MODULE TimerInt1. */
 
-#include "TimerInt1Events.h"
+#include "Events.h"
 #include "TimerInt1.h"
 
 #ifdef __cplusplus
