@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-18, 23:35, # CodeGen: 258
+**     Date/Time   : 2019-05-19, 01:01, # CodeGen: 259
 **     Abstract    :
 **
 **     Settings    :
@@ -60,8 +60,6 @@
   #include "RTC.h"
   #include "TimerInt0.h"
   #include "TimerIntLdd1.h"
-  #include "TimerInt1.h"
-  #include "TimerIntLdd2.h"
   #include "UART2.h"
   #include "ASerialLdd2.h"
   #include "UART0.h"
@@ -83,7 +81,6 @@
   #include "SM1.h"
   #include "NOKIA5110_LIGHT.h"
   #include "BitIoLdd3.h"
-  #include "TU3.h"
   #include "KBOARD_C1.h"
   #include "ExtIntLdd1.h"
   #include "KBOARD_C2.h"
@@ -152,7 +149,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x20  0x00000080   -   ivINT_CMP0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x21  0x00000084   -   ivINT_TPM0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x22  0x00000088   -   ivINT_TPM1                    unused by PE */
-    (tIsrFunc)&TU3_Interrupt,          /* 0x23  0x0000008C   2   ivINT_TPM2                    used by PE */
+    (tIsrFunc)&CPU_Interrupt,          /* 0x23  0x0000008C   -   ivINT_TPM2                    unused by PE */
     (tIsrFunc)&RTC_Interrupt,          /* 0x24  0x00000090   2   ivINT_RTC                     used by PE */
     (tIsrFunc)&RTC_SecondsInterrupt,   /* 0x25  0x00000094   2   ivINT_RTC_Seconds             used by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x26  0x00000098   -   ivINT_PIT                     unused by PE */
