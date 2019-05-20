@@ -121,7 +121,7 @@ void KBOARD_C3_OnInterrupt(void)
 		else if(row == 3)
 			key_pressed = KEY_9;
 		else if(row == 4)
-			key_pressed = KEY_HASHTAG;
+			key_pressed = KEY_ASTERISK;
 	}
 
 	//display_write_line(1, "Column 3");
@@ -240,7 +240,7 @@ void KBOARD_C1_OnInterrupt(void)
 		else if(row == 3)
 			key_pressed = KEY_7;
 		else if(row == 4)
-			key_pressed = KEY_ASTERISK;
+			key_pressed = KEY_HASHTAG;
 	}
 
 	//display_write_line(1, "Column 1");
