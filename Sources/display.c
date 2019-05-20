@@ -65,6 +65,13 @@ void display_clean_line(uint8_t line)
 	display_write_line(line, "                    ");
 }
 
+/*! @brief A function that updates what is currently being displayed
+ *
+ * This function takes no arguments but it depends hardly on the
+ * current state of the display FSM (which is a "globally static"
+ * variable).
+ *
+ * */
 void display_update()
 {
 	/*! TODO: Remember to ensure that you're overwriting all lines */
@@ -398,12 +405,41 @@ void display_update()
 	}
 }
 
+/*! @brief A function that forcibly changes the current state of
+ * display FSM
+ *
+ * This function currently is used by timeout purposes.
+ *
+ */
 void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state)
 {
 	state = new_state;
 	display_update();
 }
 
+/*! @brief A function that iterates over a FSM, which controls the
+ * display menus and motor configurations
+ *
+ * The states are:
+ *
+ * 	OPTIONS_MENU_1		->	First "page" of options
+ *	OPTIONS_MENU_2		-> 	Last "page" of options
+ *	CURR_STATE_MENU		-> 	Displays for CURR_STATE_MENU_TIMEOUT
+ *							seconds the motor current configs
+ *	DIRECTION_MENU		->	Enables the user to change motor direction
+ *	DIRECTION_CONF		->	Confirms the change in motor direction
+ *	MODE_MENU			->	Enables the user to change motor mode
+ *	MODE_CONF			->	Confirms the change in motor mode
+ *	SPEED_MENU			->	Enables the user to change motor speed
+ *	SPEED_CONF			->	Confirms the change in motor speed
+ *	THRESHOLD_MENU		->	Enables the user to change motor threshold
+ *	THRESHOLD_CONF		->	Enables the user to change motor threshold
+ *
+ *	NOTE: I'm not using the proposed FSM. I find this design more
+ *	intuitive.
+ *
+ * @param	last_key_pressed	The key that was just pressed
+ */
 void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 {
 	switch(state)
@@ -529,6 +565,10 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 	display_update();
 }
 
+/*! @brief A function that sets a timeout of 'timeout' seconds
+ *
+ * @param	timeout	The timeout in seconds
+ */
 void display_set_timeout(uint8_t timeout)
 {
 	display_timeout.timer = 0;
@@ -536,6 +576,7 @@ void display_set_timeout(uint8_t timeout)
 	display_timeout.triggered = ON;
 }
 
+/*! @brief	A function that unsets the current configuration of timeout */
 void display_unset_timeout()
 {
 	display_timeout.timer = 0;
