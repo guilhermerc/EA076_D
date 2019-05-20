@@ -26,6 +26,7 @@ typedef enum
 	OPTIONS_MENU_1,
 	OPTIONS_MENU_2,
 	OPTIONS_MENU_3,
+	OPTIONS_MENU_4,
 	THRESHOLD_MENU,
 	CURR_STATE_MENU,
 	SPEED_DEC_1_MENU,
@@ -49,7 +50,7 @@ void display_init();
 void display_write_line(uint8_t line, char * string);
 void display_clean_line(uint8_t line);
 void display_fsm(KBOARD_KEY_TYPE last_key_pressed);
-void display_update(DISPLAY_FSM_STATE state);
+void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state);
 void display_unset_timeout();
 
 #endif /* SOURCES_DISPLAY_H_ */

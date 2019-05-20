@@ -30,7 +30,9 @@
 #include <CPU.h>
 #include <display.h>
 #include <kboard.h>
+#include <motor.h>
 #include <PE_Types.h>
+#include <rtc.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 volatile bool external_interrupt = FALSE;
@@ -45,6 +47,7 @@ extern volatile bool timeout_reached;
  *  TODO: Change what have to be changed due to the correct size of display = 14
  * 	TODO: The keyboard external interruptions should put an event in the event buffer
  * 	TODO: The timeout also should put an event in the event buffer
+ *	TODO: Protect the boundaries of motor_change_speed function
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -71,8 +74,8 @@ int main(void)
 	// display_init();
 	// event_buff_init();
 	// kboard_init();
-	// motor_init();
-	// rtc_init();
+	motor_init();
+	rtc_init();
 	// temp_init();
 
 	/*
@@ -96,7 +99,7 @@ int main(void)
 
 		if(timeout_reached)
 		{
-			display_update(OPTIONS_MENU_1);
+			display_fsm_force_state_change(OPTIONS_MENU_1);
 			timeout_reached = FALSE;
 		}
 	}
