@@ -21,26 +21,24 @@
 
 #define SPEED_STRING_SIZE	8
 
-#define CURR_STATE_MENU_TIMEOUT	3
-#define SPEED_SETUP_MENU_TIMEOUT	3
+#define CURR_STATE_MENU_TIMEOUT	5
+#define STANDARD_TIMEOUT 3
 
-/*!
- 	[OK] OPTIONS_MENU_1,
+/*
+ * 	[OK] OPTIONS_MENU_1,
 	[OK] OPTIONS_MENU_2,
-	[OK] OPTIONS_MENU_3,
-	[OK] OPTIONS_MENU_4,
-	TODO: THRESHOLD_MENU,
 	[OK] CURR_STATE_MENU,
-	[OK] SPEED_DEC_1_MENU,
-	TODO: DIRECTION_MENU,
-	[OK] SPEED_INC_1_MENU,
-	[OK] SPEED_DEC_10_MENU,
-	TODO: MODE_MENU,
-	[OK] SPEED_INC_10_MENU
-*/
+	[OK] DIRECTION_MENU,
+	[OK] DIRECTION_CONF,
+	[OK] MODE_MENU,
+	[OK] MODE_CONF,
+	[OK] SPEED_MENU,
+	[OK] SPEED_CONF,
+	THRESHOLD_MENU,
+	THRESHOLD_CONF
+ */
 
 static DISPLAY_FSM_STATE state;
-static uint8_t last_pwm = 0;
 
 void display_set_timeout(uint8_t timeout);
 
@@ -85,21 +83,21 @@ void display_update()
 	{
 		/*!
 		 * 	  """"""""""""""""
-		 * 1: "Options  (1/4)"
+		 * 1: "Options  (1/2)"
 		 * 2: "--------------"
-		 * 3: "0|Set thresh  "
-		 * 4: "2|Show state  "
-		 * 5: "              "
-		 * 6: "3|More options"
+		 * 3: "4|Show state  "
+		 * 4: "5|Change dir  "
+		 * 5: "6|Change mode "
+		 * 6: "9|More options"
 		 * 	  """"""""""""""""
 		 */
 
-		display_write_line(1, "Options  (1/4)");
+		display_write_line(1, "Options  (1/2)");
 		display_write_line(2, "--------------");
-		display_write_line(3, "0|Set thresh  ");
-		display_write_line(4, "2|Show state  ");
-		display_write_line(5, "              ");
-		display_write_line(6, "3|More options");
+		display_write_line(3, "4|Show state  ");
+		display_write_line(4, "5|Change dir  ");
+		display_write_line(5, "6|Change mode ");
+		display_write_line(6, "9|More options");
 
 		break;
 	}
@@ -107,65 +105,21 @@ void display_update()
 	{
 		/*!
 		 * 	  """"""""""""""""
-		 * 1: "Options  (2/4)"
+		 * 1: "Options  (2/2)"
 		 * 2: "--------------"
-		 * 3: "4|Speed -1%   "
-		 * 4: "6|Speed +1%   "
-		 * 5: "1|Prev options"
-		 * 6: "3|More options"
-		 * 	  """"""""""""""""
-		 */
-
-		display_write_line(1, "Options  (2/4)");
-		display_write_line(2, "--------------");
-		display_write_line(3, "4|Speed -1%   ");
-		display_write_line(4, "6|Speed +1%   ");
-		display_write_line(5, "1|Prev options");
-		display_write_line(6, "3|More options");
-
-		break;
-	}
-	case OPTIONS_MENU_3:
-	{
-		/*!
-		 * 	  """"""""""""""""
-		 * 1: "Options  (3/4)"
-		 * 2: "--------------"
-		 * 3: "7|Speed -10%  "
-		 * 4: "9|Speed +10%  "
-		 * 5: "1|Prev options"
-		 * 6: "3|More options"
-		 * 	  """"""""""""""""
-		 */
-
-		display_write_line(1, "Options  (3/4)");
-		display_write_line(2, "--------------");
-		display_write_line(3, "7|Speed -10%  ");
-		display_write_line(4, "9|Speed +10%  ");
-		display_write_line(5, "1|Prev options");
-		display_write_line(6, "3|More options");
-
-		break;
-	}
-	case OPTIONS_MENU_4:
-	{
-		/*!
-		 * 	  """"""""""""""""
-		 * 1: "Options  (4/4)"
-		 * 2: "--------------"
-		 * 3: "5|Choose dir  "
-		 * 4: "8|Choose mode "
+		 * 3: "4|Change speed"
+		 * 4: "5|Change thres"
 		 * 5: "              "
-		 * 6: "1|Prev options"
+		 * 6: "7|Prev options"
 		 * 	  """"""""""""""""
 		 */
 
-		display_write_line(1, "Options  (4/4)");
+		display_write_line(1, "Options  (2/2)");
 		display_write_line(2, "--------------");
-		display_write_line(3, "5|Choose dir  ");
-		display_write_line(4, "8|Choose mode ");
-		display_write_line(5, "              ");
-		display_write_line(6, "1|Prev options");
+		display_write_line(3, "4|Change speed");
+		display_write_line(4, "5|Change thres");
+		display_clean_line(5);
+		display_write_line(6, "7|Prev options");
 
 		break;
 	}
@@ -217,7 +171,7 @@ void display_update()
 		else
 			display_write_line(5, "Mode     | OFF");
 
-		display_write_line(6, "              ");
+		display_clean_line(6);
 
 		display_set_timeout(CURR_STATE_MENU_TIMEOUT);
 
@@ -225,64 +179,161 @@ void display_update()
 
 		break;
 	}
-	case SPEED_DEC_1_MENU:
-	case SPEED_INC_1_MENU:
-	case SPEED_DEC_10_MENU:
-	case SPEED_INC_10_MENU:
+	case SPEED_MENU:
 	{
 		/*!
 		 * 	  """"""""""""""""
-		 * 1: "Speed changed!"
+		 * 1: "Choose amount "
 		 * 2: "--------------"
-		 * 3: "From|     100%"
-		 * 4: "To  |     100%"
+		 * 3: "4|SPEED - 1%  "
+		 * 4: "5|SPEED + 1%  "
+		 * 5: "6|SPEED - 10% "
+		 * 6: "8|SPEED + 10% "
+		 * 	  """"""""""""""""
+		 */
+
+		display_write_line(1, "Choose amount ");
+		display_write_line(2, "--------------");
+		display_write_line(3, "4|SPEED - 1%  ");
+		display_write_line(4, "5|SPEED + 1%  ");
+		display_write_line(5, "6|SPEED - 10% ");
+		display_write_line(6, "8|SPEED + 10% ");
+
+		break;
+	}
+	case SPEED_CONF:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Speed changed "
+		 * 2: "with success! "
+		 * 3: "--------------"
+		 * 4: "          100%"
 		 * 5: "              "
 		 * 6: "              "
 		 * 	  """"""""""""""""
 		 */
 
-		char last_speed[SPEED_STRING_SIZE];
 		char speed[SPEED_STRING_SIZE];
 		char line[DISPLAY_LINE_STRING_SIZE];
 
-		/*! 1st line */
-		display_write_line(1, "Speed changed!");
-
-		/*! 2nd line */
-		display_write_line(2, "--------------");
-
-		/*! 3rd line */
-		*last_speed = '\0'; /*! Ensuring that the following strcat will
-		* work properly */
-		UTIL1_strcatNum16uFormatted(last_speed, DISPLAY_LINE_STRING_SIZE,
-				(last_pwm * 100) / MAXIMUM_PWM, '0', 3);
-		strcat(last_speed, "%");
-
-		strcpy(line, "From|     ");
-		strcat(line, last_speed);
-		display_write_line(3, line);
-
-		/*! 4th line */
+		strcpy(line, "          ");
 		*speed = '\0'; /*! Ensuring that the following strcat will work
 		* properly */
 		UTIL1_strcatNum16uFormatted(speed, DISPLAY_LINE_STRING_SIZE,
 				(motor_info.current_pwm * 100) / MAXIMUM_PWM, '0', 3);
 		strcat(speed, "%");
-
-		strcpy(line, "To  |     ");
 		strcat(line, speed);
 
+
+		display_write_line(1, "Speed changed ");
+		display_write_line(2, "with success! ");
+		display_write_line(3, "--------------");
 		display_write_line(4, line);
-
-		/*! 5th line */
 		display_clean_line(5);
-
-		/*! 6th line */
 		display_clean_line(6);
 
-		display_set_timeout(SPEED_SETUP_MENU_TIMEOUT);
+		display_set_timeout(STANDARD_TIMEOUT);
 
-		state = OPTIONS_MENU_1;
+		break;
+	}
+	case DIRECTION_MENU:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Choose dir    "
+		 * 2: "--------------"
+		 * 3: "5|CLOCKWISE   "
+		 * 4: "8|COUNTERCLOCK"
+		 * 5: "              "
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		display_write_line(1, "Choose dir    ");
+		display_write_line(2, "--------------");
+		display_write_line(3, "5|CLOCKWISE   ");
+		display_write_line(4, "8|COUNTERCLOCK");
+		display_clean_line(5);
+		display_clean_line(6);
+
+		break;
+	}
+	case DIRECTION_CONF:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Direction     "
+		 * 2: "changed with  "
+		 * 3: "success!      "
+		 * 4: "--------------"
+		 * 5: "     CLOCKWISE"
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		display_write_line(1, "Direction     ");
+		display_write_line(2, "changed with  ");
+		display_write_line(3, "success!      ");
+		display_write_line(4, "--------------");
+		if(motor_info.current_dir == CLOCKWISE)
+			display_write_line(5, "     CLOCKWISE");
+		else
+			display_write_line(5, "  COUNTERCLOCK");
+		display_clean_line(6);
+
+		display_set_timeout(STANDARD_TIMEOUT);
+
+		break;
+	}
+	case MODE_MENU:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Choose mode   "
+		 * 2: "--------------"
+		 * 3: "5|ON          "
+		 * 4: "8|OFF         "
+		 * 5: "0|AUTO        "
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		display_write_line(1, "Choose mode   ");
+		display_write_line(2, "--------------");
+		display_write_line(3, "5|ON          ");
+		display_write_line(4, "8|OFF         ");
+		display_write_line(5, "0|AUTO        ");
+		display_clean_line(6);
+
+		break;
+	}
+	case MODE_CONF:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Mode changed  "
+		 * 2: "with success! "
+		 * 3: "--------------"
+		 * 4: "            ON"
+		 * 5: "              "
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		display_write_line(1, "Mode changed  ");
+		display_write_line(2, "with success! ");
+		display_write_line(3, "--------------");
+		if(motor_info.current_mode == ON)
+			display_write_line(4, "            ON");
+		else if(motor_info.current_mode == OFF)
+			display_write_line(4, "           OFF");
+		else
+			display_write_line(4, "          AUTO");
+		display_clean_line(5);
+		display_clean_line(6);
+
+		display_set_timeout(STANDARD_TIMEOUT);
 
 		break;
 	}
@@ -297,113 +348,75 @@ void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state)
 
 void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 {
-	last_pwm = motor_info.current_pwm;
-
 	switch(state)
 	{
 	case OPTIONS_MENU_1:
 	{
-		switch(last_key_pressed)
-		{
-		case KEY_0:
-		{
-			state = THRESHOLD_MENU;
-			break;
-		}
-		case KEY_2:
-		{
+		if(last_key_pressed == KEY_4)
 			state = CURR_STATE_MENU;
-			break;
-		}
-		case KEY_3:
-		{
+		else if(last_key_pressed == KEY_5)
+			state = DIRECTION_MENU;
+		else if(last_key_pressed == KEY_6)
+			state = MODE_MENU;
+		else if(last_key_pressed == KEY_9)
 			state = OPTIONS_MENU_2;
-			break;
-		}
-		}
 
 		break;
 	}
 	case OPTIONS_MENU_2:
 	{
-		switch(last_key_pressed)
-		{
-		case KEY_1:
-		{
+		if(last_key_pressed == KEY_4)
+			state = SPEED_MENU;
+		else if(last_key_pressed == KEY_5)
+			state = THRESHOLD_MENU;
+		else if(last_key_pressed == KEY_7)
 			state = OPTIONS_MENU_1;
-			break;
-		}
-		case KEY_3:
-		{
-			state = OPTIONS_MENU_3;
-			break;
-		}
-		case KEY_4:
-		{
+
+		break;
+	}
+	case SPEED_MENU:
+	{
+		state = SPEED_CONF;
+
+		if(last_key_pressed == KEY_4)
 			motor_change_speed(-1);
-			state = SPEED_DEC_1_MENU;
-			break;
-		}
-		case KEY_6:
-		{
+		else if(last_key_pressed == KEY_5)
 			motor_change_speed(1);
-			state = SPEED_INC_1_MENU;
-			break;
-		}
-		}
-
-		break;
-	}
-	case OPTIONS_MENU_3:
-	{
-		switch(last_key_pressed)
-		{
-		case KEY_1:
-		{
-			state = OPTIONS_MENU_2;
-			break;
-		}
-		case KEY_3:
-		{
-			state = OPTIONS_MENU_4;
-			break;
-		}
-		case KEY_7:
-		{
+		else if(last_key_pressed == KEY_6)
 			motor_change_speed(-10);
-			state = SPEED_DEC_10_MENU;
-			break;
-		}
-		case KEY_9:
-		{
+		else if(last_key_pressed == KEY_8)
 			motor_change_speed(10);
-			state = SPEED_INC_10_MENU;
-			break;
-		}
-		}
+		else
+			state = SPEED_MENU;
+
+		break;
+
+	}
+	case DIRECTION_MENU:
+	{
+		state = DIRECTION_CONF;
+
+		if(last_key_pressed == KEY_5)
+			motor_set_dir(CLOCKWISE);
+		else if(last_key_pressed == KEY_8)
+			motor_set_dir(ANTICLOCKWISE);
+		else
+			state = DIRECTION_MENU;
 
 		break;
 	}
-	case OPTIONS_MENU_4:
+	case MODE_MENU:
 	{
-		switch(last_key_pressed)
-		{
-		case KEY_1:
-		{
-			state = OPTIONS_MENU_3;
-			break;
-		}
-		case KEY_5:
-		{
-			state = DIRECTION_MENU;
-			break;
-		}
-		case KEY_8:
-		{
+		state = MODE_CONF;
+
+		if(last_key_pressed == KEY_5)
+			motor_set_mode(ON);
+		else if(last_key_pressed == KEY_8)
+			motor_set_mode(OFF);
+		else if(last_key_pressed == KEY_0)
+			motor_set_mode(AUTO);
+		else
 			state = MODE_MENU;
-			break;
-		}
-		}
 
 		break;
 	}
