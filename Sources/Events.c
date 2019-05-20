@@ -39,15 +39,12 @@
 #include <KBOARD_C3.h>
 #include <PE_Types.h>
 #include <PORT_PDD.h>
-#include <rtc.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <temp.h>
 #include <UART0.h>
 #include <UART2.h>
-#include <UTIL1.h>
 #include <WAIT1.h>
-#include "CPU.h"
 #include "Events.h"
 
 #ifdef __cplusplus
