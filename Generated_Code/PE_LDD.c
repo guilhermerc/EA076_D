@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-19, 01:01, # CodeGen: 259
+**     Date/Time   : 2019-05-19, 18:54, # CodeGen: 260
 **     Abstract    :
 **
 **     Settings    :
@@ -163,14 +163,14 @@ bool PE_PeripheralUsed(uint32_t PrphBaseAddress)
   switch (PrphBaseAddress) {
     /* Base address allocated by peripheral(s) ADC0 */
     case 0x4003B000UL:
-    /* Base address allocated by peripheral(s) RTC */
-    case 0x4003D000UL:
     /* Base address allocated by peripheral(s) LPTMR0 */
     case 0x40040000UL:
-    /* Base address allocated by peripheral(s) UART2 */
-    case 0x4006C000UL:
+    /* Base address allocated by peripheral(s) RTC */
+    case 0x4003D000UL:
     /* Base address allocated by peripheral(s) UART0 */
     case 0x4006A000UL:
+    /* Base address allocated by peripheral(s) UART2 */
+    case 0x4006C000UL:
     /* Base address allocated by peripheral(s) TPM1 */
     case 0x40039000UL:
     /* Base address allocated by peripheral(s) PTE */

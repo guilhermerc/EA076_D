@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-19, 01:01, # CodeGen: 259
+**     Date/Time   : 2019-05-19, 18:54, # CodeGen: 260
 **     Abstract    :
 **
 **     Settings    :
@@ -251,13 +251,13 @@
 /* {Default RTOS Adapter} No RTOS includes */
 #include "ADC0.h"
 #include "AdcLdd1.h"
-#include "RTC.h"
 #include "TimerInt0.h"
 #include "TimerIntLdd1.h"
-#include "UART2.h"
-#include "ASerialLdd2.h"
+#include "RTC.h"
 #include "UART0.h"
 #include "ASerialLdd1.h"
+#include "UART2.h"
+#include "ASerialLdd2.h"
 #include "L293D_1_2_EN.h"
 #include "PwmLdd1.h"
 #include "TU1.h"
@@ -520,10 +520,10 @@ void PE_low_level_init(void)
   /* ### TimerInt_LDD "TimerIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)TimerIntLdd1_Init(NULL);
   /* ### TimerInt "TimerInt0" init code ... */
-  /* ### Asynchro serial "UART2" init code ... */
-  UART2_Init();
   /* ### Asynchro serial "UART0" init code ... */
   UART0_Init();
+  /* ### Asynchro serial "UART2" init code ... */
+  UART2_Init();
   /* ### PWM_LDD "PwmLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)PwmLdd1_Init(NULL);
   MCUC1_Init(); /* ### McuLibConfig "MCUC1" init code ... */

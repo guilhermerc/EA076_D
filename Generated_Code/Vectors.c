@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-19, 01:01, # CodeGen: 259
+**     Date/Time   : 2019-05-19, 18:54, # CodeGen: 260
 **     Abstract    :
 **
 **     Settings    :
@@ -57,13 +57,13 @@
   #include "CPU.h"
   #include "ADC0.h"
   #include "AdcLdd1.h"
-  #include "RTC.h"
   #include "TimerInt0.h"
   #include "TimerIntLdd1.h"
-  #include "UART2.h"
-  #include "ASerialLdd2.h"
+  #include "RTC.h"
   #include "UART0.h"
   #include "ASerialLdd1.h"
+  #include "UART2.h"
+  #include "ASerialLdd2.h"
   #include "L293D_1_2_EN.h"
   #include "PwmLdd1.h"
   #include "TU1.h"
