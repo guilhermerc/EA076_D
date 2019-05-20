@@ -16,29 +16,21 @@
 #include <NOKIA5110_CONTROLLER.h>
 #include <NOKIA5110_LIGHT.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <UTIL1.h>
 
 #define SPEED_STRING_SIZE	8
+#define THRESHOLD_STRING_SIZE	16
 
 #define CURR_STATE_MENU_TIMEOUT	5
 #define STANDARD_TIMEOUT 3
 
-/*
- * 	[OK] OPTIONS_MENU_1,
-	[OK] OPTIONS_MENU_2,
-	[OK] CURR_STATE_MENU,
-	[OK] DIRECTION_MENU,
-	[OK] DIRECTION_CONF,
-	[OK] MODE_MENU,
-	[OK] MODE_CONF,
-	[OK] SPEED_MENU,
-	[OK] SPEED_CONF,
-	THRESHOLD_MENU,
-	THRESHOLD_CONF
- */
-
 static DISPLAY_FSM_STATE state;
+
+static char threshold[THRESHOLD_STRING_SIZE];
+static bool typing_threshold = FALSE;
 
 void display_set_timeout(uint8_t timeout);
 
@@ -132,7 +124,7 @@ void display_update()
 		 * 3: "Speed    |100%"
 		 * 4: "Direction|  CW"
 		 * 5: "Mode     |  ON"
-		 * 6: "              "
+		 * 6: "Threshold|20.0"
 		 * 	  """"""""""""""""
 		 */
 
@@ -171,7 +163,11 @@ void display_update()
 		else
 			display_write_line(5, "Mode     | OFF");
 
-		display_clean_line(6);
+		/*! 6th line */
+		strcpy(line, "Threshold|");
+		sprintf(threshold, "%.1f", motor_info.threshold);
+		strcat(line, threshold);
+		display_write_line(6, line);
 
 		display_set_timeout(CURR_STATE_MENU_TIMEOUT);
 
@@ -292,18 +288,18 @@ void display_update()
 		 * 	  """"""""""""""""
 		 * 1: "Choose mode   "
 		 * 2: "--------------"
-		 * 3: "5|ON          "
-		 * 4: "8|OFF         "
-		 * 5: "0|AUTO        "
+		 * 3: "4|ON          "
+		 * 4: "5|OFF         "
+		 * 5: "6|AUTO        "
 		 * 6: "              "
 		 * 	  """"""""""""""""
 		 */
 
 		display_write_line(1, "Choose mode   ");
 		display_write_line(2, "--------------");
-		display_write_line(3, "5|ON          ");
-		display_write_line(4, "8|OFF         ");
-		display_write_line(5, "0|AUTO        ");
+		display_write_line(3, "4|ON          ");
+		display_write_line(4, "5|OFF         ");
+		display_write_line(5, "6|AUTO        ");
 		display_clean_line(6);
 
 		break;
@@ -331,6 +327,68 @@ void display_update()
 		else
 			display_write_line(4, "          AUTO");
 		display_clean_line(5);
+		display_clean_line(6);
+
+		display_set_timeout(STANDARD_TIMEOUT);
+
+		break;
+	}
+	case THRESHOLD_MENU:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Type the new  "
+		 * 2: "threshold and "
+		 * 3: "press '#'     "
+		 * 4: "--------------"
+		 * 5: "              "
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		char line[DISPLAY_LINE_STRING_SIZE];
+
+		display_write_line(1, "Type the new  ");
+		display_write_line(2, "threshold and ");
+		display_write_line(3, "press '#'     ");
+		display_write_line(4, "--------------");
+
+		if(typing_threshold == TRUE)
+			display_write_line(5, threshold);
+		else
+			display_clean_line(5);
+
+		display_clean_line(6);
+
+		break;
+	}
+	case THRESHOLD_CONF:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Threshold     "
+		 * 2: "changed with  "
+		 * 3: "success!      "
+		 * 4: "--------------"
+		 * 5: "        20.0 C"
+		 * 6: "              "
+		 * 	  """"""""""""""""
+		 */
+
+		char line[DISPLAY_LINE_STRING_SIZE];
+
+		display_write_line(1, "Threshold     ");
+		display_write_line(2, "changed with  ");
+		display_write_line(3, "success!      ");
+		display_write_line(4, "--------------");
+
+		strcpy(line, "          ");
+		sprintf(threshold, "%.1f", motor_info.threshold);
+		strcat(line, threshold);
+		strcat(line, " C");
+
+		display_write_line(5, line);
+
 		display_clean_line(6);
 
 		display_set_timeout(STANDARD_TIMEOUT);
@@ -390,7 +448,6 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 			state = SPEED_MENU;
 
 		break;
-
 	}
 	case DIRECTION_MENU:
 	{
@@ -409,14 +466,61 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 	{
 		state = MODE_CONF;
 
-		if(last_key_pressed == KEY_5)
+		if(last_key_pressed == KEY_4)
 			motor_set_mode(ON);
-		else if(last_key_pressed == KEY_8)
+		else if(last_key_pressed == KEY_5)
 			motor_set_mode(OFF);
-		else if(last_key_pressed == KEY_0)
+		else if(last_key_pressed == KEY_6)
 			motor_set_mode(AUTO);
 		else
 			state = MODE_MENU;
+
+		break;
+	}
+	case THRESHOLD_MENU:
+	{
+		if(typing_threshold == FALSE)
+		{
+			*threshold = '\0';
+			typing_threshold = TRUE;
+		}
+
+		char curr_char = '\0';
+
+		if(last_key_pressed == KEY_0)
+			curr_char = '0';
+		else if(last_key_pressed == KEY_1)
+			curr_char = '1';
+		else if(last_key_pressed == KEY_2)
+			curr_char = '2';
+		else if(last_key_pressed == KEY_3)
+			curr_char = '3';
+		else if(last_key_pressed == KEY_4)
+			curr_char = '4';
+		else if(last_key_pressed == KEY_5)
+			curr_char = '5';
+		else if(last_key_pressed == KEY_6)
+			curr_char = '6';
+		else if(last_key_pressed == KEY_7)
+			curr_char = '7';
+		else if(last_key_pressed == KEY_8)
+			curr_char = '8';
+		else if(last_key_pressed == KEY_9)
+			curr_char = '9';
+		else if(last_key_pressed == KEY_ASTERISK)
+			curr_char = '.';
+		else if(last_key_pressed  == KEY_HASHTAG)
+			curr_char = '#';
+
+		if(curr_char == '#')
+		{
+			motor_set_threshold(atof(threshold));
+			typing_threshold = FALSE;
+
+			state = THRESHOLD_CONF;
+		}
+		else
+			UTIL1_chcat(threshold, THRESHOLD_STRING_SIZE, curr_char);
 
 		break;
 	}
