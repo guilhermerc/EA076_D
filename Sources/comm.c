@@ -407,7 +407,7 @@ void comm_parse()
 			{
 				struct tm time;
 				strptime(tokens[MESSAGE_INDEX], "%T", &time);
-				stamp_set_current_time(time.tm_sec, time.tm_min, time.tm_hour);
+				rtc_set_current_time(time.tm_sec, time.tm_min, time.tm_hour);
 			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))
@@ -429,7 +429,7 @@ void comm_parse()
 			if(subscriptions_state == CONCLUDED)
 			{
 				comm_info.state = WAITING_FOR_CMD;
-				LOG("COMMUNICATION", "Communication established with success!\n");
+				console_write("COMMUNICATION", "Communication established with success!\n");
 			}
 		}
 		else if(strcmp(comm_info.message_in, "NOT CONNECTED\r\n") == 0)
