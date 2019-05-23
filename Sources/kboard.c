@@ -57,6 +57,8 @@ void kboard_init()
 	KBOARD_C1_Enable();
 	KBOARD_C2_Enable();
 	KBOARD_C3_Enable();
+
+	kboard_info.last_key_pressed = NULL;
 }
 
 /*! @brief A function that deactivates a single row (set it as HIGH)

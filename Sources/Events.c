@@ -53,8 +53,6 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-extern volatile bool external_interrupt;
-extern volatile KBOARD_KEY_TYPE last_key_pressed;
 extern DISPLAY_TIMEOUT display_timeout;
 volatile bool timeout_reached = FALSE;
 
@@ -123,15 +121,16 @@ void KBOARD_C3_OnInterrupt(void)
 		else if(row == 4)
 			key_pressed = KEY_ASTERISK;
 	}
-
-	//display_write_line(1, "Column 3");
+	/*! The button was released */
+	else
+	{
+		event_buff_insert_event(NEW_KEY_PRESSING);
+		kboard_info.last_key_pressed = key_pressed;
+	}
 
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C3_PIN);
 
 	kboard_activate_rows();
-
-	external_interrupt = TRUE;
-	last_key_pressed = key_pressed;
 }
 
 
@@ -183,16 +182,16 @@ void KBOARD_C2_OnInterrupt(void)
 		else if(row == 4)
 			key_pressed = KEY_0;
 	}
-
-	//display_write_line(1, "Column 2");
+	/*! The button was released */
+	else
+	{
+		event_buff_insert_event(NEW_KEY_PRESSING);
+		kboard_info.last_key_pressed = key_pressed;
+	}
 
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C2_PIN);
 
 	kboard_activate_rows();
-
-	external_interrupt = TRUE;
-	last_key_pressed = key_pressed;
-
 }
 
 /*!@brief An event handler called when a button from column 1 is
@@ -242,15 +241,16 @@ void KBOARD_C1_OnInterrupt(void)
 		else if(row == 4)
 			key_pressed = KEY_HASHTAG;
 	}
-
-	//display_write_line(1, "Column 1");
+	/*! The button was released */
+	else
+	{
+		event_buff_insert_event(NEW_KEY_PRESSING);
+		kboard_info.last_key_pressed = key_pressed;
+	}
 
 	PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, KBOARD_C1_PIN);
 
 	kboard_activate_rows();
-
-	external_interrupt = TRUE;
-	last_key_pressed = key_pressed;
 }
 
 /*

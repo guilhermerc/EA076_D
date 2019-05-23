@@ -437,33 +437,31 @@ void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state)
  *
  *	NOTE: I'm not using the proposed FSM. I find this design more
  *	intuitive.
- *
- * @param	last_key_pressed	The key that was just pressed
  */
-void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
+void display_fsm()
 {
 	switch(state)
 	{
 	case OPTIONS_MENU_1:
 	{
-		if(last_key_pressed == KEY_4)
+		if(kboard_info.last_key_pressed == KEY_4)
 			state = CURR_STATE_MENU;
-		else if(last_key_pressed == KEY_5)
+		else if(kboard_info.last_key_pressed == KEY_5)
 			state = DIRECTION_MENU;
-		else if(last_key_pressed == KEY_6)
+		else if(kboard_info.last_key_pressed == KEY_6)
 			state = MODE_MENU;
-		else if(last_key_pressed == KEY_9)
+		else if(kboard_info.last_key_pressed == KEY_9)
 			state = OPTIONS_MENU_2;
 
 		break;
 	}
 	case OPTIONS_MENU_2:
 	{
-		if(last_key_pressed == KEY_4)
+		if(kboard_info.last_key_pressed == KEY_4)
 			state = SPEED_MENU;
-		else if(last_key_pressed == KEY_5)
+		else if(kboard_info.last_key_pressed == KEY_5)
 			state = THRESHOLD_MENU;
-		else if(last_key_pressed == KEY_7)
+		else if(kboard_info.last_key_pressed == KEY_7)
 			state = OPTIONS_MENU_1;
 
 		break;
@@ -472,13 +470,13 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 	{
 		state = SPEED_CONF;
 
-		if(last_key_pressed == KEY_4)
+		if(kboard_info.last_key_pressed == KEY_4)
 			motor_change_speed(-1);
-		else if(last_key_pressed == KEY_5)
+		else if(kboard_info.last_key_pressed == KEY_5)
 			motor_change_speed(1);
-		else if(last_key_pressed == KEY_6)
+		else if(kboard_info.last_key_pressed == KEY_6)
 			motor_change_speed(-10);
-		else if(last_key_pressed == KEY_8)
+		else if(kboard_info.last_key_pressed == KEY_8)
 			motor_change_speed(10);
 		else
 			state = SPEED_MENU;
@@ -489,9 +487,9 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 	{
 		state = DIRECTION_CONF;
 
-		if(last_key_pressed == KEY_5)
+		if(kboard_info.last_key_pressed == KEY_5)
 			motor_set_dir(CLOCKWISE);
-		else if(last_key_pressed == KEY_8)
+		else if(kboard_info.last_key_pressed == KEY_8)
 			motor_set_dir(ANTICLOCKWISE);
 		else
 			state = DIRECTION_MENU;
@@ -502,11 +500,11 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 	{
 		state = MODE_CONF;
 
-		if(last_key_pressed == KEY_4)
+		if(kboard_info.last_key_pressed == KEY_4)
 			motor_set_mode(ON);
-		else if(last_key_pressed == KEY_5)
+		else if(kboard_info.last_key_pressed == KEY_5)
 			motor_set_mode(OFF);
-		else if(last_key_pressed == KEY_6)
+		else if(kboard_info.last_key_pressed == KEY_6)
 			motor_set_mode(AUTO);
 		else
 			state = MODE_MENU;
@@ -523,29 +521,29 @@ void display_fsm(KBOARD_KEY_TYPE last_key_pressed)
 
 		char curr_char = '\0';
 
-		if(last_key_pressed == KEY_0)
+		if(kboard_info.last_key_pressed == KEY_0)
 			curr_char = '0';
-		else if(last_key_pressed == KEY_1)
+		else if(kboard_info.last_key_pressed == KEY_1)
 			curr_char = '1';
-		else if(last_key_pressed == KEY_2)
+		else if(kboard_info.last_key_pressed == KEY_2)
 			curr_char = '2';
-		else if(last_key_pressed == KEY_3)
+		else if(kboard_info.last_key_pressed == KEY_3)
 			curr_char = '3';
-		else if(last_key_pressed == KEY_4)
+		else if(kboard_info.last_key_pressed == KEY_4)
 			curr_char = '4';
-		else if(last_key_pressed == KEY_5)
+		else if(kboard_info.last_key_pressed == KEY_5)
 			curr_char = '5';
-		else if(last_key_pressed == KEY_6)
+		else if(kboard_info.last_key_pressed == KEY_6)
 			curr_char = '6';
-		else if(last_key_pressed == KEY_7)
+		else if(kboard_info.last_key_pressed == KEY_7)
 			curr_char = '7';
-		else if(last_key_pressed == KEY_8)
+		else if(kboard_info.last_key_pressed == KEY_8)
 			curr_char = '8';
-		else if(last_key_pressed == KEY_9)
+		else if(kboard_info.last_key_pressed == KEY_9)
 			curr_char = '9';
-		else if(last_key_pressed == KEY_ASTERISK)
+		else if(kboard_info.last_key_pressed == KEY_ASTERISK)
 			curr_char = '.';
-		else if(last_key_pressed  == KEY_HASHTAG)
+		else if(kboard_info.last_key_pressed  == KEY_HASHTAG)
 			curr_char = '#';
 
 		if(curr_char == '#')

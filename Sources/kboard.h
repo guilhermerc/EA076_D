@@ -45,6 +45,13 @@ typedef enum
 	KEY_HASHTAG
 } KBOARD_KEY_TYPE;
 
+typedef struct
+{
+	KBOARD_KEY_TYPE last_key_pressed;
+} KBOARD_INFO_STRUCT;
+
+KBOARD_INFO_STRUCT kboard_info;
+
 void kboard_init();
 void kboard_deactivate_row(uint8_t row);
 void kboard_activate_rows();

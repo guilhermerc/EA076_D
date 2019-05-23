@@ -27,16 +27,18 @@
  */
 /* MODULE main */
 
+#include <comm.h>
+#include <console.h>
 #include <CPU.h>
 #include <display.h>
+#include <event_buff.h>
 #include <kboard.h>
 #include <motor.h>
 #include <PE_Types.h>
 #include <rtc.h>
+#include <temp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-volatile bool external_interrupt = FALSE;
-volatile KBOARD_KEY_TYPE last_key_pressed = NULL;
 extern volatile bool timeout_reached;
 
 /*! List of TODO's that as soon as I have time I'll integrate
@@ -49,6 +51,7 @@ extern volatile bool timeout_reached;
  * 	TODO: The timeout also should put an event in the event buffer
  *	TODO: Protect the boundaries of motor_change_speed function
  *	TODO: Remove volatiles and try to understand why better
+ *	TODO: Find out why that issue with temperature publishment occurs
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -65,38 +68,28 @@ int main(void)
 	/* For example: for(;;) { } */
 
 	/*!
-	 * Initializing the keyboard module
+	 * Initializing the modules
 	 */
+	event_buff_init();
+
+	motor_init();
+	rtc_init();
+	temp_init();
+
 	display_init();
 	kboard_init();
 
-	// comm_init();
-	// console_init();
-	// display_init();
-	// event_buff_init();
-	// kboard_init();
-	motor_init();
-	rtc_init();
-	// temp_init();
+	console_init();
+	comm_init();
 
-	/*
+	/*!
 	 * Infinite loop that checks if the event ring buffer has events to
 	 * be handled.
+	 */
 	for(;;)
 	{
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
-	}
-	 *
-	 */
-
-	for(;;)
-	{
-		if(external_interrupt)
-		{
-			display_fsm(last_key_pressed);
-			external_interrupt = FALSE;
-		}
 
 		if(timeout_reached)
 		{

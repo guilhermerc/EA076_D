@@ -48,7 +48,7 @@ DISPLAY_TIMEOUT display_timeout;
 void display_init();
 void display_write_line(uint8_t line, char * string);
 void display_clean_line(uint8_t line);
-void display_fsm(KBOARD_KEY_TYPE last_key_pressed);
+void display_fsm();
 void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state);
 void display_unset_timeout();
 

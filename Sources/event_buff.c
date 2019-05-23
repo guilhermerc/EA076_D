@@ -14,6 +14,7 @@
  */
 
 #include <comm.h>
+#include <display.h>
 #include <event_buff.h>
 #include <motor.h>
 #include <temp.h>
@@ -159,7 +160,13 @@ void event_handler_read_message(EVENT_HANDLER_MESSAGE_ORIGIN origin)
  */
 void event_handler(EVENT_BUFF_TYPE event)
 {
-	while(comm_status() != AVAILABLE);
+	/*! If the event is somewhat related to the communication process,
+	 * waits (blocking) for the channel to be available
+	 */
+	if(event == NEW_MESSAGE_FROM_BROKER ||
+			event == NEW_MESSAGE_FROM_TERMINAL ||
+			event == NEW_TEMPERATURE_MEAS)
+		while(comm_status() != AVAILABLE);
 
 	switch(event)
 	{
@@ -185,7 +192,7 @@ void event_handler(EVENT_BUFF_TYPE event)
 		if(comm_info.state == WAITING_FOR_CMD)
 		{
 			temp_assemble_message();
-			comm_publish(TEMPERATURE_TOPIC, temp_info.message);
+			//comm_publish(TEMPERATURE_TOPIC, temp_info.message);
 		}
 
 		/*!
@@ -195,16 +202,17 @@ void event_handler(EVENT_BUFF_TYPE event)
 		if(motor_info.current_mode == AUTO)
 		{
 			if(temp_info.temperature >= motor_info.threshold)
-			{
 				motor_set_pwm(MAXIMUM_PWM);
-			}
 			else
-			{
 				motor_set_pwm(MINIMUM_PWM);
-			}
+		}
 
 		break;
 	}
+	case NEW_KEY_PRESSING:
+	{
+		display_fsm();
+		break;
 	}
 	}
 }
