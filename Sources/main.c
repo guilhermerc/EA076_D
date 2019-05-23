@@ -46,8 +46,6 @@
  *  TODO: Use the average calculation integrated in the ADC component (PE)
  *  TODO: Change ANTICLOCKWISE to COUNTERCLOCKWISE
  *  TODO: Change what have to be changed due to the correct size of display = 14
- * 	TODO: The keyboard external interruptions should put an event in the event buffer
- * 	TODO: The timeout also should put an event in the event buffer
  *	TODO: Protect the boundaries of motor_change_speed function
  *	TODO: Remove volatiles and try to understand why better
  *	TODO: Find out why that issue with temperature publishment occurs
@@ -89,14 +87,6 @@ int main(void)
 	{
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
-
-		/*
-		if(timeout_reached)
-		{
-			display_fsm_force_state_change(OPTIONS_MENU_1);
-			timeout_reached = FALSE;
-		}
-		*/
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
