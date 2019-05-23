@@ -48,6 +48,7 @@ extern volatile bool timeout_reached;
  * 	TODO: The keyboard external interruptions should put an event in the event buffer
  * 	TODO: The timeout also should put an event in the event buffer
  *	TODO: Protect the boundaries of motor_change_speed function
+ *	TODO: Remove volatiles and try to understand why better
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
