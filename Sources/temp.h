@@ -15,19 +15,15 @@
 #ifndef SOURCES_TEMP_H_
 #define SOURCES_TEMP_H_
 
-#include <rtc.h>
-
 #define TEMPERATURE_SIZE 32
+#define TIME_AUX_STRING_SIZE	8
 #define TEMPERATURE_STRING_SIZE 8
 #define TEMPERATURE_MESSAGE_SIZE (TIME_AUX_STRING_SIZE + TEMPERATURE_STRING_SIZE + 8)
-
-#define MAX_NUMBER_OF_SAMPLES 500
 
 typedef struct TEMPERATURE_INFO
 {
 	volatile float temperature;	// [-60˚C, 270˚C]
 	volatile uint16_t raw_temperature;
-	volatile uint16_t curr_samples_number;
 	volatile char message[TEMPERATURE_MESSAGE_SIZE];
 } TEMPERATURE_INFO;
 

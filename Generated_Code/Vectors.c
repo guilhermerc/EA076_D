@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-19, 18:54, # CodeGen: 260
+**     Date/Time   : 2019-05-23, 19:50, # CodeGen: 271
 **     Abstract    :
 **
 **     Settings    :
@@ -57,8 +57,6 @@
   #include "CPU.h"
   #include "ADC0.h"
   #include "AdcLdd1.h"
-  #include "TimerInt0.h"
-  #include "TimerIntLdd1.h"
   #include "RTC.h"
   #include "UART0.h"
   #include "ASerialLdd1.h"
@@ -66,7 +64,6 @@
   #include "ASerialLdd2.h"
   #include "L293D_1_2_EN.h"
   #include "PwmLdd1.h"
-  #include "TU1.h"
   #include "MCUC1.h"
   #include "TU2.h"
   #include "L293D_1A.h"
@@ -158,7 +155,7 @@
     (tIsrFunc)&CPU_Interrupt,          /* 0x29  0x000000A4   -   ivINT_DAC0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x2A  0x000000A8   -   ivINT_TSI0                    unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x2B  0x000000AC   -   ivINT_MCG                     unused by PE */
-    (tIsrFunc)&TU1_Interrupt,          /* 0x2C  0x000000B0   2   ivINT_LPTMR0                  used by PE */
+    (tIsrFunc)&CPU_Interrupt,          /* 0x2C  0x000000B0   -   ivINT_LPTMR0                  unused by PE */
     (tIsrFunc)&CPU_Interrupt,          /* 0x2D  0x000000B4   -   ivINT_Reserved45              unused by PE */
     (tIsrFunc)&CPU_ivINT_PORTA,        /* 0x2E  0x000000B8   2   ivINT_PORTA                   used by PE */
     (tIsrFunc)&CPU_Interrupt           /* 0x2F  0x000000BC   -   ivINT_PORTD                   unused by PE */

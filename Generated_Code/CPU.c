@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-19, 18:54, # CodeGen: 260
+**     Date/Time   : 2019-05-23, 19:50, # CodeGen: 271
 **     Abstract    :
 **
 **     Settings    :
@@ -251,8 +251,6 @@
 /* {Default RTOS Adapter} No RTOS includes */
 #include "ADC0.h"
 #include "AdcLdd1.h"
-#include "TimerInt0.h"
-#include "TimerIntLdd1.h"
 #include "RTC.h"
 #include "UART0.h"
 #include "ASerialLdd1.h"
@@ -260,7 +258,6 @@
 #include "ASerialLdd2.h"
 #include "L293D_1_2_EN.h"
 #include "PwmLdd1.h"
-#include "TU1.h"
 #include "MCUC1.h"
 #include "TU2.h"
 #include "L293D_1A.h"
@@ -377,8 +374,6 @@ void __init_hardware(void)
                SIM_SCGC5_PORTC_MASK |
                SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
-  /* SIM_SCGC5: LPTMR=1 */
-  SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
   if ((PMC_REGSC & PMC_REGSC_ACKISO_MASK) != 0x0U) {
     /* PMC_REGSC: ACKISO=1 */
     PMC_REGSC |= PMC_REGSC_ACKISO_MASK; /* Release IO pads after wakeup from VLLS mode. */
@@ -517,9 +512,6 @@ void PE_low_level_init(void)
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
   /* ### ADC "ADC0" init code ... */
   ADC0_Init();
-  /* ### TimerInt_LDD "TimerIntLdd1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
-  (void)TimerIntLdd1_Init(NULL);
-  /* ### TimerInt "TimerInt0" init code ... */
   /* ### Asynchro serial "UART0" init code ... */
   UART0_Init();
   /* ### Asynchro serial "UART2" init code ... */

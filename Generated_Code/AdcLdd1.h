@@ -7,7 +7,7 @@
 **     Version     : Component 01.183, Driver 01.08, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-14, 22:07, # CodeGen: 97
+**     Date/Time   : 2019-05-23, 19:34, # CodeGen: 263
 **     Abstract    :
 **         This device "ADC_LDD" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -71,8 +71,6 @@
 **         GetMeasuredValues            - LDD_TError AdcLdd1_GetMeasuredValues(LDD_TDeviceData *DeviceDataPtr,...
 **         CreateSampleGroup            - LDD_TError AdcLdd1_CreateSampleGroup(LDD_TDeviceData *DeviceDataPtr,...
 **         GetMeasurementCompleteStatus - bool AdcLdd1_GetMeasurementCompleteStatus(LDD_TDeviceData *DeviceDataPtr);
-**         StartCalibration             - LDD_TError AdcLdd1_StartCalibration(LDD_TDeviceData *DeviceDataPtr);
-**         GetCalibrationResultStatus   - LDD_TError AdcLdd1_GetCalibrationResultStatus(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -150,8 +148,6 @@ extern "C" {
 #define AdcLdd1_GetMeasuredValues_METHOD_ENABLED /*!< GetMeasuredValues method of the component AdcLdd1 is enabled (generated) */
 #define AdcLdd1_CreateSampleGroup_METHOD_ENABLED /*!< CreateSampleGroup method of the component AdcLdd1 is enabled (generated) */
 #define AdcLdd1_GetMeasurementCompleteStatus_METHOD_ENABLED /*!< GetMeasurementCompleteStatus method of the component AdcLdd1 is enabled (generated) */
-#define AdcLdd1_StartCalibration_METHOD_ENABLED /*!< StartCalibration method of the component AdcLdd1 is enabled (generated) */
-#define AdcLdd1_GetCalibrationResultStatus_METHOD_ENABLED /*!< GetCalibrationResultStatus method of the component AdcLdd1 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define AdcLdd1_OnMeasurementComplete_EVENT_ENABLED /*!< OnMeasurementComplete event of the component AdcLdd1 is enabled (generated) */
@@ -419,50 +415,6 @@ LDD_TError AdcLdd1_GetMeasuredValues(LDD_TDeviceData *DeviceDataPtr, LDD_TData *
 */
 /* ===================================================================*/
 bool AdcLdd1_GetMeasurementCompleteStatus(LDD_TDeviceData *DeviceDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  AdcLdd1_StartCalibration (component ADC_LDD)
-*/
-/*!
-**     @brief
-**         This method starts self calibration process. Calibration is
-**         typically used to remove the effects of the gain and offset
-**         from a specific reading.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by [Init] method.
-**     @return
-**                         - Error code
-**                           ERR_OK - OK
-**                           ERR_SPEED - The device doesn't work in the
-**                           active clock configuration
-**                           ERR_DISABLED - Component is disabled
-**                           ERR_BUSY - A conversion is already running 
-*/
-/* ===================================================================*/
-LDD_TError AdcLdd1_StartCalibration(LDD_TDeviceData *DeviceDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  AdcLdd1_GetCalibrationResultStatus (component ADC_LDD)
-*/
-/*!
-**     @brief
-**         This method should be used for check the last calibration
-**         result. If calibration completed normally the method finish
-**         calibration process by writing gain calibration values.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by [Init] method.
-**     @return
-**                         - Error code
-**                           ERR_OK - OK 
-**                           ERR_FAILED - Last calibration hasn't been
-**                           finished correctly
-*/
-/* ===================================================================*/
-LDD_TError AdcLdd1_GetCalibrationResultStatus(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================

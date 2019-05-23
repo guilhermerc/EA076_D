@@ -7,7 +7,7 @@
 **     Version     : Component 01.183, Driver 01.08, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-04-14, 22:07, # CodeGen: 97
+**     Date/Time   : 2019-05-23, 19:34, # CodeGen: 263
 **     Abstract    :
 **         This device "ADC_LDD" implements an A/D converter,
 **         its control methods and interrupt/event handling procedure.
@@ -71,8 +71,6 @@
 **         GetMeasuredValues            - LDD_TError AdcLdd1_GetMeasuredValues(LDD_TDeviceData *DeviceDataPtr,...
 **         CreateSampleGroup            - LDD_TError AdcLdd1_CreateSampleGroup(LDD_TDeviceData *DeviceDataPtr,...
 **         GetMeasurementCompleteStatus - bool AdcLdd1_GetMeasurementCompleteStatus(LDD_TDeviceData *DeviceDataPtr);
-**         StartCalibration             - LDD_TError AdcLdd1_StartCalibration(LDD_TDeviceData *DeviceDataPtr);
-**         GetCalibrationResultStatus   - LDD_TError AdcLdd1_GetCalibrationResultStatus(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -491,87 +489,6 @@ bool AdcLdd1_GetMeasurementCompleteStatus(LDD_TDeviceData *DeviceDataPtr)
   /* {Default RTOS Adapter} Critical section end, general PE function is used */
   ExitCritical();
   return (bool)((Status)? TRUE : FALSE); /* Return saved status */
-}
-
-/*
-** ===================================================================
-**     Method      :  AdcLdd1_StartCalibration (component ADC_LDD)
-*/
-/*!
-**     @brief
-**         This method starts self calibration process. Calibration is
-**         typically used to remove the effects of the gain and offset
-**         from a specific reading.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by [Init] method.
-**     @return
-**                         - Error code
-**                           ERR_OK - OK
-**                           ERR_SPEED - The device doesn't work in the
-**                           active clock configuration
-**                           ERR_DISABLED - Component is disabled
-**                           ERR_BUSY - A conversion is already running 
-*/
-/* ===================================================================*/
-LDD_TError AdcLdd1_StartCalibration(LDD_TDeviceData *DeviceDataPtr)
-{
-  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
-  if (ADC_PDD_GetConversionActiveFlag(ADC0_BASE_PTR) != 0U) { /* Last measurement still pending? */
-    return ERR_BUSY;                   /* Yes, return ERR_BUSY */
-  }
-  ADC_PDD_SetConversionTriggerType(ADC0_BASE_PTR, ADC_PDD_SW_TRIGGER); /* Select SW triggering */
-  ADC_PDD_WriteStatusControl1Reg(ADC0_BASE_PTR, 0U, ADC_PDD_MODULE_DISABLED | ((uint32_t)LDD_ADC_ON_MEASUREMENT_COMPLETE)); /* Set Control 1 register */
-  ADC_PDD_StartCalibration(ADC0_BASE_PTR); /* Start calibration */
-  return ERR_OK;
-}
-
-/*
-** ===================================================================
-**     Method      :  AdcLdd1_GetCalibrationResultStatus (component ADC_LDD)
-*/
-/*!
-**     @brief
-**         This method should be used for check the last calibration
-**         result. If calibration completed normally the method finish
-**         calibration process by writing gain calibration values.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by [Init] method.
-**     @return
-**                         - Error code
-**                           ERR_OK - OK 
-**                           ERR_FAILED - Last calibration hasn't been
-**                           finished correctly
-*/
-/* ===================================================================*/
-LDD_TError AdcLdd1_GetCalibrationResultStatus(LDD_TDeviceData *DeviceDataPtr)
-{
-  uint32_t GainValue;
-
-  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
-  if (ADC_PDD_GetCalibrationFailedStatusFlag(ADC0_BASE_PTR)) {
-    return ERR_FAILED;
-  }
-  /* If calibration is successfully passed place calibrated value into gain registers */
-  /* Cumulated gradually because of undefined behavior: the order of volatile accesses is undefined in this statement */
-  GainValue = ADC_PDD_GetPlus0CalibrationValue(ADC0_BASE_PTR); /* Find plus gain value */
-  GainValue += ADC_PDD_GetPlus1CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetPlus2CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetPlus3CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetPlus4CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetPlusSCalibrationValue(ADC0_BASE_PTR);
-  GainValue = (GainValue >> 1U) | 0x8000U;
-  ADC_PDD_SetPlusGainValue(ADC0_BASE_PTR,GainValue); /* Set plus gain value */
-  GainValue = ADC_PDD_GetMinus0CalibrationValue(ADC0_BASE_PTR); /* Find minus gain value */
-  GainValue += ADC_PDD_GetMinus1CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetMinus2CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetMinus3CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetMinus4CalibrationValue(ADC0_BASE_PTR);
-  GainValue += ADC_PDD_GetMinusSCalibrationValue(ADC0_BASE_PTR);
-  GainValue =  (GainValue >> 1U) | 0x8000U;
-  ADC_PDD_SetMinusGainValue(ADC0_BASE_PTR,GainValue); /* Set minus gain value */
-  return ERR_OK;
 }
 
 /*

@@ -147,22 +147,6 @@ void AD1_OnEnd(void);
 ** ===================================================================
 */
 
-void AD1_OnCalibrationEnd(void);
-/*
-** ===================================================================
-**     Event       :  AD1_OnCalibrationEnd (module Events)
-**
-**     Component   :  ADC0 [ADC]
-**     Description :
-**         This event is called when the calibration has been finished.
-**         User should check if the calibration pass or fail by
-**         Calibration status method./nThis event is enabled only if
-**         the <Interrupt service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-
 /*
 ** ===================================================================
 **     Event       :  UART0_OnError (module Events)
@@ -256,22 +240,6 @@ void UART2_OnRxChar(void);
 ** ===================================================================
 */
 void UART2_OnTxChar(void);
-
-/*
-** ===================================================================
-**     Event       :  TI1_OnInterrupt (module Events)
-**
-**     Component   :  TimerInt0 [TimerInt]
-**     Description :
-**         When a timer interrupt occurs this event is called (only
-**         when the component is enabled - <Enable> and the events are
-**         enabled - <EnableEvent>). This event is enabled only if a
-**         <interrupt service/event> is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void TI1_OnInterrupt(void);
 
 /* END Events */
 

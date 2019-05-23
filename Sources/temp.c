@@ -14,11 +14,9 @@
  */
 
 #include <ADC0.h>
-#include <PE_Types.h>
 #include <stdio.h>
 #include <string.h>
 #include <temp.h>
-#include <TimerInt0.h>
 
 #define ADC_AREF		3300
 #define ADC_MAX_RANGE	65536
@@ -35,9 +33,7 @@ void temp_init()
 {
 	temp_info.temperature = 0;
 	temp_info.raw_temperature = 0;
-	temp_info.curr_samples_number = 0;
 
-	TimerInt0_EnableEvent();
 	ADC0_EnableEvent();
 }
 

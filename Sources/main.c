@@ -34,7 +34,6 @@
 #include <event_buff.h>
 #include <kboard.h>
 #include <motor.h>
-#include <PE_Types.h>
 #include <rtc.h>
 #include <temp.h>
 
@@ -43,12 +42,10 @@
 /*! List of TODO's that as soon as I have time I'll integrate
  *
  *	TODO: Check if the event ring buffer indexes are properly changed
- *  TODO: Use the average calculation integrated in the ADC component (PE)
  *  TODO: Change ANTICLOCKWISE to COUNTERCLOCKWISE
  *  TODO: Change what have to be changed due to the correct size of display = 14
  *	TODO: Protect the boundaries of motor_change_speed function
  *	TODO: Remove volatiles and try to understand why better
- *	TODO: Find out why that issue with temperature publishment occurs
 */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -70,7 +67,6 @@ int main(void)
 	event_buff_init();
 
 	motor_init();
-	rtc_init();
 	temp_init();
 
 	display_init();
@@ -78,6 +74,8 @@ int main(void)
 
 	console_init();
 	comm_init();
+
+	rtc_init();
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to

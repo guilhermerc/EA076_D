@@ -17,8 +17,6 @@
 
 #include <PE_Types.h>
 
-#define TIME_AUX_STRING_SIZE	8
-
 LDD_TDeviceData * RTC_dd_ptr;
 
 void rtc_init();
