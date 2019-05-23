@@ -380,7 +380,7 @@ void comm_parse()
 				if(motor_info.current_mode == ON)
 				{
 					uint8_t percentage = (uint8_t) atoi(tokens[MESSAGE_INDEX]);
-					motor_set_pwm(percentage * (MAXIMUM_PWM/100));
+					motor_set_pwm(percentage * MAXIMUM_PWM/100);
 				}
 			}
 			else if(strcmp(tokens[TOPIC_INDEX], MODE_TOPIC_WQ) == 0)
