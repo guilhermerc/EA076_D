@@ -192,6 +192,7 @@ void event_handler(EVENT_BUFF_TYPE event)
 		if(comm_info.state == WAITING_FOR_CMD)
 		{
 			temp_assemble_message();
+			/*! TODO: Fix this */
 			//comm_publish(TEMPERATURE_TOPIC, temp_info.message);
 		}
 
@@ -212,6 +213,11 @@ void event_handler(EVENT_BUFF_TYPE event)
 	case NEW_KEY_PRESSING:
 	{
 		display_fsm();
+		break;
+	}
+	case TIMEOUT:
+	{
+		display_fsm_force_state_change(OPTIONS_MENU_1);
 		break;
 	}
 	}

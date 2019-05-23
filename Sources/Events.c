@@ -53,8 +53,6 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-extern DISPLAY_TIMEOUT display_timeout;
-volatile bool timeout_reached = FALSE;
 
 /*
 ** ===================================================================
@@ -299,7 +297,7 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 	 * main menu */
 	if(display_timeout.timer == display_timeout.target)
 	{
-		timeout_reached = TRUE;
+		event_buff_insert_event(TIMEOUT);
 		display_unset_timeout();
 	}
 }

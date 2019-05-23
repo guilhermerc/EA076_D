@@ -39,7 +39,6 @@
 #include <temp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-extern volatile bool timeout_reached;
 
 /*! List of TODO's that as soon as I have time I'll integrate
  *
@@ -91,11 +90,13 @@ int main(void)
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
 
+		/*
 		if(timeout_reached)
 		{
 			display_fsm_force_state_change(OPTIONS_MENU_1);
 			timeout_reached = FALSE;
 		}
+		*/
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
