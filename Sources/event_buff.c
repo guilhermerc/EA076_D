@@ -192,8 +192,7 @@ void event_handler(EVENT_BUFF_TYPE event)
 		if(comm_info.state == WAITING_FOR_CMD)
 		{
 			temp_assemble_message();
-			/*! TODO: Fix this */
-			//comm_publish(TEMPERATURE_TOPIC, temp_info.message);
+			comm_publish(TEMPERATURE_TOPIC, temp_info.message);
 		}
 
 		/*!
