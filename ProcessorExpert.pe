@@ -3,7 +3,7 @@
   <Header>
     <Name>EA076_PE</Name>
     <SavedBy>guilherme</SavedBy>
-    <ModificationStamp>85</ModificationStamp>
+    <ModificationStamp>86</ModificationStamp>
     <Date>2019-03-18</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -4570,7 +4570,7 @@
     <Name>ADC0</Name>
     <CompNumb>21</CompNumb>
     <CompEnabled>true</CompEnabled>
-    <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
+    <GenCodeMode>DONT_WRITE</GenCodeMode>
     <IconName>AD</IconName>
     <UserFolderName />
     <Comment lines_count="0" />
