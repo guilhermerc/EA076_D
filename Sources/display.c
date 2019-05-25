@@ -490,7 +490,7 @@ void display_fsm()
 		if(kboard_info.last_key_pressed == KEY_5)
 			motor_set_dir(CLOCKWISE);
 		else if(kboard_info.last_key_pressed == KEY_8)
-			motor_set_dir(ANTICLOCKWISE);
+			motor_set_dir(COUNTERCLOCKWISE);
 		else
 			state = DIRECTION_MENU;
 

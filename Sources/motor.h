@@ -16,7 +16,7 @@
 typedef enum
 {
 	CLOCKWISE,
-	ANTICLOCKWISE
+	COUNTERCLOCKWISE
 } MOTOR_DIR;
 
 typedef enum

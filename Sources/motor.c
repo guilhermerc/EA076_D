@@ -34,7 +34,7 @@ void motor_init()
 
 /*! @brief A function that sets the dc motor direction
  *
- *  @param	motor_dir	CLOCKWISE or ANTICLOCKWISE
+ *  @param	motor_dir	CLOCKWISE or COUNTERCLOCKWISE
  */
 void motor_set_dir(MOTOR_DIR motor_dir)
 {

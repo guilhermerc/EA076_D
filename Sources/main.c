@@ -42,7 +42,6 @@
 /*! List of TODO's that as soon as I have time I'll integrate
  *
  *	TODO: Check if the event ring buffer indexes are properly changed
- *  TODO: Change ANTICLOCKWISE to COUNTERCLOCKWISE
  *  TODO: Change what have to be changed due to the correct size of display = 14
  *	TODO: Protect the boundaries of motor_change_speed function
  *	TODO: Remove volatiles and try to understand why better

@@ -366,9 +366,9 @@ void comm_parse()
 					{
 						motor_set_dir(CLOCKWISE);
 					}
-					else if(strcmp(tokens[MESSAGE_INDEX], "ANTICLOCKWISE") == 0)
+					else if(strcmp(tokens[MESSAGE_INDEX], "COUNTERCLOCKWISE") == 0)
 					{
-						motor_set_dir(ANTICLOCKWISE);
+						motor_set_dir(COUNTERCLOCKWISE);
 					}
 				}
 			}
