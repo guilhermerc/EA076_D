@@ -7,7 +7,7 @@
 **     Version     : Component 01.032, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-26, 01:22, # CodeGen: 294
+**     Date/Time   : 2019-05-26, 17:08, # CodeGen: 300
 **     Abstract    :
 **         Driver for Microchip 24_AA/LC EEPROMs
 **     Settings    :
@@ -15,10 +15,7 @@
 **          Device                                         : 16
 **          Initial Device Address                         : 0x0
 **          Block buffer size                              : 16
-**          Acknowledge Polling                            : Enabled
-**            Page Write Time (ms)                         : 10
-**            Wait                                         : WAIT1
-**            ACK Polling Time (us)                        : 18
+**          Acknowledge Polling                            : Disabled
 **          Connection                                     : 
 **            I2C                                          : GI2C1
 **            Write Protection Pin                         : Disabled

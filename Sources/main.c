@@ -30,6 +30,8 @@
 #include <AT24C164.h>
 #include <console.h>
 #include <CPU.h>
+#include <PE_Types.h>
+#include <WAIT1.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
@@ -73,14 +75,19 @@ int main(void)
 
 	console_init();
 
-	//GI2C1_SelectSlave((uint8_t)0x00);
-
 	char string[] = "Testing testing";
+	char memory[16];
 
 	/*! TODO: Try this */
-	//AT24C164_SelectDevice(0x00);
+	AT24C164_SelectDevice(0x00);
 
 	AT24C164_WriteBlock(0x00, string, 16);
+
+	WAIT1_Waitms(20);
+
+	AT24C164_ReadBlock(0x00, memory, 16);
+
+	console_write(NULL, memory);
 
 	/*! TODO: Also try to change the ICR to 0x11 = 010 001
 	 */

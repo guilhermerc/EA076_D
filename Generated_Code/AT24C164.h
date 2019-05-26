@@ -6,7 +6,7 @@
 **     Component   : 24AA_EEPROM
 **     Version     : Component 01.032, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-26, 01:22, # CodeGen: 294
+**     Date/Time   : 2019-05-26, 17:08, # CodeGen: 300
 **     Abstract    :
 **         Driver for Microchip 24_AA/LC EEPROMs
 **     Settings    :
@@ -14,9 +14,7 @@
 **          Device                                         : 16
 **          Initial Device Address                         : 0x0
 **          Block buffer size                              : 16
-**          Acknowledge Polling                            : Enabled
-**            Page Write Time (ms)                         : 10
-**            Wait                                         : WAIT1
+**          Acknowledge Polling                            : Disabled
 **          Connection                                     : 
 **            I2C                                          : GI2C1
 **            Write Protection Pin                         : Disabled
@@ -83,7 +81,6 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* Include inherited components */
-#include "WAIT1.h"
 #include "GI2C1.h"
 
 #include "CPU.h"
@@ -134,9 +131,7 @@
   #error "unknown device?"
 #endif
 
-#define AT24C164_DO_ACKNOWLEDGE_POLLING    1 /* Perform acknowledge polling in the driver */
-#define AT24C164_PAGE_WRITE_TIME_MS        10 /* Page Write Time as per data sheet */
-#define AT24C164_ACK_POLLING_TIME_US       18 /* Acknowledge polling time in the I2C driver*/
+#define AT24C164_DO_ACKNOWLEDGE_POLLING    0 /* No acknowledge polling in the driver */
 
 #ifndef __BWUserType_AT24C164_Address
 #define __BWUserType_AT24C164_Address
