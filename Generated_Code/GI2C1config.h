@@ -35,7 +35,7 @@
 #endif
 
 #if !defined(GI2C1_CONFIG_WRITE_BUFFER_SIZE)
-  #define GI2C1_CONFIG_WRITE_BUFFER_SIZE             (16)
+  #define GI2C1_CONFIG_WRITE_BUFFER_SIZE             (32)
     /*!< Size of the write buffer size which defines the maximum block size which can be sent */
 #endif
 

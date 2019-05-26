@@ -7,7 +7,7 @@
 **     Version     : Component 01.042, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:29, # CodeGen: 281
+**     Date/Time   : 2019-05-26, 00:26, # CodeGen: 289
 **     Abstract    :
 **         This component implements a generic I2C driver wrapper to work both with LDD and non-LDD I2C components.
 **     Settings    :
@@ -15,13 +15,13 @@
 **          Wait                                           : WAIT1
 **          SDK                                            : MCUC1
 **          Support STOP_NOSTART                           : no
-**          Write Buffer Size                              : 16
+**          Write Buffer Size                              : 32
 **          non-LDD I2C                                    : Disabled
 **          LDD I2C                                        : Enabled
 **            I2C                                          : CI2C1
 **            Timeout                                      : Disabled
 **          RTOS                                           : Disabled
-**          Init() on startup                              : no
+**          Init() on startup                              : yes
 **     Contents    :
 **         SelectSlave       - uint8_t GI2C1_SelectSlave(uint8_t i2cAddr);
 **         UnselectSlave     - uint8_t GI2C1_UnselectSlave(void);

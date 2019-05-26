@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:25, # CodeGen: 279
+**     Date/Time   : 2019-05-25, 23:07, # CodeGen: 285
 **     Abstract    :
 **
 **     Settings    :
@@ -548,6 +548,7 @@ void PE_low_level_init(void)
   (void)BitIoLdd7_Init(NULL);
   /* ### I2C_LDD "CI2C1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)CI2C1_Init(NULL);
+  GI2C1_Init(); /* ### GenericI2C "GI2C1" init code ... */
   /* ### 24AA_EEPROM "AT24C164" init code ... */
   /* Write code here ... */
   __EI();

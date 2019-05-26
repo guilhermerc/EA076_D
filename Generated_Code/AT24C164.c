@@ -7,7 +7,7 @@
 **     Version     : Component 01.032, Driver 01.00, CPU db: 3.00.000
 **     Repository  : My Components
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:31, # CodeGen: 283
+**     Date/Time   : 2019-05-26, 01:22, # CodeGen: 294
 **     Abstract    :
 **         Driver for Microchip 24_AA/LC EEPROMs
 **     Settings    :
@@ -25,11 +25,12 @@
 **          Timeout                                        : Disabled
 **          Shell                                          : Disabled
 **     Contents    :
-**         ReadByte     - byte AT24C164_ReadByte(AT24C164_Address addr, byte *data);
-**         WriteByte    - byte AT24C164_WriteByte(AT24C164_Address addr, byte data);
-**         ReadBlock    - byte AT24C164_ReadBlock(AT24C164_Address addr, byte *data, word dataSize);
-**         WriteBlock   - byte AT24C164_WriteBlock(AT24C164_Address addr, byte *data, word dataSize);
-**         SelectDevice - byte AT24C164_SelectDevice(byte addrI2C);
+**         ReadByte          - byte AT24C164_ReadByte(AT24C164_Address addr, byte *data);
+**         WriteByte         - byte AT24C164_WriteByte(AT24C164_Address addr, byte data);
+**         ReadBlock         - byte AT24C164_ReadBlock(AT24C164_Address addr, byte *data, word dataSize);
+**         WriteBlock        - byte AT24C164_WriteBlock(AT24C164_Address addr, byte *data, word dataSize);
+**         SelectDevice      - byte AT24C164_SelectDevice(byte addrI2C);
+**         GetSelectedDevice - byte AT24C164_GetSelectedDevice(void);
 **
 **     License   :  Open Source (LGPL)
 **     Copyright : (c) Copyright Erich Styger, 2013, all rights reserved.
@@ -423,6 +424,22 @@ byte AT24C164_SelectDevice(byte addrI2C)
   }
   AT24C164_I2CAddress = addrI2C;
   return ERR_OK;
+}
+
+/*
+** ===================================================================
+**     Method      :  AT24C164_GetSelectedDevice (component 24AA_EEPROM)
+**     Description :
+**         Returns the currently used I2C address (e.g. set with
+**         SelectDevice()).
+**     Parameters  : None
+**     Returns     :
+**         ---             - I2C device address
+** ===================================================================
+*/
+byte AT24C164_GetSelectedDevice(void)
+{
+ return AT24C164_I2CAddress;
 }
 
 /* END AT24C164. */

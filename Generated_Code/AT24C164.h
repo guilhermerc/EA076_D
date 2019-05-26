@@ -6,7 +6,7 @@
 **     Component   : 24AA_EEPROM
 **     Version     : Component 01.032, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:31, # CodeGen: 283
+**     Date/Time   : 2019-05-26, 01:22, # CodeGen: 294
 **     Abstract    :
 **         Driver for Microchip 24_AA/LC EEPROMs
 **     Settings    :
@@ -23,11 +23,12 @@
 **          Timeout                                        : Disabled
 **          Shell                                          : Disabled
 **     Contents    :
-**         ReadByte     - byte AT24C164_ReadByte(AT24C164_Address addr, byte *data);
-**         WriteByte    - byte AT24C164_WriteByte(AT24C164_Address addr, byte data);
-**         ReadBlock    - byte AT24C164_ReadBlock(AT24C164_Address addr, byte *data, word dataSize);
-**         WriteBlock   - byte AT24C164_WriteBlock(AT24C164_Address addr, byte *data, word dataSize);
-**         SelectDevice - byte AT24C164_SelectDevice(byte addrI2C);
+**         ReadByte          - byte AT24C164_ReadByte(AT24C164_Address addr, byte *data);
+**         WriteByte         - byte AT24C164_WriteByte(AT24C164_Address addr, byte data);
+**         ReadBlock         - byte AT24C164_ReadBlock(AT24C164_Address addr, byte *data, word dataSize);
+**         WriteBlock        - byte AT24C164_WriteBlock(AT24C164_Address addr, byte *data, word dataSize);
+**         SelectDevice      - byte AT24C164_SelectDevice(byte addrI2C);
+**         GetSelectedDevice - byte AT24C164_GetSelectedDevice(void);
 **
 **Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **All Rights Reserved.
@@ -240,6 +241,19 @@ byte AT24C164_SelectDevice(byte addrI2C);
 **                           ERR_OK - OK
 **                           ERR_VALUE - address exceeds address pins of
 **                           device type used
+** ===================================================================
+*/
+
+byte AT24C164_GetSelectedDevice(void);
+/*
+** ===================================================================
+**     Method      :  AT24C164_GetSelectedDevice (component 24AA_EEPROM)
+**     Description :
+**         Returns the currently used I2C address (e.g. set with
+**         SelectDevice()).
+**     Parameters  : None
+**     Returns     :
+**         ---             - I2C device address
 ** ===================================================================
 */
 

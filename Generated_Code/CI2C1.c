@@ -7,7 +7,7 @@
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:31, # CodeGen: 283
+**     Date/Time   : 2019-05-25, 23:52, # CodeGen: 287
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -85,8 +85,6 @@
 **     Contents    :
 **         Init                         - LDD_TDeviceData* CI2C1_Init(LDD_TUserData *UserDataPtr);
 **         Deinit                       - void CI2C1_Deinit(LDD_TDeviceData *DeviceDataPtr);
-**         Enable                       - LDD_TError CI2C1_Enable(LDD_TDeviceData *DeviceDataPtr);
-**         Disable                      - LDD_TError CI2C1_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         SetEventMask                 - LDD_TError CI2C1_SetEventMask(LDD_TDeviceData *DeviceDataPtr, LDD_TEventMask...
 **         GetEventMask                 - LDD_TEventMask CI2C1_GetEventMask(LDD_TDeviceData *DeviceDataPtr);
 **         MasterSendBlock              - LDD_TError CI2C1_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
@@ -198,7 +196,6 @@ typedef struct {
                                        /*       5 - 7-bit addr flag */
   uint8_t StatusFlag;                  /* Flags for status of communication */
   LDD_I2C_TSendStop SendStop;          /* Enable/Disable generate send stop condition after transmission */
-  bool EnUser;                         /* Enable/Disable device */
   LDD_TEventMask EventMask;            /* Enable/Disable events mask */
   uint8_t SlaveAddr;                   /* Variable for Slave address */
   uint8_t SlaveAddrHigh;               /* Variable for High byte of the Slave address (10-bit address) */
@@ -221,9 +218,6 @@ static CI2C1_TDeviceDataPtr INT_I2C1__DEFAULT_RTOS_ISRPARAM;
 
 #define AVAILABLE_EVENTS_MASK (LDD_I2C_ON_MASTER_BLOCK_SENT | LDD_I2C_ON_MASTER_BLOCK_RECEIVED)
 #define AVAILABLE_PIN_MASK (LDD_I2C_SDA_PIN | LDD_I2C_SCL_PIN)
-
-/* Internal method prototypes */
-static void HWEnDi(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
@@ -378,7 +372,6 @@ LDD_TDeviceData* CI2C1_Init(LDD_TUserData *UserDataPtr)
   INT_I2C1__DEFAULT_RTOS_ISRPARAM = DeviceDataPrv;
   DeviceDataPrv->SerFlag = ADDR_7;     /* Reset all flags start with 7-bit address mode */
   DeviceDataPrv->EventMask = (LDD_TEventMask)(LDD_I2C_ON_MASTER_BLOCK_SENT | LDD_I2C_ON_MASTER_BLOCK_RECEIVED); /* Enable selected events */
-  DeviceDataPrv->EnUser = TRUE;        /* Enable device */
   DeviceDataPrv->SlaveAddr = 0x00U;    /* Set variable for slave address */
   DeviceDataPrv->SendStop = LDD_I2C_SEND_STOP; /* Set variable for sending stop condition (for master mode) */
   DeviceDataPrv->InpByteMNum = 0x00U;  /* Set zero number of input bufer's content */
@@ -424,7 +417,8 @@ LDD_TDeviceData* CI2C1_Init(LDD_TUserData *UserDataPtr)
   I2C1_SMB = I2C_SMB_SLTF_MASK;
   /* I2C1_F: MULT=0,ICR=0x1F */
   I2C1_F = (I2C_F_MULT(0x00) | I2C_F_ICR(0x1F)); /* Set prescaler bits */
-  HWEnDi(DeviceDataPrv);               /* Enable/disable device according to status flags */
+  I2C_PDD_EnableDevice(I2C1_BASE_PTR, PDD_ENABLE); /* Enable device */
+  I2C_PDD_EnableInterrupt(I2C1_BASE_PTR); /* Enable interrupt */
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_CI2C1_ID,DeviceDataPrv);
   return ((LDD_TDeviceData *)DeviceDataPrv); /* Return pointer to the data data structure */
@@ -461,64 +455,6 @@ void CI2C1_Deinit(LDD_TDeviceData *DeviceDataPtr)
 
 /*
 ** ===================================================================
-**     Method      :  CI2C1_Enable (component I2C_LDD)
-*/
-/*!
-**     @brief
-**         Enables I2C component. Events may be generated
-**         ("DisableEvent"/"EnableEvent").
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @return
-**                         - Error code, possible codes:
-**                           ERR_OK - OK
-**                           ERR_SPEED - This device does not work in
-**                           the active clock configuration
-*/
-/* ===================================================================*/
-LDD_TError CI2C1_Enable(LDD_TDeviceData *DeviceDataPtr)
-{
-  CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
-
-  if (!DeviceDataPrv->EnUser) {        /* Is the device disabled by user? */
-    DeviceDataPrv->EnUser = TRUE;      /* If yes then set the flag "device enabled" */
-    DeviceDataPrv->SerFlag &= (uint8_t)~(MASTER_IN_PROGRES); /* Clear the status variable */
-    HWEnDi(DeviceDataPrv);             /* Enable the device */
-  }
-  return ERR_OK;
-}
-
-/*
-** ===================================================================
-**     Method      :  CI2C1_Disable (component I2C_LDD)
-*/
-/*!
-**     @brief
-**         Disables I2C component. No events will be generated.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @return
-**                         - Error code, possible codes:
-**                           ERR_OK - OK
-**                           ERR_SPEED - This device does not work in
-**                           the active clock configuration
-*/
-/* ===================================================================*/
-LDD_TError CI2C1_Disable(LDD_TDeviceData *DeviceDataPtr)
-{
-  CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
-
-  if (DeviceDataPrv->EnUser) {         /* Is the device enabled by user? */
-    DeviceDataPrv->EnUser = FALSE;     /* If yes then set the flag "device disabled" */
-    HWEnDi(DeviceDataPrv);             /* Disable the device */
-  }
-  return ERR_OK;                       /* OK */
-}
-
-/*
-** ===================================================================
 **     Method      :  CI2C1_SetEventMask (component I2C_LDD)
 */
 /*!
@@ -544,11 +480,6 @@ LDD_TError CI2C1_SetEventMask(LDD_TDeviceData *DeviceDataPtr, LDD_TEventMask Eve
 {
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if ((EventMask & (LDD_TEventMask)~((LDD_TEventMask)AVAILABLE_EVENTS_MASK)) != 0x00U) { /* Is the parameter EventMask within an expected range? */
     return ERR_PARAM_MASK;             /* If no then error. */
   }
@@ -628,11 +559,6 @@ LDD_TError CI2C1_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *Buff
 {
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if (Size == 0x00U) {                 /* Test variable Size on zero */
     return ERR_OK;                     /* If zero then OK */
   }
@@ -787,11 +713,6 @@ LDD_TError CI2C1_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *B
 {
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if (Size == 0x00U) {                 /* Test variable Size on zero */
     return ERR_OK;                     /* If zero then OK */
   }
@@ -873,11 +794,6 @@ LDD_TError CI2C1_MasterUpdateReceiveBlockSize(LDD_TDeviceData *DeviceDataPtr, LD
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
   LDD_I2C_TSize ByteReceived;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if ((DeviceDataPrv->SerFlag & MASTER_IN_PROGRES) == 0U) { /* Is the Master receive data? */
     return ERR_NOTAVAIL;               /* If no, return error */
   }
@@ -986,11 +902,6 @@ LDD_TError CI2C1_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TAddr
 {
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if ((DeviceDataPrv->SerFlag & MASTER_IN_PROGRES) != 0x00U) { /* Is the device in the active state? */
     return ERR_BUSY;                   /* If yes then error */
   }
@@ -1053,11 +964,6 @@ LDD_TError CI2C1_CheckBus(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TBusState *Bus
   CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
 
   (void)DeviceDataPrv;                 /* Suppress unused variable warning if needed */
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   *BusStatePtr = (LDD_I2C_TBusState)((I2C_PDD_GetBusStatus(I2C1_BASE_PTR) == I2C_PDD_BUS_BUSY)?LDD_I2C_BUSY:LDD_I2C_IDLE); /* Return value of Busy bit in status register */
   return ERR_OK;
 }
@@ -1120,31 +1026,6 @@ void CI2C1_ClearStats(LDD_TDeviceData *DeviceDataPtr)
   DeviceDataPrv->Stats.SDALowTimeout = 0x00U;
   /* {Default RTOS Adapter} Critical section end, general PE function is used */
   ExitCritical();
-}
-
-/*
-** ===================================================================
-**     Method      :  HWEnDi (component I2C_LDD)
-**
-**     Description :
-**         Enables or disables the peripheral(s) associated with the 
-**         component. The method is called automatically as a part of the 
-**         Enable and Disable methods and several internal methods.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-static void HWEnDi(LDD_TDeviceData *DeviceDataPtr)
-{
-  CI2C1_TDeviceData *DeviceDataPrv = (CI2C1_TDeviceData *)DeviceDataPtr;
-
-  if (DeviceDataPrv->EnUser) {         /* Enable device? */
-    I2C_PDD_EnableDevice(I2C1_BASE_PTR, PDD_ENABLE); /* Enable device */
-    I2C_PDD_EnableInterrupt(I2C1_BASE_PTR); /* Enable interrupt */
-  } else {
-    I2C_PDD_DisableInterrupt(I2C1_BASE_PTR); /* Disable interrupt */
-    I2C_PDD_EnableDevice(I2C1_BASE_PTR, PDD_DISABLE); /* Disable device */
-    I2C_PDD_ClearBusStatusInterruptFlags(I2C1_BASE_PTR, (I2C_PDD_BUS_STOP_FLAG)); /* Clear bus status detect flags */
-  }
 }
 
 /*
@@ -1244,11 +1125,6 @@ LDD_TError CI2C1_SetOperationMode(LDD_TDeviceData *DeviceDataPtr, LDD_TDriverOpe
 {
   CI2C1_TDeviceDataPtr DeviceDataPrv = (CI2C1_TDeviceDataPtr)DeviceDataPtr;
 
-  /* Device state test - this test can be disabled by setting the "Ignore enable test"
-     property to the "yes" value in the "Configuration inspector" */
-  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
-    return ERR_DISABLED;               /* If yes then error */
-  }
   if (DeviceDataPrv->InpLenM != 0x00U) {
     return ERR_BUSY;
   }
@@ -1311,7 +1187,6 @@ LDD_TDriverState CI2C1_GetDriverState(LDD_TDeviceData *DeviceDataPtr)
   LDD_TDriverState DriverState = 0x00U;
   CI2C1_TDeviceDataPtr DeviceDataPrv = (CI2C1_TDeviceDataPtr)DeviceDataPtr;
 
-  DriverState |= (DeviceDataPrv->EnUser)? 0x00U : PE_LDD_DRIVER_DISABLED_BY_USER; /* Driver disabled by the user? */
   if (DeviceDataPrv->InpLenM != 0x00U) {
     DriverState |= PE_LDD_DRIVER_BUSY;
     return DriverState;

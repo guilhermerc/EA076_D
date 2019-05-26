@@ -7,7 +7,7 @@
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-25, 21:31, # CodeGen: 283
+**     Date/Time   : 2019-05-25, 23:52, # CodeGen: 287
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -85,8 +85,6 @@
 **     Contents    :
 **         Init                         - LDD_TDeviceData* CI2C1_Init(LDD_TUserData *UserDataPtr);
 **         Deinit                       - void CI2C1_Deinit(LDD_TDeviceData *DeviceDataPtr);
-**         Enable                       - LDD_TError CI2C1_Enable(LDD_TDeviceData *DeviceDataPtr);
-**         Disable                      - LDD_TError CI2C1_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         SetEventMask                 - LDD_TError CI2C1_SetEventMask(LDD_TDeviceData *DeviceDataPtr, LDD_TEventMask...
 **         GetEventMask                 - LDD_TEventMask CI2C1_GetEventMask(LDD_TDeviceData *DeviceDataPtr);
 **         MasterSendBlock              - LDD_TError CI2C1_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
@@ -189,8 +187,6 @@ extern "C" {
 /* Methods configuration constants - generated for all enabled component's methods */
 #define CI2C1_Init_METHOD_ENABLED      /*!< Init method of the component CI2C1 is enabled (generated) */
 #define CI2C1_Deinit_METHOD_ENABLED    /*!< Deinit method of the component CI2C1 is enabled (generated) */
-#define CI2C1_Enable_METHOD_ENABLED    /*!< Enable method of the component CI2C1 is enabled (generated) */
-#define CI2C1_Disable_METHOD_ENABLED   /*!< Disable method of the component CI2C1 is enabled (generated) */
 #define CI2C1_SetEventMask_METHOD_ENABLED /*!< SetEventMask method of the component CI2C1 is enabled (generated) */
 #define CI2C1_GetEventMask_METHOD_ENABLED /*!< GetEventMask method of the component CI2C1 is enabled (generated) */
 #define CI2C1_MasterSendBlock_METHOD_ENABLED /*!< MasterSendBlock method of the component CI2C1 is enabled (generated) */
@@ -253,45 +249,6 @@ LDD_TDeviceData* CI2C1_Init(LDD_TUserData *UserDataPtr);
 */
 /* ===================================================================*/
 void CI2C1_Deinit(LDD_TDeviceData *DeviceDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  CI2C1_Enable (component I2C_LDD)
-*/
-/*!
-**     @brief
-**         Enables I2C component. Events may be generated
-**         ("DisableEvent"/"EnableEvent").
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @return
-**                         - Error code, possible codes:
-**                           ERR_OK - OK
-**                           ERR_SPEED - This device does not work in
-**                           the active clock configuration
-*/
-/* ===================================================================*/
-LDD_TError CI2C1_Enable(LDD_TDeviceData *DeviceDataPtr);
-
-/*
-** ===================================================================
-**     Method      :  CI2C1_Disable (component I2C_LDD)
-*/
-/*!
-**     @brief
-**         Disables I2C component. No events will be generated.
-**     @param
-**         DeviceDataPtr   - Device data structure
-**                           pointer returned by <Init> method.
-**     @return
-**                         - Error code, possible codes:
-**                           ERR_OK - OK
-**                           ERR_SPEED - This device does not work in
-**                           the active clock configuration
-*/
-/* ===================================================================*/
-LDD_TError CI2C1_Disable(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
