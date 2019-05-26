@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-05-23, 19:50, # CodeGen: 271
+**     Date/Time   : 2019-05-25, 21:25, # CodeGen: 279
 **     Abstract    :
 **
 **     Settings    :
@@ -286,6 +286,9 @@
 #include "BitIoLdd6.h"
 #include "KBOARD_R4.h"
 #include "BitIoLdd7.h"
+#include "AT24C164.h"
+#include "GI2C1.h"
+#include "CI2C1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -543,6 +546,10 @@ void PE_low_level_init(void)
   (void)BitIoLdd6_Init(NULL);
   /* ### BitIO_LDD "BitIoLdd7" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)BitIoLdd7_Init(NULL);
+  /* ### I2C_LDD "CI2C1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
+  (void)CI2C1_Init(NULL);
+  /* ### 24AA_EEPROM "AT24C164" init code ... */
+  /* Write code here ... */
   __EI();
 }
   /* Flash configuration field */
