@@ -39,6 +39,9 @@
 
 #define TIME_ADJUSTMENT_TOPIC_WQ "EA076/grupoD3/adjust"
 
+#define COMMAND_TOPIC "\"EA076/grupoD3/command\""
+#define COMMAND_TOPIC_WQ "EA076/grupoD3/command"
+
 #define MAX_TOKENS	32
 
 #define CMD_TYPE_INDEX	0
@@ -60,6 +63,7 @@ typedef enum
 	SUBSCRIBING_TO_MODE_TOPIC,
 	SUBSCRIBING_TO_THRESHOLD_TOPIC,
 	SUBSCRIBING_TO_ADJUST_TOPIC,
+	SUBSCRIBING_TO_COMMAND_TOPIC,
 	CONCLUDED
 } SUBSCRIPTIONS_STATE_ENUM;
 
@@ -206,6 +210,13 @@ void comm_response()
 		{
 			strcpy(comm_info.message_out, "SUBSCRIBE ");
 			strcat(comm_info.message_out, TIME_ADJUSTMENT_TOPIC);
+			strcat(comm_info.message_out, TERMINATING_CHARS);
+			break;
+		}
+		case SUBSCRIBING_TO_COMMAND_TOPIC:
+		{
+			strcpy(comm_info.message_out, "SUBSCRIBE ");
+			strcat(comm_info.message_out, COMMAND_TOPIC);
 			strcat(comm_info.message_out, TERMINATING_CHARS);
 			break;
 		}
