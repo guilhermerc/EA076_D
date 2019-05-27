@@ -420,6 +420,11 @@ void comm_parse()
 				strptime(tokens[MESSAGE_INDEX], "%T", &time);
 				rtc_set_current_time(time.tm_sec, time.tm_min, time.tm_hour);
 			}
+			else if(strcmp(tokens[TOPIC_INDEX], COMMAND_TOPIC_WQ) == 0)
+			{
+				if(strcmp(tokens[MESSAGE_INDEX], "Dump") == 0)
+					event_buff_insert_event(MEMORY_DUMP_REQUEST);
+			}
 		}
 		else if((strcmp(tokens[0], "PUBLISH") == 0))
 		{
