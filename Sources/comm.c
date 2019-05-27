@@ -8,6 +8,7 @@
 
 #include <comm.h>
 #include <console.h>
+#include <event_buff.h>
 #include <Events.h>
 #include <motor.h>
 #include <rtc.h>
@@ -36,11 +37,12 @@
 #define THRESHOLD_TOPIC_WQ "EA076/grupoD3/threshold"
 
 #define TIME_ADJUSTMENT_TOPIC "\"EA076/grupoD3/adjust\""
-
 #define TIME_ADJUSTMENT_TOPIC_WQ "EA076/grupoD3/adjust"
 
 #define COMMAND_TOPIC "\"EA076/grupoD3/command\""
 #define COMMAND_TOPIC_WQ "EA076/grupoD3/command"
+
+#define LOG_TOPIC_WQ "EA076/grupoD3/log"
 
 #define MAX_TOKENS	32
 

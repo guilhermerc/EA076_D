@@ -13,6 +13,7 @@
 #define TERMINATING_CHARS	"\r\n"
 
 #define TEMPERATURE_TOPIC	"\"EA076/grupoD3/temp\""
+#define LOG_TOPIC "\"EA076/grupoD3/log\""
 
 #define MESSAGE_BUFFER_SIZE	512
 
