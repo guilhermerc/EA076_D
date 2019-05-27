@@ -161,16 +161,16 @@ bool UART0_HasACompleteMessage()
 {
 	bool status = FALSE;
 
-	uint8_t previous_index = (InpIndexW - 1 < 0) ? (UART0_InpLen +
-			InpIndexW - 1) : (InpIndexW - 1);
+	uint8_t previous_index = (InpIndexW == 0) ?
+			(UART0_INP_BUF_SIZE - 1) : (InpIndexW - 1);
 
 	/*!
 	 * Verifies if the last received char is '\n'
 	 */
 	if(InpBuffer[previous_index] == '\n')
 	{
-		uint8_t previous_previous_index = (InpIndexW - 2 < 0) ?
-				(UART0_InpLen + InpIndexW - 2) : (InpIndexW - 2);
+		uint8_t previous_previous_index = (previous_index == 0) ?
+				(UART0_INP_BUF_SIZE - 1) : (previous_index - 1);
 
 		/*!
 		 * Verifies if the last last received char is '\r'
