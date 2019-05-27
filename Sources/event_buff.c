@@ -16,7 +16,10 @@
 #include <comm.h>
 #include <display.h>
 #include <event_buff.h>
+#include <memory.h>
 #include <motor.h>
+#include <stdlib.h>
+#include <string.h>
 #include <temp.h>
 #include <UART0.h>
 #include <UART2.h>
@@ -108,21 +111,21 @@ EVENT_BUFF_TYPE event_buff_consume_event()
 	 * 	1 - I don't need to check it
 	 * 	2 - The state is either NONE or FULL
 	 */
-		EVENT_BUFF_TYPE event =
-				event_buff_info.ring_buff[event_buff_info.tail_ptr];
-		event_buff_info.tail_ptr++;
-		event_buff_info.tail_ptr %= EVENT_BUFF_SIZE;
+	EVENT_BUFF_TYPE event =
+			event_buff_info.ring_buff[event_buff_info.tail_ptr];
+	event_buff_info.tail_ptr++;
+	event_buff_info.tail_ptr %= EVENT_BUFF_SIZE;
 
-		if(event_buff_info.head_ptr ==
-				event_buff_info.tail_ptr)
-		{
-			state = EMPTY;
-		}
+	if(event_buff_info.head_ptr ==
+			event_buff_info.tail_ptr)
+	{
+		state = EMPTY;
+	}
 
-		if(state == FULL)
-		{
-			state = NONE;
-		}
+	if(state == FULL)
+	{
+		state = NONE;
+	}
 
 	return event;
 }
@@ -160,34 +163,101 @@ void event_handler_read_message(EVENT_HANDLER_MESSAGE_ORIGIN origin)
  */
 void event_handler(EVENT_BUFF_TYPE event)
 {
+	static bool is_dumping = FALSE;
+	static uint8_t pages_to_be_dumped = 0;
+	static uint8_t words_to_be_dumped = 0;
+	static uint8_t words_already_dumped = 0;
+	static char * buffer = NULL;
+
 	/*! If the event is somewhat related to the communication process,
 	 * waits (blocking) for the channel to be available
 	 */
 	if(event == NEW_MESSAGE_FROM_BROKER ||
 			event == NEW_MESSAGE_FROM_TERMINAL ||
-			event == NEW_TEMPERATURE_MEAS)
+			event == NEW_TEMPERATURE_MEAS ||
+			event == MEMORY_DUMP_REQUEST)
 		while(comm_status() != AVAILABLE);
 
-	switch(event)
+	if(event == MEMORY_BUFFER_FULL)
 	{
-	case NEW_MESSAGE_FROM_BROKER:
+		memory_write_page(memory_info.pages_written,
+				memory_info.buffer);
+	}
+	else if(event == MEMORY_DUMP_REQUEST)
+	{
+		if(is_dumping == FALSE)
+		{
+			pages_to_be_dumped = memory_info.pages_written - memory_info.pages_dumped;
+			words_to_be_dumped = pages_to_be_dumped * TEMPERATURE_SIZE_IN_WORDS;
+			words_already_dumped = 0;
+
+			if(pages_to_be_dumped > 0)
+			{
+				buffer = (char *) malloc((pages_to_be_dumped *
+						WORDS_PER_PAGE) * sizeof(char));
+				memory_dump(buffer);
+
+				is_dumping = TRUE;
+			}
+		}
+
+		if(is_dumping == TRUE)
+		{
+			if(comm_info.state == WAITING_FOR_CMD)
+			{
+				char temperature[TEMPERATURE_STRING_SIZE];
+
+				memcpy(temperature, &(buffer[words_already_dumped *
+											 TEMPERATURE_SIZE_IN_WORDS]),
+						TEMPERATURE_SIZE_IN_WORDS);
+				temperature[TEMPERATURE_SIZE_IN_WORDS] = '\0';
+
+				comm_publish(LOG_TOPIC, temperature);
+
+				if(++words_already_dumped == words_to_be_dumped)
+				{
+					free(buffer);
+					is_dumping = FALSE;
+				}
+				else
+					event_buff_insert_event(MEMORY_DUMP_REQUEST);
+			}
+			else
+				event_buff_insert_event(MEMORY_DUMP_REQUEST);
+
+			/*
+			for(uint8_t word = 0; word < words_dumped; word++)
+			{
+				memcpy(temperature, &(buffer[word *
+											 TEMPERATURE_SIZE_IN_WORDS]),
+						TEMPERATURE_SIZE_IN_WORDS);
+				temperature[TEMPERATURE_SIZE_IN_WORDS] = '\0';
+
+				comm_publish(LOG_TOPIC, temperature);
+
+				while(comm_status() != AVAILABLE);
+			}
+			 */
+		}
+	}
+	else if(event == LOG_TEMPERATURE_PERIOD)
+	{
+		memory_bufferize_temperature(temp_info.temperature_string);
+	}
+	else if(event == NEW_MESSAGE_FROM_BROKER)
 	{
 		event_handler_read_message(BROKER);
 		comm_process_msg();
-
-		break;
 	}
-	case NEW_MESSAGE_FROM_TERMINAL:
+	else if(event == NEW_MESSAGE_FROM_TERMINAL)
 	{
 		if(comm_info.state == WAITING_FOR_CMD)
 		{
 			event_handler_read_message(TERMINAL);
 			comm_process_msg();
 		}
-
-		break;
 	}
-	case NEW_TEMPERATURE_MEAS:
+	else if(event == NEW_TEMPERATURE_MEAS)
 	{
 		if(comm_info.state == WAITING_FOR_CMD)
 		{
@@ -206,18 +276,13 @@ void event_handler(EVENT_BUFF_TYPE event)
 			else
 				motor_set_pwm(MINIMUM_PWM);
 		}
-
-		break;
 	}
-	case NEW_KEY_PRESSING:
+	if(event == NEW_KEY_PRESSING)
 	{
 		display_fsm();
-		break;
 	}
-	case TIMEOUT:
+	else if(event == TIMEOUT)
 	{
 		display_fsm_force_state_change(OPTIONS_MENU_1);
-		break;
-	}
 	}
 }

@@ -27,11 +27,16 @@
  */
 /* MODULE main */
 
-#include <AT24C164.h>
+#include <comm.h>
 #include <console.h>
 #include <CPU.h>
-#include <PE_Types.h>
-#include <WAIT1.h>
+#include <display.h>
+#include <event_buff.h>
+#include <kboard.h>
+#include <memory.h>
+#include <motor.h>
+#include <rtc.h>
+#include <temp.h>
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
@@ -59,7 +64,6 @@ int main(void)
 	/*!
 	 * Initializing the modules
 	 */
-	/*
 	event_buff_init();
 
 	motor_init();
@@ -68,26 +72,12 @@ int main(void)
 	display_init();
 	kboard_init();
 
+	memory_init();
+
+	console_init();
 	comm_init();
 
 	rtc_init();
-	*/
-
-	console_init();
-
-	char string[] = "Testing testing";
-	char memory[16];
-
-	/*! TODO: Try this */
-	AT24C164_SelectDevice(0x00);
-
-	AT24C164_WriteBlock(0x00, string, 16);
-
-	WAIT1_Waitms(20);
-
-	AT24C164_ReadBlock(0x00, memory, 16);
-
-	console_write(NULL, memory);
 
 	/*! TODO: Also try to change the ICR to 0x11 = 010 001
 	 */
@@ -98,10 +88,8 @@ int main(void)
 	 */
 	for(;;)
 	{
-		/*
 		if(!event_buff_is_empty())
 			event_handler(event_buff_consume_event());
-		*/
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/

@@ -24,6 +24,7 @@ typedef struct TEMPERATURE_INFO
 {
 	volatile float temperature;	// [-60˚C, 270˚C]
 	volatile uint16_t raw_temperature;
+	char temperature_string[TEMPERATURE_STRING_SIZE];
 	volatile char message[TEMPERATURE_MESSAGE_SIZE];
 } TEMPERATURE_INFO;
 

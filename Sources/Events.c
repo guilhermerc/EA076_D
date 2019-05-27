@@ -37,6 +37,7 @@
 #include <KBOARD_C1.h>
 #include <KBOARD_C2.h>
 #include <KBOARD_C3.h>
+#include <memory.h>
 #include <PE_Types.h>
 #include <PORT_PDD.h>
 #include <stddef.h>
@@ -302,6 +303,12 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 	{
 		event_buff_insert_event(TIMEOUT);
 		display_unset_timeout();
+	}
+
+	if(++memory_info.timer == TEMPERATURE_LOG_PERIOD)
+	{
+		event_buff_insert_event(LOG_TEMPERATURE_PERIOD);
+		memory_info.timer = 0;
 	}
 }
 

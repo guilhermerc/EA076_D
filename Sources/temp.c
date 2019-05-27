@@ -33,7 +33,6 @@ void temp_init()
 {
 	temp_info.temperature = 0;
 	temp_info.raw_temperature = 0;
-
 	ADC0_EnableEvent();
 }
 
@@ -61,8 +60,8 @@ void temp_convert_raw_value()
 void temp_assemble_message()
 {
 	temp_convert_raw_value();
-	char temperature_string[TEMPERATURE_STRING_SIZE];
 
-	sprintf(temperature_string, "%.1f", temp_info.temperature);
-	strcpy(temp_info.message, temperature_string);
+	sprintf(temp_info.temperature_string, "%.1f",
+			temp_info.temperature);
+	strcpy(temp_info.message, temp_info.temperature_string);
 }
