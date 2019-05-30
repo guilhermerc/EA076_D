@@ -310,6 +310,8 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 		event_buff_insert_event(LOG_TEMPERATURE_PERIOD);
 		memory_info.timer = 0;
 	}
+
+	display_update();
 }
 
 /*! \brief A handler that reads the last ADC measurement
