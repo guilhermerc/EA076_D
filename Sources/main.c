@@ -69,6 +69,8 @@ int main(void)
 	motor_init();
 	temp_init();
 
+	rtc_init();
+
 	display_init();
 	kboard_init();
 
@@ -76,8 +78,6 @@ int main(void)
 
 	console_init();
 	comm_init();
-
-	rtc_init();
 
 	/*! TODO: Also try to change the ICR to 0x11 = 010 001
 	 */
