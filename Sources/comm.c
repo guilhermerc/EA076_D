@@ -56,8 +56,6 @@
 static char ip_number[IP_NUMBER_SIZE];	/**< TODO: It should be const */
 static char mac_addr[MAC_ADDR_SIZE];	/**< TODO: IT should be const */
 
-static bool unexpected_message = FALSE;
-
 typedef enum
 {
 	SUBSCRIBING_TO_DIR_TOPIC,
@@ -83,7 +81,6 @@ bool comm_are_there_conn_errors();
 void comm_init()
 {
 	subscriptions_state = SUBSCRIBING_TO_DIR_TOPIC;
-	unexpected_message = FALSE;
 
 	comm_info.state = CONNECT_WIFI;
 	comm_info.message_received = FALSE;
@@ -227,23 +224,13 @@ void comm_response()
 	}
 	case PUBLISHING:
 	{
-		if(unexpected_message == FALSE)
-		{
-			strcpy(comm_info.message_out, comm_info.message_in);
+		strcpy(comm_info.message_out, comm_info.message_in);
 		/*!
 		 * TODO: DEBUGGING PURPOSES!! REMOVE IT BEFORE SUBMITTING!
 		 *
 		comm_info.state = WAITING_FOR_CMD;
 		 *
 		 */
-		}
-		/*!
-		 * Ignoring "MESSAGE [<TOPIC>],[<CONTENT>]"
-		 */
-		else
-		{
-			unexpected_message = FALSE;
-		}
 		break;
 	}
 	}
@@ -474,13 +461,6 @@ void comm_parse()
 		else if(strcmp(comm_info.message_in, "ERROR SUBSCRIBE\r\n") == 0)
 		{
 			comm_info.state = WAITING_FOR_CMD;
-		}
-		/*!
-		 * MESSAGE [<TOPIC>],[<CONTENT>] arrived
-		 */
-		else
-		{
-			unexpected_message = TRUE;
 		}
 	}
 	}
