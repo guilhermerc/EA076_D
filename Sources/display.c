@@ -120,7 +120,7 @@ void display_update()
 		display_write_line(4, "      HH:MM:SS");
 
 		display_write_line(5, "              ");
-		display_write_line(6, "9|More options");
+		display_write_line(6, "9|Options list");
 
 		break;
 	}
