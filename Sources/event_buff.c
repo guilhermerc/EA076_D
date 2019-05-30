@@ -269,6 +269,6 @@ void event_handler(EVENT_BUFF_TYPE event)
 	}
 	else if(event == TIMEOUT)
 	{
-		display_fsm_force_state_change(OPTIONS_MENU_1);
+		display_fsm_force_state_change(CURRENT_TIME_MENU);
 	}
 }
