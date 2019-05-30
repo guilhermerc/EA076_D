@@ -225,12 +225,6 @@ void comm_response()
 	case PUBLISHING:
 	{
 		strcpy(comm_info.message_out, comm_info.message_in);
-		/*!
-		 * TODO: DEBUGGING PURPOSES!! REMOVE IT BEFORE SUBMITTING!
-		 *
-		comm_info.state = WAITING_FOR_CMD;
-		 *
-		 */
 		break;
 	}
 	}

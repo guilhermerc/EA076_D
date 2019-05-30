@@ -1,22 +1,18 @@
 /*!
-** @file LOG.c
-** @brief This file contains the implementations related to the logging
-** process
+** @file console.c
+** @brief 	This file contains the implementations related to the
+** 			communication with Terminal
 **
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
-
-/*
- * LOG.c
- *
- *  Created on: 30/03/2019
- *      Author: guilherme
- */
 
 #include <console.h>
 #include <Events.h>
 #include <string.h>
 
+/*!
+ * @brief	A function that initializes the console module
+ */
 void console_init()
 {
 	console_info.status = DONE;

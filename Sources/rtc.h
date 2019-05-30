@@ -1,16 +1,9 @@
 /*!
-** @file stamp.h
-** @brief This file exports what is necessary from stamp.c
+** @file rtc.h
+** @brief This file exports what is necessary from rtc.c
 **
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
-
-/*
- * Timestamp.h
- *
- *  Created on: 14/04/2019
- *      Author: guilherme
- */
 
 #ifndef PROGRAMMER_CODE_LIBRARIES_STAMP_H_
 #define PROGRAMMER_CODE_LIBRARIES_STAMP_H_

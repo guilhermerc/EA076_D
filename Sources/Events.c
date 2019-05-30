@@ -297,20 +297,27 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 	if(display_timeout.triggered = TRUE)
 		display_timeout.timer++;
 
-	/*! If timer has reached the target timeout configured, return to
-	 * main menu */
+	/*! If timer has reached the target timeout configured, returns to
+	 * home page
+	 * */
 	if(display_timeout.timer == display_timeout.target)
 	{
 		event_buff_insert_event(TIMEOUT);
 		display_unset_timeout();
 	}
 
+	/*! If timer has reached the temperature logging period, inserts an
+	 * event in the ring buffer to perform this feature
+	 */
 	if(++memory_info.timer == TEMPERATURE_LOG_PERIOD)
 	{
 		event_buff_insert_event(LOG_TEMPERATURE_PERIOD);
 		memory_info.timer = 0;
 	}
 
+	/*! Refreshes the content of display. This is particularly useful
+	 * for updating the display time.
+	 * */
 	display_update();
 }
 
@@ -341,26 +348,6 @@ void AD1_OnEnd(void)
 	ADC0_GetValue16(&temp_info.raw_temperature);
 
 	event_buff_insert_event(NEW_TEMPERATURE_MEAS);
-}
-
-/*
-** ===================================================================
-**     Event       :  UART0_OnError (module Events)
-**
-**     Component   :  UART0 [AsynchroSerial]
-**     Description :
-**         This event is called when a channel error (not the error
-**         returned by a given method) occurs. The errors can be read
-**         using <GetError> method.
-**         The event is available only when the <Interrupt
-**         service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void UART0_OnError(void)
-{
-  /* Write your code here ... */
 }
 
 /*! @brief A handler that echoes the received char and also insert an
@@ -426,26 +413,6 @@ void UART0_OnTxChar(void)
 
 		console_info.status = DONE;
 	}
-}
-
-/*
-** ===================================================================
-**     Event       :  UART2_OnError (module Events)
-**
-**     Component   :  UART2 [AsynchroSerial]
-**     Description :
-**         This event is called when a channel error (not the error
-**         returned by a given method) occurs. The errors can be read
-**         using <GetError> method.
-**         The event is available only when the <Interrupt
-**         service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-void UART2_OnError(void)
-{
-  /* Write your code here ... */
 }
 
 /*! @brief A handler that checks if a complete message has been

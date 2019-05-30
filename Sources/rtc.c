@@ -1,17 +1,10 @@
 /*!
-** @file stamp.c
+** @file rtc.c
 ** @brief This file contains implementations related to the
-** time stamp generation
+** Real Time Clock LDD wrappers
 **
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
-
-/*
- * Timestamp.c
- *
- *  Created on: 14/04/2019
- *      Author: guilherme
- */
 
 #include <rtc.h>
 #include <RTC.h>
@@ -53,6 +46,8 @@ void rtc_get_time(LDD_RTC_TTime * current_time_ptr)
 	RTC_GetTime(RTC_dd_ptr, current_time_ptr);
 }
 
+/*! @brief A function that sets the RTC current time
+ */
 void rtc_set_current_time(uint32_t second, uint32_t minute,
 		uint32_t hour)
 {

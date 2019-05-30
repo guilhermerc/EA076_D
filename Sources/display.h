@@ -1,10 +1,3 @@
-/*
- * display.h
- *
- *  Created on: 04/05/2019
- *      Author: guilherme
- */
-
 /*!
  * @file display.h
  * @brief This file exports what is necessary from display.c

@@ -1,18 +1,3 @@
-/* ###################################################################
-**     Filename    : Events.h
-**     Project     : EA076_D
-**     Processor   : MKL25Z128VLK4
-**     Component   : Events
-**     Version     : Driver 01.00
-**     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-03-18, 16:31, # CodeGen: 0
-**     Abstract    :
-**         This is user's event module.
-**         Put your event handler code here.
-**     Contents    :
-**         CPU_OnNMIINT - void CPU_OnNMIINT(void);
-**
-** ###################################################################*/
 /*!
 ** @file Events.h
 ** @version 01.00

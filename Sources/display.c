@@ -1,9 +1,3 @@
-/*
- * display.c
- *
- *  Created on: 04/05/2019
- *      Author: guilherme
- */
 /*!
  * @file display.c
  * @brief This file contains implementations related to the display.
@@ -77,8 +71,6 @@ void display_clean_line(uint8_t line)
  * */
 void display_update()
 {
-	/*! TODO: Remember to ensure that you're overwriting all lines */
-
 	switch(state)
 	{
 	case CURRENT_TIME_MENU:
