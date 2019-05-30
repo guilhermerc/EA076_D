@@ -15,6 +15,7 @@
 #include <motor.h>
 #include <NOKIA5110_CONTROLLER.h>
 #include <NOKIA5110_LIGHT.h>
+#include <rtc.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +33,8 @@ static DISPLAY_FSM_STATE state;
 static char threshold[THRESHOLD_STRING_SIZE];
 static bool typing_threshold = FALSE;
 
+static LDD_RTC_TTime current_time;
+
 void display_set_timeout(uint8_t timeout);
 
 /*! @brief A function that performs the display's initialization
@@ -43,7 +46,7 @@ void display_init()
 	NOKIA5110_LIGHT_ClrVal();
 
 	display_unset_timeout();
-	display_fsm_force_state_change(OPTIONS_MENU_1);
+	display_fsm_force_state_change(CURRENT_TIME_MENU);
 }
 
 /*! @brief A function that writes a single line in the display
@@ -78,6 +81,57 @@ void display_update()
 
 	switch(state)
 	{
+	case CURRENT_TIME_MENU:
+	{
+		/*!
+		 * 	  """"""""""""""""
+		 * 1: "Hi            "
+		 * 2: "--------------"
+		 * 3: "    MM/DD/YYYY"
+		 * 4: "      HH:MM:SS"
+		 * 5: "              "
+		 * 6: "9|Options list"
+		 * 	  """"""""""""""""
+		 */
+
+		char line_string[DISPLAY_LINE_STRING_SIZE];
+
+		rtc_get_time(&current_time);
+
+		display_write_line(1, "Hi            ");
+		display_write_line(2, "--------------");
+
+		/*! Assembles the string "    MM/DD/YYYY" */
+		UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE, "    ");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Month, '0', 2);
+		UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, "/");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Day, '0', 2);
+		UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, "/");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Year, '0', 4);
+
+		display_write_line(3, "    MM/DD/YYYY");
+
+		/*! Assembles the string "      HH:MM:SS" */
+		UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE, "      ");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Hour, '0', 2);
+		UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, ":");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Minute, '0', 2);
+		UTIL1_strcat(line_string, DISPLAY_LINE_STRING_SIZE, ":");
+		UTIL1_strcatNum32uFormatted(line_string,
+				DISPLAY_LINE_STRING_SIZE, current_time.Second, '0', 2);
+
+		display_write_line(4, "      HH:MM:SS");
+
+		display_write_line(5, "              ");
+		display_write_line(6, "9|More options");
+
+		break;
+	}
 	case OPTIONS_MENU_1:
 	{
 		/*!
@@ -422,6 +476,7 @@ void display_fsm_force_state_change(DISPLAY_FSM_STATE new_state)
  *
  * The states are:
  *
+ *  CURRENT_TIME_MENU	->	Home "page"
  * 	OPTIONS_MENU_1		->	First "page" of options
  *	OPTIONS_MENU_2		-> 	Last "page" of options
  *	CURR_STATE_MENU		-> 	Displays for CURR_STATE_MENU_TIMEOUT
@@ -442,6 +497,13 @@ void display_fsm()
 {
 	switch(state)
 	{
+	case CURRENT_TIME_MENU:
+	{
+		if(kboard_info.last_key_pressed == KEY_9)
+			state = OPTIONS_MENU_1;
+
+		break;
+	}
 	case OPTIONS_MENU_1:
 	{
 		if(kboard_info.last_key_pressed == KEY_4)
