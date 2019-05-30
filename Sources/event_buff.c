@@ -178,7 +178,11 @@ void event_handler(EVENT_BUFF_TYPE event)
 			event == MEMORY_DUMP_REQUEST)
 		while(comm_status() != AVAILABLE);
 
-	if(event == MEMORY_BUFFER_FULL)
+	if(event == DISPLAY_REFRESH)
+	{
+		display_update();
+	}
+	else if(event == MEMORY_BUFFER_FULL)
 	{
 		memory_write_page(memory_info.pages_written,
 				memory_info.buffer);

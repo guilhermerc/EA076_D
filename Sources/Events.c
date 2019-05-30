@@ -311,7 +311,8 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 		memory_info.timer = 0;
 	}
 
-	//display_update();
+	if(display_get_state() == CURRENT_TIME_MENU)
+		event_buff_insert_event(DISPLAY_REFRESH);
 }
 
 /*! \brief A handler that reads the last ADC measurement

@@ -128,7 +128,7 @@ void display_update()
 		display_write_line(4, line_string);
 
 		display_write_line(5, "              ");
-		display_write_line(6, "9|More options");
+		display_write_line(6, "9|Options list");
 
 		break;
 	}
@@ -642,4 +642,9 @@ void display_unset_timeout()
 	display_timeout.timer = 0;
 	display_timeout.target = 0;
 	display_timeout.triggered = OFF;
+}
+
+DISPLAY_FSM_STATE display_get_state()
+{
+	return state;
 }
