@@ -112,7 +112,7 @@ void display_update()
 		UTIL1_strcatNum32uFormatted(line_string,
 				DISPLAY_LINE_STRING_SIZE, current_time.Year, '0', 4);
 
-		display_write_line(3, "    MM/DD/YYYY");
+		display_write_line(3, line_string);
 
 		/*! Assembles the string "      HH:MM:SS" */
 		UTIL1_strcpy(line_string, DISPLAY_LINE_STRING_SIZE, "      ");
@@ -125,7 +125,7 @@ void display_update()
 		UTIL1_strcatNum32uFormatted(line_string,
 				DISPLAY_LINE_STRING_SIZE, current_time.Second, '0', 2);
 
-		display_write_line(4, "      HH:MM:SS");
+		display_write_line(4, line_string);
 
 		display_write_line(5, "              ");
 		display_write_line(6, "9|More options");
