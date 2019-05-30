@@ -224,20 +224,6 @@ void event_handler(EVENT_BUFF_TYPE event)
 			}
 			else
 				event_buff_insert_event(MEMORY_DUMP_REQUEST);
-
-			/*
-			for(uint8_t word = 0; word < words_dumped; word++)
-			{
-				memcpy(temperature, &(buffer[word *
-											 TEMPERATURE_SIZE_IN_WORDS]),
-						TEMPERATURE_SIZE_IN_WORDS);
-				temperature[TEMPERATURE_SIZE_IN_WORDS] = '\0';
-
-				comm_publish(LOG_TOPIC, temperature);
-
-				while(comm_status() != AVAILABLE);
-			}
-			 */
 		}
 	}
 	else if(event == LOG_TEMPERATURE_PERIOD)
@@ -277,7 +263,7 @@ void event_handler(EVENT_BUFF_TYPE event)
 				motor_set_pwm(MINIMUM_PWM);
 		}
 	}
-	if(event == NEW_KEY_PRESSING)
+	else if(event == NEW_KEY_PRESSING)
 	{
 		display_fsm();
 	}
