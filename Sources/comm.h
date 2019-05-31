@@ -44,9 +44,9 @@ typedef enum
 
 typedef struct
 {
-	volatile COMM_STATE_ENUM state;
-	volatile bool message_received;
-	volatile COMM_SENDING_STATUS sending_status;
+	COMM_STATE_ENUM state;
+	bool message_received;
+	COMM_SENDING_STATUS sending_status;
 	char message_in[MESSAGE_BUFFER_SIZE];
 	char message_out[MESSAGE_BUFFER_SIZE];
 } COMM_INFO_STRUCT;

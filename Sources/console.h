@@ -22,8 +22,8 @@
 
 typedef struct
 {
-	volatile COMM_SENDING_STATUS status;
-	volatile UART0_TComData buffer[CONSOLE_BUFFER_SIZE];
+	COMM_SENDING_STATUS status;
+	UART0_TComData buffer[CONSOLE_BUFFER_SIZE];
 } CONSOLE_INFO_STRUCT;
 
 CONSOLE_INFO_STRUCT console_info;
