@@ -1,10 +1,3 @@
-/*
- * kboard.c
- *
- *  Created on: 11/05/2019
- *      Author: guilherme
- */
-
 /*!
  * @file kboard.c
  * @brief This file contains implementations related to the keyboard.

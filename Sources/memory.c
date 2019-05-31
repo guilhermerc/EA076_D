@@ -1,8 +1,9 @@
-/*
- * memory.c
+/*!
+ * @file memory.c
+ * @brief This file contains implementations related to the EEPROM
+ * memory.
  *
- *  Created on: 26/05/2019
- *      Author: guilherme
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #include <AT24C164.h>
@@ -16,6 +17,9 @@
 
 void memory_read_page(uint8_t page, char * buffer);
 
+/*! @brief A function that initializes the memory module
+ *
+ */
 void memory_init()
 {
 	memory_info.timer = 0;
@@ -24,6 +28,11 @@ void memory_init()
 	memory_info.pages_dumped = 0;
 }
 
+/*! @brief A function that bufferizes a 4-char string size representing
+ * a temperature
+ * @param 	temperature		A pointer to string representation of the
+ * 							current temperature
+ */
 void memory_bufferize_temperature(char * temperature)
 {
 	strcpy(&(memory_info.buffer[memory_info.words_written]),
@@ -38,7 +47,11 @@ void memory_bufferize_temperature(char * temperature)
 	}
 }
 
-
+/*! @brief A function that dumps the memory's content into a buffer
+ *
+ * @param 	buffer	A pointer to buffer which will receive the memory's
+ * 					content
+ */
 void memory_dump(char * buffer)
 {
 	for(uint8_t page = memory_info.pages_dumped, i = 0;
@@ -49,6 +62,12 @@ void memory_dump(char * buffer)
 	memory_info.pages_dumped = memory_info.pages_written;
 }
 
+/*! @brief A function that writes a single page in the memory
+ *
+ * @param 	page	The page index on which the content of 'buffer'
+ * 					will be written
+ * @param 	buffer	The content to write in the memory page
+ */
 void memory_write_page(uint8_t page, char * buffer)
 {
 	AT24C164_SelectDevice(MEMORY_I2C_ADDRESS);
@@ -60,6 +79,12 @@ void memory_write_page(uint8_t page, char * buffer)
 	memory_info.pages_written++;
 }
 
+/*! @brief A function that reads a single page of the memory
+ *
+ * @param 	page	The page index of which the content will be read
+ * @param 	buffer	The buffer that will be filled with the content of
+ * 					a memory page indexed by 'page'
+ */
 void memory_read_page(uint8_t page, char * buffer)
 {
 	AT24C164_SelectDevice(MEMORY_I2C_ADDRESS);

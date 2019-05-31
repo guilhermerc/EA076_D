@@ -6,13 +6,6 @@
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
 
-/*
- * LM61_temp.c
- *
- *  Created on: 13/04/2019
- *      Author: guilherme
- */
-
 #include <ADC0.h>
 #include <stdio.h>
 #include <string.h>

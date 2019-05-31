@@ -1,18 +1,3 @@
- /* ###################################################################
-**     Filename    : Events.c
-**     Project     : EA076_D
-**     Processor   : MKL25Z128VLK4
-**     Component   : Events
-**     Version     : Driver 01.00
-**     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-03-18, 16:31, # CodeGen: 0
-**     Abstract    :
-**         This is user's event module.
-**         Put your event handler code here.
-**     Contents    :
-**         CPU_OnNMIINT - void CPU_OnNMIINT(void);
-**
-** ###################################################################*/
 /*!
 ** @file Events.c
 ** @version 01.00
@@ -46,6 +31,7 @@
 #include <UART0.h>
 #include <UART2.h>
 #include <WAIT1.h>
+#include "CPU.h"
 #include "Events.h"
 
 #ifdef __cplusplus
@@ -311,6 +297,9 @@ void RTC1_OnSecond(LDD_TUserData *UserDataPtr)
 		memory_info.timer = 0;
 	}
 
+	/*! Only refreshes the display if it is on CURRENT_TIME_MENU since
+	 * all the others are static
+	 */
 	if(display_get_state() == CURRENT_TIME_MENU)
 		event_buff_insert_event(DISPLAY_REFRESH);
 }

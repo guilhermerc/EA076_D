@@ -1,9 +1,3 @@
-/*
- * display.c
- *
- *  Created on: 04/05/2019
- *      Author: guilherme
- */
 /*!
  * @file display.c
  * @brief This file contains implementations related to the display.
@@ -644,6 +638,10 @@ void display_unset_timeout()
 	display_timeout.triggered = OFF;
 }
 
+/*! @brief A function that gets the current state of display's fsm
+ *
+ * @return	Current state of display's fsm
+ */
 DISPLAY_FSM_STATE display_get_state()
 {
 	return state;

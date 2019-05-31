@@ -1,16 +1,9 @@
 /*!
-** @file LOG.h
-** @brief This file exports what is necessary from LOG.c
+** @file console.h
+** @brief This file exports what is necessary from console.c
 **
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
-
-/*
- * LOG.h
- *
- *  Created on: 30/03/2019
- *      Author: guilherme
- */
 
 #ifndef SOURCES_CONSOLE_H_
 #define SOURCES_CONSOLE_H_

@@ -26,6 +26,52 @@
  **  @{
  */
 /* MODULE main */
+#include "CPU.h"
+#include "Events.h"
+#include "ADC0.h"
+#include "AdcLdd1.h"
+#include "RTC.h"
+#include "UART0.h"
+#include "ASerialLdd1.h"
+#include "UART2.h"
+#include "ASerialLdd2.h"
+#include "L293D_1_2_EN.h"
+#include "PwmLdd1.h"
+#include "MCUC1.h"
+#include "TU2.h"
+#include "L293D_1A.h"
+#include "BitIoLdd1.h"
+#include "L293D_2A.h"
+#include "BitIoLdd2.h"
+#include "NOKIA5110_CONTROLLER.h"
+#include "RESpin1.h"
+#include "SCEpin1.h"
+#include "D_Cpin1.h"
+#include "WAIT1.h"
+#include "SM1.h"
+#include "NOKIA5110_LIGHT.h"
+#include "BitIoLdd3.h"
+#include "KBOARD_C1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARD_C2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARD_C3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARD_R1.h"
+#include "BitIoLdd4.h"
+#include "KBOARD_R2.h"
+#include "BitIoLdd5.h"
+#include "KBOARD_R3.h"
+#include "BitIoLdd6.h"
+#include "KBOARD_R4.h"
+#include "BitIoLdd7.h"
+#include "AT24C164.h"
+#include "GI2C1.h"
+#include "CI2C1.h"
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
 
 #include <comm.h>
 #include <console.h>
@@ -42,11 +88,16 @@
 
 /*! List of TODO's that as soon as I have time I'll integrate
  *
- *	TODO: Check if the event ring buffer indexes are properly changed
- *  TODO: Change what have to be changed due to the correct size of display = 14
- *	TODO: Protect the boundaries of motor_change_speed function
- *	TODO: Remove volatiles and try to understand why better
-*/
+ *  TODO: Change what have to be changed due to the correct size of
+ *  display = 14.
+ *	TODO: Protect the boundaries of motor_change_speed function.
+ *	TODO: I should have logged the raw value of temperature since it
+ *	uses only 2 bytes instead of 4 bytes used by the its string
+ *	representation.
+ *  TODO: I should handle the border of EEPROM memory and treat it as a
+ *  "ring memory". I'm not even handling the case in which all of the
+ *  pages were already written.
+ *  */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -78,9 +129,6 @@ int main(void)
 
 	console_init();
 	comm_init();
-
-	/*! TODO: Also try to change the ICR to 0x11 = 010 001
-	 */
 
 	/*!
 	 * Infinite loop that checks if the event ring buffer has events to

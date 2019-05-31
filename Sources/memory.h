@@ -1,8 +1,8 @@
-/*
- * memory.h
+/*!
+ * @file memory.h
+ * @brief This file exports what is necessary from memory.c
  *
- *  Created on: 26/05/2019
- *      Author: guilherme
+ * @author Guilherme R C <guilherme.riciolic@gmail.com>
  */
 
 #ifndef SOURCES_MEMORY_H_

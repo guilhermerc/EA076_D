@@ -1,10 +1,3 @@
-/*
- * event_buffer.h
- *
- *  Created on: 19/04/2019
- *      Author: guilherme
- */
-
 /*!
  * @file event_buff.h
  * @brief This file exports what is necessary from event_buff.c

@@ -1,10 +1,3 @@
-/*
- * kboard.h
- *
- *  Created on: 11/05/2019
- *      Author: guilherme
- */
-
 /*!
  * @file kboard.h
  * @brief This file exports what is necessary from kboard.c

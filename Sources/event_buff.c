@@ -1,10 +1,3 @@
-/*
- * event_buffer.c
- *
- *  Created on: 19/04/2019
- *      Author: guilherme
- */
-
 /*!
  * @file event_buff.c
  * @brief This file contains implementations related to the event ring

@@ -1,18 +1,10 @@
 /*!
-** @file stamp.c
+** @file rtc.c
 ** @brief This file contains implementations related to the
-** time stamp generation
+** RTC operation
 **
 ** @author Guilherme R C <guilherme.riciolic@gmail.com>
 */
-
-/*
- * Timestamp.c
- *
- *  Created on: 14/04/2019
- *      Author: guilherme
- */
-
 #include <rtc.h>
 #include <RTC.h>
 #include <stdint.h>

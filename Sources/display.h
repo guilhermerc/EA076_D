@@ -1,10 +1,3 @@
-/*
- * display.h
- *
- *  Created on: 04/05/2019
- *      Author: guilherme
- */
-
 /*!
  * @file display.h
  * @brief This file exports what is necessary from display.c
@@ -18,7 +11,6 @@
 #include <kboard.h>
 #include <PE_Types.h>
 
-/*! TODO: Check the width of the display */
 #define DISPLAY_LINE_STRING_SIZE	20
 
 typedef enum

@@ -1,18 +1,3 @@
-/* ###################################################################
-**     Filename    : Events.h
-**     Project     : EA076_D
-**     Processor   : MKL25Z128VLK4
-**     Component   : Events
-**     Version     : Driver 01.00
-**     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-03-18, 16:31, # CodeGen: 0
-**     Abstract    :
-**         This is user's event module.
-**         Put your event handler code here.
-**     Contents    :
-**         CPU_OnNMIINT - void CPU_OnNMIINT(void);
-**
-** ###################################################################*/
 /*!
 ** @file Events.h
 ** @version 01.00
@@ -30,6 +15,50 @@
 #ifndef __Events_H
 #define __Events_H
 /* MODULE Events */
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
+#include "ADC0.h"
+#include "AdcLdd1.h"
+#include "RTC.h"
+#include "UART0.h"
+#include "ASerialLdd1.h"
+#include "UART2.h"
+#include "ASerialLdd2.h"
+#include "L293D_1_2_EN.h"
+#include "PwmLdd1.h"
+#include "MCUC1.h"
+#include "TU2.h"
+#include "L293D_1A.h"
+#include "BitIoLdd1.h"
+#include "L293D_2A.h"
+#include "BitIoLdd2.h"
+#include "NOKIA5110_CONTROLLER.h"
+#include "RESpin1.h"
+#include "SCEpin1.h"
+#include "D_Cpin1.h"
+#include "WAIT1.h"
+#include "SM1.h"
+#include "NOKIA5110_LIGHT.h"
+#include "BitIoLdd3.h"
+#include "KBOARD_C1.h"
+#include "ExtIntLdd1.h"
+#include "KBOARD_C2.h"
+#include "ExtIntLdd2.h"
+#include "KBOARD_C3.h"
+#include "ExtIntLdd3.h"
+#include "KBOARD_R1.h"
+#include "BitIoLdd4.h"
+#include "KBOARD_R2.h"
+#include "BitIoLdd5.h"
+#include "KBOARD_R3.h"
+#include "BitIoLdd6.h"
+#include "KBOARD_R4.h"
+#include "BitIoLdd7.h"
+#include "AT24C164.h"
+#include "GI2C1.h"
+#include "CI2C1.h"
 
 #include <PE_Types.h>
 
