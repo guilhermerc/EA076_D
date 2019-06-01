@@ -2309,6 +2309,38 @@ Based on the following sources:&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="docu-dummy" urn="urn:adsk.eagle:library:215">
+<description>Dummy symbols</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="RESISTOR" urn="urn:adsk.eagle:symbol:13162/1" library_version="2">
+<wire x1="-2.54" y1="-0.889" x2="2.54" y2="-0.889" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0.889" x2="-2.54" y2="0.889" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-0.889" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="0.889" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-0.889" x2="-2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-2.54" y2="0.889" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="0" x2="-2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="0" x2="5.08" y2="0" width="0.1524" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="R" urn="urn:adsk.eagle:component:13171/1" prefix="R" library_version="2">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
+<gates>
+<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2328,6 +2360,8 @@ Based on the following sources:&lt;p&gt;
 <part name="X2" library="con-garry" library_urn="urn:adsk.eagle:library:147" deviceset="332-02" device="" package3d_urn="urn:adsk.eagle:package:6810/1"/>
 <part name="X3" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="5566-16" device=""/>
 <part name="IC5" library="atmel" library_urn="urn:adsk.eagle:library:105" deviceset="AT24C*" device="P" package3d_urn="urn:adsk.eagle:package:4324/1"/>
+<part name="R1" library="docu-dummy" library_urn="urn:adsk.eagle:library:215" deviceset="R" device=""/>
+<part name="R2" library="docu-dummy" library_urn="urn:adsk.eagle:library:215" deviceset="R" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2414,6 +2448,8 @@ Based on the following sources:&lt;p&gt;
 <attribute name="NAME" x="129.54" y="-75.565" size="1.778" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="129.54" y="-99.06" size="1.778" layer="96"/>
 </instance>
+<instance part="R1" gate="G$1" x="149.86" y="-109.22" smashed="yes" rot="R90"/>
+<instance part="R2" gate="G$1" x="154.94" y="-109.22" smashed="yes" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -2470,6 +2506,13 @@ Based on the following sources:&lt;p&gt;
 <wire x1="114.3" y1="-78.74" x2="114.3" y2="-66.04" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="-66.04" x2="55.88" y2="-66.04" width="0.1524" layer="91"/>
 <wire x1="55.88" y1="-66.04" x2="55.88" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="-114.3" x2="149.86" y2="-129.54" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="-129.54" x2="109.22" y2="-129.54" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="-114.3" x2="154.94" y2="-129.54" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="-129.54" x2="149.86" y2="-129.54" width="0.1524" layer="91"/>
+<junction x="109.22" y="-129.54"/>
+<junction x="55.88" y="-78.74"/>
+<junction x="149.86" y="-129.54"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -2584,6 +2627,10 @@ Based on the following sources:&lt;p&gt;
 <wire x1="147.32" y1="-83.82" x2="152.4" y2="-83.82" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="G$1" pin="WP"/>
 <wire x1="147.32" y1="-88.9" x2="152.4" y2="-88.9" width="0.1524" layer="91"/>
+<junction x="124.46" y="-93.98"/>
+<junction x="152.4" y="-81.28"/>
+<junction x="152.4" y="-83.82"/>
+<junction x="152.4" y="-88.9"/>
 </segment>
 </net>
 <net name="N$12" class="0">
@@ -2713,6 +2760,8 @@ Based on the following sources:&lt;p&gt;
 <wire x1="134.62" y1="-66.04" x2="134.62" y2="-30.48" width="0.1524" layer="91"/>
 <pinref part="FRDM1" gate="G$1" pin="PTC10"/>
 <wire x1="134.62" y1="-30.48" x2="144.78" y2="-30.48" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="-104.14" x2="154.94" y2="-91.44" width="0.1524" layer="91"/>
+<junction x="154.94" y="-91.44"/>
 </segment>
 </net>
 <net name="N$28" class="0">
@@ -2723,7 +2772,10 @@ Based on the following sources:&lt;p&gt;
 <wire x1="132.08" y1="-71.12" x2="157.48" y2="-71.12" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="-71.12" x2="157.48" y2="-93.98" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="G$1" pin="SDA"/>
-<wire x1="157.48" y1="-93.98" x2="147.32" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="-93.98" x2="149.86" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="-93.98" x2="147.32" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="149.86" y1="-104.14" x2="149.86" y2="-93.98" width="0.1524" layer="91"/>
+<junction x="149.86" y="-93.98"/>
 </segment>
 </net>
 </nets>
